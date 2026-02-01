@@ -1,41 +1,32 @@
 /**
- * 인트로 화면 - "결혼식에 초대합니다" 한글자씩 타이핑 효과
- * salondeletter 스타일
+ * 인트로 화면 - "결혼식에 초대합니다" salondeletter 스타일
+ * clipPath + path 구조, stroke 애니메이션
  */
 (function () {
-    const INTRO_TEXT = '결혼식에 초대합니다';
-    const TYPING_DELAY = 200;
-    const HOLD_DURATION = 1200;
+    const HOLD_DURATION = 2000;
+
+    function fadeOutIntro() {
+        const introScreen = document.getElementById('introScreen');
+        if (!introScreen) return;
+        introScreen.classList.add('intro-fade-out');
+        setTimeout(function () {
+            introScreen.style.display = 'none';
+        }, 800);
+    }
 
     function init() {
         const introScreen = document.getElementById('introScreen');
-        const typingEl = document.getElementById('introTypingText');
-        const cursorEl = document.getElementById('introCursor');
+        const strokePath = document.getElementById('introStrokePath');
+        if (!introScreen || !strokePath) return;
 
-        if (!introScreen || !typingEl) return;
+        var pathLength = strokePath.getTotalLength();
+        strokePath.style.strokeDasharray = pathLength;
+        strokePath.style.strokeDashoffset = pathLength;
+        strokePath.style.animation = 'intro-svg-draw 4000ms ease-out forwards';
 
-        const chars = INTRO_TEXT.split('');
-        let index = 0;
-
-        function typeNext() {
-            if (index < chars.length) {
-                typingEl.textContent += chars[index];
-                index++;
-                setTimeout(typeNext, TYPING_DELAY);
-            } else {
-                cursorEl.style.display = 'none';
-                setTimeout(fadeOutIntro, HOLD_DURATION);
-            }
-        }
-
-        function fadeOutIntro() {
-            introScreen.classList.add('intro-fade-out');
-            setTimeout(function () {
-                introScreen.style.display = 'none';
-            }, 800);
-        }
-
-        typeNext();
+        strokePath.addEventListener('animationend', function () {
+            setTimeout(fadeOutIntro, HOLD_DURATION);
+        });
     }
 
     if (document.readyState === 'loading') {

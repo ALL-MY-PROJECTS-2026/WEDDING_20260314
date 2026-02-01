@@ -29,11 +29,34 @@
     text-align: center;
 }
 
+/* salondeletter 스타일 svg_text, svg_handwritng */
+.intro-svg-text {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.intro-svg,
+.svg_handwritng {
+    width: 100%;
+    max-width: 23.75rem;
+    max-height: 200px;
+    overflow: visible;
+}
+
+/* stroke 애니메이션 - salondeletter loading-draw-speed 4000ms, JS에서 path length 설정 후 적용 */
+@keyframes intro-svg-draw {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
 .intro-screen .intro-text-wrap {
     font-family: 'NanumYeBbeunMinGyeongCe', serif !important;
-    font-size: 3.2rem !important;
-    font-weight: 400;
-    color: #b88c8c;
+    font-size: 3.8rem !important;
+    font-weight: 900 !important;
+    color: #d4a84b;
     letter-spacing: 0.02em;
     line-height: 1.6;
 }
@@ -42,15 +65,17 @@
     display: inline;
     font-family: inherit !important;
     font-size: inherit !important;
+    font-weight: inherit !important;
     color: inherit;
 }
 
 .intro-screen .intro-cursor {
     display: inline-block;
     margin-left: 2px;
-    color: #b88c8c;
+    color: #d4a84b;
     font-family: 'NanumYeBbeunMinGyeongCe', serif !important;
-    font-size: 2.2rem !important;
+    font-size: 3.8rem !important;
+    font-weight: 900 !important;
     animation: intro-cursor-blink 0.8s step-end infinite;
 }
 
