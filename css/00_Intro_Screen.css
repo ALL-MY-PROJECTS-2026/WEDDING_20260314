@@ -17,6 +17,19 @@
     transition: opacity 0.8s ease-out;
 }
 
+/* 가운데 정렬 확인용 세로 중앙선 */
+/* .intro-screen::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background-color: rgba(255, 0, 0, 0.3);
+    transform: translateX(-50%);
+    z-index: 10000;
+} */
+
 .intro-screen.intro-fade-out {
     opacity: 0;
     pointer-events: none;
@@ -57,12 +70,13 @@
 }
 
 .intro-screen .intro-text-wrap {
-    font-family: 'NanumYeBbeunMinGyeongCe', serif !important;
-    font-size: 3.8rem !important;
-    font-weight: 900 !important;
-    color: #d4a84b;
-    letter-spacing: 0.02em;
-    line-height: 1.6;
+    font-family: 'Noto Serif KR', 'NanumMyeongjo', serif !important;
+    font-size: 3.5rem !important;
+    font-weight: 400 !important;
+    color: #8B7355;
+    letter-spacing: 0.05em;
+    line-height: 1.8;
+    text-align: center;
 }
 
 .intro-screen .intro-typing {
@@ -76,10 +90,10 @@
 .intro-screen .intro-cursor {
     display: inline-block;
     margin-left: 2px;
-    color: #d4a84b;
-    font-family: 'NanumYeBbeunMinGyeongCe', serif !important;
-    font-size: 3.8rem !important;
-    font-weight: 900 !important;
+    color: #8B7355;
+    font-family: 'Noto Serif KR', 'NanumMyeongjo', serif !important;
+    font-size: 4.5rem !important;
+    font-weight: 400 !important;
     animation: intro-cursor-blink 0.8s step-end infinite;
 }
 

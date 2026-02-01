@@ -1,3 +1,12 @@
+/* Great Vibes - Happy Wedding Day (로컬 폰트) */
+@font-face {
+    font-family: 'Great Vibes';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../fonts/GreatVibes-Regular.ttf') format('truetype');
+}
+
 /* header */
 .wrapper>header{}
 

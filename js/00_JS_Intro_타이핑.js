@@ -1,9 +1,10 @@
 /**
- * 인트로 화면 - "결혼식에 초대합니다" salondeletter 스타일
- * clipPath + path 구조, stroke 애니메이션
+ * 인트로 화면 - "결혼식에 초대합니다" 타이핑 애니메이션
  */
 (function () {
-    const HOLD_DURATION = 2000;
+    const TEXT = '결혼식에\n초대합니다';
+    const TYPING_SPEED = 200;
+    const HOLD_DURATION = 1500;
 
     function fadeOutIntro() {
         const introScreen = document.getElementById('introScreen');
@@ -22,19 +23,39 @@
         }, 800);
     }
 
+    function typeText() {
+        const typingElement = document.getElementById('introTyping');
+        const cursorElement = document.getElementById('introCursor');
+        if (!typingElement || !cursorElement) return;
+
+        let index = 0;
+        
+        function addChar() {
+            if (index < TEXT.length) {
+                if (TEXT[index] === '\n') {
+                    typingElement.innerHTML += '<br>';
+                } else {
+                    var currentText = typingElement.innerHTML;
+                    typingElement.innerHTML = currentText + TEXT[index];
+                }
+                index++;
+                setTimeout(addChar, TYPING_SPEED);
+            } else {
+                setTimeout(function() {
+                    cursorElement.style.display = 'none';
+                    fadeOutIntro();
+                }, HOLD_DURATION);
+            }
+        }
+        
+        addChar();
+    }
+
     function init() {
         const introScreen = document.getElementById('introScreen');
-        const strokePath = document.getElementById('introStrokePath');
-        if (!introScreen || !strokePath) return;
-
-        var pathLength = strokePath.getTotalLength();
-        strokePath.style.strokeDasharray = pathLength;
-        strokePath.style.strokeDashoffset = pathLength;
-        strokePath.style.animation = 'intro-svg-draw 4000ms ease-out forwards';
-
-        strokePath.addEventListener('animationend', function () {
-            setTimeout(fadeOutIntro, HOLD_DURATION);
-        });
+        if (!introScreen) return;
+        
+        setTimeout(typeText, 300);
     }
 
     if (document.readyState === 'loading') {
