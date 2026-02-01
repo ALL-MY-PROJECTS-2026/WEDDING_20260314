@@ -41,6 +41,8 @@
                 index++;
                 setTimeout(addChar, TYPING_SPEED);
             } else {
+                // 타이핑 완료 후 커서를 다음 줄로 이동
+                typingElement.innerHTML += '<br>';
                 setTimeout(function() {
                     cursorElement.style.display = 'none';
                     fadeOutIntro();
