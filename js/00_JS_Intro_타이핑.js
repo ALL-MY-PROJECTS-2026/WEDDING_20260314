@@ -1,10 +1,10 @@
 /**
- * 인트로 화면 - "결혼식에 초대합니다" 타이핑 애니메이션
+ * 인트로 화면 - "결혼식에 초대합니다" 텍스트 표시
  */
 (function () {
-    const TEXT = '결혼식에\n초대합니다';
-    const TYPING_SPEED = 200;
-    const HOLD_DURATION = 1500;
+    const FADE_IN_DELAY = 300; // 텍스트 페이드인 딜레이 (CSS와 동일)
+    const FADE_IN_DURATION = 1000; // 텍스트 페이드인 지속 시간 (CSS와 동일)
+    const HOLD_DURATION = 2000; // 텍스트 표시 후 대기 시간
 
     function fadeOutIntro() {
         const introScreen = document.getElementById('introScreen');
@@ -23,41 +23,15 @@
         }, 800);
     }
 
-    function typeText() {
-        const typingElement = document.getElementById('introTyping');
-        const cursorElement = document.getElementById('introCursor');
-        if (!typingElement || !cursorElement) return;
-
-        let index = 0;
-        
-        function addChar() {
-            if (index < TEXT.length) {
-                if (TEXT[index] === '\n') {
-                    typingElement.innerHTML += '<br>';
-                } else {
-                    var currentText = typingElement.innerHTML;
-                    typingElement.innerHTML = currentText + TEXT[index];
-                }
-                index++;
-                setTimeout(addChar, TYPING_SPEED);
-            } else {
-                // 타이핑 완료 후 커서를 다음 줄로 이동
-                typingElement.innerHTML += '<br>';
-                setTimeout(function() {
-                    cursorElement.style.display = 'none';
-                    fadeOutIntro();
-                }, HOLD_DURATION);
-            }
-        }
-        
-        addChar();
-    }
-
     function init() {
         const introScreen = document.getElementById('introScreen');
         if (!introScreen) return;
         
-        setTimeout(typeText, 300);
+        // 텍스트 페이드인 완료 후 대기 시간을 두고 페이드아웃
+        // 페이드인 딜레이(0.3s) + 페이드인 지속(1s) + 대기(2s) = 약 3.3초
+        setTimeout(function() {
+            fadeOutIntro();
+        }, FADE_IN_DELAY + FADE_IN_DURATION + HOLD_DURATION);
     }
 
     if (document.readyState === 'loading') {

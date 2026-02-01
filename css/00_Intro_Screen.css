@@ -62,37 +62,56 @@
     text-align: center;
 }
 
-/* salondeletter 스타일 svg_text, svg_handwritng */
-.intro-svg-text {
+/* 인트로 SVG 이미지 */
+.intro-svg-wrap {
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    opacity: 0;
+    animation: intro-svg-fade-in 1s ease-out 0.3s forwards;
+    padding: 2rem 0;
 }
 
-.intro-svg,
-.svg_handwritng {
+.intro-svg-image {
     width: 100%;
-    max-width: 23.75rem;
-    max-height: 200px;
-    overflow: visible;
+    max-width: 60rem;
+    max-height: 1050px;
+    height: auto;
+    object-fit: contain;
 }
 
-/* stroke 애니메이션 - salondeletter loading-draw-speed 4000ms, JS에서 path length 설정 후 적용 */
-@keyframes intro-svg-draw {
+/* SVG 페이드인 애니메이션 */
+@keyframes intro-svg-fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
     to {
-        stroke-dashoffset: 0;
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
-.intro-screen .intro-text-wrap {
-    font-family: 'Shilla_Culture', 'Noto Serif KR', 'NanumMyeongjo', serif !important;
-    font-size: 3.5rem !important;
-    font-weight: normal !important;
-    color: rgb(245, 204, 125);
-    letter-spacing: 0.05em;
-    line-height: 1.8;
-    text-align: center;
+/* 모바일 반응형 조정 */
+@media (max-width: 768px) {
+    .intro-svg-wrap {
+        padding: 1.5rem 0;
+    }
+    .intro-svg-image {
+        max-width: 46rem;
+        max-height: 900px;
+    }
+}
+
+@media (max-width: 480px) {
+    .intro-svg-wrap {
+        padding: 1rem 0;
+    }
+    .intro-svg-image {
+        max-width: 38rem;
+        max-height: 800px;
+    }
 }
 
 .intro-screen .intro-typing {

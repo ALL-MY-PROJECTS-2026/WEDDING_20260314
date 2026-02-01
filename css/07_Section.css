@@ -58,10 +58,12 @@
     width : 320px;
     height : 320px;
     border : 1px solid #e8dfdf;
-
+    background-color: #ffffff;
     margin : 0 auto;
     display:none;
     padding : 32.821px 13.128px ;
+    position: relative;
+    z-index: 2;
    
 }
 .wrapper>main>section:nth-child(7)>.info-block>.show-block>.image-block{

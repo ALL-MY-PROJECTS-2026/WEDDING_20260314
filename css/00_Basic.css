@@ -19,6 +19,7 @@ body{
     margin :0 auto;
     text-align:center;
     overflow: hidden;
+    position: relative;
 }
 /* 종이질감 - 흰색 위에 질감만 표시 */
 .wrapper::before{
@@ -28,10 +29,10 @@ body{
     z-index: 0;
     pointer-events: none;
     background-color: #ffffff;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     background-blend-mode: overlay;
-    background-size: 100px 100px;
-    opacity: 0.3;
+    background-size: 200px 200px;
+    opacity: 0.4;
 }
 
 /* header */
@@ -41,8 +42,42 @@ body{
 .wrapper>main{}
 .wrapper>main>section{
     /* border : 2px solid; */
+    position: relative;
+    background-color: #ffffff;
+}
+/* 각 섹션에 종이질감 추가 (섹션-01 제외) */
+.wrapper>main>section:not(:nth-child(1))::before{
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-color: #ffffff;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-blend-mode: overlay;
+    background-size: 200px 200px;
+    opacity: 0.35;
+}
+/* 섹션 내부 콘텐츠가 종이질감 위에 표시되도록 */
+.wrapper>main>section > * {
+    position: relative;
+    z-index: 1;
 }
 
 /* footer */
-.wrapper>footer{}
+.wrapper>footer{
+    position: relative;
+}
+/* footer에 종이질감 추가 */
+.wrapper>footer::before{
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-blend-mode: overlay;
+    background-size: 200px 200px;
+    opacity: 0.35;
+}
 
