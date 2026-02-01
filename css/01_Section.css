@@ -69,7 +69,7 @@
     gap: 0.2rem;
 }
 .wrapper>main>section:nth-child(1) .main_image_hero_line{
-    font-family: 'Brush Script MT', 'Lucida Handwriting', cursive;
+    font-family: 'Great Vibes', 'Brush Script MT', cursive;
     font-size: clamp(2.2rem, 8vw, 3.5rem);
     font-weight: 400;
     color: #ffffff;
@@ -81,6 +81,8 @@
     max-width: 0;
     text-shadow: 1px 1px 2px rgba(0,0,0,0.15), 1px 1px 4px rgba(0,0,0,0.1);
     animation: main-hero-write-in 1.2s ease-out forwards;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 .wrapper>main>section:nth-child(1) .main_image_hero_line::first-letter{
     color: #f9d4c4;
