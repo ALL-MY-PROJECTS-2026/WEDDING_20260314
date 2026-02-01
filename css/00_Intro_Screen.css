@@ -176,6 +176,18 @@
     }
 }
 
+/* 텍스트 부분별 순차 표시 애니메이션 - '결혼식에 초대'부터 '합니다'까지 */
+@keyframes intro-text-reveal {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 /* SVG path 기본 스타일 */
 .intro-svg path[stroke] {
     stroke: rgb(245, 204, 125);

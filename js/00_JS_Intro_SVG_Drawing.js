@@ -29,6 +29,30 @@
             return 0;
         }
         
+        // clipPath의 path들을 찾아서 순차적으로 나타나게 함
+        const clipPath = svgElement.querySelector('clipPath');
+        if (clipPath && paths.length > 0) {
+            const clipPaths = clipPath.querySelectorAll('path.cls-10');
+            if (clipPaths.length > 0) {
+                // clipPath의 각 path를 순차적으로 활성화하여 텍스트 부분별로 나타나게 함
+                const mainPath = paths[0];
+                const pathLength = mainPath.getTotalLength();
+                
+                // clipPath의 각 path에 해당하는 부분을 순차적으로 나타나게 함
+                clipPaths.forEach((clipPathItem, index) => {
+                    const delay = index * 0.4; // 각 부분 간 0.4초 딜레이
+                    
+                    // clipPath를 사용하여 부분별로 나타나게 함
+                    setTimeout(() => {
+                        // clipPath의 path를 순차적으로 활성화
+                        const clipPathId = clipPath.getAttribute('id');
+                        mainPath.style.clipPath = `url(#${clipPathId})`;
+                        mainPath.style.opacity = '1';
+                    }, delay * 1000);
+                });
+            }
+        }
+        
         return animatePaths(paths);
     }
     
@@ -51,6 +75,34 @@
             path.style.strokeDashoffset = pathLength;
             path.style.strokeLinecap = 'round';
             path.style.strokeLinejoin = 'round';
+            
+            // clipPath를 사용하여 부분별로 순차적으로 나타나게 함
+            const svgElement = path.closest('svg');
+            const clipPath = svgElement ? svgElement.querySelector('clipPath') : null;
+            
+            if (clipPath && index === 0) {
+                // 첫 번째 path에만 clipPath를 적용하여 부분별로 나타나게 함
+                const clipPaths = clipPath.querySelectorAll('path.cls-10');
+                if (clipPaths.length > 0) {
+                    // clipPath의 각 path에 해당하는 부분을 순차적으로 나타나게 함
+                    // '결혼식에 초대'부터 '합니다'까지 순차적으로 나타나게 함
+                    clipPaths.forEach((clipPathItem, clipIndex) => {
+                        const clipDelay = clipIndex * 400; // 각 부분 간 0.4초 딜레이
+                        
+                        setTimeout(() => {
+                            // clipPath를 사용하여 부분별로 나타나게 함
+                            const clipPathId = clipPath.getAttribute('id');
+                            // clipPath의 각 path를 순차적으로 활성화
+                            if (clipIndex === 0) {
+                                // 첫 번째 부분부터 시작
+                                path.style.clipPath = `url(#${clipPathId})`;
+                            }
+                            // 각 부분이 나타날 때마다 clipPath 업데이트
+                            path.style.opacity = '1';
+                        }, clipDelay);
+                    });
+                }
+            }
             
             // 각 path에 순차적으로 애니메이션 적용
             path.style.animation = `intro-svg-draw ${DRAW_DURATION}ms ease-out ${totalDelay}ms forwards`;
