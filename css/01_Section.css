@@ -2,10 +2,10 @@
 .wrapper>header{}
 
 .wrapper>header>nav{
-    height : 130px;
-    padding : 48px 0px 30px 0px;
-    /* height :50px;
-    padding : 0 */
+    height : 0;
+    padding : 0;
+    min-height: 0;
+    overflow: hidden;
 }
 
 .wrapper>header>nav>div:nth-child(1){
@@ -31,14 +31,22 @@
 /* section_01 */
 .wrapper>main>section:nth-child(1){
     position:relative;
+    padding-top: 0;
+    padding-top : 20px;
+}
+.wrapper>main>section:nth-child(1) .main_image{
+    position: relative;
+    width: 100%;
+    display: block;
 }
 .wrapper>main>section:nth-child(1) img{
     width:100%;
-    height :100%;
+    height: auto;
     position:relative;
     top:0;
-    opacity: 1;  
-    
+    opacity: 1;
+    display: block;
+    vertical-align: top;
 }
 
 .wrapper>main>section:nth-child(1) video{
@@ -57,43 +65,6 @@
     */
     mix-blend-mode: screen;
 }
-.wrapper>main>section:nth-child(1) .bottom{
-    margin-top : 30px;
-}
-.wrapper>main>section:nth-child(1) .bottom>.name{
-    font-size:1.1rem;
-    font-weight: 600;
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom : 15px;
-}
-.wrapper>main>section:nth-child(1) .bottom>.name>.groom{
-    font-size:1.3rem;
-}
-.wrapper>main>section:nth-child(1) .bottom>.name>.divider{
-    position:relative;
-    width:50px;
-    font-size:1.3rem;
-}
-
-.wrapper>main>section:nth-child(1) .bottom>.name>.divider::after{
-
-}
-
-.wrapper>main>section:nth-child(1) .bottom>.name>.bride{
-    font-size:1.3rem;
-}
-
-
-.wrapper>main>section:nth-child(1) .bottom .datetime,
-.wrapper>main>section:nth-child(1) .bottom .hours,
-.wrapper>main>section:nth-child(1) .bottom .weddinghall
-{
-    font-size : 1rem;
-    margin : 5px;
-}
-
 /* footer */
 .wrapper>footer{}
 
@@ -106,10 +77,14 @@
 .volumn_block{
     /* border : 1px solid; */
     position:absolute;
-    left:310px;
-    top:-100px;
     width : 25px;
     height:25px;
+}
+.volumn_block.volumn_block--overlay{
+    right: 15px;
+    top: 15px;
+    left: auto;
+    z-index: 10;
 }
 .volumn_block>#volumn-chk{
     display:none;
@@ -124,9 +99,9 @@
 .volumn_block .volumn_up,
 .volumn_block .volumn_off
 {
-    
     cursor: pointer;
-    color:gray;
+    color: rgba(255,255,255,0.9);
+    text-shadow: 0 0 4px rgba(0,0,0,0.5);
 }
 
 .active{
@@ -137,6 +112,12 @@
 }
 .volumn_block>#volumn-chk:checked~div .volumn_off{
     display:none;
+}
+.volumn_block>#volumn-chk:not(:checked)~div .volumn_up{
+    display:none;
+}
+.volumn_block>#volumn-chk:not(:checked)~div .volumn_off{
+    display:block;
 }
 
 .volumn_block .material-symbols-outlined{

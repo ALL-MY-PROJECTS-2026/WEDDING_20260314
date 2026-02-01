@@ -11,6 +11,11 @@
         introScreen.classList.add('intro-fade-out');
         setTimeout(function () {
             introScreen.style.display = 'none';
+            var video = document.getElementById('introVideo');
+            if (video) {
+                video.load();
+                video.play().catch(function(){});
+            }
         }, 800);
     }
 
