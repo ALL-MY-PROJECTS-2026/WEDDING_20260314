@@ -1,0 +1,55 @@
+*{
+    box-sizing : border-box;
+    position:relative;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size:0.98rem;
+    font-weight:400;
+    color:rgb(58, 58, 58);
+}
+body{
+   
+    /* 480px */
+    /* width : 30rem;  */
+    width : 23.75rem;
+    margin :0 auto;
+    background-color: beige;
+    
+
+}
+.wrapper{
+    /* 380px */
+    width : 23.75rem;
+    background-color: white;
+    margin :0 auto;
+    text-align:center;
+}
+
+/* header */
+.wrapper>header{}
+
+/* main */
+.wrapper>main{}
+.wrapper>main>section{}
+
+/* footer */
+.wrapper>footer{}
+
+
+
+
+
+/* 스크롤 매직용 Style 처리 */
+
+.back-to-position{
+    opacity: 0;
+    transition: 1.5s;
+    position:relative;
+    top:50px;
+    transform:translateY(0px); 
+    /* background-color: orange; */
+    /* border-radius: 50%; */
+}
+.to-up .back-to-position{
+    opacity: 1; 
+    transform: translateY(-50px);
+}

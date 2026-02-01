@@ -1,0 +1,89 @@
+.wrapper>footer{
+    padding : 40px 0px;
+    position:relative;
+    height : 350px;
+    background-color: rgb(242, 238, 238);
+    padding-top:0px;
+}
+
+.wrapper>footer>.header{
+    width : 100%;
+    height : 200px;
+    margin : 0 auto;    
+    position:relative;
+  
+    display:flex;
+    justify-content: center;
+    align-items: center;
+  
+
+}
+.wrapper>footer>.header>img{
+    width : 100%;
+    position:absolute;
+    top:0;bottom:0;left:0;right:0;
+    
+}
+.wrapper>footer>.header>span{
+    color:white;
+    font-size:0.9rem;
+    display:block;
+
+    
+    position:relative;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    margin : auto;
+    z-index:3;
+    /* border : 1px solid white; */
+}
+.wrapper>footer>.bg{
+    background-color:black;
+    width : 100%;
+    height : 192px;
+    position:absolute;
+    left:0;
+    top:0;
+    opacity: .3;
+}
+
+.wrapper>footer>.body{
+    padding : 20px 0px;
+}
+.wrapper>footer>.body>div{
+    height : 30px;
+
+
+}
+.wrapper>footer>.body>div>a{
+    display:block;
+    width : 100%;
+    height : 100%;
+    text-decoration: none;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+.wrapper>footer>.body>div span{
+    margin : 5px;
+}
+.wrapper>footer>.body>div span:nth-child(1){
+    font-size:.9rem;
+}
+.wrapper>footer>.body>div span:nth-child(2){
+    font-size:.8rem;
+}
+.wrapper>footer>.bottom{
+   
+}
+
+.wrapper>footer>.bottom span{
+    font-size:0.5rem;
+    cursor: pointer;
+}
+.wrapper>footer>.bottom>span>span{
+    font-weight:800;
+}

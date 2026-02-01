@@ -1,0 +1,142 @@
+.wrapper>main>section:nth-child(10){
+
+    /* height : 400px; */
+    margin-top:40px;
+}
+
+
+.wrapper>main>section:nth-child(10)>.contents{
+    margin-bottom:30px;
+    
+}
+.wrapper>main>section:nth-child(10)>.contents::before{
+    content:"";
+    display:block;
+    width:100%;
+    height:40px;
+    /* border : 1px solid gray; */
+    position:absolute;
+    left:0px;right:0px;
+    top:-50px;
+    
+    
+   
+    background-image: url("../images/02_Section_01.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+.wrapper>main>section:nth-child(10)>.contents>div{
+  
+    font-size:1.3rem;     
+    color :rgb(137, 117, 122);
+    font-size : 18.0513px;
+    letter-spacing: 0.5px;
+    height:32px;;
+    margin-bottom : 30px;
+
+    
+}
+
+
+
+
+.wrapper>main>section:nth-child(10)>.accordion{
+    width : 320px;
+    margin : 0 auto;
+}
+
+.wrapper>main>section:nth-child(10)>.accordion>.accordion-item{
+   
+    /* border : 1px solid; */
+    margin-bottom:10px;
+    
+   
+}
+
+.wrapper>main>section:nth-child(10)>.accordion>.accordion-item>h2{
+   
+   
+}
+.wrapper>main>section:nth-child(10)>.accordion .accordion-button{
+    display:flex;
+    background-color: rgb(242, 238, 238);
+}
+
+.wrapper>main>section:nth-child(10)>.accordion .accordion-button>div{
+    width : 100%;
+    text-align: center;
+
+    /*  style="height:50px;border:1px solid;margin-bottom:5px;" */
+}
+.wrapper>main>section:nth-child(10)>.accordion .accordion-button>div>span{
+    font-size:.8rem;
+}
+.wrapper>main>section:nth-child(10)>.accordion .accordion-button::after{
+    flex-shrink: 0;
+    width: 0.7rem;
+    height: 0.7rem;
+    content: "";
+    background-size: 0.7rem;
+   
+}
+
+.wrapper>main>section:nth-child(10)>.accordion .accordion-body{
+   
+}
+.wrapper>main>section:nth-child(10)>.accordion .accordion-body>div{
+    height:60px;
+    padding : 15px 0px;
+    border-bottom:0px solid lightgray;
+    
+    padding : 10px;
+    
+    display:flex;
+    justify-content: space-evenly;
+
+    flex-direction: column;
+   
+    
+}
+
+.wrapper>main>section:nth-child(10)>.accordion .accordion-body span,a,div{
+    font-size:.8rem;
+}
+.wrapper>main>section:nth-child(10)>.accordion .accordion-body>div>.account{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom:5px;
+   
+}
+
+.wrapper>main>section:nth-child(10)>.accordion .accordion-body>div>.account>.left{
+   
+}
+.wrapper>main>section:nth-child(10)>.accordion .accordion-body>div>.account>.right{}
+.wrapper>main>section:nth-child(10)>.accordion .accordion-body>div>.name{
+    display:flex;
+    justify-content: left;
+    align-items: center;
+    
+}
+
+.wrapper>main>section:nth-child(10)>.accordion a{
+    display:block;
+    width : 35px;
+    height:25px;
+    /* border : 1px solid; */
+    text-decoration: none;
+
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    color : gray;
+    box-shadow: 2px 2px 2px lightgray;
+   
+}
+
+
+
+

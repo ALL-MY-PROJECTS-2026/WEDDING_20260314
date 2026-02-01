@@ -1,0 +1,125 @@
+main>section:nth-child(4){
+    background-color: rgb(251, 250, 248);
+    border-radius: 15px;
+}
+
+main>section:nth-child(4)>.datetime-block{
+    width : 300px;
+    height : 80px;
+    margin : 0 auto;
+    
+    margin-bottom:20px;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+main>section:nth-child(4)>.datetime-block>div{
+    margin-bottom : 10px;
+}
+main>section:nth-child(4)>.datetime-block>.top-date{
+    font-size : 1.2rem;
+    letter-spacing: 2px;
+}
+main>section:nth-child(4)>.datetime-block>.top-hours{
+    letter-spacing: 1px;
+}
+main>section:nth-child(4)>.calender{
+  
+    margin :0 auto;
+    margin-bottom :20px;
+    
+}
+main>section:nth-child(4)>.calender table{
+   
+  width : 100%;
+}
+main>section:nth-child(4)>.calender th,td{
+    width : 45px;
+    height : 45px;
+    /* border : 1px solid gray; */
+    margin : 2px;
+    font-size:0.9rem;
+}
+
+main>section:nth-child(4)>.calender>table .rest-day{
+    color : rgb(160, 2, 2);
+}
+main>section:nth-child(4)>.calender>table .d-day{
+    background-color: lightcoral;
+    border-radius: 50%;
+
+    color:white;
+}
+
+main>section:nth-child(4)>.bottom{}
+
+main>section:nth-child(4)>.bottom>.bottom-header{
+    display:flex;
+    justify-content: center;
+    margin-bottom:20px;
+}
+main>section:nth-child(4)>.bottom>.bottom-header>div{
+    width : 50px;
+    height : 50px;
+    border-radius: 5px;
+    border : 1px solid lightgray;
+    margin : 10px;
+
+    position:relative;
+
+    display:flex;
+    justify-content: center;
+    align-items: start;
+    padding-top:5px;
+    
+}
+main>section:nth-child(4)>.bottom>.bottom-header>div::after{
+    content : ":";
+
+    display:block;
+    position:absolute;
+    left:120%;
+    top:25%;
+}
+main>section:nth-child(4)>.bottom>.bottom-header>div:last-child::after{
+    display:none;
+
+}
+
+main>section:nth-child(4)>.bottom>.bottom-header>div:before{
+ 
+    display:block;
+    width:100%;
+    /* border : 1px solid gray; */
+    position:absolute;
+    left:0px;
+    top:55%;
+    font-size:0.6rem;
+    color:gray;
+    opacity: 0.8;
+}
+main>section:nth-child(4)>.bottom>.bottom-header>div:nth-child(1)::before{
+    content:"DAYS";
+}
+
+main>section:nth-child(4)>.bottom>.bottom-header>div:nth-child(2)::before{
+    content:"HOURS";
+
+}
+main>section:nth-child(4)>.bottom>.bottom-header>div:nth-child(3)::before{
+    content:"MIN";
+
+}
+main>section:nth-child(4)>.bottom>.bottom-header>div:nth-child(4)::before{
+    content:"SEC";
+
+}
+main>section:nth-child(4)>.bottom>.bottom-header>.day{}
+main>section:nth-child(4)>.bottom>.bottom-header>.hours{}
+main>section:nth-child(4)>.bottom>.bottom-header>.min{}
+main>section:nth-child(4)>.bottom>.bottom-header>.sec{}
+
+main>section:nth-child(4)>.bottom>.bottom-body{}

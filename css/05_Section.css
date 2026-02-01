@@ -1,0 +1,154 @@
+.wrapper>main>section:nth-child(5){
+    margin-top:50px;   
+}
+.wrapper>main>section:nth-child(5)>.sub-title{ 
+    letter-spacing: 2px;  
+    margin-bottom:10px;
+    color : rgb(194, 178, 178);
+    font-size : 11.4872px;
+    letter-spacing: 3px;
+    height:20px;
+    text-align: center;
+}
+.wrapper>main>section:nth-child(5)>.greeting-title{
+    font-size:1.3rem;     
+    color :rgb(137, 117, 122);
+    font-size : 18.0513px;
+    letter-spacing: 0.5px;
+    height:32px;;
+    margin-bottom : 30px;
+}
+
+.wrapper>main>section:nth-child(3)>.contents>.title>.m-title{
+
+}
+
+
+
+
+.wrapper>main>section:nth-child(5)>.gallery-block{
+    width : 340px;
+    height : 630px;
+    margin : 0 auto;
+    /* background-color: royalblue; */
+    border-radius: 15px;
+    margin : 50px 0px;
+    overflow:hidden;
+    transition: .4s;
+    position:relative;
+}
+.wrapper>main>section:nth-child(5)>.gallery-block>.item{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.wrapper>main>section:nth-child(5)>.gallery-block>.item>.left{
+    width : 160px;
+    height : 200px;
+    margin : 5px;
+    border : 1px solid lightgray;
+    border-radius: 5px;
+}
+.wrapper>main>section:nth-child(5)>.gallery-block>.item>.left>img{
+    border-radius: 4px;
+}
+
+.wrapper>main>section:nth-child(5)>.gallery-block>.item>.right{
+    width : 160px;
+    height : 200px;
+    margin : 5px;
+    border : 1px solid lightgray;
+    border-radius: 5px;
+}
+.wrapper>main>section:nth-child(5)>.gallery-block>.item>.left,
+.wrapper>main>section:nth-child(5)>.gallery-block>.item>.right
+{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.wrapper>main>section:nth-child(5)>.gallery-block>.item>.left>div,
+.wrapper>main>section:nth-child(5)>.gallery-block>.item>.right>div
+{
+    width : 150px;
+    height : 90px;
+    border : 1px solid lightgray;
+    border-radius: 3px;
+    margin : 5px;
+}
+.wrapper>main>section:nth-child(5)>.gallery-block>.item>.left>div>img,
+.wrapper>main>section:nth-child(5)>.gallery-block>.item>.right>div>img
+{
+    border-radius: 2px;
+}
+
+.wrapper>main>section:nth-child(5)>.gallery-block>.item:last-child>.left{
+    height : 300px;
+}
+.wrapper>main>section:nth-child(5)>.gallery-block>.item:last-child>.left>div:nth-child(1){
+    height : 200px;
+}
+.wrapper>main>section:nth-child(5)>.gallery-block>.item:last-child>.left>div:nth-child(2){
+    height : 100px;
+}
+.wrapper>main>section:nth-child(5)>.gallery-block>.item:last-child>.right{
+    height : 300px;
+}
+.wrapper>main>section:nth-child(5)>.gallery-block>.item:last-child>.lrighteft>div:nth-child(1){
+    height : 100px;
+}
+.wrapper>main>section:nth-child(5)>.gallery-block>.item:last-child>.right>div:nth-child(2){
+    height : 200px;
+}
+
+
+.wrapper>main>section:nth-child(5)>.gallery-block img{
+    width:100%;
+    height : 100%;
+  object-fit: cover;
+}
+
+
+.wrapper>main>section:nth-child(5) input[type="checkbox"]{
+    display:none;
+}
+.wrapper>main>section:nth-child(5) .more-picture-btn-block{
+    
+    position:absolute;
+    left:0;
+    right:0;
+    top:755px;
+    margin : auto;
+    z-index:5
+}
+.wrapper>main>section:nth-child(5) .more-picture-btn-block{
+    width:200px;
+    height:35px;
+    margin : 0 auto;
+    border-radius: 25px;
+    border : 1px solid lightgray;
+    background-color: white;
+    color :gray;
+
+
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    font-size:0.9rem;
+}
+
+.wrapper>main>section:nth-child(5) .more-picture-btn-block>span{
+    font-size:0.9rem;
+    margin-right:5px;
+}
+
+
+.wrapper>main>section:nth-child(5) input[type="checkbox"]:checked~.gallery-block{
+   height:100%;
+}
+
+.wrapper>main>section:nth-child(5) input[type="checkbox"]:checked+.more-picture-btn-block{
+    display:none;
+}

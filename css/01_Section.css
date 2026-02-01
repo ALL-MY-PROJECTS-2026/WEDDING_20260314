@@ -1,0 +1,144 @@
+/* header */
+.wrapper>header{}
+
+.wrapper>header>nav{
+    height : 130px;
+    padding : 48px 0px 30px 0px;
+}
+
+.wrapper>header>nav>div:nth-child(1){
+    font-size:1.8rem;
+    margin-bottom:10px;
+}
+.wrapper>header>nav>div:nth-child(2){
+    letter-spacing: 2px;
+    color : rgb(73, 65, 58);
+    font-size:.9rem;
+}
+
+/* main */
+.wrapper>main{}
+.wrapper>main>section{
+    width : 335px;
+    padding : 40px 0px;
+    margin : 0 auto;
+    
+    position:relative;
+    /* border : 1px solid; */
+}
+/* section_01 */
+.wrapper>main>section:nth-child(1) img{
+    width:100%;
+    position:relative;
+    opacity: 1;  
+}
+
+.wrapper>main>section:nth-child(1) video{
+    width:100%;
+    position:absolute;
+    left:0;
+    top:0;
+    opacity: 1;
+    visibility: initial;
+    
+    /* 중요 */
+    /*     
+    블렌딩 모드를 설정하는 것입니다. screen은 그 중 하나로, 두 개의 색상을 조합하는 방식을 나타냅니다.
+    screen 블렌딩 모드는 다음과 같이 설명됩니다:
+    Screen (스크린): 두 색상을 반전하고, 그 결과를 다시 반전시킵니다. 두 색상 중 하나라도 투명하면 다른 색상이 나타납니다. 둘 다 투명하지 않으면 화면이 흰색에 가까워지고, 투명한 부분은 투명한 상태를 유지합니다. 
+    */
+    mix-blend-mode: screen;
+}
+.wrapper>main>section:nth-child(1) .bottom{
+    margin-top : 30px;
+}
+.wrapper>main>section:nth-child(1) .bottom>.name{
+    font-size:1.1rem;
+    font-weight: 600;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom : 15px;
+}
+.wrapper>main>section:nth-child(1) .bottom>.name>.groom{
+    font-size:1.3rem;
+}
+.wrapper>main>section:nth-child(1) .bottom>.name>.divider{
+    position:relative;
+    width:50px;
+    font-size:1.3rem;
+}
+
+.wrapper>main>section:nth-child(1) .bottom>.name>.divider::after{
+
+}
+
+.wrapper>main>section:nth-child(1) .bottom>.name>.bride{
+    font-size:1.3rem;
+}
+
+
+.wrapper>main>section:nth-child(1) .bottom .datetime,
+.wrapper>main>section:nth-child(1) .bottom .hours,
+.wrapper>main>section:nth-child(1) .bottom .weddinghall
+{
+    font-size : 1rem;
+    margin : 5px;
+}
+
+/* footer */
+.wrapper>footer{}
+
+
+
+/* 
+    01_Section의 js에 사용할 Style
+*/
+
+.volumn_block{
+    /* border : 1px solid; */
+    position:absolute;
+    left:310px;
+    top:-100px;
+    width : 25px;
+    height:25px;
+}
+.volumn_block>#volumn-chk{
+    display:none;
+}
+
+.volumn_block>div{
+    position:absolute;
+    left:0;
+    top: 0;
+}
+
+.volumn_block .volumn_up,
+.volumn_block .volumn_off
+{
+    
+    cursor: pointer;
+    color:gray;
+}
+
+.active{
+    display: block !important;
+}
+.volumn_block>#volumn-chk:checked~div .volumn_up{
+    display:block;
+}
+.volumn_block>#volumn-chk:checked~div .volumn_off{
+    display:none;
+}
+
+.volumn_block .material-symbols-outlined{
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 300,
+    'GRAD' 0,
+    'opsz' 24;
+}
+
+#audioPlayer{
+    display:none;
+}

@@ -1,0 +1,59 @@
+.wrapper>main>section:nth-child(9){
+
+}
+
+
+.wrapper>main>section:nth-child(9)>div{
+    
+}
+.wrapper>main>section:nth-child(9)>div>fieldset{
+   
+    width : 320px;
+    margin: 0 auto;
+    border : 1px solid rgb(232, 223, 223);
+    border-radius: 5px;
+    padding : 41.026px 13.128px;
+    position:relative;
+}
+.wrapper>main>section:nth-child(9)>div>fieldset>legend{
+    position:absolute;
+    font-size:1rem;
+    left:0px;
+    right:0px;
+    margin:auto;
+    top:-15px;
+    /* border : 1px solid gray; */
+    width : 150px;
+    height:30px;
+
+    background-color: rgb(232, 223, 223);
+    color:rgb(82, 69, 72);
+    border-radius: 20px;
+    font-size:0.9rem;
+    
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.wrapper>main>section:nth-child(9)>div>fieldset>div button
+{
+    width:200px;
+    height:35px;
+    margin : 0 auto;
+    border-radius: 25px;
+    border : 1px solid lightgray;
+    background-color: white;
+    color :gray;
+
+
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    font-size:0.9rem;
+}
+
+.wrapper>main>section:nth-child(9)>div>fieldset>div button span{
+    color:gray;
+    font-size:1.3rem;
+    margin-right:5px;
+}
