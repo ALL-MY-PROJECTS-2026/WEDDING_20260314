@@ -1,0 +1,59 @@
+/* 인트로 화면 - 결혼식에 초대합니다 (한글자씩 타이핑) */
+.intro-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    min-height: 100dvh;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.8s ease-out;
+}
+
+.intro-screen.intro-fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.intro-content {
+    width: 100%;
+    max-width: 23.75rem;
+    padding: 0 1.5rem;
+    text-align: center;
+}
+
+.intro-text-wrap {
+    font-family: 'Hi Melody', cursive;
+    font-size: 2.2rem;
+    font-weight: 400;
+    color: #b88c8c;
+    letter-spacing: 0.02em;
+    line-height: 1.9;
+}
+
+.intro-typing {
+    display: inline;
+}
+
+.intro-cursor {
+    display: inline-block;
+    margin-left: 2px;
+    color: #b88c8c;
+    font-size: 2.2rem;
+    animation: intro-cursor-blink 0.8s step-end infinite;
+}
+
+.intro-screen.intro-fade-out .intro-cursor {
+    display: none;
+}
+
+@keyframes intro-cursor-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}

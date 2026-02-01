@@ -1,4 +1,4 @@
-const wedding_date = new Date("2024-03-20");
+const wedding_date = new Date("2026-03-14");
 const wedding_hours = "오후 02시 30분";
 
 // CALENDAR FUNCTION 
