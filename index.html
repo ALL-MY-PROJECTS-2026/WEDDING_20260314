@@ -85,6 +85,8 @@
     <link rel="stylesheet" href="./css/16_Modal_11Section_방명록.css">
     <!-- 17_Modal_05Section_갤러리 -->
     <link rel="stylesheet" href="./css/17_Modal_05Section_갤러리.css">
+    <!-- 18_BottomSheet.css -->
+    <link rel="stylesheet" href="./css/18_BottomSheet.css">
     <!-- Swiper -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     
@@ -99,7 +101,7 @@
     <!-- howler.js -오디오조작(자동재생 ISSUE 로 추가) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.1/howler.min.js"></script>  
     <!-- kakao map  -->
-    <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=69f997d9b7dfb3972e5c6ca96e84a293&libraries=services" charset="utf-8"></script>
+    <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=6effaf063a25826448e20f9b64ce23b6&libraries=services" charset="utf-8"></script>
 
     <!-- 23 카카오 공유 SDK -->
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
@@ -125,7 +127,7 @@
     <script src="./js/21_JS_10Section_Clipboard_Copy.js" defer></script>
     
     <!-- 22_JS_11Section_방명록 -->
-    <script src="./js/22_JS_11Section_방명록.js" defer></script>
+    <!-- <script src="./js/22_JS_11Section_방명록.js" defer></script> -->
     
     <!-- 23_JS_Footer_카톡공유_링크복사 -->
     <script src="./js/23_JS_Footer_카톡공유_링크복사.js" defer></script>
@@ -133,6 +135,8 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <!-- 24_JS_05Section_갤러리_모달 -->
     <script src="./js/24_JS_05Section_갤러리_모달.js" defer></script>
+    <!-- 25_JS_BottomSheet -->
+    <script src="./js/25_JS_BottomSheet.js" defer></script>
 
 
 
@@ -187,19 +191,32 @@
             <video id="introVideo" muted loop playsinline webkit-playsinline preload="none">
               <source src="https://mcard.fromtoday.co.kr/mcard/assets/flower_00.mp4" type="video/mp4">
             </video>
+            <div class="main_image_gradient"></div>
             <div class="volumn_block volumn_block--overlay">
               <input type="checkbox" id="volumn-chk" checked>
               <div><label for="volumn-chk"><span class="material-symbols-outlined volumn_up">volume_up</span></label></div>
               <div><label for="volumn-chk"><span class="material-symbols-outlined volumn_off">volume_off</span></label></div>
             </div>
           </div>
+          <nav class="mobile-nav-bar">
+            <label for="volumn-chk" class="mobile-nav-bar__item mobile-nav-bar__item--speaker">
+              <span class="material-symbols-outlined nav-speaker-on">volume_up</span>
+              <span class="material-symbols-outlined nav-speaker-off">volume_off</span>
+            </label>
+            <a href="javascript:void(0)" class="mobile-nav-bar__item mobile-nav-bar__item--menu">
+              <span class="material-symbols-outlined">menu</span>
+            </a>
+            <a href="javascript:void(0)" class="mobile-nav-bar__item mobile-nav-bar__item--share url-copy">
+              <span class="material-symbols-outlined">link</span>
+            </a>
+          </nav>
       </section>
 
       <!-- ----------------------------- 
         02
        ----------------------------- -->
 
-       <section class="scroll-spy">  
+       <section id="section-02" class="scroll-spy">  
           <div class="contents back-to-position to-up scroll-spy">
             <div class="sentence-01  back-to-position to-up">
               두 사람이 꽃과 나무처럼 걸어와서<br>
@@ -217,7 +234,7 @@
       <!-- ----------------------------- 
         03
        ----------------------------- -->
-       <section class="scroll-spy ">
+       <section id="section-03" class="scroll-spy ">
         <div class="contents back-to-position to-up">
           <div class="title">
             <div class="m-title">INVITATION</div>
@@ -252,7 +269,7 @@
        <!-- ----------------------------- 
         04
        ----------------------------- -->
-       <section  class="scroll-spy">
+       <section id="section-04" class="scroll-spy">
           <div class="datetime-block  back-to-position to-up">
             <div class="top-date">2026.03.15</div>
             <div class="top-hours">토요일 오후 3시 30분</div>
@@ -354,7 +371,7 @@
        <!-- ----------------------------- 
         05
        ----------------------------- -->
-       <section  class="scroll-spy" >
+       <section id="section-05" class="scroll-spy" >
           <div class="sub-title  back-to-position to-up"> GALLERY</div>
           <div class="greeting-title  back-to-position to-up">갤러리</div>
 
@@ -416,7 +433,7 @@
       <!-- ----------------------------- 
         06
        ----------------------------- -->      
-       <section  class="scroll-spy usemap" >
+       <section id="section-06" class="scroll-spy usemap" >
         <div class="title-01  back-to-position to-up">LOCATION</div>
         <div class="title-02  back-to-position to-up">오시는 길</div>
         <div class="location  back-to-position to-up">웨딩그룹위더스 안양</div>
@@ -477,7 +494,7 @@
       <!-- ----------------------------- 
         07
        ----------------------------- -->  
-       <section  class="scroll-spy" >
+       <section id="section-07" class="scroll-spy" >
         <div class="title01  back-to-position to-up">INFORMATION</div>
         <div class="title02  back-to-position to-up">예식정보 및 안내사항</div>
 
@@ -537,7 +554,7 @@
        <!-- ----------------------------- 
         08
        ----------------------------- -->  
-       <section  class="scroll-spy" >
+       <section id="section-08" class="scroll-spy" >
           <div  class=" back-to-position to-up">
             <fieldset>
               <legend >피로연안내</legend>
@@ -583,7 +600,7 @@
        <!-- ----------------------------- 
         10
        ----------------------------- -->       
-       <section class="scroll-spy account">
+       <section id="section-10" class="scroll-spy account">
         <div class="contents  back-to-position to-up">
           <div class="title02  back-to-position to-up">마음 전하실 곳</div>
         </div>
@@ -702,8 +719,24 @@
 
     </div>
 
-
-
+    <!-- 바텀시트 - 퀵메뉴 -->
+    <div class="bottom-sheet" id="quickMenuBottomSheet">
+      <div class="bottom-sheet__backdrop" id="quickMenuBackdrop"></div>
+      <div class="bottom-sheet__content">
+        <div class="bottom-sheet__handle"></div>
+        <div class="bottom-sheet__title">메뉴</div>
+        <ul class="bottom-sheet__menu">
+          <li><a href="#section-02" class="bottom-sheet__link">이해인, &lt;사랑의 사람들이여&gt;</a></li>
+          <li><a href="#section-03" class="bottom-sheet__link">초대합니다</a></li>
+          <li><a href="#section-04" class="bottom-sheet__link">날짜 안내</a></li>
+          <li><a href="#section-05" class="bottom-sheet__link">갤러리</a></li>
+          <li><a href="#section-06" class="bottom-sheet__link">오시는 길</a></li>
+          <li><a href="#section-07" class="bottom-sheet__link">예식정보</a></li>
+          <li><a href="#section-08" class="bottom-sheet__link">피로연 안내</a></li>
+          <li><a href="#section-10" class="bottom-sheet__link">마음 전하실 곳</a></li>
+        </ul>
+      </div>
+    </div>
 
       
       <!-- ----------------------------- 

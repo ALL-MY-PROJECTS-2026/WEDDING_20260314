@@ -8,18 +8,23 @@ bgSound.play();
 
 // 아이콘 클릭시 배경음악 재생여부
 const volumnChkEl = document.querySelector('#volumn-chk');
-volumnChkEl.addEventListener("change",function(e){
-    if(volumnChkEl.checked){
-        //audio  on
-        console.log('video mute on');
-        bgSound.play(); 
-    }else{
-        //audio off
-        console.log('video mute off');
-        bgSound.stop(); 
-      
+function updateNavSpeaker() {
+    var navSpeaker = document.querySelector('.mobile-nav-bar__item--speaker');
+    if (navSpeaker) {
+        navSpeaker.classList.toggle('is-muted', !volumnChkEl.checked);
     }
-})
+}
+if (volumnChkEl) {
+    volumnChkEl.addEventListener("change", function(e){
+        if(volumnChkEl.checked){
+            bgSound.play(); 
+        } else {
+            bgSound.stop(); 
+        }
+        updateNavSpeaker();
+    });
+    updateNavSpeaker();
+}
 
 
 

@@ -7,8 +7,10 @@
   console.log(Kakao.isInitialized());
 
 
-const kakaoShare =  document.querySelector('.kakao-share');
-kakaoShare.addEventListener('click',function(){
+const kakaoShareEls = document.querySelectorAll('.kakao-share');
+kakaoShareEls.forEach(function(kakaoShare){
+    if (!kakaoShare) return;
+    kakaoShare.addEventListener('click',function(){
 
     // Kakao.Share.sendDefault({
     //     objectType: 'text',
@@ -48,7 +50,8 @@ kakaoShare.addEventListener('click',function(){
         ],
       });
 
-})
+    });
+});
 
 
 
@@ -84,9 +87,9 @@ kakaoShare.addEventListener('click',function(){
 
 
 // 링크공유
-const urlCopy = document.querySelector('.url-copy');
-urlCopy.addEventListener('click',function(){
-        //클립보드에 복사
-         window.navigator.clipboard.writeText(window.location.href) ;
-})
+document.querySelectorAll('.url-copy').forEach(function(urlCopy){
+    urlCopy.addEventListener('click',function(){
+         window.navigator.clipboard.writeText(window.location.href); ;
+    });
+});
 

@@ -7,14 +7,10 @@
     color:rgb(58, 58, 58);
 }
 body{
-   
-    /* 480px */
-    /* width : 30rem;  */
     width : 23.75rem;
     margin :0 auto;
     background-color: rgb(47, 46, 46);
-    
-
+    padding-bottom: calc(56px + env(safe-area-inset-bottom, 0));
 }
 .wrapper{
     /* 380px */
