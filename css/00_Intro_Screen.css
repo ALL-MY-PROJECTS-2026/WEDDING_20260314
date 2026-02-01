@@ -1,5 +1,21 @@
 /* 인트로 화면 - 결혼식에 초대합니다 (한글자씩 타이핑) */
 /* * 선택자(0.98rem) 오버라이드 - 인트로는 고유 스타일 적용 */
+
+/* Shilla_Culture 폰트 등록 */
+@font-face {
+    font-family: 'Shilla_Culture';
+    src: url('../fonts/Shilla_Culture(M).ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Shilla_Culture';
+    src: url('../fonts/Shilla_Culture(B).ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
 .intro-screen {
     position: fixed;
     top: 0;
@@ -70,10 +86,10 @@
 }
 
 .intro-screen .intro-text-wrap {
-    font-family: 'Noto Serif KR', 'NanumMyeongjo', serif !important;
+    font-family: 'Shilla_Culture', 'Noto Serif KR', 'NanumMyeongjo', serif !important;
     font-size: 3.5rem !important;
-    font-weight: 400 !important;
-    color: #8B7355;
+    font-weight: normal !important;
+    color: rgb(245, 204, 125);
     letter-spacing: 0.05em;
     line-height: 1.8;
     text-align: center;
@@ -88,13 +104,7 @@
 }
 
 .intro-screen .intro-cursor {
-    display: inline-block;
-    margin-left: 2px;
-    color: #8B7355;
-    font-family: 'Noto Serif KR', 'NanumMyeongjo', serif !important;
-    font-size: 4.5rem !important;
-    font-weight: 400 !important;
-    animation: intro-cursor-blink 0.8s step-end infinite;
+    display: none;
 }
 
 .intro-screen.intro-fade-out .intro-cursor {
