@@ -2,10 +2,7 @@
 const bgSound = new Howl({
   src: ['./audio/wedding.mp3'],
   volume: 3.0,
-  loop: true,
-  onend: function () {
-    alert('We finished with the setup!');
-  }
+  loop: true
 });
 bgSound.play();
 

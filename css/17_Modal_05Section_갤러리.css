@@ -1,0 +1,63 @@
+/* 갤러리 모달 - 기존 width(23.75rem) 넘지 않음, border-radius: 0 */
+#section_05_gallery_modal .modal-dialog {
+  max-width: 23.75rem;
+  margin: 0 auto;
+}
+#section_05_gallery_modal .gallery-modal-content {
+  width: 100%;
+  max-width: 23.75rem;
+  height: auto;
+  min-height: 360px;
+  border-radius: 0;
+  overflow: hidden;
+}
+#section_05_gallery_modal .modal-header {
+  border: none;
+  padding: 8px 12px;
+  min-height: auto;
+  justify-content: flex-end;
+}
+#section_05_gallery_modal .modal-header .btn-close {
+  width: 12px;
+  height: 12px;
+  font-size: 0.5rem !important;
+}
+#section_05_gallery_modal .modal-body {
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+}
+#section_05_gallery_modal .gallery-swiper {
+  width: 100%;
+  height: 320px;
+}
+#section_05_gallery_modal .gallery-swiper .swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 320px;
+  background: #000;
+}
+#section_05_gallery_modal .gallery-swiper .swiper-slide img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+}
+#section_05_gallery_modal .swiper-button-prev,
+#section_05_gallery_modal .swiper-button-next {
+  color: rgba(255,255,255,0.8);
+}
+#section_05_gallery_modal .swiper-button-prev::after,
+#section_05_gallery_modal .swiper-button-next::after {
+  font-size: 1.2rem;
+}
+
+/* 갤러리 이미지 클릭 가능 표시 */
+.wrapper>main>section:nth-child(5) .gallery-img {
+  cursor: pointer;
+}
