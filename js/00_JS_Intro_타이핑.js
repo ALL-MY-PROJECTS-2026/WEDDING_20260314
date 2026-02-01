@@ -1,10 +1,11 @@
 /**
  * 인트로 화면 - "결혼식에 초대합니다" 한글자씩 타이핑 효과
+ * salondeletter 스타일
  */
 (function () {
-    const INTRO_TEXT = '결혼식에\n 초대합니다';
-    const TYPING_DELAY = 140;
-    const HOLD_DURATION = 2000;
+    const INTRO_TEXT = '결혼식에 초대합니다';
+    const TYPING_DELAY = 200;
+    const HOLD_DURATION = 1200;
 
     function init() {
         const introScreen = document.getElementById('introScreen');
@@ -18,11 +19,7 @@
 
         function typeNext() {
             if (index < chars.length) {
-                if (chars[index] === '\n') {
-                    typingEl.innerHTML += '<br>';
-                } else {
-                    typingEl.innerHTML += chars[index];
-                }
+                typingEl.textContent += chars[index];
                 index++;
                 setTimeout(typeNext, TYPING_DELAY);
             } else {

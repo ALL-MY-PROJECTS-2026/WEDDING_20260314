@@ -1,4 +1,5 @@
 /* 인트로 화면 - 결혼식에 초대합니다 (한글자씩 타이핑) */
+/* * 선택자(0.98rem) 오버라이드 - 인트로는 고유 스타일 적용 */
 .intro-screen {
     position: fixed;
     top: 0;
@@ -28,24 +29,28 @@
     text-align: center;
 }
 
-.intro-text-wrap {
-    font-family: 'Hi Melody', cursive;
-    font-size: 2.2rem;
+.intro-screen .intro-text-wrap {
+    font-family: 'NanumYeBbeunMinGyeongCe', serif !important;
+    font-size: 3.2rem !important;
     font-weight: 400;
     color: #b88c8c;
     letter-spacing: 0.02em;
-    line-height: 1.9;
+    line-height: 1.6;
 }
 
-.intro-typing {
+.intro-screen .intro-typing {
     display: inline;
+    font-family: inherit !important;
+    font-size: inherit !important;
+    color: inherit;
 }
 
-.intro-cursor {
+.intro-screen .intro-cursor {
     display: inline-block;
     margin-left: 2px;
     color: #b88c8c;
-    font-size: 2.2rem;
+    font-family: 'NanumYeBbeunMinGyeongCe', serif !important;
+    font-size: 2.2rem !important;
     animation: intro-cursor-blink 0.8s step-end infinite;
 }
 
