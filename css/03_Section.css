@@ -41,6 +41,44 @@
     font-size:1.2rem;
 }
 
+/* 국화꽃 아이콘에 종이 질감 효과 적용 */
+.wrapper>main>section:nth-child(3)>.contents>.sentence-02 img[src*="flower_chrysanthemum"] {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    filter: contrast(0.85) brightness(1.1) sepia(0.1);
+    mix-blend-mode: multiply;
+    opacity: 0.88;
+    background-color: #ffffff;
+    padding: 1px;
+    border-radius: 1px;
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.3) inset;
+}
+
+/* 종이 질감 오버레이 효과 */
+.wrapper>main>section:nth-child(3)>.contents>.sentence-02 span[style*="position:relative"] {
+    position: relative;
+    display: inline-block;
+}
+
+.wrapper>main>section:nth-child(3)>.contents>.sentence-02 span[style*="position:relative"]::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        url("data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paper)' opacity='0.3'/%3E%3C/svg%3E"),
+        url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.04' numOctaves='5'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)' opacity='0.1'/%3E%3C/svg%3E");
+    background-blend-mode: multiply, overlay;
+    background-size: 50px 50px, 25px 25px;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+    opacity: 0.4;
+    z-index: 1;
+}
+
 
 .wrapper>main>section:nth-child(3)>.contents>.btn-block{
 

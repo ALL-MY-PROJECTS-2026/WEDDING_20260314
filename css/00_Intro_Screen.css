@@ -33,6 +33,30 @@
     transition: opacity 0.8s ease-out;
 }
 
+/* INTRO 화면 종이 질감 효과 */
+.intro-screen::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-color: #ffffff;
+    background-image: 
+        url("data:image/svg+xml,%3Csvg width='400' height='400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paper)' opacity='0.4'/%3E%3C/svg%3E"),
+        url("data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.04' numOctaves='5'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)' opacity='0.15'/%3E%3C/svg%3E");
+    background-blend-mode: multiply, overlay;
+    background-size: 200px 200px, 100px 100px;
+    opacity: 1;
+}
+
+.intro-content {
+    position: relative;
+    z-index: 1;
+}
+
 /* 가운데 정렬 확인용 세로 중앙선 */
 /* .intro-screen::before {
     content: '';
@@ -57,61 +81,118 @@
 
 .intro-content {
     width: 100%;
-    max-width: 23.75rem;
+    max-width: 95vw;
     padding: 0 1.5rem;
     text-align: center;
 }
 
-/* 인트로 SVG 이미지 */
-.intro-svg-wrap {
+/* salondeletter 스타일 svg_text, svg_handwritng */
+.intro-svg-text {
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    opacity: 0;
-    animation: intro-svg-fade-in 1s ease-out 0.3s forwards;
-    padding: 2rem 0;
+    position: relative;
+    overflow: hidden;
 }
 
-.intro-svg-image {
+.intro-svg,
+.svg_handwritng {
     width: 100%;
-    max-width: 60rem;
-    max-height: 1050px;
+    max-width: 98vw;
+    max-height: 95vh;
+    min-height: 80vh;
     height: auto;
+    overflow: visible;
     object-fit: contain;
+    
+    /* 애니메이션 효과 조합 */
+    opacity: 0;
+    transform: scale(0.9);
+    animation: intro-svg-entrance 2.5s ease-out forwards;
+    
+    /* 필터 효과 - 부드러운 그림자와 미묘한 반짝임 */
+    filter: drop-shadow(0 4px 8px rgba(245, 204, 125, 0.3));
 }
 
-/* SVG 페이드인 애니메이션 */
-@keyframes intro-svg-fade-in {
-    from {
+/* SVG 등장 애니메이션 - 페이드인 + 스케일 */
+@keyframes intro-svg-entrance {
+    0% {
         opacity: 0;
-        transform: translateY(10px);
+        transform: scale(0.85);
+        filter: drop-shadow(0 0 0 rgba(245, 204, 125, 0));
+    }
+    60% {
+        opacity: 0.9;
+        transform: scale(1.02);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+        filter: drop-shadow(0 4px 12px rgba(245, 204, 125, 0.4));
+    }
+}
+
+/* 미묘한 글리터 효과 - 부모 요소에 적용 */
+.intro-svg-text::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.25),
+        transparent
+    );
+    animation: intro-svg-shimmer 4s ease-in-out 2s infinite;
+    pointer-events: none;
+    z-index: 1;
+}
+
+@keyframes intro-svg-shimmer {
+    0% {
+        left: -100%;
+    }
+    50% {
+        left: 100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+/* Stroke Drawing 애니메이션 - SVG path가 그려지는 효과 */
+@keyframes intro-svg-draw {
+    from {
+        stroke-dashoffset: var(--path-length, 1000);
+        opacity: 0.8;
     }
     to {
+        stroke-dashoffset: 0;
         opacity: 1;
-        transform: translateY(0);
     }
 }
 
-/* 모바일 반응형 조정 */
-@media (max-width: 768px) {
-    .intro-svg-wrap {
-        padding: 1.5rem 0;
-    }
-    .intro-svg-image {
-        max-width: 46rem;
-        max-height: 900px;
-    }
+/* SVG path 기본 스타일 */
+.intro-svg path[stroke] {
+    stroke: rgb(245, 204, 125);
+    fill: none;
+    stroke-width: 12;
+    stroke-linecap: round;
+    stroke-linejoin: round;
 }
 
-@media (max-width: 480px) {
-    .intro-svg-wrap {
-        padding: 1rem 0;
-    }
-    .intro-svg-image {
-        max-width: 38rem;
-        max-height: 800px;
-    }
+.intro-screen .intro-text-wrap {
+    font-family: 'Shilla_Culture', 'Noto Serif KR', 'NanumMyeongjo', serif !important;
+    font-size: 3.5rem !important;
+    font-weight: normal !important;
+    color: rgb(245, 204, 125);
+    letter-spacing: 0.05em;
+    line-height: 1.8;
+    text-align: center;
 }
 
 .intro-screen .intro-typing {
@@ -133,4 +214,59 @@
 @keyframes intro-cursor-blink {
     0%, 100% { opacity: 1; }
     50% { opacity: 0; }
+}
+
+/* HAPPY WEDDING DAY 애니메이션 - 가운데 정렬 */
+.intro-hero-text {
+    position: relative;
+    z-index: 2;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.2rem;
+    margin-bottom: 2rem;
+}
+
+.intro-hero-line {
+    font-family: 'Great Vibes', 'Brush Script MT', cursive;
+    font-size: clamp(2.2rem, 8vw, 3.5rem);
+    font-weight: 400;
+    color: #ffffff;
+    letter-spacing: 0.02em;
+    line-height: 1em;
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 0;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.15), 1px 1px 4px rgba(0,0,0,0.1);
+    animation: intro-hero-write-in 1.2s ease-out forwards;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.intro-hero-line::first-letter {
+    color: #f9d4c4;
+}
+
+.intro-hero-line:nth-child(1) { 
+    animation-delay: 0.5s; 
+}
+
+.intro-hero-line:nth-child(2) { 
+    animation-delay: 1.7s; 
+}
+
+.intro-hero-line:nth-child(3) { 
+    animation-delay: 2.9s; 
+}
+
+@keyframes intro-hero-write-in {
+    from { 
+        max-width: 0; 
+    }
+    to { 
+        max-width: 100%; 
+    }
 }
