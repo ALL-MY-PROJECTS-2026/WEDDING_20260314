@@ -139,7 +139,7 @@
 
 
 
-.wrapper>main>section:nth-child(7)>.title01{
+.wrapper>main>section.account .title01{
     letter-spacing: 2px;  
     margin-bottom:10px;
     color : rgb(194, 178, 178);
@@ -148,7 +148,7 @@
     height:20px;
     text-align: center;
 }
-.wrapper>main>section:nth-child(7)>.title02{
+.wrapper>main>section.account .title02{
     font-size:1.3rem;     
     color :rgb(137, 117, 122);
     font-size : 18.0513px;

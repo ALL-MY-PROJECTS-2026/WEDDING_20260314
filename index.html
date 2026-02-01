@@ -190,20 +190,6 @@
               <div><label for="volumn-chk"><span class="material-symbols-outlined volumn_off">volume_off</span></label></div>
             </div>
           </div>
-          <nav class="mobile-nav-bar">
-            <label for="volumn-chk" class="mobile-nav-bar__item mobile-nav-bar__item--speaker">
-              <span class="material-symbols-outlined nav-speaker-on">volume_up</span>
-              <span class="material-symbols-outlined nav-speaker-off">volume_off</span>
-            </label>
-            <a href="javascript:void(0)" class="mobile-nav-bar__item mobile-nav-bar__item--menu">
-              <span class="material-symbols-outlined">menu</span>
-            </a>
-            <a href="javascript:void(0)" class="mobile-nav-bar__item mobile-nav-bar__item--share url-copy">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path stroke="currentColor" stroke-width="1" d="M8.68439 10.6578L15.3125 7.34375M15.3156 16.6578L8.6938 13.3469M21 6C21 7.65685 19.6569 9 18 9C16.3431 9 15 7.65685 15 6C15 4.34315 16.3431 3 18 3C19.6569 3 21 4.34315 21 6ZM9 12C9 13.6569 7.65685 15 6 15C4.34315 15 3 13.6569 3 12C3 10.3431 4.34315 9 6 9C7.65685 9 9 10.3431 9 12ZM21 18C21 19.6569 19.6569 21 18 21C16.3431 21 15 19.6569 15 18C15 16.3431 16.3431 15 18 15C19.6569 15 21 16.3431 21 18Z"/>
-              </svg>
-            </a>
-          </nav>
       </section>
 
       <!-- ----------------------------- 
@@ -592,12 +578,26 @@
 
 
        <!-- ----------------------------- 
-        10
+        10    letter-spacing: 2px;  
+      margin-bottom:10px;
+      color : rgb(194, 178, 178);
+      font-size : 11.4872px;
+      letter-spacing: 3px;
+      height:20px;
+      text-align: center;
        ----------------------------- -->       
        <section id="section-10" class="scroll-spy account">
         <div class="contents  back-to-position to-up">
-          <div class="title01  back-to-position to-up">CONGRATULATIONS</div>
-          
+          <div class="title01  back-to-position to-up"
+            style="
+            letter-spacing: 2px;  
+            margin-bottom:10px;
+            color : rgb(194, 178, 178);
+            font-size : 11.4872px;
+            letter-spacing: 3px;
+            height:20px;
+            text-align: center;"
+          >CONGRATULATIONS</div>
           <div class="title02  back-to-position to-up">마음 전하실 곳</div>
         </div>
         
@@ -714,6 +714,22 @@
 
 
     </div>
+
+    <!-- 하단 네비게이션 바 - wrapper 밖으로 이동하여 항상 최상단 표시 -->
+    <nav class="mobile-nav-bar">
+      <label for="volumn-chk" class="mobile-nav-bar__item mobile-nav-bar__item--speaker">
+        <span class="material-symbols-outlined nav-speaker-on">volume_up</span>
+        <span class="material-symbols-outlined nav-speaker-off">volume_off</span>
+      </label>
+      <a href="javascript:void(0)" class="mobile-nav-bar__item mobile-nav-bar__item--menu">
+        <span class="material-symbols-outlined">menu</span>
+      </a>
+      <a href="javascript:void(0)" class="mobile-nav-bar__item mobile-nav-bar__item--share url-copy">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path stroke="currentColor" stroke-width="1" d="M8.68439 10.6578L15.3125 7.34375M15.3156 16.6578L8.6938 13.3469M21 6C21 7.65685 19.6569 9 18 9C16.3431 9 15 7.65685 15 6C15 4.34315 16.3431 3 18 3C19.6569 3 21 4.34315 21 6ZM9 12C9 13.6569 7.65685 15 6 15C4.34315 15 3 13.6569 3 12C3 10.3431 4.34315 9 6 9C7.65685 9 9 10.3431 9 12ZM21 18C21 19.6569 19.6569 21 18 21C16.3431 21 15 19.6569 15 18C15 16.3431 16.3431 15 18 15C19.6569 15 21 16.3431 21 18Z"/>
+        </svg>
+      </a>
+    </nav>
 
     <!-- 바텀시트 - 퀵메뉴 -->
     <div class="bottom-sheet" id="quickMenuBottomSheet">

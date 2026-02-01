@@ -81,3 +81,17 @@ body{
     z-index: 1;
 }
 
+/* 하단 네비게이션 바가 항상 최상단에 표시되도록 보장 */
+.wrapper,
+.wrapper > *,
+.wrapper > main > section,
+.wrapper > main > section > * {
+    /* mobile-nav-bar보다 낮은 z-index 보장 */
+    z-index: auto !important;
+    max-z-index: 9999 !important; /* mobile-nav-bar(2147483647)보다 낮게 */
+}
+
+/* mobile-nav-bar는 항상 최상단 */
+.mobile-nav-bar {
+    z-index: 2147483647 !important;
+}

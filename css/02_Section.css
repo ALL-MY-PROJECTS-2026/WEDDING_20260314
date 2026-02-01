@@ -29,5 +29,31 @@
 }
 .wrapper>main>section:nth-child(2)>.contents>.sentence-02{}
 
+/* section2에서 종이질감 제거 */
+.wrapper>main>section:nth-child(2)::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    pointer-events: none;
+    background-color: #ffffff;
+}
 
+.wrapper>main>section:nth-child(2)::after{
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    pointer-events: none;
+    background-color: #ffffff;
+}
 
+.wrapper>main>section:nth-child(2) > * {
+    position: relative;
+    z-index: 3;
+}

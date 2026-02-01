@@ -10,6 +10,13 @@
         const introScreen = document.getElementById('introScreen');
         if (!introScreen) return;
         introScreen.classList.add('intro-fade-out');
+        // 인트로가 페이드아웃 시작되면 하단 네비게이션 바 표시
+        const mobileNavBar = document.querySelector('.mobile-nav-bar');
+        if (mobileNavBar) {
+            mobileNavBar.style.visibility = 'visible';
+            mobileNavBar.style.opacity = '1';
+            mobileNavBar.style.pointerEvents = 'auto';
+        }
         setTimeout(function () {
             introScreen.classList.add('intro-hidden');
             if (introScreen.parentNode) {
