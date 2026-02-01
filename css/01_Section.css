@@ -34,14 +34,14 @@
     padding: 0;
     width: 100%;
     min-height: 100vh;
-    min-height: 100dvh;
+    min-height: 100svh;
 }
 .wrapper>main>section:nth-child(1) .main_image{
     position: relative;
     width: 100%;
     height: 100%;
     min-height: 100vh;
-    min-height: 100dvh;
+    min-height: 100svh;
     display: block;
     overflow: hidden;
 }
@@ -54,6 +54,99 @@
     background: linear-gradient(to bottom left, rgba(0,0,0,0.25) 0%, transparent 50%);
     pointer-events: none;
     z-index: 1;
+}
+
+/* OUR WEDDING DAY - 인트로와 동일 색상(#8B0000) 및 쓰는 듯한 효과, 첫 이미지 좌측 하단 */
+.wrapper>main>section:nth-child(1) .main_image_hero_text{
+    position: absolute;
+    left: 1.25rem;
+    bottom: 28%;
+    z-index: 2;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.2rem;
+}
+.wrapper>main>section:nth-child(1) .main_image_hero_line{
+    font-family: 'Brush Script MT', 'Lucida Handwriting', cursive;
+    font-size: clamp(2.2rem, 8vw, 3.5rem);
+    font-weight: 400;
+    color: #ffffff;
+    letter-spacing: 0.02em;
+    line-height: 1em;
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 0;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.15), 1px 1px 4px rgba(0,0,0,0.1);
+    animation: main-hero-write-in 1.2s ease-out forwards;
+}
+.wrapper>main>section:nth-child(1) .main_image_hero_line::first-letter{
+    color: #f9d4c4;
+}
+.wrapper>main>section:nth-child(1) .main_image_hero_line:nth-child(1){ animation-delay: 7s; }
+.wrapper>main>section:nth-child(1) .main_image_hero_line:nth-child(2){ animation-delay: 8.2s; }
+.wrapper>main>section:nth-child(1) .main_image_hero_line:nth-child(3){ animation-delay: 9.4s; }
+@keyframes main-hero-write-in{
+    from{ max-width: 0; }
+    to{ max-width: 100%; }
+}
+
+/* 스크롤 안내 - OUR WEDDING DAY 표시 후 우측 하단, 스크롤 시 사라짐 */
+.wrapper>main>section:nth-child(1) .main_image_scroll_hint{
+    position: absolute;
+    right: 1.25rem;
+    bottom: 50px;
+    z-index: 2;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.5rem 0.65rem;
+    background: rgba(0, 0, 0, 0.35);
+    border-radius: 25px;
+    opacity: 0;
+    animation: main-scroll-hint-in 0.5s ease-out 10.8s forwards;
+    transition: opacity 1.2s ease-out;
+}
+.wrapper>main>section:nth-child(1) .main_image_scroll_hint.scroll-hide{
+    opacity: 0 !important;
+}
+.wrapper>main>section:nth-child(1) .main_image_scroll_icon{
+    width: 20px;
+    height: 48px;
+    border: 1.5px solid rgba(255,255,255,0.9);
+    border-radius: 28px;
+    position: relative;
+    display: block;
+}
+.wrapper>main>section:nth-child(1) .main_image_scroll_icon::before{
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 6px;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    background: rgba(255,255,255,0.95);
+    border-radius: 5px;
+    animation: scroll-dot-fall 1.5s ease-in-out infinite;
+}
+@keyframes scroll-dot-fall{
+    0%{ top: 6px; opacity: 1; }
+    70%{ top: 32px; opacity: 0.3; }
+    100%{ top: 6px; opacity: 0; }
+}
+.wrapper>main>section:nth-child(1) .main_image_scroll_label{
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.95);
+    letter-spacing: 0.02em;
+}
+@keyframes main-scroll-hint-in{
+    from{ opacity: 0; transform: translateY(6px); }
+    to{ opacity: 1; transform: translateY(0); }
 }
 .wrapper>main>section:nth-child(1) img{
     position: absolute;
@@ -125,6 +218,11 @@
     'GRAD' 0,
     'opsz' 24;
 }
+.mobile-nav-bar__item svg{
+    width: 24px;
+    height: 24px;
+    stroke: currentColor;
+}
 .mobile-nav-bar__item--speaker .nav-speaker-on{
     display: block;
 }
@@ -154,7 +252,15 @@
     height:25px;
 }
 .volumn_block.volumn_block--overlay{
-    display: none;
+    display: none !important;
+    visibility: hidden !important;
+    position: absolute !important;
+    left: -9999px !important;
+    width: 1px !important;
+    height: 1px !important;
+    overflow: hidden !important;
+    pointer-events: none !important;
+    opacity: 0 !important;
 }
 .volumn_block>#volumn-chk{
     display:none;

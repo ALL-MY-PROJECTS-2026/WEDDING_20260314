@@ -137,6 +137,8 @@
     <script src="./js/24_JS_05Section_갤러리_모달.js" defer></script>
     <!-- 25_JS_BottomSheet -->
     <script src="./js/25_JS_BottomSheet.js" defer></script>
+    <!-- 26_JS_01Section_ScrollHint -->
+    <script src="./js/26_JS_01Section_ScrollHint.js" defer></script>
 
 
 
@@ -188,11 +190,20 @@
           <!-- VIDEO BLOCK -->
           <div class="main_image">
             <img src="./images/01_section.jpg" alt="">
-            <video id="introVideo" muted loop playsinline webkit-playsinline preload="none">
+            <video id="introVideo" muted loop playsinline webkit-playsinline preload="metadata">
               <source src="https://mcard.fromtoday.co.kr/mcard/assets/flower_00.mp4" type="video/mp4">
             </video>
             <div class="main_image_gradient"></div>
-            <div class="volumn_block volumn_block--overlay">
+            <div class="main_image_hero_text" aria-hidden="true">
+              <span class="main_image_hero_line">Happy</span>
+              <span class="main_image_hero_line">Wedding</span>
+              <span class="main_image_hero_line">Day</span>
+            </div>
+            <div class="main_image_scroll_hint" aria-hidden="true">
+              <span class="main_image_scroll_icon"></span>
+              <span class="main_image_scroll_label">스크롤</span>
+            </div>
+            <div class="volumn_block volumn_block--overlay" style="display:none!important">
               <input type="checkbox" id="volumn-chk" checked>
               <div><label for="volumn-chk"><span class="material-symbols-outlined volumn_up">volume_up</span></label></div>
               <div><label for="volumn-chk"><span class="material-symbols-outlined volumn_off">volume_off</span></label></div>
@@ -207,7 +218,9 @@
               <span class="material-symbols-outlined">menu</span>
             </a>
             <a href="javascript:void(0)" class="mobile-nav-bar__item mobile-nav-bar__item--share url-copy">
-              <span class="material-symbols-outlined">link</span>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path stroke="currentColor" stroke-width="1" d="M8.68439 10.6578L15.3125 7.34375M15.3156 16.6578L8.6938 13.3469M21 6C21 7.65685 19.6569 9 18 9C16.3431 9 15 7.65685 15 6C15 4.34315 16.3431 3 18 3C19.6569 3 21 4.34315 21 6ZM9 12C9 13.6569 7.65685 15 6 15C4.34315 15 3 13.6569 3 12C3 10.3431 4.34315 9 6 9C7.65685 9 9 10.3431 9 12ZM21 18C21 19.6569 19.6569 21 18 21C16.3431 21 15 19.6569 15 18C15 16.3431 16.3431 15 18 15C19.6569 15 21 16.3431 21 18Z"/>
+              </svg>
             </a>
           </nav>
       </section>
@@ -726,7 +739,7 @@
         <div class="bottom-sheet__handle"></div>
         <div class="bottom-sheet__title">메뉴</div>
         <ul class="bottom-sheet__menu">
-          <li><a href="#section-02" class="bottom-sheet__link">이해인, &lt;사랑의 사람들이여&gt;</a></li>
+          <li><a href="#section-01" class="bottom-sheet__link">메인화면</a></li>
           <li><a href="#section-03" class="bottom-sheet__link">초대합니다</a></li>
           <li><a href="#section-04" class="bottom-sheet__link">날짜 안내</a></li>
           <li><a href="#section-05" class="bottom-sheet__link">갤러리</a></li>

@@ -8,7 +8,7 @@
     bottom: 0;
     width: 100vw;
     height: 100vh;
-    min-height: 100dvh;
+    height: 100svh;
     background-color: #ffffff;
     display: flex;
     justify-content: center;
@@ -20,6 +20,10 @@
 .intro-screen.intro-fade-out {
     opacity: 0;
     pointer-events: none;
+}
+
+.intro-screen.intro-hidden {
+    display: none !important;
 }
 
 .intro-content {

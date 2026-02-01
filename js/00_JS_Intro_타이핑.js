@@ -10,7 +10,10 @@
         if (!introScreen) return;
         introScreen.classList.add('intro-fade-out');
         setTimeout(function () {
-            introScreen.style.display = 'none';
+            introScreen.classList.add('intro-hidden');
+            if (introScreen.parentNode) {
+                introScreen.parentNode.removeChild(introScreen);
+            }
             var video = document.getElementById('introVideo');
             if (video) {
                 video.load();
