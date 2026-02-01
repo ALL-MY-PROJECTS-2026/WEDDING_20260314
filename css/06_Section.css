@@ -33,6 +33,11 @@
     align-items : center;
 
 }
+.wrapper>main>section:nth-child(6)>.map #map{
+    width: 320px !important;
+    height: 320px !important;
+    min-height: 320px;
+}
 /*  */
 .map-marker{
     width : 150px;

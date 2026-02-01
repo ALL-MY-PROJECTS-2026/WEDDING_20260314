@@ -1,7 +1,7 @@
 // 카톡공유(https://developers.kakao.com/docs/latest/ko/message/js-link#default-template-msg-custom)
 
   // SDK를 초기화 합니다. 사용할 앱의 JavaScript 키를 설정해 주세요.
-  Kakao.init('4c98b24b02bfbd026cbe7fe5300f9e1d');
+  Kakao.init('69f997d9b7dfb3972e5c6ca96e84a293');
 
   // SDK 초기화 여부를 판단합니다.
   console.log(Kakao.isInitialized());
@@ -25,10 +25,10 @@ kakaoShare.addEventListener('click',function(){
     // 직접 버튼 사용하는 메시지 탬플릿(위치)
     Kakao.Share.sendDefault({
         objectType: 'location',
-        address: '주소가 들어가는 부분',
-        addressTitle: '주소 제목',
+        address: '경기도 안양시 만안구 안양로 104',
+        addressTitle: '웨딩그룹위더스 안양',
         content: {
-          title: '도형 ❤️ 하나 결혼합니다',
+          title: '민형 ❤️ 유정 결혼합니다',
           description: '',
           imageUrl: "https://edu-embadded-curriculum.github.io/02_SCREEN_IMPL_WEDDING.github.io/images/01_section.jpg",
           link: {
