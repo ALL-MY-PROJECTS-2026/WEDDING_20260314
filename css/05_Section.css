@@ -46,19 +46,22 @@
     width : 160px;
     height : 200px;
     margin : 5px;
-    border : 1px solid lightgray;
+    border : 1px solid rgba(0,0,0,0.08);
     border-radius: 5px;
+    overflow: hidden;
 }
 .wrapper>main>section:nth-child(5)>.gallery-block>.item>.left>img{
     border-radius: 4px;
+    display: block;
 }
 
 .wrapper>main>section:nth-child(5)>.gallery-block>.item>.right{
     width : 160px;
     height : 200px;
     margin : 5px;
-    border : 1px solid lightgray;
+    border : 1px solid rgba(0,0,0,0.08);
     border-radius: 5px;
+    overflow: hidden;
 }
 .wrapper>main>section:nth-child(5)>.gallery-block>.item>.left,
 .wrapper>main>section:nth-child(5)>.gallery-block>.item>.right
@@ -74,14 +77,16 @@
 {
     width : 150px;
     height : 90px;
-    border : 1px solid lightgray;
+    border : 1px solid rgba(0,0,0,0.08);
     border-radius: 3px;
     margin : 5px;
+    overflow: hidden;
 }
 .wrapper>main>section:nth-child(5)>.gallery-block>.item>.left>div>img,
 .wrapper>main>section:nth-child(5)>.gallery-block>.item>.right>div>img
 {
     border-radius: 2px;
+    display: block;
 }
 
 .wrapper>main>section:nth-child(5)>.gallery-block>.item:last-child>.left{

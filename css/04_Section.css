@@ -3,6 +3,14 @@ main>section:nth-child(4){
     border-radius: 15px;
 }
 
+main>section:nth-child(4)>.wedding-day-title{
+    font-size: 1rem;
+    letter-spacing: 3px;
+    color: #7b0101;
+    margin-bottom: 15px;
+    font-weight: 800;
+}
+
 main>section:nth-child(4)>.datetime-block{
     width : 300px;
     height : 80px;
