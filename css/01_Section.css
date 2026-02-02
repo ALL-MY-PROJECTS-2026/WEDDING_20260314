@@ -94,7 +94,7 @@
     white-space: nowrap;
     max-width: 0;
     text-shadow: 1px 1px 2px rgba(0,0,0,0.15), 1px 1px 4px rgba(0,0,0,0.1);
-    animation: main-hero-write-in 1.2s ease-out forwards;
+    animation: none; /* 기본적으로 애니메이션 비활성화 */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     padding : 5px 0;
@@ -103,9 +103,13 @@
 .wrapper>main>section:nth-child(1) .main_image_hero_line::first-letter{
     color: #f9d4c4;
 }
-.wrapper>main>section:nth-child(1) .main_image_hero_line:nth-child(1){ animation-delay: 7s; }
-.wrapper>main>section:nth-child(1) .main_image_hero_line:nth-child(2){ animation-delay: 8.2s; }
-.wrapper>main>section:nth-child(1) .main_image_hero_line:nth-child(3){ animation-delay: 9.4s; }
+/* 인트로가 끝난 후 애니메이션 시작 */
+.wrapper>main>section:nth-child(1).intro-completed .main_image_hero_line{
+    animation: main-hero-write-in 1.2s ease-out forwards;
+}
+.wrapper>main>section:nth-child(1).intro-completed .main_image_hero_line:nth-child(1){ animation-delay: 0s; }
+.wrapper>main>section:nth-child(1).intro-completed .main_image_hero_line:nth-child(2){ animation-delay: 1.2s; }
+.wrapper>main>section:nth-child(1).intro-completed .main_image_hero_line:nth-child(3){ animation-delay: 2.4s; }
 @keyframes main-hero-write-in{
     from{ max-width: 0; }
     to{ max-width: 100%; }
@@ -126,8 +130,12 @@
     background: rgba(0, 0, 0, 0.35);
     border-radius: 25px;
     opacity: 0;
-    animation: main-scroll-hint-in 0.5s ease-out 10.8s forwards;
+    animation: none; /* 기본적으로 애니메이션 비활성화 */
     transition: opacity 1.2s ease-out;
+}
+/* 인트로가 끝난 후 스크롤 힌트 표시 */
+.wrapper>main>section:nth-child(1).intro-completed .main_image_scroll_hint{
+    animation: main-scroll-hint-in 0.5s ease-out 3.8s forwards; /* HAPPY WEDDING DAY 완료 후 표시 */
 }
 .wrapper>main>section:nth-child(1) .main_image_scroll_hint.scroll-hide{
     opacity: 0 !important;
