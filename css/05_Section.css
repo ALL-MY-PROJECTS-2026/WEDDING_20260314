@@ -124,9 +124,9 @@
     position:absolute;
     left:0;
     right:0;
-    top:755px;
+    bottom:0px;
     margin : auto;
-    z-index:5;
+    z-index:115;
     cursor: pointer;
 }
 .wrapper>main>section:nth-child(5) .more-picture-btn-block{

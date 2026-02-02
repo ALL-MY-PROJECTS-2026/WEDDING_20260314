@@ -4,7 +4,7 @@
   Kakao.init('69f997d9b7dfb3972e5c6ca96e84a293');
 
   // SDK 초기화 여부를 판단합니다.
-  console.log(Kakao.isInitialized());
+  // console.log(Kakao.isInitialized()); // 디버깅용 로그 제거
 
 
 const kakaoShareEls = document.querySelectorAll('.kakao-share');
@@ -22,8 +22,6 @@ kakaoShareEls.forEach(function(kakaoShare){
     //     },
     //   });
 
-    console.log("window.location.origin",window.location.origin);
- 
     // 직접 버튼 사용하는 메시지 탬플릿(위치)
     Kakao.Share.sendDefault({
         objectType: 'location',

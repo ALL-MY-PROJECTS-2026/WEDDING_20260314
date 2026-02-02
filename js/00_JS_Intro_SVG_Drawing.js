@@ -120,9 +120,21 @@
         const container = document.getElementById('introSvgContainer');
         if (!container) return;
 
+        // file:// 프로토콜 체크 (CORS 문제 방지)
+        const isFileProtocol = window.location.protocol === 'file:';
+        
         try {
+            // file:// 프로토콜에서는 fetch 대신 img 태그 사용
+            if (isFileProtocol) {
+                container.innerHTML = '<img src="./images/intro.svg" alt="결혼식에 초대합니다" class="intro-svg svg_handwritng">';
+                return;
+            }
+            
             // SVG 파일을 fetch로 로드
             const response = await fetch('./images/intro.svg');
+            if (!response.ok) {
+                throw new Error('SVG 파일을 불러올 수 없습니다.');
+            }
             const svgText = await response.text();
             
             // SVG 텍스트를 DOM으로 변환
@@ -131,8 +143,7 @@
             const svgElement = svgDoc.querySelector('svg');
             
             if (!svgElement) {
-                console.error('SVG 요소를 찾을 수 없습니다.');
-                return;
+                throw new Error('SVG 요소를 찾을 수 없습니다.');
             }
 
             // SVG에 클래스 추가 및 스타일 설정
@@ -146,11 +157,14 @@
             // SVG가 DOM에 삽입된 후 stroke drawing 설정
             setTimeout(() => {
                 const animationDuration = setupStrokeDrawing(svgElement);
-                console.log('SVG Stroke Drawing 애니메이션 설정 완료');
             }, 100);
             
         } catch (error) {
-            console.error('SVG 로드 실패:', error);
+            // 조용히 폴백 처리 (콘솔 오류 최소화)
+            if (!isFileProtocol) {
+                // file:// 프로토콜이 아닐 때만 경고 (개발 환경)
+                console.warn('SVG 로드 실패, 이미지로 대체:', error.message);
+            }
             // 실패 시 이미지 태그로 폴백
             container.innerHTML = '<img src="./images/intro.svg" alt="결혼식에 초대합니다" class="intro-svg svg_handwritng">';
         }

@@ -20,6 +20,9 @@ const createMap = (address, markerTitle) => {
             });
             infowindow.open(map, marker);
             map.setCenter(coords);
+        } else {
+            // API 오류 시 조용히 처리 (기본 좌표 사용)
+            // 401 오류는 API 키 문제이므로 조용히 무시
         }
     });
 

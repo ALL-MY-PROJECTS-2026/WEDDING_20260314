@@ -16,12 +16,7 @@ const cal_calender = (wedding_date,time)=>{
     var monthStartDay = new Date(calendarYear, calendarMonth-1, 1);
     
     var calendarMonthStartDay = monthStartDay.getDay(); // 달력 월의 시작 요일
-    console.log("YEAR : ",calendarYear);
-    console.log("MONTH : ",calendarMonth);
-    console.log("LAST DAY : ",monthLastDate);
-    console.log("D-DAY : ",d_day);
-    console.log("START YOIL : ",monthStartDay);
-    console.log("START YOIL : ",calendarMonthStartDay); //월요일기준으로 1 - 6(토) ,0(일)
+    // 디버깅용 로그 제거
 
 
     //01SECTION 헤더 YYYY/MM/DD 랜더링
@@ -171,7 +166,6 @@ const d_day_func = (weddingDate)=>{
     let diffMin = Math.floor((diff / (1000*60)) % 60);
     let diffSec = Math.floor(diff / 1000 % 60);
 
-    console.log("D-DAY표시 :",diffDay,diffHour,diffMin,diffSec);
     // D-DAY 랜더링 
     dayEls.forEach(dayEl=>{
         if(diffDay<10)
