@@ -35,23 +35,10 @@
     transition: opacity 0.8s ease-out;
 }
 
-/* INTRO 화면 종이 질감 효과 */
-.intro-screen::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 0;
-    pointer-events: none;
-    background-color: #ffffff;
-    background-image: 
-        url("data:image/svg+xml,%3Csvg width='400' height='400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paper)' opacity='0.4'/%3E%3C/svg%3E"),
-        url("data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.04' numOctaves='5'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)' opacity='0.15'/%3E%3C/svg%3E");
-    background-blend-mode: multiply, overlay;
-    background-size: 200px 200px, 100px 100px;
-    opacity: 1;
+/* INTRO 화면 배경 이미지 */
+.intro-screen {
+    background-image: url('../images/bg.png');
+    background-repeat: repeat;
 }
 
 .intro-content {

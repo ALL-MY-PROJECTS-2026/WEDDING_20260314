@@ -34,9 +34,8 @@
     border-radius: 15px;
     margin : 50px 0px;
     overflow:hidden;
-    transition: height 0.1s ease-out; /* transition 시간 더 단축 (즉시 표시) */
+    transition: none; /* transition 완전 제거 - 즉시 표시 */
     position:relative;
-    will-change: height; /* 성능 최적화 */
 }
 .wrapper>main>section:nth-child(5)>.gallery-block>.item{
     display:flex;

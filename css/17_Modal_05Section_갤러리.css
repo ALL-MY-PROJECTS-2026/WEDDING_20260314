@@ -22,7 +22,7 @@
   padding: 12px 16px;
   min-height: auto;
   justify-content: flex-end;
-  background: rgba(0, 0, 0, 0.5);
+  background: transparent;
   position: absolute;
   top: 0;
   left: 0;
@@ -33,13 +33,13 @@
   width: 32px;
   height: 32px;
   font-size: 1.2rem !important;
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(0, 0, 0, 0.5);
   border-radius: 50%;
   opacity: 1;
   filter: brightness(0) invert(1);
 }
 #section_05_gallery_modal .modal-header .btn-close:hover {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(0, 0, 0, 0.7);
 }
 #section_05_gallery_modal .modal-body {
   padding: 0;
