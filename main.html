@@ -1795,30 +1795,95 @@ document.querySelectorAll('.url-copy').forEach(function(urlCopy){
 // main.html 로드 시 첫 섹션 초기화
 // ============================================
 (function() {
+    // 정적 자원 로드 완료 확인 함수
+    function waitForResources(callback) {
+        var resourcesLoaded = 0;
+        var totalResources = 0;
+        var maxWaitTime = 10000; // 최대 10초 대기
+        var startTime = Date.now();
+        
+        // 첫 섹션의 메인 이미지 확인
+        var mainImage = document.querySelector('.wrapper>main>section:nth-child(1) .main_image img');
+        if (mainImage) {
+            totalResources++;
+            
+            function checkImageLoaded() {
+                if (mainImage.complete && mainImage.naturalWidth > 0) {
+                    // 이미지가 이미 로드됨
+                    resourcesLoaded++;
+                    if (resourcesLoaded >= totalResources) {
+                        callback();
+                    }
+                } else {
+                    // 이미지 로드 대기
+                    mainImage.addEventListener('load', function onLoad() {
+                        mainImage.removeEventListener('load', onLoad);
+                        resourcesLoaded++;
+                        if (resourcesLoaded >= totalResources) {
+                            callback();
+                        }
+                    }, { once: true });
+                    
+                    mainImage.addEventListener('error', function onError() {
+                        mainImage.removeEventListener('error', onError);
+                        // 이미지 로드 실패해도 진행
+                        resourcesLoaded++;
+                        if (resourcesLoaded >= totalResources) {
+                            callback();
+                        }
+                    }, { once: true });
+                }
+            }
+            
+            // DOM이 준비되면 이미지 확인
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', checkImageLoaded);
+            } else {
+                checkImageLoaded();
+            }
+        } else {
+            // 이미지가 없으면 즉시 콜백
+            callback();
+        }
+        
+        // 최대 대기 시간 초과 시 강제 진행
+        setTimeout(function() {
+            if (resourcesLoaded < totalResources) {
+                callback();
+            }
+        }, maxWaitTime);
+    }
+    
     function initMainContent() {
-        // 비디오 로드 및 재생
-        var video = document.getElementById('introVideo');
-        if (video) {
-            video.load();
-            video.play().catch(function(){});
-        }
-        
-        // 하단 네비게이션 바 표시
-        const mobileNavBar = document.querySelector('.mobile-nav-bar');
-        if (mobileNavBar) {
-            mobileNavBar.style.visibility = 'visible';
-            mobileNavBar.style.opacity = '1';
-            mobileNavBar.style.pointerEvents = 'auto';
-        }
-        
-        // 첫 번째 섹션에 intro-completed 클래스 추가하여 HAPPY WEDDING DAY 애니메이션 시작
-        // 1초 후에 표시되도록 지연
-        const firstSection = document.querySelector('.wrapper>main>section:nth-child(1)');
-        if (firstSection) {
-            setTimeout(function() {
-                firstSection.classList.add('intro-completed');
-            }, 1000); // 1초(1000ms) 후에 애니메이션 시작
-        }
+        // 정적 자원 로드 완료 후 실행
+        waitForResources(function() {
+            // 비디오 로드 및 재생 (비디오는 선택적이므로 로드 완료를 기다리지 않음)
+            var video = document.getElementById('introVideo');
+            if (video) {
+                video.load();
+                video.play().catch(function(){});
+            }
+            
+            // 하단 네비게이션 바 표시
+            const mobileNavBar = document.querySelector('.mobile-nav-bar');
+            if (mobileNavBar) {
+                mobileNavBar.style.visibility = 'visible';
+                mobileNavBar.style.opacity = '1';
+                mobileNavBar.style.pointerEvents = 'auto';
+            }
+            
+            // 첫 번째 섹션에 intro-completed 클래스 추가하여 HAPPY WEDDING DAY 애니메이션 시작
+            // 정적 자원이 모두 로드된 후에 표시
+            const firstSection = document.querySelector('.wrapper>main>section:nth-child(1)');
+            if (firstSection) {
+                // 약간의 지연을 두어 부드러운 전환 효과
+                requestAnimationFrame(function() {
+                    requestAnimationFrame(function() {
+                        firstSection.classList.add('intro-completed');
+                    });
+                });
+            }
+        });
     }
     
     // DOM 로드 완료 후 실행
