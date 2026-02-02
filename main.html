@@ -89,7 +89,7 @@
     <!-- howler.js - 지연 로드 (오디오는 사용자 인터랙션 후 필요) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.1/howler.min.js" defer></script>  
     <!-- kakao map - 지연 로드 (지도 섹션에서만 필요) -->
-    <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=6effaf063a25826448e20f9b64ce23b6&libraries=services" charset="utf-8" defer></script>
+    <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=6effaf063a25826448e20f9b64ce23b6&libraries=services" charset="utf-8" ></script>
 
     <!-- 23 카카오 공유 SDK - 지연 로드 (공유 버튼 클릭 시 필요) -->
     <script src="https://developers.kakao.com/sdk/js/kakao.js" defer></script>
@@ -98,7 +98,6 @@
       JS LOCAL
       -->
     <!-- Common.js는 body 끝으로 이동하여 인라인화됨 -->
-    <!-- JavaScript 파일들은 </body> 태그 전으로 이동됨 (109-140 라인 제거) -->
 
 
 
@@ -1688,34 +1687,6 @@ document.querySelectorAll('.url-copy').forEach(function(urlCopy){
                     async>
                   </script>
 
-                <!-- 
-                  <form action="" onsubmit="return false">
-                  <table>
-                    <tr>
-                      <td style="width:80px;">이름</td>
-                      <td style="width:200px;"><input type="text" class="form-control fontstyle"></td>
-                    </tr>
-                    <tr>
-                      <td>비밀번호</td> 
-                      <td><input type="password"  class="form-control fontstyle"></td>
-                    </tr>
-                    <tr>
-                      <td colspan="2">
-                        <textarea name="" id="" cols="30" rows="10" class="form-control fontstyle" placeholder="100자 이내로 입력해주세요." ></textarea>
-                      </td>
-                    
-                    </tr>
-                    <tr>
-                      <td colspan="2">
-                        <button class="btn btn-danger w-100">작성하기</button>
-                      </td>
-                     
-                    </tr>
-                    
-                  </table>
-                  
-                </form> 
-              -->
               </div>
 
             </div>
