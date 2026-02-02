@@ -35,7 +35,8 @@
       .wrapper>header,.wrapper>main,.wrapper>footer{position:relative;z-index:1;}
       .wrapper>main>section{position:relative;z-index:1;}
       /* 인트로 화면 - 첫 화면에 필수 */
-      .intro-screen{position:fixed;top:0;left:0;right:0;bottom:0;width:100vw;height:100vh;height:100svh;background-image:url('./images/bg.png');background-repeat:repeat;background-color:#ffffff;display:flex;justify-content:center;align-items:center;z-index:9999;transition:opacity 0.8s ease-out;}
+      .intro-screen{position:fixed;top:0;left:0;right:0;bottom:0;width:100vw;height:100vh;height:100svh;background-image:url('./images/bg.png');background-repeat:repeat;background-color:#ffffff;display:flex;justify-content:center;align-items:center;z-index:9999;transition:opacity 0.8s ease-out;opacity:0;visibility:hidden;pointer-events:none;}
+      .intro-screen.intro-ready{opacity:1;visibility:visible;pointer-events:auto;}
       .intro-content{position:relative;z-index:1;width:100%;max-width:100vw;padding:0 0.5rem;text-align:center;}
       .intro-svg-text{width:100%;display:flex;justify-content:center;align-items:center;position:relative;overflow:visible;}
       .intro-screen.intro-fade-out{opacity:0;pointer-events:none;}
@@ -1122,11 +1123,72 @@
     }
 
     /**
-     * 초기화 함수
+     * 모든 리소스 로드 완료 확인
      */
-    function init() {
+    function waitForAllResources() {
+        return new Promise(function(resolve) {
+            // window.load 이벤트 대기 (모든 리소스 로드 완료)
+            if (document.readyState === 'complete') {
+                // 이미 로드 완료된 경우
+                checkFontsAndImages().then(resolve);
+            } else {
+                window.addEventListener('load', function() {
+                    checkFontsAndImages().then(resolve);
+                });
+            }
+        });
+    }
+    
+    /**
+     * 폰트와 이미지 로드 완료 확인
+     */
+    function checkFontsAndImages() {
+        return new Promise(function(resolve) {
+            var promises = [];
+            
+            // 폰트 로드 완료 확인
+            if (document.fonts && document.fonts.ready) {
+                promises.push(document.fonts.ready);
+            }
+            
+            // 주요 이미지 로드 완료 확인
+            var criticalImages = document.querySelectorAll('img[fetchpriority="high"], img[loading="eager"]');
+            if (criticalImages.length > 0) {
+                var imagePromises = Array.from(criticalImages).map(function(img) {
+                    if (img.complete) {
+                        return Promise.resolve();
+                    }
+                    return new Promise(function(imgResolve) {
+                        img.addEventListener('load', imgResolve);
+                        img.addEventListener('error', imgResolve);
+                        // 타임아웃 설정 (5초 후 강제 진행)
+                        setTimeout(imgResolve, 5000);
+                    });
+                });
+                promises.push(Promise.all(imagePromises));
+            }
+            
+            // 모든 확인이 완료되면 resolve
+            if (promises.length > 0) {
+                Promise.all(promises).then(function() {
+                    // 추가 안정성을 위한 짧은 딜레이
+                    setTimeout(resolve, 100);
+                });
+            } else {
+                setTimeout(resolve, 100);
+            }
+        });
+    }
+    
+    /**
+     * 인트로 화면 표시
+     */
+    function showIntro() {
         const introScreen = document.getElementById('introScreen');
         if (!introScreen) return;
+        
+        // 인트로 화면 표시
+        introScreen.classList.add('intro-ready');
         
         // SVG 로드 및 설정
         loadAndSetupSVG();
@@ -1136,6 +1198,14 @@
         setTimeout(function() {
             fadeOutIntro();
         }, FADE_IN_DELAY + FADE_IN_DURATION + HOLD_DURATION);
+    }
+    
+    /**
+     * 초기화 함수
+     */
+    function init() {
+        // 모든 리소스 로드 완료 후 인트로 화면 표시
+        waitForAllResources().then(showIntro);
     }
 
     // DOM 로드 완료 후 실행
