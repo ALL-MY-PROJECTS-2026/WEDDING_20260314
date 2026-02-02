@@ -19,6 +19,11 @@
     
     <!-- 첫 화면 이미지 preload (FCP 최적화) -->
     <link rel="preload" href="./images/01_section.jpg" as="image" fetchpriority="high">
+    
+    <!-- 갤러리 첫 화면 이미지 preload (갤러리 로딩 속도 개선) -->
+    <link rel="preload" href="./images/05_01.jpg" as="image">
+    <link rel="preload" href="./images/05_02.jpg" as="image">
+    <link rel="preload" href="./images/05_03.jpg" as="image">
 
     <title>민형 ❤ 유정 결혼합니다.</title>
 
@@ -310,10 +315,10 @@
 
 
             <div class="item item-01  back-to-position to-up">
-              <div class="left"> <img src="./images/05_01.jpg" alt="" class="gallery-img" role="button" tabindex="0" loading="lazy"></div>
+              <div class="left"> <img src="./images/05_01.jpg" alt="" class="gallery-img" role="button" tabindex="0" loading="eager"></div>
               <div class="right">
-                <div> <img src="./images/05_02.jpg" alt="" class="gallery-img" role="button" tabindex="0" loading="lazy"></div>
-                <div> <img src="./images/05_03.jpg" alt="" class="gallery-img" role="button" tabindex="0" loading="lazy"></div>
+                <div> <img src="./images/05_02.jpg" alt="" class="gallery-img" role="button" tabindex="0" loading="eager"></div>
+                <div> <img src="./images/05_03.jpg" alt="" class="gallery-img" role="button" tabindex="0" loading="eager"></div>
               </div>
             </div>
             <div class="item item-02  back-to-position to-up">
@@ -1372,7 +1377,7 @@ document.querySelectorAll('.url-copy').forEach(function(urlCopy){
         }
       });
     }, { 
-      rootMargin: '300px' // 섹션 위쪽 300px 전에 미리 로드 시작
+      rootMargin: '800px' // 섹션 위쪽 800px 전에 미리 로드 시작 (갤러리 로딩 속도 개선)
     });
     
     sectionObserver.observe(gallerySection);
@@ -1405,7 +1410,7 @@ document.querySelectorAll('.url-copy').forEach(function(urlCopy){
           blockObserver.unobserve(entry.target);
         }
       });
-    }, { rootMargin: '200px' });
+    }, { rootMargin: '600px' }); // 갤러리 블록 근처에서 미리 로드 시작
     
     blockObserver.observe(galleryBlock);
   }
