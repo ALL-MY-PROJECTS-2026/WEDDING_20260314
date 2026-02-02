@@ -1194,78 +1194,101 @@ document.querySelectorAll('.url-copy').forEach(function(urlCopy){
 (function () {
   'use strict';
 
-  var galleryImages = document.querySelectorAll('.gallery-img');
-  var modalEl = document.getElementById('section_05_gallery_modal');
-  var wrapperEl = document.getElementById('gallerySwiperWrapper');
-  var galleryModal = null;
-  var gallerySwiper = null;
+  function initGalleryModal() {
+    var galleryImages = document.querySelectorAll('.gallery-img');
+    var modalEl = document.getElementById('section_05_gallery_modal');
+    var wrapperEl = document.getElementById('gallerySwiperWrapper');
+    var galleryModal = null;
+    var gallerySwiper = null;
 
-  if (!galleryImages.length || !modalEl || !wrapperEl) return;
-
-  function getImageSrcList() {
-    var list = [];
-    galleryImages.forEach(function (img) {
-      list.push(img.getAttribute('src'));
-    });
-    return list;
-  }
-
-  function buildSwiperSlides(srcList) {
-    return srcList
-      .map(function (src) {
-        return (
-          '<div class="swiper-slide">' +
-          '<img src="' + src + '" alt="" loading="eager">' +
-          '</div>'
-        );
-      })
-      .join('');
-  }
-
-  function openGalleryModal(initialIndex) {
-    var srcList = getImageSrcList();
-    wrapperEl.innerHTML = buildSwiperSlides(srcList);
-
-    if (gallerySwiper) {
-      gallerySwiper.destroy(true, true);
+    // Bootstrap과 Swiper가 로드되었는지 확인
+    if (typeof bootstrap === 'undefined' || typeof Swiper === 'undefined') {
+      setTimeout(initGalleryModal, 100);
+      return;
     }
 
-    galleryModal = new bootstrap.Modal(modalEl, { backdrop: 'static', keyboard: false });
-    galleryModal.show();
+    if (!galleryImages.length || !modalEl || !wrapperEl) {
+      // DOM이 아직 준비되지 않았으면 재시도
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initGalleryModal);
+      } else {
+        setTimeout(initGalleryModal, 100);
+      }
+      return;
+    }
 
-    modalEl.addEventListener('shown.bs.modal', function onShown() {
-      modalEl.removeEventListener('shown.bs.modal', onShown);
-      gallerySwiper = new Swiper('.gallery-swiper', {
-        initialSlide: initialIndex,
-        loop: true,
-        navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
-        },
+    function getImageSrcList() {
+      var list = [];
+      galleryImages.forEach(function (img) {
+        list.push(img.getAttribute('src'));
+      });
+      return list;
+    }
+
+    function buildSwiperSlides(srcList) {
+      return srcList
+        .map(function (src) {
+          return (
+            '<div class="swiper-slide">' +
+            '<img src="' + src + '" alt="" loading="eager">' +
+            '</div>'
+          );
+        })
+        .join('');
+    }
+
+    function openGalleryModal(initialIndex) {
+      var srcList = getImageSrcList();
+      wrapperEl.innerHTML = buildSwiperSlides(srcList);
+
+      if (gallerySwiper) {
+        gallerySwiper.destroy(true, true);
+      }
+
+      galleryModal = new bootstrap.Modal(modalEl, { backdrop: 'static', keyboard: false });
+      galleryModal.show();
+
+      modalEl.addEventListener('shown.bs.modal', function onShown() {
+        modalEl.removeEventListener('shown.bs.modal', onShown);
+        gallerySwiper = new Swiper('.gallery-swiper', {
+          initialSlide: initialIndex,
+          loop: true,
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+      });
+    }
+
+    function handleClose() {
+      if (gallerySwiper) {
+        gallerySwiper.destroy(true, true);
+        gallerySwiper = null;
+      }
+    }
+
+    modalEl.addEventListener('hidden.bs.modal', handleClose);
+
+    galleryImages.forEach(function (img, index) {
+      img.addEventListener('click', function () {
+        openGalleryModal(index);
+      });
+      img.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openGalleryModal(index);
+        }
       });
     });
   }
 
-  function handleClose() {
-    if (gallerySwiper) {
-      gallerySwiper.destroy(true, true);
-      gallerySwiper = null;
-    }
+  // DOM 로드 완료 후 초기화
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initGalleryModal);
+  } else {
+    initGalleryModal();
   }
-
-  modalEl.addEventListener('hidden.bs.modal', handleClose);
-
-  galleryImages.forEach(function (img, index) {
-    img.addEventListener('click', function () {
-      openGalleryModal(index);
-    });
-    img.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        openGalleryModal(index);
-      }
-    });
-  });
 })();
     </script>
 
@@ -1480,216 +1503,215 @@ document.querySelectorAll('.url-copy').forEach(function(urlCopy){
 })();
     </script>
     
+    <!-- ----------------------------- 
+      13 Modal_Common
+     ----------------------------- -->
+     <!-- 
+      03 연락하기 Modal
+      -->
+      <div class="modal section_03_md fade" id="section_03_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <div class="title-block">
+                <div class="title01">CONTACT</div>
+                <div class="title02">연락하기</div>
+              </div>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div>
+                
+                <div class="row">
+                  <div class="husband">신랑</div>
+                  <div> 민형</div>
+                  <div>
+                    <a href="tel:01023753058"><span class="material-symbols-outlined husband">call</span></a>
+                    <a href="sms:01023753058?body=결혼축하드립니다."><span class="material-symbols-outlined husband">mail</span></a>
+                  </div>
+                </div>
+                
+                <div class="row">
+                  <div class="husband">신랑 아버지</div>
+                  <div> 유병환</div>
+                  <div>
+                    <a href="tel:01023753058"><span class="material-symbols-outlined husband">call</span></a>
+                    <a href="sms:01023753058?body=결혼축하드립니다."><span class="material-symbols-outlined husband">mail</span></a>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="husband">신랑 어머니</div>
+                  <div> 정현숙</div>
+                  <div>
+                    <a href="tel:01023753058"><span class="material-symbols-outlined husband">call</span></a>
+                    <a href="sms:01023753058?body=결혼축하드립니다."><span class="material-symbols-outlined husband">mail</span></a>
+                    
+                  </div>
+                </div>                 
+
+
+              </div>
+
+              <div>
+
+                <div class="row">
+                  <div class="wife">신부</div>
+                  <div> 유정</div>
+                  <div>
+                    <a  href="tel:01023753058"><span class="material-symbols-outlined wife">call</span></a>
+                    <a href="sms:01023753058?body=결혼축하드립니다."><span class="material-symbols-outlined wife">mail</span></a>
+                  </div>
+                </div>  
+
+                <div class="row">
+                  <div class="wife">신부 아버지</div>
+                  <div> 고성곤</div>
+                  <div>
+                    <a href="tel:01023753058"><span class="material-symbols-outlined wife">call</span></a>
+                    <a href="sms:01023753058?body=결혼축하드립니다."><span class="material-symbols-outlined wife">mail</span></a>
+                  </div>
+                </div>  
+
+                
+                <div class="row">
+                  <div class="wife">신부 어머니</div>
+                  <div> 사공미진</div>
+                  <div>
+                    <a href="tel:01023753058"><span class="material-symbols-outlined wife">call</span></a>
+                    <a href="sms:01023753058?body=결혼축하드립니다."><span class="material-symbols-outlined wife">mail</span></a>
+                  </div>
+                </div>  
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+     <!-- 
+      05 갤러리 Swiper Modal
+      -->
+      <div class="modal section_05_gallery_md fade" id="section_05_gallery_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content gallery-modal-content">
+            <div class="modal-header">
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="swiper gallery-swiper">
+                <div class="swiper-wrapper" id="gallerySwiperWrapper">
+                  <!-- 슬라이드 동적 생성 -->
+                </div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+     <!-- 
+      09 참석의사전달하기 Modal
+      -->
+      <div class="modal section_09_md fade" id="section_09_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <div class="title">
+                참석 의사 전달
+              </div>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                  <form action=""  onsubmit="return false">
+                    <table>
+                      <tr>
+                        <td class="left fontstyle">구분</td>
+                        <td class="right">
+                            <div>
+                              <input type="radio" id="husband-chk" name="type">
+                              <label for="husband-chk" class="fontstyle">신랑측</label>
+                            </div>
+                            <div>
+                              <input type="radio" id="wife-chk" name="type">
+                              <label for="wife-chk" class="fontstyle">신부측</label>
+                            </div>
+
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="fontstyle">성함</td>
+                        <td><input type="text" class="form-control"></td>
+                      </tr>
+                      <tr>
+                        <td class="fontstyle">참석인원</td>
+                        <td><input type="number" placeholder="본인 포함 총 참석인원" class="form-control"  max="10" step="1" min="1"></td>
+                      </tr>
+                      <tr>
+                        <td class="fontstyle">동행인</td>
+                        <td><input type="text" class="form-control" placeholder="함께 오시는분 성함"></td>
+                      </tr>
+                      <tr>
+                        <td class="fontstyle">식사여부</td>
+                        <td class="meals">
+                          <div>
+                            <input type="radio" id="meal-01" name="meal-type">
+                            <label for="meal-01" class="fontstyle">예정</label>
+                          </div>
+                          <div>
+                            <input type="radio" id="meal-02" name="meal-type">
+                            <label for="meal-02" class="fontstyle">안함</label>
+                          </div>
+                          <div>
+                            <input type="radio" id="meal-03" name="meal-type">
+                            <label for="meal-03" class="fontstyle">미정</label>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan="2">
+                            <button class="btn btn-danger w-100 fontstyle">참석 의사 전달하기</button>
+                        </td>
+                      </tr>
+                    </table>
+                </form>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+     <!-- 
+      11 방명록작성하기 Modal
+      -->
+      <div class="modal fade section_11_md" id="section_11_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        
+        <div class="modal-dialog  modal-dialog-centered">
+          
+          <div class="modal-content">
+            <div class="modal-header">
+              <div class="title">방명록</div>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <script src="https://utteranc.es/client.js"
+                  repo="EDU-EMBADDED-CURRICULUM/Wedding_Comments"
+                  issue-term="pathname"
+                  label="댓글 : "
+                  theme="boxy-light"
+                  crossorigin="anonymous"
+                  async>
+                </script>
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    
   </body>
 </html>
-
-      
-      <!-- ----------------------------- 
-        13 Modal_Common
-       ----------------------------- -->
-       <!-- 
-        03 연락하기 Modal
-        -->
-        <div class="modal section_03_md fade" id="section_03_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-          <div class="modal-dialog  modal-dialog-centered">
-            <div class="modal-content">
-              <div class="modal-header">
-                <div class="title-block">
-                  <div class="title01">CONTACT</div>
-                  <div class="title02">연락하기</div>
-                </div>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <div>
-                  
-                  <div class="row">
-                    <div class="husband">신랑</div>
-                    <div> 민형</div>
-                    <div>
-                      <a href="tel:01023753058"><span class="material-symbols-outlined husband">call</span></a>
-                      <a href="sms:01023753058?body=결혼축하드립니다."><span class="material-symbols-outlined husband">mail</span></a>
-                    </div>
-                  </div>
-                  
-                  <div class="row">
-                    <div class="husband">신랑 아버지</div>
-                    <div> 유병환</div>
-                    <div>
-                      <a href="tel:01023753058"><span class="material-symbols-outlined husband">call</span></a>
-                      <a href="sms:01023753058?body=결혼축하드립니다."><span class="material-symbols-outlined husband">mail</span></a>
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="husband">신랑 어머니</div>
-                    <div> 정현숙</div>
-                    <div>
-                      <a href="tel:01023753058"><span class="material-symbols-outlined husband">call</span></a>
-                      <a href="sms:01023753058?body=결혼축하드립니다."><span class="material-symbols-outlined husband">mail</span></a>
-                      
-                    </div>
-                  </div>                 
-
-
-                </div>
-
-                <div>
-
-                  <div class="row">
-                    <div class="wife">신부</div>
-                    <div> 유정</div>
-                    <div>
-                      <a  href="tel:01023753058"><span class="material-symbols-outlined wife">call</span></a>
-                      <a href="sms:01023753058?body=결혼축하드립니다."><span class="material-symbols-outlined wife">mail</span></a>
-                    </div>
-                  </div>  
-
-                  <div class="row">
-                    <div class="wife">신부 아버지</div>
-                    <div> 고성곤</div>
-                    <div>
-                      <a href="tel:01023753058"><span class="material-symbols-outlined wife">call</span></a>
-                      <a href="sms:01023753058?body=결혼축하드립니다."><span class="material-symbols-outlined wife">mail</span></a>
-                    </div>
-                  </div>  
-
-                  
-                  <div class="row">
-                    <div class="wife">신부 어머니</div>
-                    <div> 사공미진</div>
-                    <div>
-                      <a href="tel:01023753058"><span class="material-symbols-outlined wife">call</span></a>
-                      <a href="sms:01023753058?body=결혼축하드립니다."><span class="material-symbols-outlined wife">mail</span></a>
-                    </div>
-                  </div>  
-
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </div>
-
-       <!-- 
-        05 갤러리 Swiper Modal
-        -->
-        <div class="modal section_05_gallery_md fade" id="section_05_gallery_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content gallery-modal-content">
-              <div class="modal-header">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <div class="swiper gallery-swiper">
-                  <div class="swiper-wrapper" id="gallerySwiperWrapper">
-                    <!-- 슬라이드 동적 생성 -->
-                  </div>
-                  <div class="swiper-button-prev"></div>
-                  <div class="swiper-button-next"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-       <!-- 
-        09 참석의사전달하기 Modal
-        -->
-        <div class="modal section_09_md fade" id="section_09_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-          <div class="modal-dialog  modal-dialog-centered">
-            <div class="modal-content">
-              <div class="modal-header">
-                <div class="title">
-                  참석 의사 전달
-                </div>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                    <form action=""  onsubmit="return false">
-                      <table>
-                        <tr>
-                          <td class="left fontstyle">구분</td>
-                          <td class="right">
-                              <div>
-                                <input type="radio" id="husband-chk" name="type">
-                                <label for="husband-chk" class="fontstyle">신랑측</label>
-                              </div>
-                              <div>
-                                <input type="radio" id="wife-chk" name="type">
-                                <label for="wife-chk" class="fontstyle">신부측</label>
-                              </div>
-
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="fontstyle">성함</td>
-                          <td><input type="text" class="form-control"></td>
-                        </tr>
-                        <tr>
-                          <td class="fontstyle">참석인원</td>
-                          <td><input type="number" placeholder="본인 포함 총 참석인원" class="form-control"  max="10" step="1" min="1"></td>
-                        </tr>
-                        <tr>
-                          <td class="fontstyle">동행인</td>
-                          <td><input type="text" class="form-control" placeholder="함께 오시는분 성함"></td>
-                        </tr>
-                        <tr>
-                          <td class="fontstyle">식사여부</td>
-                          <td class="meals">
-                            <div>
-                              <input type="radio" id="meal-01" name="meal-type">
-                              <label for="meal-01" class="fontstyle">예정</label>
-                            </div>
-                            <div>
-                              <input type="radio" id="meal-02" name="meal-type">
-                              <label for="meal-02" class="fontstyle">안함</label>
-                            </div>
-                            <div>
-                              <input type="radio" id="meal-03" name="meal-type">
-                              <label for="meal-03" class="fontstyle">미정</label>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td colspan="2">
-                              <button class="btn btn-danger w-100 fontstyle">참석 의사 전달하기</button>
-                          </td>
-                        </tr>
-                      </table>
-                  </form>
-              </div>
-
-            </div>
-          </div>
-        </div>
-
-       <!-- 
-        11 방명록작성하기 Modal
-        -->
-        <div class="modal fade section_11_md" id="section_11_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-          
-          <div class="modal-dialog  modal-dialog-centered">
-            
-            <div class="modal-content">
-              <div class="modal-header">
-                <div class="title">방명록</div>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-
-              <div class="modal-body">
-                  <script src="https://utteranc.es/client.js"
-                    repo="EDU-EMBADDED-CURRICULUM/Wedding_Comments"
-                    issue-term="pathname"
-                    label="댓글 : "
-                    theme="boxy-light"
-                    crossorigin="anonymous"
-                    async>
-                  </script>
-
-              </div>
-
-            </div>
-          </div>
-
-        </div>
