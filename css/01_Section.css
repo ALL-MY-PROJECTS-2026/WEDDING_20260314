@@ -1,10 +1,10 @@
-/* Great Vibes - Happy Wedding Day (로컬 폰트) */
+/* James Stroker - Happy Wedding Day (로컬 폰트) */
 @font-face {
-    font-family: 'Great Vibes';
+    font-family: 'James Stroker';
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url('../fonts/GreatVibes-Regular.ttf') format('truetype');
+    src: url('../fonts/James Stroker.ttf') format('truetype');
 }
 
 /* header */
@@ -83,7 +83,7 @@
     min-width: 0;
 }
 .wrapper>main>section:nth-child(1) .main_image_hero_line{
-    font-family: 'Great Vibes', 'Brush Script MT', cursive;
+    font-family: 'James Stroker', 'Brush Script MT', cursive;
     font-size: clamp(3rem, 10vw, 4.2rem);
     font-weight: 400;
     color: #ffffff;
