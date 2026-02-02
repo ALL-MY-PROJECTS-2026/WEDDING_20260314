@@ -1321,37 +1321,93 @@ document.querySelectorAll('.url-copy').forEach(function(urlCopy){
 /**
  * 갤러리 이미지 preload 최적화
  * '사진더보기' 버튼 클릭 시 빠른 로딩을 위해 이미지 미리 로드
+ * 1. 갤러리 섹션이 뷰포트에 들어오면 모든 이미지 preload
+ * 2. '사진더보기' 버튼 hover 시에도 모든 이미지 preload (데스크톱)
  */
 (function() {
   'use strict';
   
-  // 갤러리 블록이 뷰포트에 들어왔을 때 추가 이미지 preload
+  var gallerySection = document.querySelector('.wrapper>main>section#section-05');
   var galleryBlock = document.querySelector('.wrapper>main>section:nth-child(5)>.gallery-block');
-  if (!galleryBlock) return;
+  var morePictureBtn = document.querySelector('.more-picture-btn-block');
   
-  // Intersection Observer로 갤러리 블록이 보일 때 추가 이미지 preload
+  if (!gallerySection || !galleryBlock) return;
+  
+  // 모든 갤러리 이미지 preload 함수
+  function preloadAllGalleryImages() {
+    var allGalleryImages = galleryBlock.querySelectorAll('.gallery-img');
+    var preloadedUrls = new Set(); // 중복 preload 방지
+    
+    allGalleryImages.forEach(function(img) {
+      if (!img.src) return;
+      
+      // 이미 preload된 URL인지 확인
+      if (preloadedUrls.has(img.src)) return;
+      
+      // 이미지가 아직 로드되지 않았으면 preload
+      if (img.complete === false || img.naturalWidth === 0) {
+        // link rel="preload"로 preload
+        var link = document.createElement('link');
+        link.rel = 'preload';
+        link.as = 'image';
+        link.href = img.src;
+        document.head.appendChild(link);
+        preloadedUrls.add(img.src);
+        
+        // 추가로 Image 객체로도 preload (더 확실한 방법)
+        var preloadImg = new Image();
+        preloadImg.src = img.src;
+      }
+    });
+  }
+  
+  // 1. Intersection Observer로 갤러리 섹션이 뷰포트에 들어오면 모든 이미지 preload
   if ('IntersectionObserver' in window) {
-    var observer = new IntersectionObserver(function(entries) {
+    var sectionObserver = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
         if (entry.isIntersecting) {
-          // 갤러리 블록이 보이면 추가 이미지들 preload
-          var hiddenImages = galleryBlock.querySelectorAll('.item.item-04 img, .item.item-05 img');
-          hiddenImages.forEach(function(img) {
-            if (img.complete === false) {
-              // 이미지가 아직 로드되지 않았으면 preload
-              var link = document.createElement('link');
-              link.rel = 'preload';
-              link.as = 'image';
-              link.href = img.src;
-              document.head.appendChild(link);
-            }
-          });
-          observer.unobserve(entry.target);
+          // 갤러리 섹션이 보이면 모든 이미지 preload
+          preloadAllGalleryImages();
+          sectionObserver.unobserve(entry.target);
         }
       });
-    }, { rootMargin: '100px' }); // 100px 전에 미리 로드 시작
+    }, { 
+      rootMargin: '300px' // 섹션 위쪽 300px 전에 미리 로드 시작
+    });
     
-    observer.observe(galleryBlock);
+    sectionObserver.observe(gallerySection);
+  }
+  
+  // 2. '사진더보기' 버튼 hover 시에도 모든 이미지 preload (데스크톱)
+  if (morePictureBtn) {
+    // 마우스 이벤트 (데스크톱)
+    morePictureBtn.addEventListener('mouseenter', function() {
+      preloadAllGalleryImages();
+    }, { once: true }); // 한 번만 실행
+    
+    // 터치 이벤트 (모바일 - 버튼 근처 터치 시)
+    morePictureBtn.addEventListener('touchstart', function() {
+      preloadAllGalleryImages();
+    }, { once: true, passive: true });
+    
+    // 포커스 이벤트 (키보드 접근성)
+    morePictureBtn.addEventListener('focus', function() {
+      preloadAllGalleryImages();
+    }, { once: true });
+  }
+  
+  // 3. 갤러리 블록이 뷰포트에 들어왔을 때도 preload (추가 안전장치)
+  if ('IntersectionObserver' in window) {
+    var blockObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          preloadAllGalleryImages();
+          blockObserver.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '200px' });
+    
+    blockObserver.observe(galleryBlock);
   }
 })();
     </script>
