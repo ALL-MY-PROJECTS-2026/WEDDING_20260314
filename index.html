@@ -1075,59 +1075,90 @@
 
     /**
      * SVG 파일을 로드하고 인라인으로 삽입
+     * @returns {Promise<number>} SVG 그리기 애니메이션 완료 시간 (ms)
      */
     async function loadAndSetupSVG() {
-        const container = document.getElementById('introSvgContainer');
-        if (!container) return;
+        return new Promise(function(resolve) {
+            const container = document.getElementById('introSvgContainer');
+            if (!container) {
+                resolve(0);
+                return;
+            }
 
-        // file:// 프로토콜 체크 (CORS 문제 방지)
-        const isFileProtocol = window.location.protocol === 'file:';
-        
-        try {
+            // file:// 프로토콜 체크 (CORS 문제 방지)
+            const isFileProtocol = window.location.protocol === 'file:';
+            
             // file:// 프로토콜에서는 fetch 대신 img 태그 사용
             if (isFileProtocol) {
                 container.innerHTML = '<img src="./images/intro.svg" alt="결혼식에 초대합니다" class="intro-svg svg_handwritng">';
+                // 이미지의 경우 즉시 완료로 처리
+                resolve(0);
                 return;
             }
             
             // SVG 파일을 fetch로 로드
-            const response = await fetch('./images/intro.svg');
-            if (!response.ok) {
-                throw new Error('SVG 파일을 불러올 수 없습니다.');
-            }
-            const svgText = await response.text();
-            
-            // SVG 텍스트를 DOM으로 변환
-            const parser = new DOMParser();
-            const svgDoc = parser.parseFromString(svgText, 'image/svg+xml');
-            const svgElement = svgDoc.querySelector('svg');
-            
-            if (!svgElement) {
-                throw new Error('SVG 요소를 찾을 수 없습니다.');
-            }
+            fetch('./images/intro.svg')
+                .then(function(response) {
+                    if (!response.ok) {
+                        throw new Error('SVG 파일을 불러올 수 없습니다.');
+                    }
+                    return response.text();
+                })
+                .then(function(svgText) {
+                    // SVG 텍스트를 DOM으로 변환
+                    const parser = new DOMParser();
+                    const svgDoc = parser.parseFromString(svgText, 'image/svg+xml');
+                    const svgElement = svgDoc.querySelector('svg');
+                    
+                    if (!svgElement) {
+                        throw new Error('SVG 요소를 찾을 수 없습니다.');
+                    }
 
-            // SVG에 클래스 추가 및 스타일 설정
-            svgElement.classList.add('intro-svg', 'svg_handwritng');
-            svgElement.setAttribute('preserveAspectRatio', 'xMidYMid meet');
-            svgElement.setAttribute('aria-label', '결혼식에 초대합니다');
-            
-            // 컨테이너에 SVG 삽입
-            container.appendChild(svgElement);
-            
-            // SVG가 DOM에 삽입된 후 stroke drawing 설정
-            setTimeout(() => {
-                const animationDuration = setupStrokeDrawing(svgElement);
-            }, 100);
-            
-        } catch (error) {
-            // 조용히 폴백 처리 (콘솔 오류 최소화)
-            if (!isFileProtocol) {
-                // file:// 프로토콜이 아닐 때만 경고 (개발 환경)
-                console.warn('SVG 로드 실패, 이미지로 대체:', error.message);
-            }
-            // 실패 시 이미지 태그로 폴백
-            container.innerHTML = '<img src="./images/intro.svg" alt="결혼식에 초대합니다" class="intro-svg svg_handwritng">';
-        }
+                    // SVG에 클래스 추가 및 스타일 설정
+                    svgElement.classList.add('intro-svg', 'svg_handwritng');
+                    svgElement.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+                    svgElement.setAttribute('aria-label', '결혼식에 초대합니다');
+                    
+                    // 컨테이너에 SVG 삽입
+                    container.appendChild(svgElement);
+                    
+                    // SVG가 DOM에 삽입된 후 stroke drawing 설정
+                    setTimeout(function() {
+                        const animationDuration = setupStrokeDrawing(svgElement);
+                        
+                        // 애니메이션 완료를 감지하기 위해 animationend 이벤트 사용
+                        if (animationDuration > 0) {
+                            const path = svgElement.querySelector('path[stroke]') || 
+                                        svgElement.querySelector('.loading_g path[stroke]');
+                            if (path) {
+                                // animationend 이벤트로 애니메이션 완료 감지
+                                path.addEventListener('animationend', function onAnimationEnd() {
+                                    path.removeEventListener('animationend', onAnimationEnd);
+                                    resolve(animationDuration);
+                                }, { once: true });
+                                
+                                // 타임아웃 안전장치 (애니메이션 시간 + 여유 시간)
+                                setTimeout(function() {
+                                    resolve(animationDuration);
+                                }, animationDuration + 500);
+                            } else {
+                                // path를 찾을 수 없는 경우
+                                resolve(animationDuration);
+                            }
+                        } else {
+                            // 애니메이션이 없는 경우
+                            resolve(0);
+                        }
+                    }, 100);
+                })
+                .catch(function(error) {
+                    // 조용히 폴백 처리 (콘솔 오류 최소화)
+                    console.warn('SVG 로드 실패, 이미지로 대체:', error.message);
+                    // 실패 시 이미지 태그로 폴백
+                    container.innerHTML = '<img src="./images/intro.svg" alt="결혼식에 초대합니다" class="intro-svg svg_handwritng">';
+                    resolve(0);
+                });
+        });
     }
 
     /**
@@ -1191,18 +1222,20 @@
     /**
      * 인트로 화면 애니메이션 시작
      */
-    function startIntro() {
+    async function startIntro() {
         const introScreen = document.getElementById('introScreen');
         if (!introScreen) return;
         
-        // SVG 로드 및 설정
-        loadAndSetupSVG();
+        // SVG 로드 및 설정, 그리기 애니메이션 완료 대기
+        const svgAnimationDuration = await loadAndSetupSVG();
         
-        // 텍스트 페이드인 완료 후 대기 시간을 두고 페이드아웃
-        // 페이드인 딜레이(0.3s) + 페이드인 지속(1s) + 대기(2s) = 약 3.3초
+        // SVG 그리기 애니메이션이 완료된 후 추가 대기 시간을 두고 페이드아웃
+        // SVG 그리기 완료 + 추가 대기 시간(HOLD_DURATION)
+        const totalWaitTime = svgAnimationDuration + HOLD_DURATION;
+        
         setTimeout(function() {
             fadeOutIntro();
-        }, FADE_IN_DELAY + FADE_IN_DURATION + HOLD_DURATION);
+        }, totalWaitTime);
     }
     
     /**
