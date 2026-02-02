@@ -28,17 +28,15 @@
     height: 100vh;
     height: 100svh;
     background-color: #ffffff;
+    background-image: url('../images/bg.png');
+    background-repeat: repeat;
+    background-size: auto;
+    background-position: 0 0;
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 9999;
     transition: opacity 0.8s ease-out;
-}
-
-/* INTRO 화면 배경 이미지 */
-.intro-screen {
-    background-image: url('../images/bg.png');
-    background-repeat: repeat;
 }
 
 .intro-content {
