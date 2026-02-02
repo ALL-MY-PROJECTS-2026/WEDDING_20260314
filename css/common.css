@@ -565,9 +565,15 @@ main>section:nth-child(4)>.bottom>.bottom-body{}
 
 
 /* 추가 이미지들(item-04, item-05) 미리 렌더링하고 숨김 - 즉시 표시를 위해 */
+/* max-height: 0으로 설정하여 구조물은 렌더링되지만 보이지 않게 처리 */
 .wrapper>main>section:nth-child(5)>.gallery-block>.item.item-04,
 .wrapper>main>section:nth-child(5)>.gallery-block>.item.item-05 {
-    display: none; /* 레이아웃에 영향 없이 완전히 숨김, 이미지는 미리 로드됨 */
+    max-height: 0 !important; /* 높이를 0으로 설정하여 레이아웃에 영향 없게 */
+    overflow: hidden !important; /* 넘치는 내용 숨김 */
+    margin: 0 !important;
+    padding: 0 !important;
+    opacity: 0 !important; /* 완전히 투명하게 */
+    transition: none !important; /* transition 완전 제거 */
 }
 
 /* 체크박스 체크 시 추가 이미지 표시 및 버튼 숨김 */
@@ -581,9 +587,12 @@ main>section:nth-child(4)>.bottom>.bottom-body{}
 
 .wrapper>main>section:nth-child(5) input[type="checkbox"]:checked~.gallery-block>.item.item-04,
 .wrapper>main>section:nth-child(5) input[type="checkbox"]:checked~.gallery-block>.item.item-05 {
-    display: flex !important; /* 즉시 표시 (이미 렌더링되어 있음) */
-    transition: none !important; /* transition 완전 제거 */
+    max-height: 1000px !important; /* 충분히 큰 값으로 설정하여 즉시 표시 */
+    overflow: visible !important; /* overflow 복원 */
+    margin: revert !important; /* 기본 margin 복원 */
+    padding: revert !important; /* 기본 padding 복원 */
     opacity: 1 !important; /* 즉시 표시 */
+    transition: none !important; /* transition 완전 제거 */
     transform: none !important; /* transform 제거 */
 }
 

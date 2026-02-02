@@ -1471,6 +1471,49 @@ document.querySelectorAll('.url-copy').forEach(function(urlCopy){
 })();
     </script>
     
+    <!-- 갤러리 '사진더보기' 버튼 클릭 시 즉시 구조물 표시 -->
+    <script>
+// ============================================
+// 갤러리 '사진더보기' 버튼 즉시 반응 처리
+// ============================================
+(function() {
+  'use strict';
+  
+  var morePictureCheckbox = document.getElementById('more-picture');
+  var galleryBlock = document.querySelector('.wrapper>main>section:nth-child(5)>.gallery-block');
+  var item04 = document.querySelector('.wrapper>main>section:nth-child(5)>.gallery-block>.item.item-04');
+  var item05 = document.querySelector('.wrapper>main>section:nth-child(5)>.gallery-block>.item.item-05');
+  
+  if (!morePictureCheckbox || !galleryBlock) return;
+  
+  // 체크박스 변경 이벤트 리스너
+  morePictureCheckbox.addEventListener('change', function() {
+    if (this.checked) {
+      // requestAnimationFrame을 사용하여 브라우저 렌더링 사이클에 맞춰 즉시 처리
+      requestAnimationFrame(function() {
+        // 구조물 즉시 표시
+        if (item04) {
+          item04.style.maxHeight = '1000px';
+          item04.style.opacity = '1';
+          item04.style.overflow = 'visible';
+        }
+        if (item05) {
+          item05.style.maxHeight = '1000px';
+          item05.style.opacity = '1';
+          item05.style.overflow = 'visible';
+        }
+        
+        // gallery-block 높이 즉시 조정
+        galleryBlock.style.height = 'auto';
+        
+        // 강제 리플로우 트리거하여 즉시 렌더링
+        galleryBlock.offsetHeight;
+      });
+    }
+  });
+})();
+    </script>
+    
     <!-- main.html 로드 시 첫 섹션 비디오 자동 재생 및 intro-completed 클래스 추가 -->
     <script>
 // ============================================
