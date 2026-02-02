@@ -61,6 +61,7 @@
      */
     function animatePaths(paths) {
         let totalDelay = 0;
+        const lastIndex = paths.length - 1;
 
         paths.forEach((path, index) => {
             const pathLength = path.getTotalLength();
@@ -104,8 +105,22 @@
                 }
             }
             
-            // 각 path에 순차적으로 애니메이션 적용
-            path.style.animation = `intro-svg-draw ${DRAW_DURATION}ms ease-out ${totalDelay}ms forwards`;
+            // 마지막 path (마침표 부분)에 튀어나오는 효과 추가
+            if (index === lastIndex) {
+                // 마지막 path는 stroke drawing 애니메이션 후 튀어나오는 효과
+                const dotDelay = totalDelay + DRAW_DURATION;
+                path.style.animation = `intro-svg-draw ${DRAW_DURATION}ms ease-out ${totalDelay}ms forwards`;
+                
+                // stroke drawing 완료 후 튀어나오는 효과
+                setTimeout(() => {
+                    path.style.animation = `intro-svg-draw ${DRAW_DURATION}ms ease-out ${totalDelay}ms forwards, intro-dot-pop 0.8s ease-out 0s forwards`;
+                    path.style.opacity = '1';
+                    path.style.transformOrigin = 'center';
+                }, dotDelay);
+            } else {
+                // 각 path에 순차적으로 애니메이션 적용
+                path.style.animation = `intro-svg-draw ${DRAW_DURATION}ms ease-out ${totalDelay}ms forwards`;
+            }
             
             totalDelay += PATH_DELAY;
         });
