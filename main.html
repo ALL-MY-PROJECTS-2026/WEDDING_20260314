@@ -1212,9 +1212,10 @@ document.querySelectorAll('.url-copy').forEach(function(urlCopy){
     var galleryImages = document.querySelectorAll('.gallery-img');
     var modalEl = document.getElementById('section_05_gallery_modal');
     var wrapperEl = document.getElementById('gallerySwiperWrapper');
-    var galleryModal = null;
-    var gallerySwiper = null;
-    var isSwiperPreInitialized = false; // Swiper 사전 초기화 여부
+    var galleryModal = null; // Modal 인스턴스 재사용
+    var gallerySwiper = null; // Swiper 인스턴스 재사용
+    var cachedSlidesHTML = null; // 슬라이드 HTML 캐싱
+    var isInitialized = false; // 초기화 여부
 
     // Bootstrap과 Swiper가 로드되었는지 확인
     if (typeof bootstrap === 'undefined' || typeof Swiper === 'undefined') {
@@ -1241,62 +1242,49 @@ document.querySelectorAll('.url-copy').forEach(function(urlCopy){
     }
 
     function buildSwiperSlides(srcList) {
-      return srcList
-        .map(function (src) {
+      // 캐시된 HTML이 있으면 재사용
+      if (cachedSlidesHTML) {
+        return cachedSlidesHTML;
+      }
+      
+      // 첫 이미지만 eager, 나머지는 lazy로 최적화
+      var slidesHTML = srcList
+        .map(function (src, index) {
+          var loadingAttr = index === 0 ? 'loading="eager"' : 'loading="lazy"';
           return (
             '<div class="swiper-slide">' +
-            '<img src="' + src + '" alt="" loading="eager">' +
+            '<img src="' + src + '" alt="" ' + loadingAttr + '>' +
             '</div>'
           );
         })
         .join('');
-    }
-
-    // Swiper 사전 초기화 함수 (모달이 보일 때만 초기화)
-    function preInitializeSwiper() {
-      if (isSwiperPreInitialized || !wrapperEl) return;
       
-      // 모달이 보이지 않으면 초기화하지 않음 (Swiper는 보이는 요소에서만 제대로 작동)
-      var modalStyle = window.getComputedStyle(modalEl);
-      if (modalStyle.display === 'none' || !modalEl.classList.contains('show')) {
-        return;
-      }
-      
-      var srcList = getImageSrcList();
-      wrapperEl.innerHTML = buildSwiperSlides(srcList);
-      
-      // Swiper를 미리 초기화
-      try {
-        gallerySwiper = new Swiper('.gallery-swiper', {
-          initialSlide: 0,
-          loop: true,
-          navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-          },
-        });
-        isSwiperPreInitialized = true;
-      } catch (e) {
-        // Swiper 초기화 실패 시 무시 (나중에 다시 시도)
-      }
+      // HTML 캐싱
+      cachedSlidesHTML = slidesHTML;
+      return slidesHTML;
     }
 
     function openGalleryModal(initialIndex) {
-      var srcList = getImageSrcList();
-      wrapperEl.innerHTML = buildSwiperSlides(srcList);
+      // Modal 인스턴스 재사용 (한 번만 생성)
+      if (!galleryModal) {
+        galleryModal = new bootstrap.Modal(modalEl, { backdrop: 'static', keyboard: false });
+      }
       
-      // 기존 Swiper가 있으면 제거
+      // 기존 Swiper가 있으면 제거 (innerHTML 재설정 전에)
       if (gallerySwiper) {
         gallerySwiper.destroy(true, true);
         gallerySwiper = null;
-        isSwiperPreInitialized = false;
+        isInitialized = false;
       }
       
-      galleryModal = new bootstrap.Modal(modalEl, { backdrop: 'static', keyboard: false });
+      // 슬라이드 HTML 생성 (캐시 활용)
+      var srcList = getImageSrcList();
+      wrapperEl.innerHTML = buildSwiperSlides(srcList);
+      
+      // 모달 표시
       galleryModal.show();
 
-      // 모달이 완전히 표시된 후 Swiper 초기화 (fade 애니메이션 제거로 즉시 표시됨)
-      // shown.bs.modal 이벤트 대신 즉시 초기화 시도 (더 빠른 반응)
+      // Swiper 초기화 (requestAnimationFrame 1회로 축소)
       var initSwiper = function() {
         try {
           gallerySwiper = new Swiper('.gallery-swiper', {
@@ -1307,41 +1295,64 @@ document.querySelectorAll('.url-copy').forEach(function(urlCopy){
               prevEl: '.swiper-button-prev',
             },
           });
-          isSwiperPreInitialized = true;
+          isInitialized = true;
         } catch (e) {
           // Swiper 초기화 실패 시 shown.bs.modal 이벤트에서 재시도
           modalEl.addEventListener('shown.bs.modal', function onShown() {
             modalEl.removeEventListener('shown.bs.modal', onShown);
             if (!gallerySwiper) {
-              gallerySwiper = new Swiper('.gallery-swiper', {
-                initialSlide: initialIndex,
-                loop: true,
-                navigation: {
-                  nextEl: '.swiper-button-next',
-                  prevEl: '.swiper-button-prev',
-                },
-              });
-              isSwiperPreInitialized = true;
+              try {
+                gallerySwiper = new Swiper('.gallery-swiper', {
+                  initialSlide: initialIndex,
+                  loop: true,
+                  navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                  },
+                });
+                isInitialized = true;
+              } catch (e2) {
+                // 재시도 실패 시 무시
+              }
             }
           }, { once: true });
         }
       };
       
-      // requestAnimationFrame을 사용하여 DOM 업데이트 후 즉시 초기화
-      requestAnimationFrame(function() {
-        requestAnimationFrame(initSwiper);
-      });
+      // requestAnimationFrame 1회만 사용 (즉시 실행)
+      requestAnimationFrame(initSwiper);
     }
 
     function handleClose() {
-      // 모달이 닫힐 때 Swiper 제거 (다음에 열 때 다시 초기화)
+      // 모달이 닫힐 때 Swiper 제거 (메모리 관리)
+      // 다음에 열 때 빠른 초기화를 위해 최소한의 정리만 수행
       if (gallerySwiper) {
-        gallerySwiper.destroy(true, true);
+        try {
+          gallerySwiper.destroy(true, true);
+        } catch (e) {
+          // destroy 실패 시 무시
+        }
         gallerySwiper = null;
-        isSwiperPreInitialized = false;
+        isInitialized = false;
       }
     }
 
+    // hide.bs.modal 이벤트에서 처리 시작 (더 빠른 반응)
+    modalEl.addEventListener('hide.bs.modal', function() {
+      // 모달이 닫히기 시작할 때 즉시 처리 (애니메이션 대기 없이)
+      // Swiper 정리를 미리 시작하여 닫기 지연 감소
+      if (gallerySwiper) {
+        try {
+          gallerySwiper.destroy(true, true);
+        } catch (e) {
+          // destroy 실패 시 무시
+        }
+        gallerySwiper = null;
+        isInitialized = false;
+      }
+    });
+    
+    // hidden.bs.modal 이벤트는 최소한의 처리만 (이미 처리됨)
     modalEl.addEventListener('hidden.bs.modal', handleClose);
 
     galleryImages.forEach(function (img, index) {
