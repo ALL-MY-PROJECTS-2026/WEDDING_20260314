@@ -426,6 +426,7 @@ main>section:nth-child(4)>.bottom>.bottom-body{}
 /* 갤러리 섹션 빈 화면 지연 문제 해결 - transition 제거 */
 .wrapper>main>section:nth-child(5) .back-to-position {
     transition: none !important; /* transition 완전 제거 - 즉시 표시 */
+    will-change: transform, opacity; /* Transform 최적화 - 모바일 스크롤 성능 개선 */
 }
 .wrapper>main>section:nth-child(5).to-up .back-to-position {
     opacity: 1 !important; /* 즉시 표시 */
@@ -449,6 +450,8 @@ main>section:nth-child(4)>.bottom>.bottom-body{}
     overflow:hidden;
     transition: none !important; /* transition 완전 제거 - 즉시 표시 */
     position:relative;
+    will-change: transform; /* Transform 최적화 - 모바일 스크롤 성능 개선 */
+    contain: layout style paint; /* 레이아웃 격리 - 리플로우 범위 축소 */
 }
 .wrapper>main>section:nth-child(5)>.gallery-block>.item{
     display:flex;
