@@ -1198,47 +1198,91 @@
 // file:// 프로토콜에서는 Howl 객체 생성 자체를 하지 않음 (CORS 오류 방지)
 let bgSound = null;
 
-if (window.location.protocol !== 'file:') {
-  bgSound = new Howl({
-    src: ['./audio/wedding.mp3'],
-    volume: 0.3, // 0-1 범위로 수정 (3.0 → 0.3)
-    loop: true,
-    onloaderror: function(id, error) {
-      // 오디오 로드 실패 시 조용히 처리 (CORS 문제 등)
-    },
-    onplayerror: function(id, error) {
-      // 오디오 재생 실패 시 조용히 처리
-      if (bgSound) {
-        bgSound.once('unlock', function() {
-          bgSound.play();
-        });
-      }
+function initAudio() {
+    // Howler.js가 로드되었는지 확인
+    if (typeof Howl === 'undefined') {
+        setTimeout(initAudio, 100);
+        return;
     }
-  });
-  
-  // 자동 재생 시도
-  bgSound.play();
+    
+    // DOM이 준비되었는지 확인
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(initAudio, 100);
+        });
+        return;
+    }
+    
+    if (window.location.protocol !== 'file:') {
+        bgSound = new Howl({
+            src: ['./audio/wedding.mp3'],
+            volume: 0.3, // 0-1 범위로 수정 (3.0 → 0.3)
+            loop: true,
+            onloaderror: function(id, error) {
+                // 오디오 로드 실패 시 조용히 처리 (CORS 문제 등)
+            },
+            onplayerror: function(id, error) {
+                // 오디오 재생 실패 시 조용히 처리
+                if (bgSound) {
+                    bgSound.once('unlock', function() {
+                        bgSound.play();
+                    });
+                }
+            }
+        });
+        
+        // 자동 재생 시도
+        bgSound.play();
+    }
+    
+    // 아이콘 클릭시 배경음악 재생여부
+    const volumnChkEl = document.querySelector('#volumn-chk');
+    
+    function updateNavSpeaker() {
+        var navSpeaker = document.querySelector('.mobile-nav-bar__item--speaker');
+        if (navSpeaker && volumnChkEl) {
+            navSpeaker.classList.toggle('is-muted', !volumnChkEl.checked);
+        }
+    }
+    
+    // 체크박스 change 이벤트
+    if (volumnChkEl && bgSound) {
+        volumnChkEl.addEventListener("change", function(e){
+            if(volumnChkEl.checked){
+                bgSound.play(); 
+            } else {
+                bgSound.stop(); 
+            }
+            updateNavSpeaker();
+        });
+        updateNavSpeaker();
+    }
+    
+    // 하단 네비게이션 바 스피커 아이콘 클릭 이벤트 (직접 처리)
+    var navSpeaker = document.querySelector('.mobile-nav-bar__item--speaker');
+    if (navSpeaker && volumnChkEl && bgSound) {
+        navSpeaker.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // 체크박스 토글
+            volumnChkEl.checked = !volumnChkEl.checked;
+            
+            // 오디오 재생/정지
+            if(volumnChkEl.checked){
+                bgSound.play(); 
+            } else {
+                bgSound.stop(); 
+            }
+            
+            // 네비게이션 바 아이콘 상태 업데이트
+            updateNavSpeaker();
+        });
+    }
 }
 
-// 아이콘 클릭시 배경음악 재생여부
-const volumnChkEl = document.querySelector('#volumn-chk');
-function updateNavSpeaker() {
-    var navSpeaker = document.querySelector('.mobile-nav-bar__item--speaker');
-    if (navSpeaker) {
-        navSpeaker.classList.toggle('is-muted', !volumnChkEl.checked);
-    }
-}
-if (volumnChkEl && bgSound) {
-    volumnChkEl.addEventListener("change", function(e){
-        if(volumnChkEl.checked){
-            bgSound.play(); 
-        } else {
-            bgSound.stop(); 
-        }
-        updateNavSpeaker();
-    });
-    updateNavSpeaker();
-}
+// 초기화 시작
+initAudio();
     </script>
     
     <!-- 19_JS_06Section_Map - 지연 로드 (지도 섹션에서만 필요) - 인라인화 -->
