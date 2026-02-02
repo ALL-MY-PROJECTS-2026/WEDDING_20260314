@@ -104,8 +104,7 @@
      <!-- 
       JS LOCAL
       -->
-    <!-- 17 Common.js -->
-    <script src="./js/common.js" defer></script>
+    <!-- Common.js는 body 끝으로 이동하여 인라인화됨 -->
     <!-- JavaScript 파일들은 </body> 태그 전으로 이동됨 (109-140 라인 제거) -->
 
 
@@ -969,41 +968,898 @@
          JavaScript 파일 - 직접 실행 (109-140 라인에서 이동)
          ============================================ -->
     
-    <!-- 인트로 관련 스크립트 - 통합 -->
-    <script src="./js/00_JS_Intro.js"></script>
+    <!-- 인트로 관련 스크립트 - 인라인화 -->
+    <script>
+/**
+ * 인트로 화면 - 통합 스크립트
+ * SVG Stroke Drawing 효과 및 타이밍 제어
+ */
+(function () {
+    // 타이밍 상수
+    const FADE_IN_DELAY = 300; // 텍스트 페이드인 딜레이 (CSS와 동일)
+    const FADE_IN_DURATION = 1000; // 텍스트 페이드인 지속 시간 (CSS와 동일)
+    const HOLD_DURATION = 2000; // 텍스트 표시 후 대기 시간
+    
+    // SVG Drawing 상수
+    const DRAW_DURATION = 4000; // 그려지는 애니메이션 지속 시간 (4초)
+
+    /**
+     * 인트로 화면 페이드아웃 처리
+     */
+    function fadeOutIntro() {
+        const introScreen = document.getElementById('introScreen');
+        if (!introScreen) return;
+        introScreen.classList.add('intro-fade-out');
+        // 인트로가 페이드아웃 시작되면 하단 네비게이션 바 표시
+        const mobileNavBar = document.querySelector('.mobile-nav-bar');
+        if (mobileNavBar) {
+            mobileNavBar.style.visibility = 'visible';
+            mobileNavBar.style.opacity = '1';
+            mobileNavBar.style.pointerEvents = 'auto';
+        }
+        setTimeout(function () {
+            introScreen.classList.add('intro-hidden');
+            if (introScreen.parentNode) {
+                introScreen.parentNode.removeChild(introScreen);
+            }
+            var video = document.getElementById('introVideo');
+            if (video) {
+                video.load();
+                video.play().catch(function(){});
+            }
+        }, 800);
+    }
+
+    /**
+     * SVG path를 한 획씩 그려지는 애니메이션 처리
+     */
+    function setupStrokeDrawing(svgElement) {
+        // loading_g 그룹 안의 path 찾기
+        const loadingGroup = svgElement.querySelector('.loading_g');
+        if (!loadingGroup) {
+            // loading_g가 없으면 모든 stroke path 찾기
+            const paths = svgElement.querySelectorAll('path[stroke]');
+            if (paths.length === 0) {
+                console.warn('SVG path를 찾을 수 없습니다.');
+                return 0;
+            }
+            return animatePath(paths[0]);
+        }
+        
+        // loading_g 안의 path 찾기
+        const paths = loadingGroup.querySelectorAll('path[stroke]');
+        if (paths.length === 0) {
+            console.warn('SVG path를 찾을 수 없습니다.');
+            return 0;
+        }
+        
+        // 첫 번째 path를 한 획씩 그려지게 처리
+        return animatePath(paths[0]);
+    }
+    
+    /**
+     * Path를 한 획씩 그려지는 애니메이션 적용
+     */
+    function animatePath(path) {
+        const pathLength = path.getTotalLength();
+        
+        if (pathLength === 0) {
+            console.warn('Path의 길이가 0입니다.');
+            return 0;
+        }
+        
+        // stroke-dasharray와 stroke-dashoffset 설정
+        path.style.strokeDasharray = pathLength;
+        path.style.strokeDashoffset = pathLength;
+        path.style.strokeLinecap = 'round';
+        path.style.strokeLinejoin = 'round';
+        path.style.opacity = '1';
+        
+        // CSS 변수 설정 (CSS 애니메이션에서 사용)
+        path.style.setProperty('--path-length', pathLength);
+        
+        // CSS 애니메이션으로 한 획씩 그려지게 처리
+        path.style.animation = `intro-svg-draw ${DRAW_DURATION}ms ease-out 0ms forwards`;
+        
+        return DRAW_DURATION; // 전체 애니메이션 완료 시간
+    }
+
+    /**
+     * SVG 파일을 로드하고 인라인으로 삽입
+     */
+    async function loadAndSetupSVG() {
+        const container = document.getElementById('introSvgContainer');
+        if (!container) return;
+
+        // file:// 프로토콜 체크 (CORS 문제 방지)
+        const isFileProtocol = window.location.protocol === 'file:';
+        
+        try {
+            // file:// 프로토콜에서는 fetch 대신 img 태그 사용
+            if (isFileProtocol) {
+                container.innerHTML = '<img src="./images/intro.svg" alt="결혼식에 초대합니다" class="intro-svg svg_handwritng">';
+                return;
+            }
+            
+            // SVG 파일을 fetch로 로드
+            const response = await fetch('./images/intro.svg');
+            if (!response.ok) {
+                throw new Error('SVG 파일을 불러올 수 없습니다.');
+            }
+            const svgText = await response.text();
+            
+            // SVG 텍스트를 DOM으로 변환
+            const parser = new DOMParser();
+            const svgDoc = parser.parseFromString(svgText, 'image/svg+xml');
+            const svgElement = svgDoc.querySelector('svg');
+            
+            if (!svgElement) {
+                throw new Error('SVG 요소를 찾을 수 없습니다.');
+            }
+
+            // SVG에 클래스 추가 및 스타일 설정
+            svgElement.classList.add('intro-svg', 'svg_handwritng');
+            svgElement.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+            svgElement.setAttribute('aria-label', '결혼식에 초대합니다');
+            
+            // 컨테이너에 SVG 삽입
+            container.appendChild(svgElement);
+            
+            // SVG가 DOM에 삽입된 후 stroke drawing 설정
+            setTimeout(() => {
+                const animationDuration = setupStrokeDrawing(svgElement);
+            }, 100);
+            
+        } catch (error) {
+            // 조용히 폴백 처리 (콘솔 오류 최소화)
+            if (!isFileProtocol) {
+                // file:// 프로토콜이 아닐 때만 경고 (개발 환경)
+                console.warn('SVG 로드 실패, 이미지로 대체:', error.message);
+            }
+            // 실패 시 이미지 태그로 폴백
+            container.innerHTML = '<img src="./images/intro.svg" alt="결혼식에 초대합니다" class="intro-svg svg_handwritng">';
+        }
+    }
+
+    /**
+     * 초기화 함수
+     */
+    function init() {
+        const introScreen = document.getElementById('introScreen');
+        if (!introScreen) return;
+        
+        // SVG 로드 및 설정
+        loadAndSetupSVG();
+        
+        // 텍스트 페이드인 완료 후 대기 시간을 두고 페이드아웃
+        // 페이드인 딜레이(0.3s) + 페이드인 지속(1s) + 대기(2s) = 약 3.3초
+        setTimeout(function() {
+            fadeOutIntro();
+        }, FADE_IN_DELAY + FADE_IN_DURATION + HOLD_DURATION);
+    }
+
+    // DOM 로드 완료 후 실행
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+})();
+    </script>
+
+    <!-- ScrollMagic 애니메이션 - common.js에서 인라인화 -->
+    <script>
+// ============================================
+// common.js - ScrollMagic 애니메이션
+// ============================================
+(function() {
+    function initScrollMagic() {
+        // ScrollMagic이 로드되었는지 확인
+        if (typeof ScrollMagic === 'undefined') {
+            setTimeout(initScrollMagic, 100);
+            return;
+        }
+        
+        // DOM이 준비되었는지 확인
+        var spyEls = document.querySelectorAll('section.scroll-spy');
+        if (!spyEls || spyEls.length === 0) {
+            setTimeout(initScrollMagic, 100);
+            return;
+        }
+        
+        // NodeList를 배열로 변환하여 forEach 사용
+        Array.from(spyEls).forEach(function(spyEl){   
+            // 스크롤매직이벤트처리 객체
+            new ScrollMagic.Scene({
+                    triggerElement : spyEl, //감시할 요소 선택
+                    triggerHook : 0.8       //스크린에서의 스크롤 위치
+                })
+            .setClassToggle(spyEl,'to-up')
+            .addTo(new ScrollMagic.Controller());   
+        });
+    }
+    
+    // DOM 로드 완료 후 초기화
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initScrollMagic);
+    } else {
+        initScrollMagic();
+    }
+})();
+    </script>
 
     <!-- 섹션별 스크립트 -->
-    <!-- 18_JS_01Section(live-server 로 확인할것 CORS문제..) -->
-    <script src="./js/18_Section_Bg_Audio.js"></script>
-    
-    <!-- 19_JS_06Section_Map - 지연 로드 (지도 섹션에서만 필요) -->
-    <script src="./js/19_JS_06Section_Map.js"></script>
+    <!-- 18_JS_01Section(live-server 로 확인할것 CORS문제..) - 인라인화 -->
+    <script>
+// ============================================
+// 18_Section_Bg_Audio.js - 배경 음악
+// ============================================
+// howler.js(오디오 자동재생 - live-server로 확인)
+// file:// 프로토콜에서는 Howl 객체 생성 자체를 하지 않음 (CORS 오류 방지)
+let bgSound = null;
 
-    <!-- 20_JS_04Section_DDay - 지연 로드 -->
-    <script src="./js/20_JS_04Section_DDay.js"></script>
+if (window.location.protocol !== 'file:') {
+  bgSound = new Howl({
+    src: ['./audio/wedding.mp3'],
+    volume: 0.3, // 0-1 범위로 수정 (3.0 → 0.3)
+    loop: true,
+    onloaderror: function(id, error) {
+      // 오디오 로드 실패 시 조용히 처리 (CORS 문제 등)
+    },
+    onplayerror: function(id, error) {
+      // 오디오 재생 실패 시 조용히 처리
+      if (bgSound) {
+        bgSound.once('unlock', function() {
+          bgSound.play();
+        });
+      }
+    }
+  });
+  
+  // 자동 재생 시도
+  bgSound.play();
+}
+
+// 아이콘 클릭시 배경음악 재생여부
+const volumnChkEl = document.querySelector('#volumn-chk');
+function updateNavSpeaker() {
+    var navSpeaker = document.querySelector('.mobile-nav-bar__item--speaker');
+    if (navSpeaker) {
+        navSpeaker.classList.toggle('is-muted', !volumnChkEl.checked);
+    }
+}
+if (volumnChkEl && bgSound) {
+    volumnChkEl.addEventListener("change", function(e){
+        if(volumnChkEl.checked){
+            bgSound.play(); 
+        } else {
+            bgSound.stop(); 
+        }
+        updateNavSpeaker();
+    });
+    updateNavSpeaker();
+}
+    </script>
     
-    <!-- 21_JS_10Section_Clipboard_Copy - 지연 로드 (계좌번호 복사) -->
-    <script src="./js/21_JS_10Section_Clipboard_Copy.js"></script>
+    <!-- 19_JS_06Section_Map - 지연 로드 (지도 섹션에서만 필요) - 인라인화 -->
+    <script>
+// ============================================
+// 19_JS_06Section_Map.js - 지도 초기화
+// ============================================
+const createMap = (address, markerTitle) => {
+    var mapContainer = document.getElementById('map');
+    if (!mapContainer) return;
+
+    var mapOption = {
+        center: new kakao.maps.LatLng(37.3929, 126.9267), // 안양 중심좌표
+        level: 3
+    };
+
+    var map = new kakao.maps.Map(mapContainer, mapOption);
+    map.setDraggable(false);
+
+    var geocoder = new kakao.maps.services.Geocoder();
+    geocoder.addressSearch(address, function(result, status) {
+        if (status === kakao.maps.services.Status.OK) {
+            var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+            var marker = new kakao.maps.Marker({ map: map, position: coords });
+            var infowindow = new kakao.maps.InfoWindow({
+                content: '<div class="map-marker">' + markerTitle + '</div>'
+            });
+            infowindow.open(map, marker);
+            map.setCenter(coords);
+        }
+    });
+
+    return map;
+};
+
+// 카카오맵 SDK 로드 후 초기화 + 스크롤 시 relayout
+function initMap() {
+    // Kakao Maps SDK 로드 확인 (더 강화된 체크)
+    if (typeof kakao === 'undefined' || typeof kakao.maps === 'undefined' || !kakao.maps.Map) {
+        setTimeout(initMap, 100);
+        return;
+    }
+    
+    var mapContainer = document.getElementById('map');
+    if (!mapContainer) {
+        setTimeout(initMap, 100);
+        return;
+    }
+    
+    var mapSection = document.querySelector('.wrapper>main>section.usemap');
+    if (!mapSection) {
+        setTimeout(initMap, 100);
+        return;
+    }
+    
+    // 지도 초기화
+    var map = createMap("경기도 안양시 만안구 안양로 104", "웨딩그룹위더스 안양");
+    if (!map) {
+        // 초기화 실패 시 재시도
+        setTimeout(initMap, 200);
+        return;
+    }
+
+    // relayout 함수
+    var relayoutMap = function() {
+        try {
+            if (map && typeof map.relayout === 'function') {
+                map.relayout();
+            }
+        } catch(e) {
+            // relayout 실패 시 무시
+        }
+    };
+    
+    // 지도 초기화 직후 즉시 relayout (지도가 숨겨져 있을 때를 대비)
+    setTimeout(relayoutMap, 100);
+    setTimeout(relayoutMap, 300);
+    setTimeout(relayoutMap, 500);
+    
+    // 지도 섹션이 보일 때 relayout (IntersectionObserver 사용)
+    if (typeof IntersectionObserver !== 'undefined') {
+        var observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    // 지도가 보이면 relayout (여러 번 호출)
+                    setTimeout(relayoutMap, 50);
+                    setTimeout(relayoutMap, 200);
+                    setTimeout(relayoutMap, 400);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '100px' });
+        observer.observe(mapSection);
+        
+        // 이미 보이는 상태면 즉시 relayout
+        var rect = mapSection.getBoundingClientRect();
+        var mapParent = mapContainer.closest('.map');
+        var parentStyle = window.getComputedStyle(mapParent);
+        var isVisible = rect.top < window.innerHeight && rect.bottom > 0 && 
+                       parseFloat(parentStyle.opacity) > 0 &&
+                       parentStyle.display !== 'none';
+        
+        if (isVisible) {
+            setTimeout(relayoutMap, 200);
+            setTimeout(relayoutMap, 500);
+        }
+    } else {
+        // IntersectionObserver 미지원 시 폴백
+        setTimeout(relayoutMap, 500);
+        setTimeout(relayoutMap, 1000);
+    }
+    
+    // 윈도우 리사이즈 시 relayout
+    var resizeTimer;
+    window.addEventListener('resize', function() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(relayoutMap, 100);
+    });
+}
+
+// DOM 로드 완료 후 초기화 시도
+function startMapInit() {
+    // DOM이 준비되었는지 확인
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(initMap, 100);
+        });
+    } else {
+        // DOM이 이미 로드된 경우
+        setTimeout(initMap, 100);
+    }
+}
+
+// 스크립트 로드 시 즉시 시작
+startMapInit();
+    </script>
+
+    <!-- 20_JS_04Section_DDay - 지연 로드 - 인라인화 -->
+    <script>
+// ============================================
+// 20_JS_04Section_DDay.js - D-Day 계산
+// ============================================
+const wedding_date = new Date("2026-03-14");
+const wedding_hours = "오후 03시 30분";
+
+// CALENDAR FUNCTION 
+const cal_calender = (wedding_date,time)=>{
+   
+    var d_day = wedding_date.getDate();
+    var yoil = wedding_date.getDay();
+    var calendarYear = wedding_date.getFullYear();          // 달력 연도
+    var calendarMonth = wedding_date.getMonth() + 1;        // 달력 월 
+    var calendarToday = wedding_date.getDate();             // 달력 일
+    
+    //마지막 일자 구하기
+    var monthLastDate = new Date(2022, calendarMonth-1, 0).getDate();
+    //날짜를 기준으로 월의 시작 요일 구하기
+    var monthStartDay = new Date(calendarYear, calendarMonth-1, 1);
+    
+    var calendarMonthStartDay = monthStartDay.getDay(); // 달력 월의 시작 요일
+
+    //01SECTION 헤더 YYYY/MM/DD 랜더링
+    const Section01topDateEl = document.querySelector('.wrapper nav>div:nth-child(1)')
+    if(Section01topDateEl){
+    Section01topDateEl.innerHTML = calendarYear+" <span style=font-size:1.5rem>/</span> ";
+    if(calendarMonth<10)
+    Section01topDateEl.innerHTML += "0"+calendarMonth+" <span style=font-size:1.5rem>/</span> ";
+    else
+    Section01topDateEl.innerHTML += calendarMonth+" <span style=font-size:1.5rem>/</span> ";
+
+    if(d_day<10)
+    Section01topDateEl.innerHTML += "0"+d_day;
+    else
+    Section01topDateEl.innerHTML += d_day;   
+    }
+
+    ///01SECTION 헤더 요일 랜더링
+    const yoilEl = document.querySelector('.wrapper nav>div:nth-child(2)')
+    if(yoilEl){
+    if(yoil==0)
+        yoilEl.innerHTML = 'SUNDAY';
+    else if(yoil==1)
+        yoilEl.innerHTML = 'MONDAY';
+    else if(yoil==2)
+        yoilEl.innerHTML = 'TUESDAY';
+    else if(yoil==3)
+        yoilEl.innerHTML = 'WEDNESDAY';
+    else if(yoil==4)
+        yoilEl.innerHTML = 'THURSDAY';
+    else if(yoil==5)
+        yoilEl.innerHTML = 'FRIDAY';
+    else if(yoil==6)
+        yoilEl.innerHTML = 'SATURDAY';
+    }
+
+    ///01SECTION DATETIME에 연월일 요일 랜더링
+    const section01DatetimeEl = document.querySelector('.wrapper>main>section:nth-child(1) .datetime');
+    if(section01DatetimeEl){
+    section01DatetimeEl.innerHTML = calendarYear+" 년 ";
+    if(calendarMonth<10)
+    section01DatetimeEl.innerHTML += "0"+calendarMonth+" 월 ";
+    else
+    section01DatetimeEl.innerHTML += calendarMonth+" 월 ";
+
+    if(d_day<10)
+    section01DatetimeEl.innerHTML += "0"+d_day+" 일 ";
+    else
+    section01DatetimeEl.innerHTML += d_day +" 일 ";   
+    }
+
+    const section01HoursEl = document.querySelector('.wrapper>main>section:nth-child(1) .bottom .hours');
+    if(section01HoursEl) section01HoursEl.innerHTML= time;
+
+
+    //화면에 달력 랜더링
+
+
+    //-------------------
+    // TOP-DATE
+    //-------------------
+    const topDateEl = document.querySelector('.wrapper>main>section:nth-child(4) .top-date')
+    topDateEl.innerHTML = calendarYear+".";
+    if(calendarMonth<10)
+        topDateEl.innerHTML += "0"+calendarMonth+".";
+    else
+        topDateEl.innerHTML += calendarMonth+".";
+
+    if(d_day<10)
+        topDateEl.innerHTML += "0"+d_day;
+    else
+        topDateEl.innerHTML += d_day;
+
+        
+
+    //-------------------
+    // TOP-HOURS
+    //-------------------
+    const topHoursEl = document.querySelector('.wrapper>main>section:nth-child(4) .top-hours')
+    if(yoil==0)
+        topHoursEl.innerHTML = '일요일 ' +time;
+    else if(yoil==1)
+        topHoursEl.innerHTML = '월요일 ' +time;
+    else if(yoil==2)
+        topHoursEl.innerHTML = '화요일 ' +time;
+    else if(yoil==3)
+        topHoursEl.innerHTML = '수요일 ' +time;
+    else if(yoil==4)
+        topHoursEl.innerHTML = '목요일 ' +time;
+    else if(yoil==5)
+        topHoursEl.innerHTML = '금요일 ' +time;
+    else if(yoil==6)
+        topHoursEl.innerHTML = '토요일 ' +time;
+    
+    //-------------------
+    // TABLE BODY 
+    //-------------------
+    let day=1;
+    //FirstRow
+    const tdStartEls =  document.querySelectorAll(".wrapper>main>section:nth-child(4) table td.start-days");
+    tdStartEls.forEach(tdEl=>{    
+       const start_no =  tdEl.getAttribute('data-start');
+        if(start_no>=calendarMonthStartDay)
+            tdEl.innerHTML=(day++);
+    })
+    //EtcRow
+    const tdEtcEls =  document.querySelectorAll(".wrapper>main>section:nth-child(4) table td.days");
+    tdEtcEls.forEach(tdEl=>{    
+      
+        if(day<=monthLastDate)
+            tdEl.innerHTML=day;
+    
+        day++;
+    })   
+    // D-DAY 표시(classname : d-day)
+    const tdEls =  document.querySelectorAll(".wrapper>main>section:nth-child(4) table td");
+    tdEls.forEach(tdEl=>{
+        if(tdEl.innerHTML==d_day)
+        tdEl.classList.add('d-day');
+    })
+    
+    
+    
+}
+
+
+cal_calender(wedding_date, wedding_hours);
+
+
+
+// D DAY FUNCTION
+const dayEls = document.querySelectorAll('.wrapper>main>section:nth-child(4) .bottom .day>span');
+const hoursEl = document.querySelector('.wrapper>main>section:nth-child(4) .bottom .hours>span');
+const minEl = document.querySelector('.wrapper>main>section:nth-child(4) .bottom .min>span');
+const secEl = document.querySelector('.wrapper>main>section:nth-child(4) .bottom .sec>span');
+
+const d_day_func = (weddingDate)=>{
+
+    const todayTime = new Date();
+    
+    const diff = weddingDate - todayTime;
+
+    let diffDay = Math.floor(diff / (1000*60*60*24));
+    let diffHour = Math.floor((diff / (1000*60*60)) % 24);
+    let diffMin = Math.floor((diff / (1000*60)) % 60);
+    let diffSec = Math.floor(diff / 1000 % 60);
+
+    // D-DAY 랜더링 
+    dayEls.forEach(dayEl=>{
+        if(diffDay<10)
+            dayEl.innerHTML = "0"+diffDay;
+        else
+            dayEl.innerHTML = diffDay;
+    })
+
+
+    if(diffHour<10)
+        diffHour="0"+diffHour;
+    hoursEl.innerHTML = diffHour;
+
+    if(diffMin<10)
+        diffMin="0"+diffMin;
+    minEl.innerHTML = diffMin;
+    if(diffSec<10)
+        diffSec="0"+ diffSec;
+    
+        secEl.innerHTML = diffSec;
+
+
+}
+
+// DDAY 최초실행
+d_day_func(wedding_date);
+
+//D Day 반복 비동기
+setInterval(function(){
+    d_day_func(wedding_date);
+},1000)
+    </script>
+    
+    <!-- 21_JS_10Section_Clipboard_Copy - 지연 로드 (계좌번호 복사) - 인라인화 -->
+    <script>
+// ============================================
+// 21_JS_10Section_Clipboard_Copy.js - 클립보드 복사
+// ============================================
+const accordionAEls = document.querySelectorAll(".accordion .right a");
+
+
+accordionAEls.forEach(item=>{
+
+    item.addEventListener('click',function(){
+        console.log(item);
+        const leftBlockEl =  item.parentNode.parentNode;
+        const accountNumber =  item.parentNode.parentNode.querySelector('.account-number').innerHTML;
+        console.log(accountNumber);
+        //클립보드에 복사
+         window.navigator.clipboard.writeText(accountNumber) ;
+
+
+    })
+})
+    </script>
     
     <!-- 22_JS_11Section_방명록 -->
     <!-- <script src="./js/22_JS_11Section_방명록.js"></script> -->
     
-    <!-- 23_JS_Footer_카톡공유_링크복사 - 지연 로드 (하단에서만 필요) -->
-    <script src="./js/23_JS_Footer_카톡공유_링크복사.js"></script>
+    <!-- 23_JS_Footer_카톡공유_링크복사 - 지연 로드 (하단에서만 필요) - 인라인화 -->
+    <script>
+// ============================================
+// 23_JS_Footer_카톡공유_링크복사.js - 카톡 공유 및 링크 복사
+// ============================================
+// 카톡공유(https://developers.kakao.com/docs/latest/ko/message/js-link#default-template-msg-custom)
+
+  // SDK를 초기화 합니다. 사용할 앱의 JavaScript 키를 설정해 주세요.
+  Kakao.init('69f997d9b7dfb3972e5c6ca96e84a293');
+
+  // SDK 초기화 여부를 판단합니다.
+
+const kakaoShareEls = document.querySelectorAll('.kakao-share');
+kakaoShareEls.forEach(function(kakaoShare){
+    if (!kakaoShare) return;
+    kakaoShare.addEventListener('click',function(){
+
+    // 직접 버튼 사용하는 메시지 탬플릿(위치)
+    Kakao.Share.sendDefault({
+        objectType: 'location',
+        address: '경기도 안양시 만안구 안양로 104',
+        addressTitle: '웨딩그룹위더스 안양',
+        content: {
+          title: '민형 ❤️ 유정 결혼합니다',
+          description: '',
+          imageUrl: "https://edu-embadded-curriculum.github.io/02_SCREEN_IMPL_WEDDING.github.io/images/01_section.jpg",
+          link: {
+            mobileWebUrl: window.location.href,
+            webUrl: window.location.href,
+          },
+        },
+
+        buttons: [
+          {
+            title: '자세히 보기',
+            link: {
+              mobileWebUrl: window.location.href,
+              webUrl: window.location.href,
+            },
+          },
+        ],
+      });
+
+    });
+});
+
+
+// 링크공유
+document.querySelectorAll('.url-copy').forEach(function(urlCopy){
+    urlCopy.addEventListener('click',function(){
+         window.navigator.clipboard.writeText(window.location.href); ;
+    });
+});
+    </script>
 
     <!-- 모달 관련 스크립트 -->
     <!-- Swiper - 지연 로드 (갤러리 모달에서만 사용) -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <!-- 24_JS_05Section_갤러리_모달 -->
-    <script src="./js/24_JS_05Section_갤러리_모달.js"></script>
+    <!-- 24_JS_05Section_갤러리_모달 - 인라인화 -->
+    <script>
+// ============================================
+// 24_JS_05Section_갤러리_모달.js - 갤러리 모달
+// ============================================
+(function () {
+  'use strict';
+
+  var galleryImages = document.querySelectorAll('.gallery-img');
+  var modalEl = document.getElementById('section_05_gallery_modal');
+  var wrapperEl = document.getElementById('gallerySwiperWrapper');
+  var galleryModal = null;
+  var gallerySwiper = null;
+
+  if (!galleryImages.length || !modalEl || !wrapperEl) return;
+
+  function getImageSrcList() {
+    var list = [];
+    galleryImages.forEach(function (img) {
+      list.push(img.getAttribute('src'));
+    });
+    return list;
+  }
+
+  function buildSwiperSlides(srcList) {
+    return srcList
+      .map(function (src) {
+        return (
+          '<div class="swiper-slide">' +
+          '<img src="' + src + '" alt="" loading="eager">' +
+          '</div>'
+        );
+      })
+      .join('');
+  }
+
+  function openGalleryModal(initialIndex) {
+    var srcList = getImageSrcList();
+    wrapperEl.innerHTML = buildSwiperSlides(srcList);
+
+    if (gallerySwiper) {
+      gallerySwiper.destroy(true, true);
+    }
+
+    galleryModal = new bootstrap.Modal(modalEl, { backdrop: 'static', keyboard: false });
+    galleryModal.show();
+
+    modalEl.addEventListener('shown.bs.modal', function onShown() {
+      modalEl.removeEventListener('shown.bs.modal', onShown);
+      gallerySwiper = new Swiper('.gallery-swiper', {
+        initialSlide: initialIndex,
+        loop: true,
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+      });
+    });
+  }
+
+  function handleClose() {
+    if (gallerySwiper) {
+      gallerySwiper.destroy(true, true);
+      gallerySwiper = null;
+    }
+  }
+
+  modalEl.addEventListener('hidden.bs.modal', handleClose);
+
+  galleryImages.forEach(function (img, index) {
+    img.addEventListener('click', function () {
+      openGalleryModal(index);
+    });
+    img.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openGalleryModal(index);
+      }
+    });
+  });
+})();
+    </script>
 
     <!-- 기타 유틸리티 스크립트 -->
-    <!-- 25_JS_BottomSheet -->
-    <script src="./js/25_JS_BottomSheet.js"></script>
-    <!-- 25_JS_Gallery_Preload - 갤러리 이미지 preload 최적화 -->
-    <script src="./js/25_JS_Gallery_Preload.js"></script>
-    <!-- 26_JS_01Section_ScrollHint -->
-    <script src="./js/26_JS_01Section_ScrollHint.js"></script>
+    <!-- 25_JS_BottomSheet - 인라인화 -->
+    <script>
+// ============================================
+// 25_JS_BottomSheet.js - 바텀시트
+// ============================================
+/**
+ * 바텀시트 - 메뉴 클릭 시 퀵메뉴 표시
+ */
+(function(){
+    var bottomSheet = document.getElementById('quickMenuBottomSheet');
+    var backdrop = document.getElementById('quickMenuBackdrop');
+    var menuBtn = document.querySelector('.mobile-nav-bar__item--menu');
+    var quickLinks = document.querySelectorAll('.bottom-sheet__link');
+
+    function openBottomSheet(){
+        if (bottomSheet) bottomSheet.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeBottomSheet(){
+        if (bottomSheet) bottomSheet.classList.remove('is-open');
+        document.body.style.overflow = '';
+    }
+
+    if (menuBtn) {
+        menuBtn.addEventListener('click', function(e){
+            e.preventDefault();
+            openBottomSheet();
+        });
+    }
+    if (backdrop) {
+        backdrop.addEventListener('click', closeBottomSheet);
+    }
+    quickLinks.forEach(function(link){
+        link.addEventListener('click', function(e){
+            var href = this.getAttribute('href');
+            if (href && href.indexOf('#') === 0) {
+                e.preventDefault();
+                var target = document.querySelector(href);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+                closeBottomSheet();
+            }
+        });
+    });
+})();
+    </script>
+    <!-- 25_JS_Gallery_Preload - 갤러리 이미지 preload 최적화 - 인라인화 -->
+    <script>
+// ============================================
+// 25_JS_Gallery_Preload.js - 갤러리 이미지 preload
+// ============================================
+/**
+ * 갤러리 이미지 preload 최적화
+ * '사진더보기' 버튼 클릭 시 빠른 로딩을 위해 이미지 미리 로드
+ */
+(function() {
+  'use strict';
+  
+  // 갤러리 블록이 뷰포트에 들어왔을 때 추가 이미지 preload
+  var galleryBlock = document.querySelector('.wrapper>main>section:nth-child(5)>.gallery-block');
+  if (!galleryBlock) return;
+  
+  // Intersection Observer로 갤러리 블록이 보일 때 추가 이미지 preload
+  if ('IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          // 갤러리 블록이 보이면 추가 이미지들 preload
+          var hiddenImages = galleryBlock.querySelectorAll('.item.item-04 img, .item.item-05 img');
+          hiddenImages.forEach(function(img) {
+            if (img.complete === false) {
+              // 이미지가 아직 로드되지 않았으면 preload
+              var link = document.createElement('link');
+              link.rel = 'preload';
+              link.as = 'image';
+              link.href = img.src;
+              document.head.appendChild(link);
+            }
+          });
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '100px' }); // 100px 전에 미리 로드 시작
+    
+    observer.observe(galleryBlock);
+  }
+})();
+    </script>
+    <!-- 26_JS_01Section_ScrollHint - 인라인화 -->
+    <script>
+// ============================================
+// 26_JS_01Section_ScrollHint.js - 스크롤 힌트
+// ============================================
+(function () {
+  'use strict';
+
+  var scrollHint = document.querySelector('.main_image_scroll_hint');
+  if (!scrollHint) return;
+
+  var hasScrolled = false;
+
+  function handleScroll() {
+    if (hasScrolled) return;
+    
+    if (window.scrollY > 50) {
+      hasScrolled = true;
+      scrollHint.classList.add('scroll-hide');
+      window.removeEventListener('scroll', handleScroll);
+    }
+  }
+
+  window.addEventListener('scroll', handleScroll, { passive: true });
+})();
+    </script>
     
   </body>
 </html>
