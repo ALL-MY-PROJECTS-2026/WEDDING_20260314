@@ -34,8 +34,9 @@
     border-radius: 15px;
     margin : 50px 0px;
     overflow:hidden;
-    transition: .4s;
+    transition: height 0.1s ease-out; /* transition 시간 더 단축 (즉시 표시) */
     position:relative;
+    will-change: height; /* 성능 최적화 */
 }
 .wrapper>main>section:nth-child(5)>.gallery-block>.item{
     display:flex;
@@ -151,10 +152,25 @@
 }
 
 
-.wrapper>main>section:nth-child(5) input[type="checkbox"]:checked~.gallery-block{
-   height:100%;
+/* 추가 이미지들(item-04, item-05) 미리 렌더링하고 숨김 - 즉시 표시를 위해 */
+.wrapper>main>section:nth-child(5)>.gallery-block>.item.item-04,
+.wrapper>main>section:nth-child(5)>.gallery-block>.item.item-05 {
+    display: none; /* 레이아웃에 영향 없이 완전히 숨김, 이미지는 미리 로드됨 */
 }
 
-.wrapper>main>section:nth-child(5) input[type="checkbox"]:checked+.more-picture-btn-block{
-    display:none;
+/* 체크박스 체크 시 추가 이미지 표시 및 버튼 숨김 */
+.wrapper>main>section:nth-child(5) input[type="checkbox"]:checked~.gallery-block{
+   height:100%;
+   /* 이미지 로딩 최적화 */
+   contain: layout style paint;
+}
+
+.wrapper>main>section:nth-child(5) input[type="checkbox"]:checked~.gallery-block>.item.item-04,
+.wrapper>main>section:nth-child(5) input[type="checkbox"]:checked~.gallery-block>.item.item-05 {
+    display: flex; /* 즉시 표시 (이미 렌더링되어 있음) */
+}
+
+/* 버튼 숨김 - 체크박스 체크 시 */
+.wrapper>main>section:nth-child(5) input[type="checkbox"]:checked~.gallery-block .more-picture-btn-block{
+    display:none !important;
 }

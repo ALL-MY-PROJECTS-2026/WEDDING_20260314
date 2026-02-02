@@ -22,7 +22,7 @@
       .map(function (src) {
         return (
           '<div class="swiper-slide">' +
-          '<img src="' + src + '" alt="">' +
+          '<img src="' + src + '" alt="" loading="eager">' +
           '</div>'
         );
       })
