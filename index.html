@@ -1237,30 +1237,37 @@ function initAudio() {
     
     // 아이콘 클릭시 배경음악 재생여부
     const volumnChkEl = document.querySelector('#volumn-chk');
+    var navSpeaker = document.querySelector('.mobile-nav-bar__item--speaker');
     
     function updateNavSpeaker() {
-        var navSpeaker = document.querySelector('.mobile-nav-bar__item--speaker');
         if (navSpeaker && volumnChkEl) {
-            navSpeaker.classList.toggle('is-muted', !volumnChkEl.checked);
+            // 명확하게 클래스 추가/제거 (toggle 대신)
+            if (volumnChkEl.checked) {
+                navSpeaker.classList.remove('is-muted');
+            } else {
+                navSpeaker.classList.add('is-muted');
+            }
         }
     }
     
     // 체크박스 change 이벤트
-    if (volumnChkEl && bgSound) {
+    if (volumnChkEl) {
         volumnChkEl.addEventListener("change", function(e){
-            if(volumnChkEl.checked){
-                bgSound.play(); 
-            } else {
-                bgSound.stop(); 
+            if (bgSound) {
+                if(volumnChkEl.checked){
+                    bgSound.play(); 
+                } else {
+                    bgSound.stop(); 
+                }
             }
             updateNavSpeaker();
         });
+        // 초기 상태 설정
         updateNavSpeaker();
     }
     
     // 하단 네비게이션 바 스피커 아이콘 클릭 이벤트 (직접 처리)
-    var navSpeaker = document.querySelector('.mobile-nav-bar__item--speaker');
-    if (navSpeaker && volumnChkEl && bgSound) {
+    if (navSpeaker && volumnChkEl) {
         navSpeaker.addEventListener('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
@@ -1268,15 +1275,9 @@ function initAudio() {
             // 체크박스 토글
             volumnChkEl.checked = !volumnChkEl.checked;
             
-            // 오디오 재생/정지
-            if(volumnChkEl.checked){
-                bgSound.play(); 
-            } else {
-                bgSound.stop(); 
-            }
-            
-            // 네비게이션 바 아이콘 상태 업데이트
-            updateNavSpeaker();
+            // change 이벤트를 수동으로 트리거하여 일관성 유지
+            var changeEvent = new Event('change', { bubbles: true });
+            volumnChkEl.dispatchEvent(changeEvent);
         });
     }
 }
