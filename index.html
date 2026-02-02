@@ -35,12 +35,13 @@
       .wrapper>header,.wrapper>main,.wrapper>footer{position:relative;z-index:1;}
       .wrapper>main>section{position:relative;z-index:1;}
       /* 인트로 화면 - 첫 화면에 필수 */
-      .intro-screen{position:fixed;top:0;left:0;right:0;bottom:0;width:100vw;height:100vh;height:100svh;background-image:url('./images/bg.png');background-repeat:repeat;background-color:#ffffff;display:flex;justify-content:center;align-items:center;z-index:9999;transition:opacity 0.8s ease-out;opacity:0;visibility:hidden;pointer-events:none;}
-      .intro-screen.intro-ready{opacity:1;visibility:visible;pointer-events:auto;}
+      .intro-screen{position:fixed;top:0;left:0;right:0;bottom:0;width:100vw;height:100vh;height:100svh;background-image:url('./images/bg.png');background-repeat:repeat;background-color:#ffffff;display:flex;justify-content:center;align-items:center;z-index:9999;transition:opacity 0.8s ease-out;opacity:1;visibility:visible;pointer-events:auto;}
       .intro-content{position:relative;z-index:1;width:100%;max-width:100vw;padding:0 0.5rem;text-align:center;}
       .intro-svg-text{width:100%;display:flex;justify-content:center;align-items:center;position:relative;overflow:visible;}
       .intro-screen.intro-fade-out{opacity:0;pointer-events:none;}
       .intro-screen.intro-hidden{display:none!important;}
+      /* 인트로 화면이 표시되는 동안 메인 콘텐츠 숨김 */
+      body:has(.intro-screen:not(.intro-hidden)) .wrapper{opacity:0;visibility:hidden;overflow:hidden;}
       /* 첫 섹션 기본 스타일 */
       .wrapper>main>section:nth-child(1){position:relative;padding:0;width:100%;min-height:100vh;min-height:100svh;}
       .wrapper>main>section:nth-child(1) .main_image{position:relative;width:100%;height:100%;min-height:100vh;min-height:100svh;display:block;overflow:hidden;}
@@ -998,6 +999,13 @@
             mobileNavBar.style.opacity = '1';
             mobileNavBar.style.pointerEvents = 'auto';
         }
+        // 메인 콘텐츠 표시
+        const wrapper = document.querySelector('.wrapper');
+        if (wrapper) {
+            wrapper.style.opacity = '1';
+            wrapper.style.visibility = 'visible';
+            wrapper.style.overflow = '';
+        }
         setTimeout(function () {
             introScreen.classList.add('intro-hidden');
             if (introScreen.parentNode) {
@@ -1181,14 +1189,11 @@
     }
     
     /**
-     * 인트로 화면 표시
+     * 인트로 화면 애니메이션 시작
      */
-    function showIntro() {
+    function startIntro() {
         const introScreen = document.getElementById('introScreen');
         if (!introScreen) return;
-        
-        // 인트로 화면 표시
-        introScreen.classList.add('intro-ready');
         
         // SVG 로드 및 설정
         loadAndSetupSVG();
@@ -1204,8 +1209,8 @@
      * 초기화 함수
      */
     function init() {
-        // 모든 리소스 로드 완료 후 인트로 화면 표시
-        waitForAllResources().then(showIntro);
+        // 모든 리소스 로드 완료 후 인트로 애니메이션 시작
+        waitForAllResources().then(startIntro);
     }
 
     // DOM 로드 완료 후 실행
