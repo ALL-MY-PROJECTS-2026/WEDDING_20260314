@@ -592,8 +592,10 @@ main>section:nth-child(4)>.bottom>.bottom-body{}
     margin: revert !important; /* 기본 margin 복원 */
     padding: revert !important; /* 기본 padding 복원 */
     opacity: 1 !important; /* 즉시 표시 */
+    display: flex !important; /* 즉시 표시 (JavaScript와 동일하게) */
     transition: none !important; /* transition 완전 제거 */
     transform: none !important; /* transform 제거 */
+    visibility: visible !important; /* visibility 명시적 설정 */
 }
 
 /* 버튼 숨김 - 체크박스 체크 시 */
@@ -1829,4 +1831,50 @@ main>section:nth-child(4)>.bottom>.bottom-body{}
 /* 갤러리 이미지 클릭 가능 표시 */
 .wrapper>main>section:nth-child(5) .gallery-img {
   cursor: pointer;
+}
+
+/* 갤러리 로딩 스피너 */
+.wrapper>main>section:nth-child(5)>.gallery-block>.gallery-loading-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 200;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+}
+
+.wrapper>main>section:nth-child(5)>.gallery-block>.gallery-loading-spinner .spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(137, 117, 122, 0.2);
+  border-top-color: rgba(137, 117, 122, 0.9);
+  border-radius: 50%;
+  animation: spinner-rotate 0.8s linear infinite;
+}
+
+@keyframes spinner-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* 갤러리 모달 fade 애니메이션 제거 - 모달 지연 해결 */
+#section_05_gallery_modal.fade {
+  transition: none !important;
+}
+#section_05_gallery_modal.fade .modal-dialog {
+  transition: none !important;
+}
+#section_05_gallery_modal.fade.show {
+  opacity: 1 !important;
+}
+#section_05_gallery_modal.fade.show .modal-dialog {
+  transform: none !important;
 }

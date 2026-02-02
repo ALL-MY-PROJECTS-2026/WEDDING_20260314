@@ -20,10 +20,7 @@
     <!-- 첫 화면 이미지 preload (FCP 최적화) -->
     <link rel="preload" href="./images/01_section.jpg" as="image" fetchpriority="high">
     
-    <!-- 갤러리 첫 화면 이미지 preload (갤러리 로딩 속도 개선) -->
-    <link rel="preload" href="./images/05_01.jpg" as="image">
-    <link rel="preload" href="./images/05_02.jpg" as="image">
-    <link rel="preload" href="./images/05_03.jpg" as="image">
+   
 
     <title>민형 ❤ 유정 결혼합니다.</title>
 
@@ -311,6 +308,10 @@
                   <span class="material-symbols-outlined">photo_camera</span>  
                   <span>사진더보기</span>         
               </label>
+              <!-- 이미지 로딩 중 스피너 -->
+              <div class="gallery-loading-spinner" id="galleryLoadingSpinner" style="display: none;">
+                <div class="spinner"></div>
+              </div>
 
 
             <div class="item item-01  back-to-position to-up">
@@ -660,12 +661,19 @@
             var triggerHookValue = isGallerySection ? 0.5 : 0.8; // 갤러리는 0.5, 나머지는 0.8
             
             // 스크롤매직이벤트처리 객체
-            new ScrollMagic.Scene({
+            var scene = new ScrollMagic.Scene({
                     triggerElement : spyEl, //감시할 요소 선택
                     triggerHook : triggerHookValue //스크린에서의 스크롤 위치
                 })
-            .setClassToggle(spyEl,'to-up')
-            .addTo(new ScrollMagic.Controller());   
+            .setClassToggle(spyEl,'to-up');
+            
+            // 갤러리 섹션은 한 번 렌더링되면 유지 (reverse: false)
+            // 다른 섹션은 기존대로 토글 동작
+            if (isGallerySection) {
+                scene.reverse(false); // 한 번만 트리거, 다시 제거하지 않음
+            }
+            
+            scene.addTo(new ScrollMagic.Controller());   
         });
     }
     
@@ -1206,6 +1214,7 @@ document.querySelectorAll('.url-copy').forEach(function(urlCopy){
     var wrapperEl = document.getElementById('gallerySwiperWrapper');
     var galleryModal = null;
     var gallerySwiper = null;
+    var isSwiperPreInitialized = false; // Swiper 사전 초기화 여부
 
     // Bootstrap과 Swiper가 로드되었는지 확인
     if (typeof bootstrap === 'undefined' || typeof Swiper === 'undefined') {
@@ -1243,34 +1252,93 @@ document.querySelectorAll('.url-copy').forEach(function(urlCopy){
         .join('');
     }
 
-    function openGalleryModal(initialIndex) {
+    // Swiper 사전 초기화 함수 (모달이 보일 때만 초기화)
+    function preInitializeSwiper() {
+      if (isSwiperPreInitialized || !wrapperEl) return;
+      
+      // 모달이 보이지 않으면 초기화하지 않음 (Swiper는 보이는 요소에서만 제대로 작동)
+      var modalStyle = window.getComputedStyle(modalEl);
+      if (modalStyle.display === 'none' || !modalEl.classList.contains('show')) {
+        return;
+      }
+      
       var srcList = getImageSrcList();
       wrapperEl.innerHTML = buildSwiperSlides(srcList);
-
-      if (gallerySwiper) {
-        gallerySwiper.destroy(true, true);
-      }
-
-      galleryModal = new bootstrap.Modal(modalEl, { backdrop: 'static', keyboard: false });
-      galleryModal.show();
-
-      modalEl.addEventListener('shown.bs.modal', function onShown() {
-        modalEl.removeEventListener('shown.bs.modal', onShown);
+      
+      // Swiper를 미리 초기화
+      try {
         gallerySwiper = new Swiper('.gallery-swiper', {
-          initialSlide: initialIndex,
+          initialSlide: 0,
           loop: true,
           navigation: {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
           },
         });
+        isSwiperPreInitialized = true;
+      } catch (e) {
+        // Swiper 초기화 실패 시 무시 (나중에 다시 시도)
+      }
+    }
+
+    function openGalleryModal(initialIndex) {
+      var srcList = getImageSrcList();
+      wrapperEl.innerHTML = buildSwiperSlides(srcList);
+      
+      // 기존 Swiper가 있으면 제거
+      if (gallerySwiper) {
+        gallerySwiper.destroy(true, true);
+        gallerySwiper = null;
+        isSwiperPreInitialized = false;
+      }
+      
+      galleryModal = new bootstrap.Modal(modalEl, { backdrop: 'static', keyboard: false });
+      galleryModal.show();
+
+      // 모달이 완전히 표시된 후 Swiper 초기화 (fade 애니메이션 제거로 즉시 표시됨)
+      // shown.bs.modal 이벤트 대신 즉시 초기화 시도 (더 빠른 반응)
+      var initSwiper = function() {
+        try {
+          gallerySwiper = new Swiper('.gallery-swiper', {
+            initialSlide: initialIndex,
+            loop: true,
+            navigation: {
+              nextEl: '.swiper-button-next',
+              prevEl: '.swiper-button-prev',
+            },
+          });
+          isSwiperPreInitialized = true;
+        } catch (e) {
+          // Swiper 초기화 실패 시 shown.bs.modal 이벤트에서 재시도
+          modalEl.addEventListener('shown.bs.modal', function onShown() {
+            modalEl.removeEventListener('shown.bs.modal', onShown);
+            if (!gallerySwiper) {
+              gallerySwiper = new Swiper('.gallery-swiper', {
+                initialSlide: initialIndex,
+                loop: true,
+                navigation: {
+                  nextEl: '.swiper-button-next',
+                  prevEl: '.swiper-button-prev',
+                },
+              });
+              isSwiperPreInitialized = true;
+            }
+          }, { once: true });
+        }
+      };
+      
+      // requestAnimationFrame을 사용하여 DOM 업데이트 후 즉시 초기화
+      requestAnimationFrame(function() {
+        requestAnimationFrame(initSwiper);
       });
     }
 
     function handleClose() {
+      // 모달이 닫힐 때 Swiper 제거 (다음에 열 때 다시 초기화)
       if (gallerySwiper) {
         gallerySwiper.destroy(true, true);
         gallerySwiper = null;
+        isSwiperPreInitialized = false;
       }
     }
 
@@ -1287,6 +1355,9 @@ document.querySelectorAll('.url-copy').forEach(function(urlCopy){
         }
       });
     });
+    
+    // Swiper 사전 초기화는 제거 (모달이 보일 때만 초기화하는 것이 더 안전)
+    // 대신 모달 내 이미지만 사전 로드하여 모달 열 때 빠르게 표시
   }
 
   // DOM 로드 완료 후 초기화
@@ -1366,10 +1437,14 @@ document.querySelectorAll('.url-copy').forEach(function(urlCopy){
   
   if (!gallerySection || !galleryBlock) return;
   
-  // 모든 갤러리 이미지 preload 함수
-  function preloadAllGalleryImages() {
+  // 모든 갤러리 이미지 preload 함수 (우선순위 조정)
+  function preloadAllGalleryImages(priority) {
+    priority = priority || 'low'; // 기본값: low
     var allGalleryImages = galleryBlock.querySelectorAll('.gallery-img');
     var preloadedUrls = new Set(); // 중복 preload 방지
+    
+    // 첫 화면 이미지(05_01~05_03)는 즉시, 나머지는 lazy
+    var firstScreenImages = ['05_01.jpg', '05_02.jpg', '05_03.jpg'];
     
     allGalleryImages.forEach(function(img) {
       if (!img.src) return;
@@ -1377,13 +1452,28 @@ document.querySelectorAll('.url-copy').forEach(function(urlCopy){
       // 이미 preload된 URL인지 확인
       if (preloadedUrls.has(img.src)) return;
       
+      // 첫 화면 이미지인지 확인
+      var isFirstScreen = firstScreenImages.some(function(filename) {
+        return img.src.indexOf(filename) !== -1;
+      });
+      
+      // 첫 화면 이미지가 아니고 priority가 low면 스킵 (lazy loading)
+      if (!isFirstScreen && priority === 'low') {
+        return;
+      }
+      
       // 이미지가 아직 로드되지 않았으면 preload
       if (img.complete === false || img.naturalWidth === 0) {
-        // link rel="preload"로 preload
+        // link rel="preload"로 preload (우선순위 설정)
         var link = document.createElement('link');
         link.rel = 'preload';
         link.as = 'image';
         link.href = img.src;
+        if (isFirstScreen) {
+          link.setAttribute('fetchpriority', 'high');
+        } else {
+          link.setAttribute('fetchpriority', 'low');
+        }
         document.head.appendChild(link);
         preloadedUrls.add(img.src);
         
@@ -1394,53 +1484,119 @@ document.querySelectorAll('.url-copy').forEach(function(urlCopy){
     });
   }
   
-  // 1. Intersection Observer로 갤러리 섹션이 뷰포트에 들어오면 모든 이미지 preload
+  // 모달 내 이미지 사전 로드 함수
+  function preloadModalImages() {
+    var galleryImages = document.querySelectorAll('.gallery-img');
+    var preloadedUrls = new Set();
+    
+    galleryImages.forEach(function(img) {
+      if (!img.src || preloadedUrls.has(img.src)) return;
+      
+      // 모달용 이미지는 우선순위를 낮춰서 preload
+      var link = document.createElement('link');
+      link.rel = 'preload';
+      link.as = 'image';
+      link.href = img.src;
+      link.setAttribute('fetchpriority', 'low');
+      document.head.appendChild(link);
+      preloadedUrls.add(img.src);
+      
+      var preloadImg = new Image();
+      preloadImg.src = img.src;
+    });
+  }
+  
+  // 1. Intersection Observer로 갤러리 섹션이 뷰포트에 들어오면 이미지 preload (우선순위 조정)
   if ('IntersectionObserver' in window) {
     var sectionObserver = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
         if (entry.isIntersecting) {
-          // 갤러리 섹션이 보이면 모든 이미지 preload
-          preloadAllGalleryImages();
+          // 갤러리 섹션이 보이면 첫 화면 이미지만 즉시 preload, 나머지는 lazy
+          // requestIdleCallback을 사용하여 브라우저 유휴 시간에 preload
+          if ('requestIdleCallback' in window) {
+            requestIdleCallback(function() {
+              preloadAllGalleryImages('low');
+            }, { timeout: 2000 });
+          } else {
+            // 폴백: setTimeout 사용
+            setTimeout(function() {
+              preloadAllGalleryImages('low');
+            }, 100);
+          }
           sectionObserver.unobserve(entry.target);
         }
       });
     }, { 
-      rootMargin: '800px' // 섹션 위쪽 800px 전에 미리 로드 시작 (갤러리 로딩 속도 개선)
+      rootMargin: '300px' // 섹션 위쪽 300px 전에 미리 로드 시작 (스크롤 지연 방지)
     });
     
     sectionObserver.observe(gallerySection);
   }
   
-  // 2. '사진더보기' 버튼 hover 시에도 모든 이미지 preload (데스크톱)
+  // 2. '사진더보기' 버튼 hover 시에도 모든 이미지 preload (데스크톱, 우선순위 높음)
   if (morePictureBtn) {
     // 마우스 이벤트 (데스크톱)
     morePictureBtn.addEventListener('mouseenter', function() {
-      preloadAllGalleryImages();
+      preloadAllGalleryImages('high'); // 버튼 hover 시에는 모든 이미지 즉시 preload
     }, { once: true }); // 한 번만 실행
     
     // 터치 이벤트 (모바일 - 버튼 근처 터치 시)
     morePictureBtn.addEventListener('touchstart', function() {
-      preloadAllGalleryImages();
+      preloadAllGalleryImages('high'); // 터치 시에는 모든 이미지 즉시 preload
     }, { once: true, passive: true });
     
     // 포커스 이벤트 (키보드 접근성)
     morePictureBtn.addEventListener('focus', function() {
-      preloadAllGalleryImages();
+      preloadAllGalleryImages('high'); // 포커스 시에는 모든 이미지 즉시 preload
     }, { once: true });
   }
   
-  // 3. 갤러리 블록이 뷰포트에 들어왔을 때도 preload (추가 안전장치)
+  // 3. 갤러리 블록이 뷰포트에 들어왔을 때도 preload (추가 안전장치, 우선순위 조정)
   if ('IntersectionObserver' in window) {
     var blockObserver = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
         if (entry.isIntersecting) {
-          preloadAllGalleryImages();
+          // requestIdleCallback을 사용하여 브라우저 유휴 시간에 preload
+          if ('requestIdleCallback' in window) {
+            requestIdleCallback(function() {
+              preloadAllGalleryImages('low');
+            }, { timeout: 2000 });
+          } else {
+            // 폴백: setTimeout 사용
+            setTimeout(function() {
+              preloadAllGalleryImages('low');
+            }, 100);
+          }
           blockObserver.unobserve(entry.target);
         }
       });
-    }, { rootMargin: '600px' }); // 갤러리 블록 근처에서 미리 로드 시작
+    }, { rootMargin: '200px' }); // 갤러리 블록 근처에서 미리 로드 시작 (스크롤 지연 방지)
     
     blockObserver.observe(galleryBlock);
+  }
+  
+  // 4. 모달 내 이미지 사전 로드 (갤러리 섹션이 보일 때)
+  if ('IntersectionObserver' in window) {
+    var modalPreloadObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          // requestIdleCallback을 사용하여 브라우저 유휴 시간에 모달 이미지 preload
+          if ('requestIdleCallback' in window) {
+            requestIdleCallback(function() {
+              preloadModalImages();
+            }, { timeout: 3000 });
+          } else {
+            // 폴백: setTimeout 사용
+            setTimeout(function() {
+              preloadModalImages();
+            }, 500);
+          }
+          modalPreloadObserver.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '200px' });
+    
+    modalPreloadObserver.observe(gallerySection);
   }
 })();
     </script>
@@ -1471,10 +1627,10 @@ document.querySelectorAll('.url-copy').forEach(function(urlCopy){
 })();
     </script>
     
-    <!-- 갤러리 '사진더보기' 버튼 클릭 시 즉시 구조물 표시 -->
+    <!-- 갤러리 '사진더보기' 버튼 클릭 시 즉시 구조물 표시 및 스피너 처리 -->
     <script>
 // ============================================
-// 갤러리 '사진더보기' 버튼 즉시 반응 처리
+// 갤러리 '사진더보기' 버튼 즉시 반응 처리 + 스피너
 // ============================================
 (function() {
   'use strict';
@@ -1483,24 +1639,83 @@ document.querySelectorAll('.url-copy').forEach(function(urlCopy){
   var galleryBlock = document.querySelector('.wrapper>main>section:nth-child(5)>.gallery-block');
   var item04 = document.querySelector('.wrapper>main>section:nth-child(5)>.gallery-block>.item.item-04');
   var item05 = document.querySelector('.wrapper>main>section:nth-child(5)>.gallery-block>.item.item-05');
+  var spinner = document.getElementById('galleryLoadingSpinner');
   
   if (!morePictureCheckbox || !galleryBlock) return;
+  
+  // 이미지 로딩 완료 확인 함수
+  function checkImagesLoaded(items, callback) {
+    var images = [];
+    items.forEach(function(item) {
+      if (item) {
+        var imgs = item.querySelectorAll('img');
+        imgs.forEach(function(img) {
+          images.push(img);
+        });
+      }
+    });
+    
+    if (images.length === 0) {
+      callback();
+      return;
+    }
+    
+    var loadedCount = 0;
+    var totalCount = images.length;
+    var hasShownSpinner = false;
+    var startTime = Date.now();
+    var spinnerTimeout = null;
+    
+    // 100ms 후에도 이미지가 로드되지 않으면 스피너 표시
+    spinnerTimeout = setTimeout(function() {
+      if (loadedCount < totalCount && spinner) {
+        spinner.style.display = 'flex';
+        hasShownSpinner = true;
+      }
+    }, 100);
+    
+    function imageLoaded() {
+      loadedCount++;
+      if (loadedCount === totalCount) {
+        if (spinnerTimeout) {
+          clearTimeout(spinnerTimeout);
+        }
+        if (hasShownSpinner && spinner) {
+          spinner.style.display = 'none';
+        }
+        callback();
+      }
+    }
+    
+    images.forEach(function(img) {
+      if (img.complete && img.naturalWidth > 0) {
+        // 이미 로드된 이미지
+        imageLoaded();
+      } else {
+        // 로딩 중인 이미지
+        img.addEventListener('load', imageLoaded, { once: true });
+        img.addEventListener('error', imageLoaded, { once: true }); // 에러 시에도 진행
+      }
+    });
+  }
   
   // 체크박스 변경 이벤트 리스너
   morePictureCheckbox.addEventListener('change', function() {
     if (this.checked) {
-      // requestAnimationFrame을 사용하여 브라우저 렌더링 사이클에 맞춰 즉시 처리
+      // 구조물을 즉시 표시 (이미지 로딩과 무관하게)
       requestAnimationFrame(function() {
         // 구조물 즉시 표시
         if (item04) {
           item04.style.maxHeight = '1000px';
           item04.style.opacity = '1';
           item04.style.overflow = 'visible';
+          item04.style.display = 'flex'; // display도 즉시 설정
         }
         if (item05) {
           item05.style.maxHeight = '1000px';
           item05.style.opacity = '1';
           item05.style.overflow = 'visible';
+          item05.style.display = 'flex'; // display도 즉시 설정
         }
         
         // gallery-block 높이 즉시 조정
@@ -1508,6 +1723,12 @@ document.querySelectorAll('.url-copy').forEach(function(urlCopy){
         
         // 강제 리플로우 트리거하여 즉시 렌더링
         galleryBlock.offsetHeight;
+        
+        // 이미지 로딩 상태 확인 및 스피너 처리
+        checkImagesLoaded([item04, item05], function() {
+          // 모든 이미지 로딩 완료
+          // 추가 처리 없음 (스피너는 이미 숨김 처리됨)
+        });
       });
     }
   });
@@ -1521,12 +1742,6 @@ document.querySelectorAll('.url-copy').forEach(function(urlCopy){
 // ============================================
 (function() {
     function initMainContent() {
-        // 첫 번째 섹션에 intro-completed 클래스 추가하여 HAPPY WEDDING DAY 애니메이션 시작
-        const firstSection = document.querySelector('.wrapper>main>section:nth-child(1)');
-        if (firstSection) {
-            firstSection.classList.add('intro-completed');
-        }
-        
         // 비디오 로드 및 재생
         var video = document.getElementById('introVideo');
         if (video) {
@@ -1540,6 +1755,15 @@ document.querySelectorAll('.url-copy').forEach(function(urlCopy){
             mobileNavBar.style.visibility = 'visible';
             mobileNavBar.style.opacity = '1';
             mobileNavBar.style.pointerEvents = 'auto';
+        }
+        
+        // 첫 번째 섹션에 intro-completed 클래스 추가하여 HAPPY WEDDING DAY 애니메이션 시작
+        // 1초 후에 표시되도록 지연
+        const firstSection = document.querySelector('.wrapper>main>section:nth-child(1)');
+        if (firstSection) {
+            setTimeout(function() {
+                firstSection.classList.add('intro-completed');
+            }, 1000); // 1초(1000ms) 후에 애니메이션 시작
         }
     }
     
