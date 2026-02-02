@@ -623,6 +623,8 @@
           <li><a href="#section-06" class="bottom-sheet__link">오시는 길</a></li>
           <li><a href="#section-07" class="bottom-sheet__link">예식정보</a></li>
           <li><a href="#section-10" class="bottom-sheet__link">마음 전하실 곳</a></li>
+          <li><a href="javascript:void(0)" class="bottom-sheet__link"></a></li>
+
         </ul>
       </div>
         </div>
@@ -653,10 +655,14 @@
         
         // NodeList를 배열로 변환하여 forEach 사용
         Array.from(spyEls).forEach(function(spyEl){   
+            // 갤러리 섹션은 더 일찍 트리거되도록 설정 (빈 화면 지연 방지)
+            var isGallerySection = spyEl.id === 'section-05';
+            var triggerHookValue = isGallerySection ? 0.5 : 0.8; // 갤러리는 0.5, 나머지는 0.8
+            
             // 스크롤매직이벤트처리 객체
             new ScrollMagic.Scene({
                     triggerElement : spyEl, //감시할 요소 선택
-                    triggerHook : 0.8       //스크린에서의 스크롤 위치
+                    triggerHook : triggerHookValue //스크린에서의 스크롤 위치
                 })
             .setClassToggle(spyEl,'to-up')
             .addTo(new ScrollMagic.Controller());   

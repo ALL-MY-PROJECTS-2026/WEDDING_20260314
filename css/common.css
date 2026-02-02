@@ -423,6 +423,15 @@ main>section:nth-child(4)>.bottom>.bottom-body{}
     margin-bottom : 30px;
 }
 
+/* 갤러리 섹션 빈 화면 지연 문제 해결 - transition 제거 */
+.wrapper>main>section:nth-child(5) .back-to-position {
+    transition: none !important; /* transition 완전 제거 - 즉시 표시 */
+}
+.wrapper>main>section:nth-child(5).to-up .back-to-position {
+    opacity: 1 !important; /* 즉시 표시 */
+    transform: translateY(-50px) !important;
+}
+
 .wrapper>main>section:nth-child(3)>.contents>.title>.m-title{
 
 }
