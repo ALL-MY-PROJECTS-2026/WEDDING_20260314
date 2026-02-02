@@ -72,7 +72,7 @@
     // 타이밍 상수
     const FADE_IN_DELAY = 300; // 텍스트 페이드인 딜레이 (CSS와 동일)
     const FADE_IN_DURATION = 1000; // 텍스트 페이드인 지속 시간 (CSS와 동일)
-    const HOLD_DURATION = 2000; // 텍스트 표시 후 대기 시간
+    const HOLD_DURATION = 0; // 텍스트 표시 후 대기 시간 (SVG draw 완료 후 바로 전환)
     
     // SVG Drawing 상수
     const DRAW_DURATION = 4000; // 그려지는 애니메이션 지속 시간 (4초)
@@ -284,13 +284,11 @@
         // SVG 로드 및 설정, 그리기 애니메이션 완료 대기
         const svgAnimationDuration = await loadAndSetupSVG();
         
-        // SVG 그리기 애니메이션이 완료된 후 추가 대기 시간을 두고 페이드아웃
-        // SVG 그리기 완료 + 추가 대기 시간(HOLD_DURATION)
-        const totalWaitTime = svgAnimationDuration + HOLD_DURATION;
-        
+        // SVG 그리기 애니메이션이 완료되면 바로 페이드아웃 (추가 대기 시간 없음)
+        // SVG draw 애니메이션이 완료되면 "결혼식에 초대합니다" 문구가 완전히 그려진 상태
         setTimeout(function() {
             fadeOutIntro();
-        }, totalWaitTime);
+        }, svgAnimationDuration);
     }
     
     /**
