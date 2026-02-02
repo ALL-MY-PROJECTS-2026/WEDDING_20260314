@@ -438,7 +438,7 @@ main>section:nth-child(4)>.bottom>.bottom-body{}
     border-radius: 15px;
     margin : 50px 0px;
     overflow:hidden;
-    transition: none; /* transition 완전 제거 - 즉시 표시 */
+    transition: none !important; /* transition 완전 제거 - 즉시 표시 */
     position:relative;
 }
 .wrapper>main>section:nth-child(5)>.gallery-block>.item{
@@ -563,14 +563,19 @@ main>section:nth-child(4)>.bottom>.bottom-body{}
 
 /* 체크박스 체크 시 추가 이미지 표시 및 버튼 숨김 */
 .wrapper>main>section:nth-child(5) input[type="checkbox"]:checked~.gallery-block{
-   height:100%;
+   height: auto !important; /* 즉시 표시를 위해 auto 사용 */
+   min-height: 630px; /* 최소 높이 유지 */
+   transition: none !important; /* transition 완전 제거 */
    /* 이미지 로딩 최적화 */
    contain: layout style paint;
 }
 
 .wrapper>main>section:nth-child(5) input[type="checkbox"]:checked~.gallery-block>.item.item-04,
 .wrapper>main>section:nth-child(5) input[type="checkbox"]:checked~.gallery-block>.item.item-05 {
-    display: flex; /* 즉시 표시 (이미 렌더링되어 있음) */
+    display: flex !important; /* 즉시 표시 (이미 렌더링되어 있음) */
+    transition: none !important; /* transition 완전 제거 */
+    opacity: 1 !important; /* 즉시 표시 */
+    transform: none !important; /* transform 제거 */
 }
 
 /* 버튼 숨김 - 체크박스 체크 시 */
