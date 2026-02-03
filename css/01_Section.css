@@ -67,9 +67,6 @@
     background: #ffffff;
     background-image: url('../images/bg.png');
     background-repeat: repeat;
-    /* 균등한 물결 효과 SVG mask - 정확한 path 좌표 */
-    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 380 45' preserveAspectRatio='none'%3E%3Cpath d='M0,45 L0,35 Q47.5,35 47.5,40 T95,40 T142.5,40 T190,40 T237.5,40 T285,40 T332.5,40 T380,40 L380,45 Z' fill='%23000'/%3E%3C/svg%3E");
-    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 380 45' preserveAspectRatio='none'%3E%3Cpath d='M0,45 L0,35 Q47.5,35 47.5,40 T95,40 T142.5,40 T190,40 T237.5,40 T285,40 T332.5,40 T380,40 L380,45 Z' fill='%23000'/%3E%3C/svg%3E");
     mask-size: 100% 100%;
     -webkit-mask-size: 100% 100%;
     mask-repeat: no-repeat;
@@ -80,22 +77,49 @@
     pointer-events: none;
 }
 
-/* 일시 및 장소 정보 블록 */
+
+/* WAVE */
+.wrapper>main>section:nth-child(1){
+    position: relative;
+}
+.wrapper>main>section:nth-child(1) .wave-bottom1{
+    position: absolute;
+    left: 0;
+    top:70%;
+    width: 100%;
+    height: 100px; /* 물결의 높이 */
+    background: #ffffff; /* 기존 배경색과 동일 */
+    background-image: url('../images/bg.png'); /* 기존 종이 질감과 동일 */
+    background-repeat: repeat; /* 기존과 동일한 반복 */
+    
+    /* mask-image 또는 clip-path를 사용하여 곡선 생성 */
+    /* 간단한 구현을 위해 SVG 데이터 URL 사용 예시 */
+    mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="black" fill-opacity="1" d="M0,160L60,176C120,192,240,224,360,229.3C480,235,600,213,720,181.3C840,149,960,107,1080,101.3C1200,96,1320,128,1380,144L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>');
+    -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="black" fill-opacity="1" d="M0,160L60,176C120,192,240,224,360,229.3C480,235,600,213,720,181.3C840,149,960,107,1080,101.3C1200,96,1320,128,1380,144L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>');
+    mask-size: cover;
+    -webkit-mask-size: cover;
+    z-index: 2; /* 정보 블록(z-index: 4) 아래에 배치 */
+    pointer-events: none;
+}
+
+
+/* 일시 및 장소 정보 블록 - 물결 범위 안에서 정가운데 배치 */
 .wrapper>main>section:nth-child(1) .main_image_info_block{
     position: relative;
     width: 100%;
-    padding: 12px 20px 12px 20px; /* 위아래 여백만 최소화 */
-    background: #ffffff;
-    background-image: url('../images/bg.png');
+    padding: 0 20px; /* 좌우만 여백, 상하는 중앙 정렬을 위해 제거 */
+    background: #ffffff; /* 배경색 유지 */
+    background-image: url('../images/bg.png'); /* 종이 질감 유지 */
     background-repeat: repeat;
     text-align: center;
-    z-index: 2;
-    margin-top: -1px; /* 물결 효과와 자연스럽게 연결 */
+    z-index: 5; /* wave-bottom1(z-index: 2)와 물결 효과(z-index: 3) 위에 표시되도록 */
+    margin-top: -45px; /* 물결 높이(45px)만큼 올려서 물결 영역 안에 배치 */
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    top : -10px;
-   
+    justify-content: center; /* 수직 중앙 정렬 */
+    align-items: center; /* 수평 중앙 정렬 */
+    top:-30px;
+    min-height:120px;
 }
 
 .wrapper>main>section:nth-child(1) .main_image_info_date{
@@ -103,9 +127,12 @@
     font-size: 0.95rem;
     font-weight: 400;
     color: rgb(58, 58, 58);
-    line-height: 1.5;
-    margin-bottom: 4px;
+    line-height: 1.3; /* 줄 간격 조정 */
+    margin-bottom: 2px; /* 간격 축소 */
     letter-spacing: 0.02em;
+    position:relative;
+    z-index: 100;
+    margin-bottom:10px;
 }
 
 .wrapper>main>section:nth-child(1) .main_image_info_location{
@@ -113,9 +140,12 @@
     font-size: 1.1rem;
     font-weight: 500;
     color: rgb(58, 58, 58);
-    line-height: 1.5;
-    margin-bottom: 2px;
+    line-height: 1.3; /* 줄 간격 조정 */
+    margin-bottom: 1px; /* 간격 축소 */
     letter-spacing: 0.01em;
+    position:relative;
+    z-index: 100;
+    margin-bottom:10px;
 }
 
 .wrapper>main>section:nth-child(1) .main_image_info_address{
@@ -123,10 +153,13 @@
     font-size: 0.85rem;
     font-weight: 400;
     color: rgb(100, 100, 100);
-    line-height: 1.5;
+    line-height: 1.3; /* 줄 간격 조정 */
     letter-spacing: 0.01em;
     margin-bottom: 0; /* 기본 margin 제거 */
-    padding-bottom: 15px; /* 하단 네비바와의 간격 */
+    padding-bottom: 0; /* 정보 블록 padding으로 처리 */
+    position:relative;
+    z-index: 100;
+    margin-bottom:10px;
 }
 
 /* 첫 번째 이미지 그라데이션 - 넷플릭스 스타일: 상단에서 하단으로 깔끔한 페이드아웃 */
@@ -142,19 +175,20 @@
     z-index: 1;
 }
 
+
 /* HAPPY WEDDING DAY - 첫 이미지 좌측 상단 오버레이 */
 .wrapper>main>section:nth-child(1) .main_image_hero_text{
     position: absolute;
-    left: 1.0rem;
-    top: 1.25rem;
+    left: 0rem;
+    top: 0.25rem;
     z-index: 2;
     pointer-events: none;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 0.2rem;
-    max-width: calc(100% - 2.5rem);
-    min-width: 0;
+    max-width: calc(100% - 1.5rem);
+    padding : 0 10px;
 }
 .wrapper>main>section:nth-child(1) .main_image_hero_line{
     font-family: 'James Stroker', 'Brush Script MT', cursive;
@@ -172,11 +206,15 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     padding : 5px 0;
+    padding-top: 15px;
     margin : 5px 0;
+   
+    text-align: left;
+   
 }
 .wrapper>main>section:nth-child(1) .main_image_hero_line::first-letter{
     color: #f9d4c4;
-    font-size:5rem;
+    font-size:5.2rem;
 }
 .wrapper>main>section:nth-child(1).intro-completed{
     padding-bottom : 0;
