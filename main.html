@@ -1,176 +1,274 @@
 <!DOCTYPE html>
 <html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    
-    <!-- favicon -->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="icon" href="images/favicon.png">
 
-    <!-- Opengraph -->
-    <meta property="og:type" content="website" /> 
-    <meta property="og:site_name" content="SITENAME" />
-    <meta property="og:title" content="민형 ❤ 유정 결혼합니다." />
-    <meta property="og:description" content="2026년 3월 14일(토) 오후 03시 30분 웨딩그룹위더스 안양" />
-    <meta property="og:image" content="https://github.com/ALL-MY-PROJECTS-2026/WEDDING_20260314/blob/main/images/01_section.jpg?raw=true" />
-    <meta property="og:url" content="https://all-my-projects-2026.github.io/WEDDING_20260314/" />
-    
-    <!-- 첫 화면 이미지 preload (FCP 최적화) -->
-    <link rel="preload" href="./images/01_section.jpg" as="image" fetchpriority="high">
-    
-       
-    
-       
+  <!-- favicon -->
 
-    <title>민형 ❤ 유정 결혼합니다.</title>
+  <link rel="icon" href="images/favicon.png">
 
-    <!-- Critical CSS 인라인 (첫 화면 렌더링 최적화) -->
-    <style>
-      /* Material Symbols 기본 스타일 */
-      .material-symbols-outlined {
-        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-      }
-      /* 기본 레이아웃 - 첫 화면에 필수 */
-      *{box-sizing:border-box;position:relative;font-family:'Noto Sans KR',sans-serif;font-size:0.98rem;font-weight:400;color:rgb(58,58,58);}
-      body{width:23.75rem;margin:0 auto;background-color:#ffffff;padding-bottom:calc(56px + env(safe-area-inset-bottom,0));}
-      .wrapper{width:23.75rem;background-color:#ffffff;background-image:url('./images/bg.png');background-repeat:repeat;margin:0 auto;text-align:center;overflow:hidden;position:relative;}
-      .wrapper>header,.wrapper>main,.wrapper>footer{position:relative;z-index:1;}
-      .wrapper>main>section{position:relative;z-index:1;}
-      /* 첫 섹션 기본 스타일 */
-      .wrapper>main>section:nth-child(1){position:relative;padding:0;width:100%;min-height:100vh;min-height:100svh;}
-      .wrapper>main>section:nth-child(1) .main_image{position:relative;width:100%;height:100%;min-height:100vh;min-height:100svh;display:block;overflow:hidden;}
-      /* 스크롤 매직 기본 */
-      .back-to-position{opacity:0;transition:1.5s;position:relative;top:50px;transform:translateY(0px);}
-      .to-up .back-to-position{opacity:1;transform:translateY(-50px);}
-      /* 모바일 네비게이션 */
-      .mobile-nav-bar{z-index:2147483647!important;}
-    </style>
+  <!-- Opengraph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="SITENAME" />
+  <meta property="og:title" content="민형 ❤ 유정 결혼합니다." />
+  <meta property="og:description" content="2026년 3월 14일(토) 오후 03시 30분 웨딩그룹위더스 안양" />
+  <meta property="og:image"
+    content="https://github.com/ALL-MY-PROJECTS-2026/WEDDING_20260314/blob/main/images/01_section.jpg?raw=true" />
+  <meta property="og:url" content="https://all-my-projects-2026.github.io/WEDDING_20260314/" />
 
-    <!-- google icon - 지연 로드 -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"></noscript>
+  <!-- 첫 화면 이미지 preload (FCP 최적화) -->
+  <link rel="preload" href="./images/01_section.jpg" as="image" fetchpriority="high">
 
-    <!-- 폰트 preconnect 최적화 -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://hangeul.pstatic.net">
-    
-    <!-- google font (지연 로드) - Hi Melody 제거 (사용하지 않음) -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"></noscript>
-    
-    <!-- BS5 - 지연 로드 (모달에서만 사용) -->
-    <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"></noscript>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous" defer></script>
-    
-    <!-- Critical CSS - 즉시 로드 (첫 화면에 필수) -->
-    <link rel="stylesheet" href="./css/common.css">
-    <link rel="stylesheet" href="./css/00_Basic.css">
-    <link rel="stylesheet" href="./css/01_Section.css">
-    
-    <!-- 18_BottomSheet.css -->
-    <link rel="stylesheet" href="./css/18_BottomSheet.css">
-    <!-- Swiper - 지연 로드 (갤러리 모달에서만 사용) -->
-    <link rel="preload" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"></noscript>
-    
-  
-    <!-- 
+
+  <link rel="stylesheet" href="css/leaflet@1.3.3/leaflet.css" />
+  <!--STEP 3: 지도 영역 관련 CSS 추가하기 -->
+  <link rel="stylesheet" href="css/main.css" />
+  <!--STEP 2: JS 추가하기 -->
+  <!-- Download 방식 -->
+  <script src="js/leaflet@1.3.3/leaflet.js"></script>
+  <!-- Leaflet Plugins: Leaflet.KoreanTmsProviders 추가  -->
+  <script src="js/KoreanTmsProviders/lib/proj4.js"></script>
+  <script src="js/KoreanTmsProviders/lib/proj4leaflet.js"></script>
+  <script src="js/KoreanTmsProviders/src/Leaflet.KoreanTmsProviders.js"></script>
+
+
+  <title>민형 ❤ 유정 결혼합니다.</title>
+
+  <!-- Critical CSS 인라인 (첫 화면 렌더링 최적화) -->
+  <style>
+    /* Material Symbols 기본 스타일 */
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+
+    /* 기본 레이아웃 - 첫 화면에 필수 */
+    * {
+      box-sizing: border-box;
+      position: relative;
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 0.98rem;
+      font-weight: 400;
+      color: rgb(58, 58, 58);
+    }
+
+    body {
+      width: 23.75rem;
+      margin: 0 auto;
+      background-color: #ffffff;
+      padding-bottom: calc(56px + env(safe-area-inset-bottom, 0));
+    }
+
+    .wrapper {
+      width: 23.75rem;
+      background-color: #ffffff;
+      background-image: url('./images/bg.png');
+      background-repeat: repeat;
+      margin: 0 auto;
+      text-align: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .wrapper>header,
+    .wrapper>main,
+    .wrapper>footer {
+      position: relative;
+      z-index: 1;
+    }
+
+    .wrapper>main>section {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* 첫 섹션 기본 스타일 */
+    .wrapper>main>section:nth-child(1) {
+      position: relative;
+      padding: 0;
+      width: 100%;
+      min-height: 100vh;
+      min-height: 100svh;
+    }
+
+    .wrapper>main>section:nth-child(1) .main_image {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      min-height: 100vh;
+      min-height: 100svh;
+      display: block;
+      overflow: hidden;
+    }
+
+    /* 스크롤 매직 기본 */
+    .back-to-position {
+      opacity: 0;
+      transition: 1.5s;
+      position: relative;
+      top: 50px;
+      transform: translateY(0px);
+    }
+
+    .to-up .back-to-position {
+      opacity: 1;
+      transform: translateY(-50px);
+    }
+
+    /* 모바일 네비게이션 */
+    .mobile-nav-bar {
+      z-index: 2147483647 !important;
+    }
+  </style>
+
+  <!-- google icon - 지연 로드 -->
+  <link rel="preload"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+  </noscript>
+
+  <!-- 폰트 preconnect 최적화 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://hangeul.pstatic.net">
+
+  <!-- google font (지연 로드) - Hi Melody 제거 (사용하지 않음) -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" as="style"
+    onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap">
+  </noscript>
+
+  <!-- BS5 - 지연 로드 (모달에서만 사용) -->
+  <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" as="style"
+    onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  </noscript>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"
+    defer></script>
+
+  <!-- Critical CSS - 즉시 로드 (첫 화면에 필수) -->
+  <link rel="stylesheet" href="./css/common.css">
+  <link rel="stylesheet" href="./css/00_Basic.css">
+  <link rel="stylesheet" href="./css/01_Section.css">
+
+  <!-- 18_BottomSheet.css -->
+  <link rel="stylesheet" href="./css/18_BottomSheet.css">
+  <!-- Swiper - 지연 로드 (갤러리 모달에서만 사용) -->
+  <link rel="preload" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" as="style"
+    onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  </noscript>
+
+
+  <!-- 
       JS CDN
      -->
 
 
-    
-     <!-- SCROLL MAGIC - 지연 로드 (스크롤 애니메이션에 필요) -->
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js"
-     integrity="sha512-8E3KZoPoZCD+1dgfqhPbejQBnQfBXe8FuwL4z/c8sTrgeDMFEnoyTlH3obB4/fV+6Sg0a0XF+L/6xS4Xx1fUEg=="
-     crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
-    <!-- howler.js - 지연 로드 (오디오는 사용자 인터랙션 후 필요) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.1/howler.min.js" defer></script>  
-    
 
-
-    <!-- kakao map - 지연 로드 (지도 섹션에서만 필요) -->
-    <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=6effaf063a25826448e20f9b64ce23b6&libraries=services" charset="utf-8"></script>
-
-    <!-- 23 카카오 공유 SDK - 지연 로드 (공유 버튼 클릭 시 필요) -->
-    <script  src="https://developers.kakao.com/sdk/js/kakao.js" ></script>
+  <!-- SCROLL MAGIC - 지연 로드 (스크롤 애니메이션에 필요) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js"
+    integrity="sha512-8E3KZoPoZCD+1dgfqhPbejQBnQfBXe8FuwL4z/c8sTrgeDMFEnoyTlH3obB4/fV+6Sg0a0XF+L/6xS4Xx1fUEg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
+  <!-- howler.js - 지연 로드 (오디오는 사용자 인터랙션 후 필요) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.1/howler.min.js" defer></script>
 
 
 
+  <!-- kakao map - 지연 로드 (지도 섹션에서만 필요) -->
+  <script type="text/javascript"
+    src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=6effaf063a25826448e20f9b64ce23b6&libraries=services"
+    charset="utf-8"></script>
 
-     <!-- 
+  <!-- 23 카카오 공유 SDK - 지연 로드 (공유 버튼 클릭 시 필요) -->
+  <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+
+
+
+
+  <!-- 
       JS LOCAL
       -->
-    <!-- Common.js는 body 끝으로 이동하여 인라인화됨 -->
+  <!-- Common.js는 body 끝으로 이동하여 인라인화됨 -->
 
 
 
-  </head>
-  <body>
-    <div class="wrapper">
-      <header>
-        <div class="top-header"></div>
-        <nav>
-          <!-- <div>23 | 12 | 30</div>
+</head>
+
+<body>
+  <div class="wrapper">
+    <header>
+      <div class="top-header"></div>
+      <nav>
+        <!-- <div>23 | 12 | 30</div>
           <div>SATURDAY</div> -->
-        </nav>
-      </header>
-      <main>
+      </nav>
+    </header>
+    <main>
       <!-- ----------------------------- 
           01 
        ----------------------------- -->
-        <section>
-          <!-- VIDEO BLOCK -->
-          <div class="main_image">
-            <img src="./images/01_section.jpg" alt="" fetchpriority="high">
-            <video id="introVideo" muted loop playsinline webkit-playsinline preload="none" poster="./images/01_section.jpg">
-              <source src="https://mcard.fromtoday.co.kr/mcard/assets/flower_00.mp4" type="video/mp4">
-            </video>
-            <div class="main_image_gradient"></div>
-            <div class="main_image_hero_text" aria-hidden="true">
-              <span class="main_image_hero_line">Happy</span>
-              <span class="main_image_hero_line">Wedding</span>
-              <span class="main_image_hero_line">Day</span>
+      <section>
+        <!-- VIDEO BLOCK -->
+        <div class="main_image">
+          <img src="./images/01_section.jpg" alt="" fetchpriority="high">
+          <video id="introVideo" muted loop playsinline webkit-playsinline preload="none"
+            poster="./images/01_section.jpg">
+            <source src="https://mcard.fromtoday.co.kr/mcard/assets/flower_00.mp4" type="video/mp4">
+          </video>
+          <div class="main_image_gradient"></div>
+          <div class="main_image_hero_text" aria-hidden="true">
+            <span class="main_image_hero_line">Happy</span>
+            <span class="main_image_hero_line">Wedding</span>
+            <span class="main_image_hero_line">Day</span>
+          </div>
+          <div class="main_image_scroll_hint" aria-hidden="true">
+            <span class="main_image_scroll_icon"></span>
+            <span class="main_image_scroll_label">스크롤</span>
+          </div>
+          <div class="volumn_block volumn_block--overlay" style="display:none!important">
+            <input type="checkbox" id="volumn-chk" checked>
+            <div><label for="volumn-chk"><span class="material-symbols-outlined volumn_up">volume_up</span></label>
             </div>
-            <div class="main_image_scroll_hint" aria-hidden="true">
-              <span class="main_image_scroll_icon"></span>
-              <span class="main_image_scroll_label">스크롤</span>
-            </div>
-            <div class="volumn_block volumn_block--overlay" style="display:none!important">
-              <input type="checkbox" id="volumn-chk" checked>
-              <div><label for="volumn-chk"><span class="material-symbols-outlined volumn_up">volume_up</span></label></div>
-              <div><label for="volumn-chk"><span class="material-symbols-outlined volumn_off">volume_off</span></label></div>
+            <div><label for="volumn-chk"><span class="material-symbols-outlined volumn_off">volume_off</span></label>
             </div>
           </div>
+        </div>
       </section>
 
       <!-- ----------------------------- 
         02
        ----------------------------- -->
 
-       <section id="section-02" class="scroll-spy">  
-          <div class="contents back-to-position to-up scroll-spy">
-            <div class="sentence-01  back-to-position to-up">
-              두 사람이 꽃과 나무처럼 걸어와서<br>
-              서로의 모든 것이 되기 위해<br>
-              오랜 기다림 끝에 혼례식을 치르는 날<br>
-              세상은 더욱 아름다워라
-            </div>
-            <div class="sentence-02 back-to-position to-up">
-              이해인,&lt;사랑의 사람들이여&gt;
-            </div>
+      <section id="section-02" class="scroll-spy">
+        <div class="contents back-to-position to-up scroll-spy">
+          <div class="sentence-01  back-to-position to-up">
+            두 사람이 꽃과 나무처럼 걸어와서<br>
+            서로의 모든 것이 되기 위해<br>
+            오랜 기다림 끝에 혼례식을 치르는 날<br>
+            세상은 더욱 아름다워라
           </div>
+          <div class="sentence-02 back-to-position to-up">
+            이해인,&lt;사랑의 사람들이여&gt;
+          </div>
+        </div>
 
-       </section>
+      </section>
 
       <!-- ----------------------------- 
         03
        ----------------------------- -->
-       <section id="section-03" class="scroll-spy ">
+      <section id="section-03" class="scroll-spy ">
         <div class="contents back-to-position to-up">
           <div class="title">
             <div class="m-title">INVITATION</div>
@@ -182,14 +280,17 @@
               여기 곱고 예쁜 두 사람이 <span class="c-bold"><span style="color:#d28686">사랑</span></span>을 맺어<br>
               인생의 반려자가 되려 합니다.<br>
               새 인생을 시작하는 이 자리에 오셔서<br>
-              <span class="c-bold"><span style="color:#d28686">축복</span></span>해 주시면 감사하겠습니다.</div>
+              <span class="c-bold"><span style="color:#d28686">축복</span></span>해 주시면 감사하겠습니다.
+            </div>
           </div>
           <div class="image-block-01 back-to-position to-up">
             <img src="./images/03_section_01.jpg" alt="">
           </div>
-          <div class="sentence-02 back-to-position to-up"> 
-            <div><span style="position:relative"> 유병환<img src="images/flower_chrysanthemum.jpg" style="width:15px;"  > · 정현숙</span> 의 아들 <span> 민형</span></div>
-            <div><span style="position:relative"> 고성곤<img src="images/flower_chrysanthemum.jpg" style="width:15px;"  > · 사공미진</span> 의 딸   <span> 유정</span></div>
+          <div class="sentence-02 back-to-position to-up">
+            <div><span style="position:relative"> 유병환<img src="images/flower_chrysanthemum.jpg" style="width:15px;"> ·
+                정현숙</span> 의 아들 <span> 민형</span></div>
+            <div><span style="position:relative"> 고성곤<img src="images/flower_chrysanthemum.jpg" style="width:15px;"> ·
+                사공미진</span> 의 딸 <span> 유정</span></div>
           </div>
           <!-- <div class="btn-block back-to-position to-up">
               <button data-bs-toggle="modal" data-bs-target="#section_03_modal">
@@ -198,200 +299,259 @@
               </button>
           </div> -->
 
-        </div>   
-       </section>
+        </div>
+      </section>
 
 
-       <!-- ----------------------------- 
+      <!-- ----------------------------- 
         04
        ----------------------------- -->
-       <section id="section-04" class="scroll-spy">
-          <div class="datetime-block  back-to-position to-up">
-            <div class="top-date">2026.03.15</div>
-            <div class="top-hours">토요일 오후 3시 30분</div>
-          </div>
-          <hr style="width:90%;margin:15px auto;" class="back-to-position to-up" >
-          <div class="calender  back-to-position to-up">
-            <table>
-              <tr>
-                <th class="rest-day ">일</th>
-                <th>월</th>
-                <th>화</th>
-                <th>수</th>
-                <th>목</th>
-                <th>금</th>
-                <th>토</th>
-              </tr>
-              <tr>
-                <td class="rest-day start-days" data-start="0"></td>
-                <td class="start-days s-1" data-start="1"></td>
-                <td class="start-days s-2" data-start="2"></td>
-                <td class="start-days s-3" data-start="3"></td>
-                <td class="start-days s-4" data-start="4"></td>
-                <td class="start-days s-5" data-start="5"></td>
-                <td class="start-days s-6" data-start="6"></td>
-              </tr>
-              <tr>
-                <td class="rest-day days"></td>
-                <td class="days"></td>
-                <td class="days"></td>
-                <td class="days"></td>
-                <td class="days"></td>
-                <td class="days"></td>
-                <td class="days"></td>
-              </tr>
-              <tr>
-                <td class="rest-day days"></td>
-                <td class="days"></td>
-                <td class="days"></td>
-                <td class="days"></td>
-                <td class="days"></td>
-                <td class="days"></td>
-                <td class="days"></td>
-              </tr>
-              <tr>
-                <td class="rest-day days"></td>
-                <td class="days"></td>
-                <td class="days"></td>
-                <td class="days"></td>
-                <td class="days"></td>
-                <td class="days"></td>
-                <td class="days"></td>
-              </tr>
-              <tr>
-                <td class="rest-day days"></td>
-                <td class="days"></td>
-                <td class="days"></td>
-                <td class="days"></td>
-                <td class="days"></td>
-                <td class="days"></td>
-                <td class="days"></td>
-              </tr>
-              <tr>
-                <td class="rest-day days"></td>
-                <td class="days"></td>
-                <td class="days"></td>
-                <td class="days"></td>
-                <td class="days"></td>
-                <td class="days"></td>
-                <td class="days"></td>
-              </tr>
-            </table>
-          </div>      
-          <hr style="width:90%;margin:15px auto;" class="back-to-position to-up">
-          
-          <div class="bottom back-to-position to-up">
-            <div class="bottom-header">
-              <div class="day">
-                <span></span>
-              </div>
-              <div class="hours">
-                <span></span>
-              </div>
-              <div class="min">
-                <span></span>
-              </div>
-              <div class="sec">
-                <span></span>
-              </div>
+      <section id="section-04" class="scroll-spy">
+        <div class="datetime-block  back-to-position to-up">
+          <div class="top-date">2026.03.15</div>
+          <div class="top-hours">토요일 오후 3시 30분</div>
+        </div>
+        <hr style="width:90%;margin:15px auto;" class="back-to-position to-up">
+        <div class="calender  back-to-position to-up">
+          <table>
+            <tr>
+              <th class="rest-day ">일</th>
+              <th>월</th>
+              <th>화</th>
+              <th>수</th>
+              <th>목</th>
+              <th>금</th>
+              <th>토</th>
+            </tr>
+            <tr>
+              <td class="rest-day start-days" data-start="0"></td>
+              <td class="start-days s-1" data-start="1"></td>
+              <td class="start-days s-2" data-start="2"></td>
+              <td class="start-days s-3" data-start="3"></td>
+              <td class="start-days s-4" data-start="4"></td>
+              <td class="start-days s-5" data-start="5"></td>
+              <td class="start-days s-6" data-start="6"></td>
+            </tr>
+            <tr>
+              <td class="rest-day days"></td>
+              <td class="days"></td>
+              <td class="days"></td>
+              <td class="days"></td>
+              <td class="days"></td>
+              <td class="days"></td>
+              <td class="days"></td>
+            </tr>
+            <tr>
+              <td class="rest-day days"></td>
+              <td class="days"></td>
+              <td class="days"></td>
+              <td class="days"></td>
+              <td class="days"></td>
+              <td class="days"></td>
+              <td class="days"></td>
+            </tr>
+            <tr>
+              <td class="rest-day days"></td>
+              <td class="days"></td>
+              <td class="days"></td>
+              <td class="days"></td>
+              <td class="days"></td>
+              <td class="days"></td>
+              <td class="days"></td>
+            </tr>
+            <tr>
+              <td class="rest-day days"></td>
+              <td class="days"></td>
+              <td class="days"></td>
+              <td class="days"></td>
+              <td class="days"></td>
+              <td class="days"></td>
+              <td class="days"></td>
+            </tr>
+            <tr>
+              <td class="rest-day days"></td>
+              <td class="days"></td>
+              <td class="days"></td>
+              <td class="days"></td>
+              <td class="days"></td>
+              <td class="days"></td>
+              <td class="days"></td>
+            </tr>
+          </table>
+        </div>
+        <hr style="width:90%;margin:15px auto;" class="back-to-position to-up">
+
+        <div class="bottom back-to-position to-up">
+          <div class="bottom-header">
+            <div class="day">
+              <span></span>
             </div>
-            <div class=" bottom-body back-to-position to-up ">
-              <span class="day">민형 ❤ 유정의 결혼식이 <span style="color:red;"></span>일 남았습니다.</span>
+            <div class="hours">
+              <span></span>
+            </div>
+            <div class="min">
+              <span></span>
+            </div>
+            <div class="sec">
+              <span></span>
             </div>
           </div>
+          <div class=" bottom-body back-to-position to-up ">
+            <span class="day">민형 ❤ 유정의 결혼식이 <span style="color:red;"></span>일 남았습니다.</span>
+          </div>
+        </div>
 
-       </section>
+      </section>
 
-       
-        
-       <!-- ----------------------------- 
+
+
+      <!-- ----------------------------- 
         05
        ----------------------------- -->
-       <section id="section-05" class="scroll-spy" >
-          <div class="sub-title  back-to-position to-up"> GALLERY</div>
-          <div class="greeting-title  back-to-position to-up">갤러리</div>
-
-          
-          <!-- btn -->
-          <input type="checkbox" id="more-picture" />
-          <div class="gallery-block  back-to-position to-up">
-              <label for="more-picture" class="more-picture-btn-block ">   
-                  <span class="material-symbols-outlined">photo_camera</span>  
-                  <span>사진더보기</span>         
-              </label>
-              <!-- 이미지 로딩 중 스피너 -->
-              <div class="gallery-loading-spinner" id="galleryLoadingSpinner" style="display: none;">
-                <div class="spinner"></div>
-              </div>
+      <section id="section-05" class="scroll-spy">
+        <div class="sub-title  back-to-position to-up"> GALLERY</div>
+        <div class="greeting-title  back-to-position to-up">갤러리</div>
 
 
-            <div class="item item-01  back-to-position to-up">
-              <div class="left"> <img src="https://github.com/ALL-MY-PROJECTS-2026/WEDDING_20260314/blob/main/images/05_01.jpg?raw=true" alt="" class="gallery-img" role="button" tabindex="0" loading="eager"></div>
-              <div class="right">
-                <div> <img src="https://github.com/ALL-MY-PROJECTS-2026/WEDDING_20260314/blob/main/images/05_02.jpg?raw=true" alt="" class="gallery-img" role="button" tabindex="0" loading="lazy"></div>
-                <div> <img src="https://github.com/ALL-MY-PROJECTS-2026/WEDDING_20260314/blob/main/images/05_03.jpg?raw=true" alt="" class="gallery-img" role="button" tabindex="0" loading="lazy"></div>
-              </div>
+        <!-- btn -->
+        <input type="checkbox" id="more-picture" />
+        <div class="gallery-block  back-to-position to-up">
+          <label for="more-picture" class="more-picture-btn-block ">
+            <span class="material-symbols-outlined">photo_camera</span>
+            <span>사진더보기</span>
+          </label>
+          <!-- 이미지 로딩 중 스피너 -->
+          <div class="gallery-loading-spinner" id="galleryLoadingSpinner" style="display: none;">
+            <div class="spinner"></div>
+          </div>
+
+
+          <div class="item item-01  back-to-position to-up">
+            <div class="left"> <img
+                src="https://github.com/ALL-MY-PROJECTS-2026/WEDDING_20260314/blob/main/images/05_01.jpg?raw=true"
+                alt="" class="gallery-img" role="button" tabindex="0" loading="eager"></div>
+            <div class="right">
+              <div> <img
+                  src="https://github.com/ALL-MY-PROJECTS-2026/WEDDING_20260314/blob/main/images/05_02.jpg?raw=true"
+                  alt="" class="gallery-img" role="button" tabindex="0" loading="lazy"></div>
+              <div> <img
+                  src="https://github.com/ALL-MY-PROJECTS-2026/WEDDING_20260314/blob/main/images/05_03.jpg?raw=true"
+                  alt="" class="gallery-img" role="button" tabindex="0" loading="lazy"></div>
             </div>
-            <div class="item item-02  back-to-position to-up">
-              <div class="left">
-                <div> <img src="https://github.com/ALL-MY-PROJECTS-2026/WEDDING_20260314/blob/main/images/05_04.jpg?raw=true" alt="" class="gallery-img" role="button" tabindex="0" loading="lazy"></div>
-                <div> <img src="https://github.com/ALL-MY-PROJECTS-2026/WEDDING_20260314/blob/main/images/05_05.jpg?raw=true" alt="" class="gallery-img" role="button" tabindex="0" loading="lazy"></div>
-              </div>
-              <div class="right"> <img src="https://github.com/ALL-MY-PROJECTS-2026/WEDDING_20260314/blob/main/images/05_06.jpg?raw=true" alt="" class="gallery-img" role="button" tabindex="0" loading="lazy"></div>
+          </div>
+          <div class="item item-02  back-to-position to-up">
+            <div class="left">
+              <div> <img
+                  src="https://github.com/ALL-MY-PROJECTS-2026/WEDDING_20260314/blob/main/images/05_04.jpg?raw=true"
+                  alt="" class="gallery-img" role="button" tabindex="0" loading="lazy"></div>
+              <div> <img
+                  src="https://github.com/ALL-MY-PROJECTS-2026/WEDDING_20260314/blob/main/images/05_05.jpg?raw=true"
+                  alt="" class="gallery-img" role="button" tabindex="0" loading="lazy"></div>
             </div>
-            <div class="item item-03  back-to-position to-up">
-              <div class="left"> <img src="https://github.com/ALL-MY-PROJECTS-2026/WEDDING_20260314/blob/main/images/05_07.jpg?raw=true" alt="" class="gallery-img" role="button" tabindex="0" loading="lazy"></div>
-              <div class="right">
-                <div> <img src="https://github.com/ALL-MY-PROJECTS-2026/WEDDING_20260314/blob/main/images/05_08.jpg?raw=true" alt="" class="gallery-img" role="button" tabindex="0" loading="lazy"></div>
-                <div> <img src="https://github.com/ALL-MY-PROJECTS-2026/WEDDING_20260314/blob/main/images/05_09.jpg?raw=true" alt="" class="gallery-img" role="button" tabindex="0" loading="lazy"></div>
-              </div>
+            <div class="right"> <img
+                src="https://github.com/ALL-MY-PROJECTS-2026/WEDDING_20260314/blob/main/images/05_06.jpg?raw=true"
+                alt="" class="gallery-img" role="button" tabindex="0" loading="lazy"></div>
+          </div>
+          <div class="item item-03  back-to-position to-up">
+            <div class="left"> <img
+                src="https://github.com/ALL-MY-PROJECTS-2026/WEDDING_20260314/blob/main/images/05_07.jpg?raw=true"
+                alt="" class="gallery-img" role="button" tabindex="0" loading="lazy"></div>
+            <div class="right">
+              <div> <img
+                  src="https://github.com/ALL-MY-PROJECTS-2026/WEDDING_20260314/blob/main/images/05_08.jpg?raw=true"
+                  alt="" class="gallery-img" role="button" tabindex="0" loading="lazy"></div>
+              <div> <img
+                  src="https://github.com/ALL-MY-PROJECTS-2026/WEDDING_20260314/blob/main/images/05_09.jpg?raw=true"
+                  alt="" class="gallery-img" role="button" tabindex="0" loading="lazy"></div>
             </div>
-            <div class="item item-04  back-to-position to-up">
-              <div class="left"> <img src="https://github.com/ALL-MY-PROJECTS-2026/WEDDING_20260314/blob/main/images/05_10.jpg?raw=true" alt="" class="gallery-img" role="button" tabindex="0" loading="lazy"></div>
-              <div class="right"> <img src="https://github.com/ALL-MY-PROJECTS-2026/WEDDING_20260314/blob/main/images/05_11.jpg?raw=true" alt="" class="gallery-img" role="button" tabindex="0" loading="lazy"></div>
+          </div>
+          <div class="item item-04  back-to-position to-up">
+            <div class="left"> <img
+                src="https://github.com/ALL-MY-PROJECTS-2026/WEDDING_20260314/blob/main/images/05_10.jpg?raw=true"
+                alt="" class="gallery-img" role="button" tabindex="0" loading="lazy"></div>
+            <div class="right"> <img
+                src="https://github.com/ALL-MY-PROJECTS-2026/WEDDING_20260314/blob/main/images/05_11.jpg?raw=true"
+                alt="" class="gallery-img" role="button" tabindex="0" loading="lazy"></div>
+          </div>
+          <div class="item item-05  back-to-position to-up">
+            <div class="left">
+              <div> <img
+                  src="https://github.com/ALL-MY-PROJECTS-2026/WEDDING_20260314/blob/main/images/05_12.jpg?raw=true"
+                  alt="" class="gallery-img" role="button" tabindex="0" loading="lazy"></div>
+              <div> <img
+                  src="https://github.com/ALL-MY-PROJECTS-2026/WEDDING_20260314/blob/main/images/05_13.jpg?raw=true"
+                  alt="" class="gallery-img" role="button" tabindex="0" loading="lazy"></div>
             </div>
-            <div class="item item-05  back-to-position to-up">
-              <div class="left">
-                <div> <img src="https://github.com/ALL-MY-PROJECTS-2026/WEDDING_20260314/blob/main/images/05_12.jpg?raw=true" alt="" class="gallery-img" role="button" tabindex="0" loading="lazy"></div>
-                <div> <img src="https://github.com/ALL-MY-PROJECTS-2026/WEDDING_20260314/blob/main/images/05_13.jpg?raw=true" alt="" class="gallery-img" role="button" tabindex="0" loading="lazy"></div>
-              </div>
-              <div class="right  back-to-position to-up">
-                <div> <img src="https://github.com/ALL-MY-PROJECTS-2026/WEDDING_20260314/blob/main/images/05_14.jpg?raw=true" alt="" class="gallery-img" role="button" tabindex="0" loading="lazy"></div>
-                <div> <img src="https://github.com/ALL-MY-PROJECTS-2026/WEDDING_20260314/blob/main/images/05_15.jpg?raw=true" alt="" class="gallery-img" role="button" tabindex="0" loading="lazy"></div>
-              </div>
-              <div class="right  back-to-position to-up">
-                <div> <img src="https://github.com/ALL-MY-PROJECTS-2026/WEDDING_20260314/blob/main/images/05_16.jpg?raw=true" alt="" class="gallery-img" role="button" tabindex="0" loading="lazy"></div>
-                <div> <img src="https://github.com/ALL-MY-PROJECTS-2026/WEDDING_20260314/blob/main/images/05_17.jpg?raw=true" alt="" class="gallery-img" role="button" tabindex="0" loading="lazy"></div>
-              </div>
+            <div class="right  back-to-position to-up">
+              <div> <img
+                  src="https://github.com/ALL-MY-PROJECTS-2026/WEDDING_20260314/blob/main/images/05_14.jpg?raw=true"
+                  alt="" class="gallery-img" role="button" tabindex="0" loading="lazy"></div>
+              <div> <img
+                  src="https://github.com/ALL-MY-PROJECTS-2026/WEDDING_20260314/blob/main/images/05_15.jpg?raw=true"
+                  alt="" class="gallery-img" role="button" tabindex="0" loading="lazy"></div>
             </div>
-    
-          </div>    
+            <div class="right  back-to-position to-up">
+              <div> <img
+                  src="https://github.com/ALL-MY-PROJECTS-2026/WEDDING_20260314/blob/main/images/05_16.jpg?raw=true"
+                  alt="" class="gallery-img" role="button" tabindex="0" loading="lazy"></div>
+              <div> <img
+                  src="https://github.com/ALL-MY-PROJECTS-2026/WEDDING_20260314/blob/main/images/05_17.jpg?raw=true"
+                  alt="" class="gallery-img" role="button" tabindex="0" loading="lazy"></div>
+            </div>
+          </div>
+
+        </div>
       </section>
 
       <!-- ----------------------------- 
         06
-       ----------------------------- -->      
-       <section id="section-06" class="scroll-spy usemap" >
+       ----------------------------- -->
+      <section id="section-06" class="scroll-spy usemap">
         <div class="title-01  back-to-position to-up">LOCATION</div>
         <div class="title-02  back-to-position to-up">오시는 길</div>
         <div class="location  back-to-position to-up">웨딩그룹위더스 안양</div>
         <div class="address  back-to-position to-up">경기도 안양시 만안구 안양로 104</div>
         <div class="map  back-to-position to-up">
-            <div id="map" style="width:100%;height:100%;"></div>
+          <div id="map" style="width:100%;height:100%;"></div>
+          <script>
+            // 네이버 지도에서 확인한 정확한 좌표 (place ID: 34585318)
+            // 네이버 지도 기준: 37.3929, 126.9267
+            // 더 정확한 좌표를 위해 네이버 지도에서 확인한 값 사용
+            var address = "경기도 안양시 만안구 안양로 104";
+            var markerTitle = "웨딩그룹위더스 안양";
+            
+            // 네이버 지도에서 확인한 정확한 좌표 (WGS84)
+            // 네이버 지도 place ID 34585318 기준 좌표
+            var accurateLat = 37.384550;
+            var accurateLng = 126.933999;
+            
+            var map = new L.Map('map', {
+              center: new L.LatLng(accurateLat, accurateLng), //웨딩그룹위더스 안양 중심좌표
+              zoom: 10,	//Leaflet.KoreanTmsProviders.js : resolutions기준 줌 레벨(Level 12)
+              crs: L.Proj.CRS.Daum, //Leaflet.KoreanTmsProviders.js : 새로 정의된 Daum Map CRS
+              worldCopyJump: false,  //https://leafletjs.com/reference-1.3.2.html#map-worldcopyjump 참조    
+            });
+            var baseLayers = L.tileLayer.koreaProvider('DaumMap.Street').addTo(map);
+
+            // 웨딩그룹위더스 안양 마커 추가 (네이버 지도 기준 정확한 좌표 사용)
+            var marker = L.marker([accurateLat, accurateLng]).addTo(map);
+            marker.bindPopup('<div class="map-marker">' + markerTitle + '</div>').openPopup();
+
+          </script>
         </div>
         <div class="map-nav  back-to-position to-up">
-            <div class="naver">
-                <a href="https://map.naver.com/v5/search/웨딩그룹위더스%20안양" target="_blank"> 
-                  <img src="https://mcard.fromtoday.co.kr/mcard/assets/images/icon_navermap_w48.png" alt="" >
-                  네이버지도
-                </a>
-            </div>
-            <div class="kakao">
-              <a href="https://map.kakao.com/link/search/웨딩그룹위더스%20안양" target="_blank">
-                <img src="https://mcard.fromtoday.co.kr/mcard/assets/images/icon_kakaonavi_w48.png" alt="" >
-                카카오내비
-              </a>
-            </div>
+          <div class="naver">
+            <a href="https://map.naver.com/v5/search/웨딩그룹위더스%20안양" target="_blank">
+              <img src="https://mcard.fromtoday.co.kr/mcard/assets/images/icon_navermap_w48.png" alt="">
+              네이버지도
+            </a>
+          </div>
+          <div class="kakao">
+            <a href="https://map.kakao.com/link/search/웨딩그룹위더스%20안양" target="_blank">
+              <img src="https://mcard.fromtoday.co.kr/mcard/assets/images/icon_kakaonavi_w48.png" alt="">
+              카카오내비
+            </a>
+          </div>
         </div>
 
         <div class="info  back-to-position to-up">
@@ -426,70 +586,70 @@
             </div>
           </div>
         </div>
-       </section>
+      </section>
 
 
       <!-- ----------------------------- 
         07
-       ----------------------------- -->  
-       <section id="section-07" class="scroll-spy" >
+       ----------------------------- -->
+      <section id="section-07" class="scroll-spy">
         <div class="title01  back-to-position to-up">INFORMATION</div>
         <div class="title02  back-to-position to-up">예식정보 및 안내사항</div>
 
         <div class="info-block  back-to-position to-up">
-            <!-- 버튼 -->
-            <input type="radio" name="selectone" id="one" checked>
-            <input type="radio" name="selectone" id="two">
-            <input type="radio" name="selectone" id="three">          
+          <!-- 버튼 -->
+          <input type="radio" name="selectone" id="one" checked>
+          <input type="radio" name="selectone" id="two">
+          <input type="radio" name="selectone" id="three">
           <ul>
-            <li class="menu01"><label for="one" >포토부스</label></li>
-            <li class="menu02"><label for="two" >식사안내</label></li>
+            <li class="menu01"><label for="one">포토부스</label></li>
+            <li class="menu02"><label for="two">식사안내</label></li>
             <li class="menu03"><label for="three">주차안내</label></li>
           </ul>
           <div class="show-block one  back-to-position to-up">
-              <div class="image-block">
-                <img src="./images/07_01.jpg" alt="" loading="lazy">
-              </div>
-              <div>
-                  포토부스가 설치될 예정입니다.<br>
-                  귀한 발걸음 해주신 여러분의<br>
-                  환한 미소와 따뜻한 말씀 남겨주시면<br>
-                  소중히 간직하도록 하겠습니다.<br>
-              </div>
+            <div class="image-block">
+              <img src="./images/07_01.jpg" alt="" loading="lazy">
+            </div>
+            <div>
+              포토부스가 설치될 예정입니다.<br>
+              귀한 발걸음 해주신 여러분의<br>
+              환한 미소와 따뜻한 말씀 남겨주시면<br>
+              소중히 간직하도록 하겠습니다.<br>
+            </div>
           </div>
           <div class="show-block two  back-to-position to-up">
             <div class="image-block">
               <span class="material-symbols-outlined">restaurant</span>
             </div>
-              <div>
-                웨딩홀 식사 및 뷔페정보입니다 <br>
-                웨딩홀 식사 및 뷔페정보입니다 <br>
-                <br>
-              
-                웨딩홀 식사 및 뷔페정보입니다
-                웨딩홀 식사 및 뷔페정보입니다
-                웨딩홀 식사 및 뷔페정보입니다
-              </div>
+            <div>
+              웨딩홀 식사 및 뷔페정보입니다 <br>
+              웨딩홀 식사 및 뷔페정보입니다 <br>
+              <br>
+
+              웨딩홀 식사 및 뷔페정보입니다
+              웨딩홀 식사 및 뷔페정보입니다
+              웨딩홀 식사 및 뷔페정보입니다
+            </div>
           </div>
           <div class="show-block three  back-to-position to-up">
             <div class="image-block">
               <span class="material-symbols-outlined">local_parking</span>
             </div>
-              <div>
-                주차 정보가 표시되는 부분입니다  <br>
-                주차 정보가 표시되는 부분입니다  <br>
-                <br>
-                주차 정보가 표시되는 부분입니다  <br>
-                주차 정보가 표시되는 부분입니다  <br>
-                주차 정보가 표시되는 부분입니다  <br>
-              </div>
+            <div>
+              주차 정보가 표시되는 부분입니다 <br>
+              주차 정보가 표시되는 부분입니다 <br>
+              <br>
+              주차 정보가 표시되는 부분입니다 <br>
+              주차 정보가 표시되는 부분입니다 <br>
+              주차 정보가 표시되는 부분입니다 <br>
+            </div>
           </div>
         </div>
 
-       </section>
+      </section>
 
 
-       <!-- ----------------------------- 
+      <!-- ----------------------------- 
         10    letter-spacing: 2px;  
       margin-bottom:10px;
       color : rgb(194, 178, 178);
@@ -497,59 +657,61 @@
       letter-spacing: 3px;
       height:20px;
       text-align: center;
-       ----------------------------- -->       
-       <section id="section-10" class="scroll-spy account">
+       ----------------------------- -->
+      <section id="section-10" class="scroll-spy account">
         <div class="contents  back-to-position to-up">
-          <div class="title01  back-to-position to-up"
-            style="
+          <div class="title01  back-to-position to-up" style="
             letter-spacing: 2px;  
             margin-bottom:10px;
             color : rgb(194, 178, 178);
             font-size : 11.4872px;
             letter-spacing: 3px;
             height:20px;
-            text-align: center;"
-          >ACCOUNTS</div>
+            text-align: center;">ACCOUNTS</div>
           <div class="title02  back-to-position to-up">마음 전하실 곳</div>
         </div>
-        
+
         <div class="accordion back-to-position to-up" id="accordionExample">
-           <!-- 신랑 -->
+          <!-- 신랑 -->
           <div class="accordion-item ">
-            <h2 class="accordion-header" id="headingOne" >
-              <button class="accordion-button collapsed"  type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" >
+            <h2 class="accordion-header" id="headingOne">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                 <div>
                   <span class="sentences">신랑측 계좌번호</span>
-                </div>  
+                </div>
               </button>
             </h2>
-            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+              data-bs-parent="#accordionExample">
               <div class="accordion-body">
                 <div>
-                    <div class="account">
-                      <div class="left">
-                        <span >신한은행</span>
-                        <span class="account-number">110-259-239657</span>
-                      </div>
-                      <div class="right">
-                        <a href="javascript:void(0)">복사</a>
-                      </div>
+                  <div class="account">
+                    <div class="left">
+                      <span>신한은행</span>
+                      <span class="account-number">110-259-239657</span>
                     </div>
-                    <div class="name">민형</div>
+                    <div class="right">
+                      <a href="javascript:void(0)">복사</a>
+                    </div>
+                  </div>
+                  <div class="name">민형</div>
                 </div>
               </div>
             </div>
           </div>
           <!-- 신부 -->
-          <div class="accordion-item" >
+          <div class="accordion-item">
             <h2 class="accordion-header" id="headingTwo">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                 <div>
-                  <span  class="sentences">신부측 계좌번호</span>
-                </div> 
+                  <span class="sentences">신부측 계좌번호</span>
+                </div>
               </button>
             </h2>
-            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+              data-bs-parent="#accordionExample">
               <div class="accordion-body">
                 <div>
                   <div class="account">
@@ -565,1360 +727,1242 @@
                 </div>
               </div>
             </div>
-          </div>    
+          </div>
 
         </div>
 
-       </section>
+      </section>
 
-      </main>
+    </main>
 
-      <footer>
-          <div class="header">
-            <img src="./images/12_01_F.jpg" alt="" loading="lazy">
-            <span>
-                응원하고 격려해주신 모든 분들께 감사드리며<br/>
-                행복하게 잘 살겠습니다.<br/>
-            </span>
-          </div>
-          <div class="bg"></div>
-
-          <div class="body">
-            <div>
-              <a href="javascript:void(0)">
-                <span class="material-symbols-outlined">mode_comment</span>
-                <span class="kakao-share">카카오톡 공유하기</span>
-              </a>
-            </div>
-            <div>
-              <a href="javascript:void(0)">
-                <span class="material-symbols-outlined">attach_file</span>
-                <span class="url-copy">링크주소 공유하기</span>
-
-              </a>
-            </div>
-          </div>
-          <div class="bottom">
-            <span>Copyright 2026 <span>WEDDING_PROJECT_BY_JUNGWOOGYUN</span> All right reserved.</span>
-          </div>
-      </footer>
-
-    </div>
-
-    <!-- 하단 네비게이션 바 - wrapper 밖으로 이동하여 항상 최상단 표시 -->
-    <nav class="mobile-nav-bar">
-      <label for="volumn-chk" class="mobile-nav-bar__item mobile-nav-bar__item--speaker">
-        <span class="material-symbols-outlined nav-speaker-on">volume_up</span>
-        <span class="material-symbols-outlined nav-speaker-off">volume_off</span>
-      </label>
-      <a href="javascript:void(0)" class="mobile-nav-bar__item mobile-nav-bar__item--menu">
-        <span class="material-symbols-outlined">menu</span>
-      </a>
-      <a href="javascript:void(0)" class="mobile-nav-bar__item mobile-nav-bar__item--share url-copy">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path stroke="currentColor" stroke-width="1" d="M8.68439 10.6578L15.3125 7.34375M15.3156 16.6578L8.6938 13.3469M21 6C21 7.65685 19.6569 9 18 9C16.3431 9 15 7.65685 15 6C15 4.34315 16.3431 3 18 3C19.6569 3 21 4.34315 21 6ZM9 12C9 13.6569 7.65685 15 6 15C4.34315 15 3 13.6569 3 12C3 10.3431 4.34315 9 6 9C7.65685 9 9 10.3431 9 12ZM21 18C21 19.6569 19.6569 21 18 21C16.3431 21 15 19.6569 15 18C15 16.3431 16.3431 15 18 15C19.6569 15 21 16.3431 21 18Z"/>
-        </svg>
-      </a>
-    </nav>
-
-    <!-- 바텀시트 - 퀵메뉴 -->
-    <div class="bottom-sheet" id="quickMenuBottomSheet">
-      <div class="bottom-sheet__backdrop" id="quickMenuBackdrop"></div>
-      <div class="bottom-sheet__content">
-        <div class="bottom-sheet__handle"></div>
-        <div class="bottom-sheet__title">메뉴</div>
-        <ul class="bottom-sheet__menu">
-          <li><a href="#section-01" class="bottom-sheet__link">메인화면</a></li>
-          <li><a href="#section-03" class="bottom-sheet__link">초대합니다</a></li>
-          <li><a href="#section-04" class="bottom-sheet__link">날짜 안내</a></li>
-          <li><a href="#section-05" class="bottom-sheet__link">갤러리</a></li>
-          <li><a href="#section-06" class="bottom-sheet__link">오시는 길</a></li>
-          <li><a href="#section-07" class="bottom-sheet__link">예식정보</a></li>
-          <li><a href="#section-10" class="bottom-sheet__link">마음 전하실 곳</a></li>
-          <li><a href="javascript:void(0)" class="bottom-sheet__link"></a></li>
-
-        </ul>
+    <footer>
+      <div class="header">
+        <img src="./images/12_01_F.jpg" alt="" loading="lazy">
+        <span>
+          응원하고 격려해주신 모든 분들께 감사드리며<br />
+          행복하게 잘 살겠습니다.<br />
+        </span>
       </div>
-        </div>
+      <div class="bg"></div>
 
-    <!-- ============================================
+      <div class="body">
+        <div>
+          <a href="javascript:void(0)">
+            <span class="material-symbols-outlined">mode_comment</span>
+            <span class="kakao-share">카카오톡 공유하기</span>
+          </a>
+        </div>
+        <div>
+          <a href="javascript:void(0)">
+            <span class="material-symbols-outlined">attach_file</span>
+            <span class="url-copy">링크주소 공유하기</span>
+
+          </a>
+        </div>
+      </div>
+      <div class="bottom">
+        <span>Copyright 2026 <span>WEDDING_PROJECT_BY_JUNGWOOGYUN</span> All right reserved.</span>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- 하단 네비게이션 바 - wrapper 밖으로 이동하여 항상 최상단 표시 -->
+  <nav class="mobile-nav-bar">
+    <label for="volumn-chk" class="mobile-nav-bar__item mobile-nav-bar__item--speaker">
+      <span class="material-symbols-outlined nav-speaker-on">volume_up</span>
+      <span class="material-symbols-outlined nav-speaker-off">volume_off</span>
+    </label>
+    <a href="javascript:void(0)" class="mobile-nav-bar__item mobile-nav-bar__item--menu">
+      <span class="material-symbols-outlined">menu</span>
+    </a>
+    <a href="javascript:void(0)" class="mobile-nav-bar__item mobile-nav-bar__item--share url-copy">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path stroke="currentColor" stroke-width="1"
+          d="M8.68439 10.6578L15.3125 7.34375M15.3156 16.6578L8.6938 13.3469M21 6C21 7.65685 19.6569 9 18 9C16.3431 9 15 7.65685 15 6C15 4.34315 16.3431 3 18 3C19.6569 3 21 4.34315 21 6ZM9 12C9 13.6569 7.65685 15 6 15C4.34315 15 3 13.6569 3 12C3 10.3431 4.34315 9 6 9C7.65685 9 9 10.3431 9 12ZM21 18C21 19.6569 19.6569 21 18 21C16.3431 21 15 19.6569 15 18C15 16.3431 16.3431 15 18 15C19.6569 15 21 16.3431 21 18Z" />
+      </svg>
+    </a>
+  </nav>
+
+  <!-- 바텀시트 - 퀵메뉴 -->
+  <div class="bottom-sheet" id="quickMenuBottomSheet">
+    <div class="bottom-sheet__backdrop" id="quickMenuBackdrop"></div>
+    <div class="bottom-sheet__content">
+      <div class="bottom-sheet__handle"></div>
+      <div class="bottom-sheet__title">메뉴</div>
+      <ul class="bottom-sheet__menu">
+        <li><a href="#section-01" class="bottom-sheet__link">메인화면</a></li>
+        <li><a href="#section-03" class="bottom-sheet__link">초대합니다</a></li>
+        <li><a href="#section-04" class="bottom-sheet__link">날짜 안내</a></li>
+        <li><a href="#section-05" class="bottom-sheet__link">갤러리</a></li>
+        <li><a href="#section-06" class="bottom-sheet__link">오시는 길</a></li>
+        <li><a href="#section-07" class="bottom-sheet__link">예식정보</a></li>
+        <li><a href="#section-10" class="bottom-sheet__link">마음 전하실 곳</a></li>
+        <li><a href="javascript:void(0)" class="bottom-sheet__link"></a></li>
+
+      </ul>
+    </div>
+  </div>
+
+  <!-- ============================================
          JavaScript 파일 - 직접 실행
          ============================================ -->
-    
-    <!-- ScrollMagic 애니메이션 - common.js에서 인라인화 -->
-    <script>
-// ============================================
-// common.js - ScrollMagic 애니메이션
-// ============================================
-(function() {
-    function initScrollMagic() {
+
+  <!-- ScrollMagic 애니메이션 - common.js에서 인라인화 -->
+  <script>
+    // ============================================
+    // common.js - ScrollMagic 애니메이션
+    // ============================================
+    (function () {
+      function initScrollMagic() {
         // ScrollMagic이 로드되었는지 확인
         if (typeof ScrollMagic === 'undefined') {
-            setTimeout(initScrollMagic, 100);
-            return;
+          setTimeout(initScrollMagic, 100);
+          return;
         }
-        
+
         // DOM이 준비되었는지 확인
         var spyEls = document.querySelectorAll('section.scroll-spy');
         if (!spyEls || spyEls.length === 0) {
-            setTimeout(initScrollMagic, 100);
-            return;
+          setTimeout(initScrollMagic, 100);
+          return;
         }
-        
+
         // ScrollMagic Controller 생성 (전역으로 하나만 생성하여 성능 최적화)
         var controller = new ScrollMagic.Controller();
-        
+
         // 모바일 감지 (스크롤 최적화를 위해)
-        var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
-                      (window.innerWidth <= 768);
-        
+        var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+          (window.innerWidth <= 768);
+
         // 쓰로틀링을 위한 변수
         var lastScrollTime = 0;
         var scrollThrottle = isMobile ? 100 : 50; // 모바일은 100ms, 데스크톱은 50ms
-        
+
         // NodeList를 배열로 변환하여 forEach 사용
-        Array.from(spyEls).forEach(function(spyEl){   
-            // 갤러리 섹션은 더 일찍 트리거되도록 설정 (빈 화면 지연 방지)
-            var isGallerySection = spyEl.id === 'section-05';
-            var triggerHookValue = isGallerySection ? 0.5 : 0.8; // 갤러리는 0.5, 나머지는 0.8
-            
-            // 스크롤매직이벤트처리 객체
-            var scene = new ScrollMagic.Scene({
-                    triggerElement : spyEl, //감시할 요소 선택
-                    triggerHook : triggerHookValue //스크린에서의 스크롤 위치
-                })
-            .setClassToggle(spyEl,'to-up');
-            
-            // 갤러리 섹션은 한 번 렌더링되면 유지 (reverse: false)
-            // 다른 섹션은 기존대로 토글 동작
-            if (isGallerySection) {
-                scene.reverse(false); // 한 번만 트리거, 다시 제거하지 않음
-            }
-            
-            // 모바일에서 ScrollMagic 이벤트 쓰로틀링 적용
-            if (isMobile && isGallerySection) {
-                scene.on('enter', function() {
-                    var now = Date.now();
-                    if (now - lastScrollTime < scrollThrottle) {
-                        return; // 쓰로틀링으로 스킵
-                    }
-                    lastScrollTime = now;
-                });
-            }
-            
-            scene.addTo(controller);   
+        Array.from(spyEls).forEach(function (spyEl) {
+          // 갤러리 섹션은 더 일찍 트리거되도록 설정 (빈 화면 지연 방지)
+          var isGallerySection = spyEl.id === 'section-05';
+          var triggerHookValue = isGallerySection ? 0.5 : 0.8; // 갤러리는 0.5, 나머지는 0.8
+
+          // 스크롤매직이벤트처리 객체
+          var scene = new ScrollMagic.Scene({
+            triggerElement: spyEl, //감시할 요소 선택
+            triggerHook: triggerHookValue //스크린에서의 스크롤 위치
+          })
+            .setClassToggle(spyEl, 'to-up');
+
+          // 갤러리 섹션은 한 번 렌더링되면 유지 (reverse: false)
+          // 다른 섹션은 기존대로 토글 동작
+          if (isGallerySection) {
+            scene.reverse(false); // 한 번만 트리거, 다시 제거하지 않음
+          }
+
+          // 모바일에서 ScrollMagic 이벤트 쓰로틀링 적용
+          if (isMobile && isGallerySection) {
+            scene.on('enter', function () {
+              var now = Date.now();
+              if (now - lastScrollTime < scrollThrottle) {
+                return; // 쓰로틀링으로 스킵
+              }
+              lastScrollTime = now;
+            });
+          }
+
+          scene.addTo(controller);
         });
-    }
-    
-    // DOM 로드 완료 후 초기화
-    if (document.readyState === 'loading') {
+      }
+
+      // DOM 로드 완료 후 초기화
+      if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initScrollMagic);
-    } else {
+      } else {
         initScrollMagic();
-    }
-})();
-    </script>
+      }
+    })();
+  </script>
 
-    <!-- 섹션별 스크립트 -->
-    <!-- 18_JS_01Section(live-server 로 확인할것 CORS문제..) - 인라인화 -->
-    <script>
-// ============================================
-// 18_Section_Bg_Audio.js - 배경 음악
-// ============================================
-// howler.js(오디오 자동재생 - live-server로 확인)
-// file:// 프로토콜에서는 Howl 객체 생성 자체를 하지 않음 (CORS 오류 방지)
-let bgSound = null;
+  <!-- 섹션별 스크립트 -->
+  <!-- 18_JS_01Section(live-server 로 확인할것 CORS문제..) - 인라인화 -->
+  <script>
+    // ============================================
+    // 18_Section_Bg_Audio.js - 배경 음악
+    // ============================================
+    // howler.js(오디오 자동재생 - live-server로 확인)
+    // file:// 프로토콜에서는 Howl 객체 생성 자체를 하지 않음 (CORS 오류 방지)
+    let bgSound = null;
 
-function initAudio() {
-    // Howler.js가 로드되었는지 확인
-    if (typeof Howl === 'undefined') {
+    function initAudio() {
+      // Howler.js가 로드되었는지 확인
+      if (typeof Howl === 'undefined') {
         setTimeout(initAudio, 100);
         return;
-    }
-    
-    // DOM이 준비되었는지 확인
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', function() {
-            setTimeout(initAudio, 100);
+      }
+
+      // DOM이 준비되었는지 확인
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function () {
+          setTimeout(initAudio, 100);
         });
         return;
-    }
-    
-    if (window.location.protocol !== 'file:') {
+      }
+
+      if (window.location.protocol !== 'file:') {
         bgSound = new Howl({
-            src: ['./audio/wedding.mp3'],
-            volume: 0.3, // 0-1 범위로 수정 (3.0 → 0.3)
-            loop: true,
-            onloaderror: function(id, error) {
-                // 오디오 로드 실패 시 조용히 처리 (CORS 문제 등)
-            },
-            onplayerror: function(id, error) {
-                // 오디오 재생 실패 시 조용히 처리
-                if (bgSound) {
-                    bgSound.once('unlock', function() {
-                        bgSound.play();
-                    });
-                }
+          src: ['./audio/wedding.mp3'],
+          volume: 0.3, // 0-1 범위로 수정 (3.0 → 0.3)
+          loop: true,
+          onloaderror: function (id, error) {
+            // 오디오 로드 실패 시 조용히 처리 (CORS 문제 등)
+          },
+          onplayerror: function (id, error) {
+            // 오디오 재생 실패 시 조용히 처리
+            if (bgSound) {
+              bgSound.once('unlock', function () {
+                bgSound.play();
+              });
             }
+          }
         });
-        
+
         // 자동 재생 시도
         bgSound.play();
-    }
-    
-    // 아이콘 클릭시 배경음악 재생여부
-    const volumnChkEl = document.querySelector('#volumn-chk');
-    var navSpeaker = document.querySelector('.mobile-nav-bar__item--speaker');
-    
-    function updateNavSpeaker() {
+      }
+
+      // 아이콘 클릭시 배경음악 재생여부
+      const volumnChkEl = document.querySelector('#volumn-chk');
+      var navSpeaker = document.querySelector('.mobile-nav-bar__item--speaker');
+
+      function updateNavSpeaker() {
         if (navSpeaker && volumnChkEl) {
-            // 명확하게 클래스 추가/제거 (toggle 대신)
-            if (volumnChkEl.checked) {
-                navSpeaker.classList.remove('is-muted');
-            } else {
-                navSpeaker.classList.add('is-muted');
-            }
+          // 명확하게 클래스 추가/제거 (toggle 대신)
+          if (volumnChkEl.checked) {
+            navSpeaker.classList.remove('is-muted');
+          } else {
+            navSpeaker.classList.add('is-muted');
+          }
         }
-    }
-    
-    // 체크박스 change 이벤트
-    if (volumnChkEl) {
-        volumnChkEl.addEventListener("change", function(e){
-            if (bgSound) {
-                if(volumnChkEl.checked){
-                    bgSound.play(); 
-                } else {
-                    bgSound.stop(); 
-                }
+      }
+
+      // 체크박스 change 이벤트
+      if (volumnChkEl) {
+        volumnChkEl.addEventListener("change", function (e) {
+          if (bgSound) {
+            if (volumnChkEl.checked) {
+              bgSound.play();
+            } else {
+              bgSound.stop();
             }
-            updateNavSpeaker();
+          }
+          updateNavSpeaker();
         });
         // 초기 상태 설정
         updateNavSpeaker();
-    }
-    
-    // 하단 네비게이션 바 스피커 아이콘 클릭 이벤트 (직접 처리)
-    if (navSpeaker && volumnChkEl) {
-        navSpeaker.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            // 체크박스 토글
-            volumnChkEl.checked = !volumnChkEl.checked;
-            
-            // change 이벤트를 수동으로 트리거하여 일관성 유지
-            var changeEvent = new Event('change', { bubbles: true });
-            volumnChkEl.dispatchEvent(changeEvent);
+      }
+
+      // 하단 네비게이션 바 스피커 아이콘 클릭 이벤트 (직접 처리)
+      if (navSpeaker && volumnChkEl) {
+        navSpeaker.addEventListener('click', function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+
+          // 체크박스 토글
+          volumnChkEl.checked = !volumnChkEl.checked;
+
+          // change 이벤트를 수동으로 트리거하여 일관성 유지
+          var changeEvent = new Event('change', { bubbles: true });
+          volumnChkEl.dispatchEvent(changeEvent);
         });
-    }
-}
-
-// 초기화 시작
-initAudio();
-    </script>
-    
-    <!-- 19_JS_06Section_Map - 지연 로드 (지도 섹션에서만 필요) - 인라인화 -->
-    <script>
-// ============================================
-// 19_JS_06Section_Map.js - 지도 초기화
-// ============================================
-const createMap = (address, markerTitle) => {
-    var mapContainer = document.getElementById('map');
-    if (!mapContainer) return;
-
-    var mapOption = {
-        center: new kakao.maps.LatLng(37.3929, 126.9267), // 안양 중심좌표
-        level: 3
-    };
-
-    var map = new kakao.maps.Map(mapContainer, mapOption);
-    map.setDraggable(false);
-
-    var geocoder = new kakao.maps.services.Geocoder();
-    geocoder.addressSearch(address, function(result, status) {
-        if (status === kakao.maps.services.Status.OK) {
-            var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-            var marker = new kakao.maps.Marker({ map: map, position: coords });
-            var infowindow = new kakao.maps.InfoWindow({
-                content: '<div class="map-marker">' + markerTitle + '</div>'
-            });
-            infowindow.open(map, marker);
-            map.setCenter(coords);
-        }
-    });
-
-    return map;
-};
-
-// 카카오맵 SDK 로드 후 초기화 + 스크롤 시 relayout
-function initMap() {
-    // Kakao Maps SDK 로드 확인 (더 강화된 체크)
-    if (typeof kakao === 'undefined' || typeof kakao.maps === 'undefined' || !kakao.maps.Map) {
-        setTimeout(initMap, 100);
-        return;
-    }
-    
-    var mapContainer = document.getElementById('map');
-    if (!mapContainer) {
-        setTimeout(initMap, 100);
-        return;
-    }
-    
-    var mapSection = document.querySelector('.wrapper>main>section.usemap');
-    if (!mapSection) {
-        setTimeout(initMap, 100);
-        return;
-    }
-    
-    // 지도 초기화
-    var map = createMap("경기도 안양시 만안구 안양로 104", "웨딩그룹위더스 안양");
-    if (!map) {
-        // 초기화 실패 시 재시도
-        setTimeout(initMap, 200);
-        return;
+      }
     }
 
-    // relayout 함수
-    var relayoutMap = function() {
-        try {
-            if (map && typeof map.relayout === 'function') {
-                map.relayout();
-            }
-        } catch(e) {
-            // relayout 실패 시 무시
-        }
-    };
-    
-    // 지도 초기화 직후 즉시 relayout (지도가 숨겨져 있을 때를 대비)
-    setTimeout(relayoutMap, 100);
-    setTimeout(relayoutMap, 300);
-    setTimeout(relayoutMap, 500);
-    
-    // 지도 섹션이 보일 때 relayout (IntersectionObserver 사용)
-    if (typeof IntersectionObserver !== 'undefined') {
-        var observer = new IntersectionObserver(function(entries) {
-            entries.forEach(function(entry) {
-                if (entry.isIntersecting) {
-                    // 지도가 보이면 relayout (여러 번 호출)
-                    setTimeout(relayoutMap, 50);
-                    setTimeout(relayoutMap, 200);
-                    setTimeout(relayoutMap, 400);
-                }
-            });
-        }, { threshold: 0.1, rootMargin: '100px' });
-        observer.observe(mapSection);
-        
-        // 이미 보이는 상태면 즉시 relayout
-        var rect = mapSection.getBoundingClientRect();
-        var mapParent = mapContainer.closest('.map');
-        var parentStyle = window.getComputedStyle(mapParent);
-        var isVisible = rect.top < window.innerHeight && rect.bottom > 0 && 
-                       parseFloat(parentStyle.opacity) > 0 &&
-                       parentStyle.display !== 'none';
-        
-        if (isVisible) {
-            setTimeout(relayoutMap, 200);
-            setTimeout(relayoutMap, 500);
-        }
-    } else {
-        // IntersectionObserver 미지원 시 폴백
-        setTimeout(relayoutMap, 500);
-        setTimeout(relayoutMap, 1000);
-    }
-    
-    // 윈도우 리사이즈 시 relayout
-    var resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(relayoutMap, 100);
-    });
-}
+    // 초기화 시작
+    initAudio();
+  </script>
 
-// DOM 로드 완료 후 초기화 시도
-function startMapInit() {
-    // DOM이 준비되었는지 확인
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', function() {
-            setTimeout(initMap, 100);
-        });
-    } else {
-        // DOM이 이미 로드된 경우
-        setTimeout(initMap, 100);
-    }
-}
-
-// 스크립트 로드 시 즉시 시작
-startMapInit();
-    </script>
-    
-    <!-- 20_JS_04Section_DDay - 지연 로드 - 인라인화 -->
-    <script>
-// ============================================
-// 20_JS_04Section_DDay.js - D-Day 계산
-// ============================================
-const wedding_date = new Date("2026-03-14");
-const wedding_hours = "오후 03시 30분";
-
-// CALENDAR FUNCTION 
-const cal_calender = (wedding_date,time)=>{
-   
-    var d_day = wedding_date.getDate();
-    var yoil = wedding_date.getDay();
-    var calendarYear = wedding_date.getFullYear();          // 달력 연도
-    var calendarMonth = wedding_date.getMonth() + 1;        // 달력 월 
-    var calendarToday = wedding_date.getDate();             // 달력 일
-    
-    //마지막 일자 구하기
-    var monthLastDate = new Date(2022, calendarMonth-1, 0).getDate();
-    //날짜를 기준으로 월의 시작 요일 구하기
-    var monthStartDay = new Date(calendarYear, calendarMonth-1, 1);
-    
-    var calendarMonthStartDay = monthStartDay.getDay(); // 달력 월의 시작 요일
-
-    //01SECTION 헤더 YYYY/MM/DD 랜더링
-    const Section01topDateEl = document.querySelector('.wrapper nav>div:nth-child(1)')
-    if(Section01topDateEl){
-    Section01topDateEl.innerHTML = calendarYear+" <span style=font-size:1.5rem>/</span> ";
-    if(calendarMonth<10)
-    Section01topDateEl.innerHTML += "0"+calendarMonth+" <span style=font-size:1.5rem>/</span> ";
-    else
-    Section01topDateEl.innerHTML += calendarMonth+" <span style=font-size:1.5rem>/</span> ";
-
-    if(d_day<10)
-    Section01topDateEl.innerHTML += "0"+d_day;
-    else
-    Section01topDateEl.innerHTML += d_day;   
-    }
-
-    ///01SECTION 헤더 요일 랜더링
-    const yoilEl = document.querySelector('.wrapper nav>div:nth-child(2)')
-    if(yoilEl){
-    if(yoil==0)
-        yoilEl.innerHTML = 'SUNDAY';
-    else if(yoil==1)
-        yoilEl.innerHTML = 'MONDAY';
-    else if(yoil==2)
-        yoilEl.innerHTML = 'TUESDAY';
-    else if(yoil==3)
-        yoilEl.innerHTML = 'WEDNESDAY';
-    else if(yoil==4)
-        yoilEl.innerHTML = 'THURSDAY';
-    else if(yoil==5)
-        yoilEl.innerHTML = 'FRIDAY';
-    else if(yoil==6)
-        yoilEl.innerHTML = 'SATURDAY';
-    }
-
-    ///01SECTION DATETIME에 연월일 요일 랜더링
-    const section01DatetimeEl = document.querySelector('.wrapper>main>section:nth-child(1) .datetime');
-    if(section01DatetimeEl){
-    section01DatetimeEl.innerHTML = calendarYear+" 년 ";
-    if(calendarMonth<10)
-    section01DatetimeEl.innerHTML += "0"+calendarMonth+" 월 ";
-    else
-    section01DatetimeEl.innerHTML += calendarMonth+" 월 ";
-
-    if(d_day<10)
-    section01DatetimeEl.innerHTML += "0"+d_day+" 일 ";
-    else
-    section01DatetimeEl.innerHTML += d_day +" 일 ";   
-    }
-
-    const section01HoursEl = document.querySelector('.wrapper>main>section:nth-child(1) .bottom .hours');
-    if(section01HoursEl) section01HoursEl.innerHTML= time;
-
-
-    //화면에 달력 랜더링
-
-
-    //-------------------
-    // TOP-DATE
-    //-------------------
-    const topDateEl = document.querySelector('.wrapper>main>section:nth-child(4) .top-date')
-    topDateEl.innerHTML = calendarYear+".";
-    if(calendarMonth<10)
-        topDateEl.innerHTML += "0"+calendarMonth+".";
-    else
-        topDateEl.innerHTML += calendarMonth+".";
-
-    if(d_day<10)
-        topDateEl.innerHTML += "0"+d_day;
-    else
-        topDateEl.innerHTML += d_day;
-        
-
-    //-------------------
-    // TOP-HOURS
-    //-------------------
-    const topHoursEl = document.querySelector('.wrapper>main>section:nth-child(4) .top-hours')
-    if(yoil==0)
-        topHoursEl.innerHTML = '일요일 ' +time;
-    else if(yoil==1)
-        topHoursEl.innerHTML = '월요일 ' +time;
-    else if(yoil==2)
-        topHoursEl.innerHTML = '화요일 ' +time;
-    else if(yoil==3)
-        topHoursEl.innerHTML = '수요일 ' +time;
-    else if(yoil==4)
-        topHoursEl.innerHTML = '목요일 ' +time;
-    else if(yoil==5)
-        topHoursEl.innerHTML = '금요일 ' +time;
-    else if(yoil==6)
-        topHoursEl.innerHTML = '토요일 ' +time;
-    
-    //-------------------
-    // TABLE BODY 
-    //-------------------
-    let day=1;
-    //FirstRow
-    const tdStartEls =  document.querySelectorAll(".wrapper>main>section:nth-child(4) table td.start-days");
-    tdStartEls.forEach(tdEl=>{    
-       const start_no =  tdEl.getAttribute('data-start');
-        if(start_no>=calendarMonthStartDay)
-            tdEl.innerHTML=(day++);
-    })
-    //EtcRow
-    const tdEtcEls =  document.querySelectorAll(".wrapper>main>section:nth-child(4) table td.days");
-    tdEtcEls.forEach(tdEl=>{    
-      
-        if(day<=monthLastDate)
-            tdEl.innerHTML=day;
-    
-        day++;
-    })   
-    // D-DAY 표시(classname : d-day)
-    const tdEls =  document.querySelectorAll(".wrapper>main>section:nth-child(4) table td");
-    tdEls.forEach(tdEl=>{
-        if(tdEl.innerHTML==d_day)
-        tdEl.classList.add('d-day');
-    })
-    
-    
-    
-}
-
-
-cal_calender(wedding_date, wedding_hours);
+  <!-- 19_JS_06Section_Map - 지연 로드 (지도 섹션에서만 필요) - 인라인화 -->
+  <script>
+    // ============================================
+    // 19_JS_06Section_Map.js - 지도 초기화
+    // ============================================
 
 
 
-// D DAY FUNCTION
-const dayEls = document.querySelectorAll('.wrapper>main>section:nth-child(4) .bottom .day>span');
-const hoursEl = document.querySelector('.wrapper>main>section:nth-child(4) .bottom .hours>span');
-const minEl = document.querySelector('.wrapper>main>section:nth-child(4) .bottom .min>span');
-const secEl = document.querySelector('.wrapper>main>section:nth-child(4) .bottom .sec>span');
 
-const d_day_func = (weddingDate)=>{
 
-    const todayTime = new Date();
-    
-    const diff = weddingDate - todayTime;
 
-    let diffDay = Math.floor(diff / (1000*60*60*24));
-    let diffHour = Math.floor((diff / (1000*60*60)) % 24);
-    let diffMin = Math.floor((diff / (1000*60)) % 60);
-    let diffSec = Math.floor(diff / 1000 % 60);
+  </script>
 
-    // D-DAY 랜더링 
-    dayEls.forEach(dayEl=>{
-        if(diffDay<10)
-            dayEl.innerHTML = "0"+diffDay;
+  <!-- 20_JS_04Section_DDay - 지연 로드 - 인라인화 -->
+  <script>
+    // ============================================
+    // 20_JS_04Section_DDay.js - D-Day 계산
+    // ============================================
+    const wedding_date = new Date("2026-03-14");
+    const wedding_hours = "오후 03시 30분";
+
+    // CALENDAR FUNCTION 
+    const cal_calender = (wedding_date, time) => {
+
+      var d_day = wedding_date.getDate();
+      var yoil = wedding_date.getDay();
+      var calendarYear = wedding_date.getFullYear();          // 달력 연도
+      var calendarMonth = wedding_date.getMonth() + 1;        // 달력 월 
+      var calendarToday = wedding_date.getDate();             // 달력 일
+
+      //마지막 일자 구하기
+      var monthLastDate = new Date(2022, calendarMonth - 1, 0).getDate();
+      //날짜를 기준으로 월의 시작 요일 구하기
+      var monthStartDay = new Date(calendarYear, calendarMonth - 1, 1);
+
+      var calendarMonthStartDay = monthStartDay.getDay(); // 달력 월의 시작 요일
+
+      //01SECTION 헤더 YYYY/MM/DD 랜더링
+      const Section01topDateEl = document.querySelector('.wrapper nav>div:nth-child(1)')
+      if (Section01topDateEl) {
+        Section01topDateEl.innerHTML = calendarYear + " <span style=font-size:1.5rem>/</span> ";
+        if (calendarMonth < 10)
+          Section01topDateEl.innerHTML += "0" + calendarMonth + " <span style=font-size:1.5rem>/</span> ";
         else
-            dayEl.innerHTML = diffDay;
-    })
+          Section01topDateEl.innerHTML += calendarMonth + " <span style=font-size:1.5rem>/</span> ";
+
+        if (d_day < 10)
+          Section01topDateEl.innerHTML += "0" + d_day;
+        else
+          Section01topDateEl.innerHTML += d_day;
+      }
+
+      ///01SECTION 헤더 요일 랜더링
+      const yoilEl = document.querySelector('.wrapper nav>div:nth-child(2)')
+      if (yoilEl) {
+        if (yoil == 0)
+          yoilEl.innerHTML = 'SUNDAY';
+        else if (yoil == 1)
+          yoilEl.innerHTML = 'MONDAY';
+        else if (yoil == 2)
+          yoilEl.innerHTML = 'TUESDAY';
+        else if (yoil == 3)
+          yoilEl.innerHTML = 'WEDNESDAY';
+        else if (yoil == 4)
+          yoilEl.innerHTML = 'THURSDAY';
+        else if (yoil == 5)
+          yoilEl.innerHTML = 'FRIDAY';
+        else if (yoil == 6)
+          yoilEl.innerHTML = 'SATURDAY';
+      }
+
+      ///01SECTION DATETIME에 연월일 요일 랜더링
+      const section01DatetimeEl = document.querySelector('.wrapper>main>section:nth-child(1) .datetime');
+      if (section01DatetimeEl) {
+        section01DatetimeEl.innerHTML = calendarYear + " 년 ";
+        if (calendarMonth < 10)
+          section01DatetimeEl.innerHTML += "0" + calendarMonth + " 월 ";
+        else
+          section01DatetimeEl.innerHTML += calendarMonth + " 월 ";
+
+        if (d_day < 10)
+          section01DatetimeEl.innerHTML += "0" + d_day + " 일 ";
+        else
+          section01DatetimeEl.innerHTML += d_day + " 일 ";
+      }
+
+      const section01HoursEl = document.querySelector('.wrapper>main>section:nth-child(1) .bottom .hours');
+      if (section01HoursEl) section01HoursEl.innerHTML = time;
 
 
-    if(diffHour<10)
-        diffHour="0"+diffHour;
-    hoursEl.innerHTML = diffHour;
-
-    if(diffMin<10)
-        diffMin="0"+diffMin;
-    minEl.innerHTML = diffMin;
-    if(diffSec<10)
-        diffSec="0"+ diffSec;
-    
-        secEl.innerHTML = diffSec;
+      //화면에 달력 랜더링
 
 
-}
+      //-------------------
+      // TOP-DATE
+      //-------------------
+      const topDateEl = document.querySelector('.wrapper>main>section:nth-child(4) .top-date')
+      topDateEl.innerHTML = calendarYear + ".";
+      if (calendarMonth < 10)
+        topDateEl.innerHTML += "0" + calendarMonth + ".";
+      else
+        topDateEl.innerHTML += calendarMonth + ".";
 
-// DDAY 최초실행
-d_day_func(wedding_date);
+      if (d_day < 10)
+        topDateEl.innerHTML += "0" + d_day;
+      else
+        topDateEl.innerHTML += d_day;
 
-//D Day 반복 비동기
-setInterval(function(){
+
+      //-------------------
+      // TOP-HOURS
+      //-------------------
+      const topHoursEl = document.querySelector('.wrapper>main>section:nth-child(4) .top-hours')
+      if (yoil == 0)
+        topHoursEl.innerHTML = '일요일 ' + time;
+      else if (yoil == 1)
+        topHoursEl.innerHTML = '월요일 ' + time;
+      else if (yoil == 2)
+        topHoursEl.innerHTML = '화요일 ' + time;
+      else if (yoil == 3)
+        topHoursEl.innerHTML = '수요일 ' + time;
+      else if (yoil == 4)
+        topHoursEl.innerHTML = '목요일 ' + time;
+      else if (yoil == 5)
+        topHoursEl.innerHTML = '금요일 ' + time;
+      else if (yoil == 6)
+        topHoursEl.innerHTML = '토요일 ' + time;
+
+      //-------------------
+      // TABLE BODY 
+      //-------------------
+      let day = 1;
+      //FirstRow
+      const tdStartEls = document.querySelectorAll(".wrapper>main>section:nth-child(4) table td.start-days");
+      tdStartEls.forEach(tdEl => {
+        const start_no = tdEl.getAttribute('data-start');
+        if (start_no >= calendarMonthStartDay)
+          tdEl.innerHTML = (day++);
+      })
+      //EtcRow
+      const tdEtcEls = document.querySelectorAll(".wrapper>main>section:nth-child(4) table td.days");
+      tdEtcEls.forEach(tdEl => {
+
+        if (day <= monthLastDate)
+          tdEl.innerHTML = day;
+
+        day++;
+      })
+      // D-DAY 표시(classname : d-day)
+      const tdEls = document.querySelectorAll(".wrapper>main>section:nth-child(4) table td");
+      tdEls.forEach(tdEl => {
+        if (tdEl.innerHTML == d_day)
+          tdEl.classList.add('d-day');
+      })
+
+
+
+    }
+
+
+    cal_calender(wedding_date, wedding_hours);
+
+
+
+    // D DAY FUNCTION
+    const dayEls = document.querySelectorAll('.wrapper>main>section:nth-child(4) .bottom .day>span');
+    const hoursEl = document.querySelector('.wrapper>main>section:nth-child(4) .bottom .hours>span');
+    const minEl = document.querySelector('.wrapper>main>section:nth-child(4) .bottom .min>span');
+    const secEl = document.querySelector('.wrapper>main>section:nth-child(4) .bottom .sec>span');
+
+    const d_day_func = (weddingDate) => {
+
+      const todayTime = new Date();
+
+      const diff = weddingDate - todayTime;
+
+      let diffDay = Math.floor(diff / (1000 * 60 * 60 * 24));
+      let diffHour = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      let diffMin = Math.floor((diff / (1000 * 60)) % 60);
+      let diffSec = Math.floor(diff / 1000 % 60);
+
+      // D-DAY 랜더링 
+      dayEls.forEach(dayEl => {
+        if (diffDay < 10)
+          dayEl.innerHTML = "0" + diffDay;
+        else
+          dayEl.innerHTML = diffDay;
+      })
+
+
+      if (diffHour < 10)
+        diffHour = "0" + diffHour;
+      hoursEl.innerHTML = diffHour;
+
+      if (diffMin < 10)
+        diffMin = "0" + diffMin;
+      minEl.innerHTML = diffMin;
+      if (diffSec < 10)
+        diffSec = "0" + diffSec;
+
+      secEl.innerHTML = diffSec;
+
+
+    }
+
+    // DDAY 최초실행
     d_day_func(wedding_date);
-},1000)
-    </script>
-    
-    <!-- 21_JS_10Section_Clipboard_Copy - 지연 로드 (계좌번호 복사) - 인라인화 -->
-    <script>
-// ============================================
-// 21_JS_10Section_Clipboard_Copy.js - 클립보드 복사
-// ============================================
-const accordionAEls = document.querySelectorAll(".accordion .right a");
+
+    //D Day 반복 비동기
+    setInterval(function () {
+      d_day_func(wedding_date);
+    }, 1000)
+  </script>
+
+  <!-- 21_JS_10Section_Clipboard_Copy - 지연 로드 (계좌번호 복사) - 인라인화 -->
+  <script>
+    // ============================================
+    // 21_JS_10Section_Clipboard_Copy.js - 클립보드 복사
+    // ============================================
+    const accordionAEls = document.querySelectorAll(".accordion .right a");
 
 
-accordionAEls.forEach(item=>{
+    accordionAEls.forEach(item => {
 
-    item.addEventListener('click',function(){
+      item.addEventListener('click', function () {
         console.log(item);
-        const leftBlockEl =  item.parentNode.parentNode;
-        const accountNumber =  item.parentNode.parentNode.querySelector('.account-number').innerHTML;
+        const leftBlockEl = item.parentNode.parentNode;
+        const accountNumber = item.parentNode.parentNode.querySelector('.account-number').innerHTML;
         console.log(accountNumber);
         //클립보드에 복사
-         window.navigator.clipboard.writeText(accountNumber) ;
+        window.navigator.clipboard.writeText(accountNumber);
 
 
+      })
     })
-})
-    </script>
-    
-    <!-- 23_JS_Footer_카톡공유_링크복사 - 지연 로드 (하단에서만 필요) - 인라인화 -->
-    <script>
-// ============================================
-// 23_JS_Footer_카톡공유_링크복사.js - 카톡 공유 및 링크 복사
-// ============================================
-// 카톡공유(https://developers.kakao.com/docs/latest/ko/message/js-link#default-template-msg-custom)
+  </script>
 
-  // SDK를 초기화 합니다. 사용할 앱의 JavaScript 키를 설정해 주세요.
-  Kakao.init('69f997d9b7dfb3972e5c6ca96e84a293');
+  <!-- 23_JS_Footer_카톡공유_링크복사 - 지연 로드 (하단에서만 필요) - 인라인화 -->
+  <script>
+    // ============================================
+    // 23_JS_Footer_카톡공유_링크복사.js - 카톡 공유 및 링크 복사
+    // ============================================
+    // 카톡공유(https://developers.kakao.com/docs/latest/ko/message/js-link#default-template-msg-custom)
 
-  // SDK 초기화 여부를 판단합니다.
+    // SDK를 초기화 합니다. 사용할 앱의 JavaScript 키를 설정해 주세요.
+    Kakao.init('69f997d9b7dfb3972e5c6ca96e84a293');
 
-const kakaoShareEls = document.querySelectorAll('.kakao-share');
-kakaoShareEls.forEach(function(kakaoShare){
-    if (!kakaoShare) return;
-    kakaoShare.addEventListener('click',function(){
+    // SDK 초기화 여부를 판단합니다.
 
-    // 직접 버튼 사용하는 메시지 탬플릿(위치)
-    Kakao.Share.sendDefault({
-        objectType: 'location',
-        address: '경기도 안양시 만안구 안양로 104',
-        addressTitle: '웨딩그룹위더스 안양',
-        content: {
-          title: '민형 ❤️ 유정 결혼합니다',
-          description: '',
-          imageUrl: "https://edu-embadded-curriculum.github.io/02_SCREEN_IMPL_WEDDING.github.io/images/01_section.jpg",
-          link: {
-            mobileWebUrl: window.location.href,
-            webUrl: window.location.href,
-          },
-        },
+    const kakaoShareEls = document.querySelectorAll('.kakao-share');
+    kakaoShareEls.forEach(function (kakaoShare) {
+      if (!kakaoShare) return;
+      kakaoShare.addEventListener('click', function () {
 
-        buttons: [
-          {
-            title: '자세히 보기',
+        // 직접 버튼 사용하는 메시지 탬플릿(위치)
+        Kakao.Share.sendDefault({
+          objectType: 'location',
+          address: '경기도 안양시 만안구 안양로 104',
+          addressTitle: '웨딩그룹위더스 안양',
+          content: {
+            title: '민형 ❤️ 유정 결혼합니다',
+            description: '',
+            imageUrl: "https://edu-embadded-curriculum.github.io/02_SCREEN_IMPL_WEDDING.github.io/images/01_section.jpg",
             link: {
               mobileWebUrl: window.location.href,
               webUrl: window.location.href,
             },
           },
-        ],
+
+          buttons: [
+            {
+              title: '자세히 보기',
+              link: {
+                mobileWebUrl: window.location.href,
+                webUrl: window.location.href,
+              },
+            },
+          ],
+        });
+
       });
-
     });
-});
 
 
-// 링크공유
-document.querySelectorAll('.url-copy').forEach(function(urlCopy){
-    urlCopy.addEventListener('click',function(){
-         window.navigator.clipboard.writeText(window.location.href); ;
+    // 링크공유
+    document.querySelectorAll('.url-copy').forEach(function (urlCopy) {
+      urlCopy.addEventListener('click', function () {
+        window.navigator.clipboard.writeText(window.location.href);;
+      });
     });
-});
-    </script>
+  </script>
 
-    <!-- 모달 관련 스크립트 -->
-    <!-- Swiper - 지연 로드 (갤러리 모달에서만 사용) -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <!-- 24_JS_05Section_갤러리_모달 - 인라인화 -->
-    <script>
-// ============================================
-// 24_JS_05Section_갤러리_모달.js - 갤러리 모달
-// ============================================
-(function () {
-  'use strict';
+  <!-- 모달 관련 스크립트 -->
+  <!-- Swiper - 지연 로드 (갤러리 모달에서만 사용) -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <!-- 24_JS_05Section_갤러리_모달 - 인라인화 -->
+  <script>
+    // ============================================
+    // 24_JS_05Section_갤러리_모달.js - 갤러리 모달
+    // ============================================
+    (function () {
+      'use strict';
 
-  function initGalleryModal() {
-    var galleryImages = document.querySelectorAll('.gallery-img');
-    var modalEl = document.getElementById('section_05_gallery_modal');
-    var wrapperEl = document.getElementById('gallerySwiperWrapper');
-    var galleryModal = null; // Modal 인스턴스 재사용
-    var gallerySwiper = null; // Swiper 인스턴스 재사용
-    var cachedSlidesHTML = null; // 슬라이드 HTML 캐싱
-    var isInitialized = false; // 초기화 여부
+      function initGalleryModal() {
+        var galleryImages = document.querySelectorAll('.gallery-img');
+        var modalEl = document.getElementById('section_05_gallery_modal');
+        var wrapperEl = document.getElementById('gallerySwiperWrapper');
+        var galleryModal = null; // Modal 인스턴스 재사용
+        var gallerySwiper = null; // Swiper 인스턴스 재사용
+        var cachedSlidesHTML = null; // 슬라이드 HTML 캐싱
+        var isInitialized = false; // 초기화 여부
 
-    // Bootstrap과 Swiper가 로드되었는지 확인
-    if (typeof bootstrap === 'undefined' || typeof Swiper === 'undefined') {
-      setTimeout(initGalleryModal, 100);
-      return;
-    }
+        // Bootstrap과 Swiper가 로드되었는지 확인
+        if (typeof bootstrap === 'undefined' || typeof Swiper === 'undefined') {
+          setTimeout(initGalleryModal, 100);
+          return;
+        }
 
-    if (!galleryImages.length || !modalEl || !wrapperEl) {
-      // DOM이 아직 준비되지 않았으면 재시도
+        if (!galleryImages.length || !modalEl || !wrapperEl) {
+          // DOM이 아직 준비되지 않았으면 재시도
+          if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initGalleryModal);
+          } else {
+            setTimeout(initGalleryModal, 100);
+          }
+          return;
+        }
+
+        function getImageSrcList() {
+          var list = [];
+          galleryImages.forEach(function (img) {
+            list.push(img.getAttribute('src'));
+          });
+          return list;
+        }
+
+        function buildSwiperSlides(srcList) {
+          // 캐시된 HTML이 있으면 재사용
+          if (cachedSlidesHTML) {
+            return cachedSlidesHTML;
+          }
+
+          // 첫 이미지만 eager, 나머지는 lazy로 최적화
+          var slidesHTML = srcList
+            .map(function (src, index) {
+              var loadingAttr = index === 0 ? 'loading="eager"' : 'loading="lazy"';
+              return (
+                '<div class="swiper-slide">' +
+                '<img src="' + src + '" alt="" ' + loadingAttr + '>' +
+                '</div>'
+              );
+            })
+            .join('');
+
+          // HTML 캐싱
+          cachedSlidesHTML = slidesHTML;
+          return slidesHTML;
+        }
+
+        function openGalleryModal(initialIndex) {
+          // Modal 인스턴스 재사용 (한 번만 생성)
+          if (!galleryModal) {
+            galleryModal = new bootstrap.Modal(modalEl, { backdrop: 'static', keyboard: false });
+          }
+
+          // 기존 Swiper가 있으면 제거 (innerHTML 재설정 전에)
+          if (gallerySwiper) {
+            gallerySwiper.destroy(true, true);
+            gallerySwiper = null;
+            isInitialized = false;
+          }
+
+          // 슬라이드 HTML 생성 (캐시 활용)
+          var srcList = getImageSrcList();
+          wrapperEl.innerHTML = buildSwiperSlides(srcList);
+
+          // 모달 표시
+          galleryModal.show();
+
+          // Swiper 초기화 (requestAnimationFrame 1회로 축소)
+          var initSwiper = function () {
+            try {
+              gallerySwiper = new Swiper('.gallery-swiper', {
+                initialSlide: initialIndex,
+                loop: true,
+                navigation: {
+                  nextEl: '.swiper-button-next',
+                  prevEl: '.swiper-button-prev',
+                },
+              });
+              isInitialized = true;
+            } catch (e) {
+              // Swiper 초기화 실패 시 shown.bs.modal 이벤트에서 재시도
+              modalEl.addEventListener('shown.bs.modal', function onShown() {
+                modalEl.removeEventListener('shown.bs.modal', onShown);
+                if (!gallerySwiper) {
+                  try {
+                    gallerySwiper = new Swiper('.gallery-swiper', {
+                      initialSlide: initialIndex,
+                      loop: true,
+                      navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                      },
+                    });
+                    isInitialized = true;
+                  } catch (e2) {
+                    // 재시도 실패 시 무시
+                  }
+                }
+              }, { once: true });
+            }
+          };
+
+          // requestAnimationFrame 1회만 사용 (즉시 실행)
+          requestAnimationFrame(initSwiper);
+        }
+
+        function handleClose() {
+          // 모달이 닫힐 때 Swiper 제거 (메모리 관리)
+          // 다음에 열 때 빠른 초기화를 위해 최소한의 정리만 수행
+          if (gallerySwiper) {
+            try {
+              gallerySwiper.destroy(true, true);
+            } catch (e) {
+              // destroy 실패 시 무시
+            }
+            gallerySwiper = null;
+            isInitialized = false;
+          }
+        }
+
+        // hide.bs.modal 이벤트에서 처리 시작 (더 빠른 반응)
+        modalEl.addEventListener('hide.bs.modal', function () {
+          // 모달이 닫히기 시작할 때 즉시 처리 (애니메이션 대기 없이)
+          // Swiper 정리를 미리 시작하여 닫기 지연 감소
+          if (gallerySwiper) {
+            try {
+              gallerySwiper.destroy(true, true);
+            } catch (e) {
+              // destroy 실패 시 무시
+            }
+            gallerySwiper = null;
+            isInitialized = false;
+          }
+        });
+
+        // hidden.bs.modal 이벤트는 최소한의 처리만 (이미 처리됨)
+        modalEl.addEventListener('hidden.bs.modal', handleClose);
+
+        galleryImages.forEach(function (img, index) {
+          img.addEventListener('click', function () {
+            openGalleryModal(index);
+          });
+          img.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              openGalleryModal(index);
+            }
+          });
+        });
+
+        // Swiper 사전 초기화는 제거 (모달이 보일 때만 초기화하는 것이 더 안전)
+        // 대신 모달 내 이미지만 사전 로드하여 모달 열 때 빠르게 표시
+      }
+
+      // DOM 로드 완료 후 초기화
       if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initGalleryModal);
       } else {
-        setTimeout(initGalleryModal, 100);
+        initGalleryModal();
       }
-      return;
-    }
+    })();
+  </script>
 
-    function getImageSrcList() {
-      var list = [];
-      galleryImages.forEach(function (img) {
-        list.push(img.getAttribute('src'));
-      });
-      return list;
-    }
+  <!-- 기타 유틸리티 스크립트 -->
+  <!-- 25_JS_BottomSheet - 인라인화 -->
+  <script>
+    // ============================================
+    // 25_JS_BottomSheet.js - 바텀시트
+    // ============================================
+    /**
+     * 바텀시트 - 메뉴 클릭 시 퀵메뉴 표시
+     */
+    (function () {
+      var bottomSheet = document.getElementById('quickMenuBottomSheet');
+      var backdrop = document.getElementById('quickMenuBackdrop');
+      var menuBtn = document.querySelector('.mobile-nav-bar__item--menu');
+      var quickLinks = document.querySelectorAll('.bottom-sheet__link');
 
-    function buildSwiperSlides(srcList) {
-      // 캐시된 HTML이 있으면 재사용
-      if (cachedSlidesHTML) {
-        return cachedSlidesHTML;
-      }
-      
-      // 첫 이미지만 eager, 나머지는 lazy로 최적화
-      var slidesHTML = srcList
-        .map(function (src, index) {
-          var loadingAttr = index === 0 ? 'loading="eager"' : 'loading="lazy"';
-          return (
-            '<div class="swiper-slide">' +
-            '<img src="' + src + '" alt="" ' + loadingAttr + '>' +
-            '</div>'
-          );
-        })
-        .join('');
-      
-      // HTML 캐싱
-      cachedSlidesHTML = slidesHTML;
-      return slidesHTML;
-    }
-
-    function openGalleryModal(initialIndex) {
-      // Modal 인스턴스 재사용 (한 번만 생성)
-      if (!galleryModal) {
-        galleryModal = new bootstrap.Modal(modalEl, { backdrop: 'static', keyboard: false });
-      }
-      
-      // 기존 Swiper가 있으면 제거 (innerHTML 재설정 전에)
-      if (gallerySwiper) {
-        gallerySwiper.destroy(true, true);
-        gallerySwiper = null;
-        isInitialized = false;
-      }
-      
-      // 슬라이드 HTML 생성 (캐시 활용)
-      var srcList = getImageSrcList();
-      wrapperEl.innerHTML = buildSwiperSlides(srcList);
-      
-      // 모달 표시
-      galleryModal.show();
-
-      // Swiper 초기화 (requestAnimationFrame 1회로 축소)
-      var initSwiper = function() {
-        try {
-          gallerySwiper = new Swiper('.gallery-swiper', {
-            initialSlide: initialIndex,
-            loop: true,
-            navigation: {
-              nextEl: '.swiper-button-next',
-              prevEl: '.swiper-button-prev',
-            },
-          });
-          isInitialized = true;
-        } catch (e) {
-          // Swiper 초기화 실패 시 shown.bs.modal 이벤트에서 재시도
-          modalEl.addEventListener('shown.bs.modal', function onShown() {
-            modalEl.removeEventListener('shown.bs.modal', onShown);
-            if (!gallerySwiper) {
-              try {
-                gallerySwiper = new Swiper('.gallery-swiper', {
-                  initialSlide: initialIndex,
-                  loop: true,
-                  navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev',
-                  },
-                });
-                isInitialized = true;
-              } catch (e2) {
-                // 재시도 실패 시 무시
-              }
-            }
-          }, { once: true });
-        }
-      };
-      
-      // requestAnimationFrame 1회만 사용 (즉시 실행)
-      requestAnimationFrame(initSwiper);
-    }
-
-    function handleClose() {
-      // 모달이 닫힐 때 Swiper 제거 (메모리 관리)
-      // 다음에 열 때 빠른 초기화를 위해 최소한의 정리만 수행
-      if (gallerySwiper) {
-        try {
-          gallerySwiper.destroy(true, true);
-        } catch (e) {
-          // destroy 실패 시 무시
-        }
-        gallerySwiper = null;
-        isInitialized = false;
-      }
-    }
-
-    // hide.bs.modal 이벤트에서 처리 시작 (더 빠른 반응)
-    modalEl.addEventListener('hide.bs.modal', function() {
-      // 모달이 닫히기 시작할 때 즉시 처리 (애니메이션 대기 없이)
-      // Swiper 정리를 미리 시작하여 닫기 지연 감소
-      if (gallerySwiper) {
-        try {
-          gallerySwiper.destroy(true, true);
-        } catch (e) {
-          // destroy 실패 시 무시
-        }
-        gallerySwiper = null;
-        isInitialized = false;
-      }
-    });
-    
-    // hidden.bs.modal 이벤트는 최소한의 처리만 (이미 처리됨)
-    modalEl.addEventListener('hidden.bs.modal', handleClose);
-
-    galleryImages.forEach(function (img, index) {
-      img.addEventListener('click', function () {
-        openGalleryModal(index);
-      });
-      img.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          openGalleryModal(index);
-        }
-      });
-    });
-    
-    // Swiper 사전 초기화는 제거 (모달이 보일 때만 초기화하는 것이 더 안전)
-    // 대신 모달 내 이미지만 사전 로드하여 모달 열 때 빠르게 표시
-  }
-
-  // DOM 로드 완료 후 초기화
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initGalleryModal);
-  } else {
-    initGalleryModal();
-  }
-})();
-    </script>
-
-    <!-- 기타 유틸리티 스크립트 -->
-    <!-- 25_JS_BottomSheet - 인라인화 -->
-    <script>
-// ============================================
-// 25_JS_BottomSheet.js - 바텀시트
-// ============================================
-/**
- * 바텀시트 - 메뉴 클릭 시 퀵메뉴 표시
- */
-(function(){
-    var bottomSheet = document.getElementById('quickMenuBottomSheet');
-    var backdrop = document.getElementById('quickMenuBackdrop');
-    var menuBtn = document.querySelector('.mobile-nav-bar__item--menu');
-    var quickLinks = document.querySelectorAll('.bottom-sheet__link');
-
-    function openBottomSheet(){
+      function openBottomSheet() {
         if (bottomSheet) bottomSheet.classList.add('is-open');
         document.body.style.overflow = 'hidden';
-    }
-    function closeBottomSheet(){
+      }
+      function closeBottomSheet() {
         if (bottomSheet) bottomSheet.classList.remove('is-open');
         document.body.style.overflow = '';
-    }
+      }
 
-    if (menuBtn) {
-        menuBtn.addEventListener('click', function(e){
-            e.preventDefault();
-            openBottomSheet();
+      if (menuBtn) {
+        menuBtn.addEventListener('click', function (e) {
+          e.preventDefault();
+          openBottomSheet();
         });
-    }
-    if (backdrop) {
+      }
+      if (backdrop) {
         backdrop.addEventListener('click', closeBottomSheet);
-    }
-    quickLinks.forEach(function(link){
-        link.addEventListener('click', function(e){
-            var href = this.getAttribute('href');
-            if (href && href.indexOf('#') === 0) {
-                e.preventDefault();
-                var target = document.querySelector(href);
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }
-                closeBottomSheet();
+      }
+      quickLinks.forEach(function (link) {
+        link.addEventListener('click', function (e) {
+          var href = this.getAttribute('href');
+          if (href && href.indexOf('#') === 0) {
+            e.preventDefault();
+            var target = document.querySelector(href);
+            if (target) {
+              target.scrollIntoView({ behavior: 'smooth' });
             }
+            closeBottomSheet();
+          }
         });
-    });
-})();
-    </script>
-    <!-- 25_JS_Gallery_Preload - 갤러리 이미지 preload 최적화 - 인라인화 -->
-    <script>
-// ============================================
-// 25_JS_Gallery_Preload.js - 갤러리 이미지 preload
-// ============================================
-/**
- * 갤러리 이미지 preload 최적화
- * '사진더보기' 버튼 클릭 시 빠른 로딩을 위해 이미지 미리 로드
- * 1. 갤러리 섹션이 뷰포트에 들어오면 모든 이미지 preload
- * 2. '사진더보기' 버튼 hover 시에도 모든 이미지 preload (데스크톱)
- */
-(function() {
-  'use strict';
-  
-  var gallerySection = document.querySelector('.wrapper>main>section#section-05');
-  var galleryBlock = document.querySelector('.wrapper>main>section:nth-child(5)>.gallery-block');
-  var morePictureBtn = document.querySelector('.more-picture-btn-block');
-  
-  if (!gallerySection || !galleryBlock) return;
-  
-  // 모든 갤러리 이미지 preload 함수 (우선순위 조정)
-  function preloadAllGalleryImages(priority) {
-    priority = priority || 'low'; // 기본값: low
-    var allGalleryImages = galleryBlock.querySelectorAll('.gallery-img');
-    var preloadedUrls = new Set(); // 중복 preload 방지
-    
-    // 첫 화면 이미지(05_01~05_03)는 즉시, 나머지는 lazy
-    var firstScreenImages = ['05_01.jpg', '05_02.jpg', '05_03.jpg'];
-    
-    allGalleryImages.forEach(function(img) {
-      if (!img.src) return;
-      
-      // 이미 preload된 URL인지 확인
-      if (preloadedUrls.has(img.src)) return;
-      
-      // 첫 화면 이미지인지 확인
-      var isFirstScreen = firstScreenImages.some(function(filename) {
-        return img.src.indexOf(filename) !== -1;
       });
-      
-      // 첫 화면 이미지가 아니고 priority가 low면 스킵 (lazy loading)
-      if (!isFirstScreen && priority === 'low') {
-        return;
+    })();
+  </script>
+  <!-- 25_JS_Gallery_Preload - 갤러리 이미지 preload 최적화 - 인라인화 -->
+  <script>
+    // ============================================
+    // 25_JS_Gallery_Preload.js - 갤러리 이미지 preload
+    // ============================================
+    /**
+     * 갤러리 이미지 preload 최적화
+     * '사진더보기' 버튼 클릭 시 빠른 로딩을 위해 이미지 미리 로드
+     * 1. 갤러리 섹션이 뷰포트에 들어오면 모든 이미지 preload
+     * 2. '사진더보기' 버튼 hover 시에도 모든 이미지 preload (데스크톱)
+     */
+    (function () {
+      'use strict';
+
+      var gallerySection = document.querySelector('.wrapper>main>section#section-05');
+      var galleryBlock = document.querySelector('.wrapper>main>section:nth-child(5)>.gallery-block');
+      var morePictureBtn = document.querySelector('.more-picture-btn-block');
+
+      if (!gallerySection || !galleryBlock) return;
+
+      // 모든 갤러리 이미지 preload 함수 (우선순위 조정)
+      function preloadAllGalleryImages(priority) {
+        priority = priority || 'low'; // 기본값: low
+        var allGalleryImages = galleryBlock.querySelectorAll('.gallery-img');
+        var preloadedUrls = new Set(); // 중복 preload 방지
+
+        // 첫 화면 이미지(05_01~05_03)는 즉시, 나머지는 lazy
+        var firstScreenImages = ['05_01.jpg', '05_02.jpg', '05_03.jpg'];
+
+        allGalleryImages.forEach(function (img) {
+          if (!img.src) return;
+
+          // 이미 preload된 URL인지 확인
+          if (preloadedUrls.has(img.src)) return;
+
+          // 첫 화면 이미지인지 확인
+          var isFirstScreen = firstScreenImages.some(function (filename) {
+            return img.src.indexOf(filename) !== -1;
+          });
+
+          // 첫 화면 이미지가 아니고 priority가 low면 스킵 (lazy loading)
+          if (!isFirstScreen && priority === 'low') {
+            return;
+          }
+
+          // 이미지가 아직 로드되지 않았으면 preload
+          if (img.complete === false || img.naturalWidth === 0) {
+            // link rel="preload"로 preload (우선순위 설정)
+            var link = document.createElement('link');
+            link.rel = 'preload';
+            link.as = 'image';
+            link.href = img.src;
+            if (isFirstScreen) {
+              link.setAttribute('fetchpriority', 'high');
+            } else {
+              link.setAttribute('fetchpriority', 'low');
+            }
+            document.head.appendChild(link);
+            preloadedUrls.add(img.src);
+
+            // 추가로 Image 객체로도 preload (더 확실한 방법)
+            var preloadImg = new Image();
+            preloadImg.src = img.src;
+          }
+        });
       }
-      
-      // 이미지가 아직 로드되지 않았으면 preload
-      if (img.complete === false || img.naturalWidth === 0) {
-        // link rel="preload"로 preload (우선순위 설정)
-        var link = document.createElement('link');
-        link.rel = 'preload';
-        link.as = 'image';
-        link.href = img.src;
-        if (isFirstScreen) {
-          link.setAttribute('fetchpriority', 'high');
-        } else {
+
+      // 모달 내 이미지 사전 로드 함수
+      function preloadModalImages() {
+        var galleryImages = document.querySelectorAll('.gallery-img');
+        var preloadedUrls = new Set();
+
+        galleryImages.forEach(function (img) {
+          if (!img.src || preloadedUrls.has(img.src)) return;
+
+          // 모달용 이미지는 우선순위를 낮춰서 preload
+          var link = document.createElement('link');
+          link.rel = 'preload';
+          link.as = 'image';
+          link.href = img.src;
           link.setAttribute('fetchpriority', 'low');
-        }
-        document.head.appendChild(link);
-        preloadedUrls.add(img.src);
-        
-        // 추가로 Image 객체로도 preload (더 확실한 방법)
-        var preloadImg = new Image();
-        preloadImg.src = img.src;
-      }
-    });
-  }
-  
-  // 모달 내 이미지 사전 로드 함수
-  function preloadModalImages() {
-    var galleryImages = document.querySelectorAll('.gallery-img');
-    var preloadedUrls = new Set();
-    
-    galleryImages.forEach(function(img) {
-      if (!img.src || preloadedUrls.has(img.src)) return;
-      
-      // 모달용 이미지는 우선순위를 낮춰서 preload
-      var link = document.createElement('link');
-      link.rel = 'preload';
-      link.as = 'image';
-      link.href = img.src;
-      link.setAttribute('fetchpriority', 'low');
-      document.head.appendChild(link);
-      preloadedUrls.add(img.src);
-      
-      var preloadImg = new Image();
-      preloadImg.src = img.src;
-    });
-  }
-  
-  // 모바일 감지 (최적화를 위해)
-  var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
-                (window.innerWidth <= 768);
-  
-  // 모바일에서는 rootMargin을 줄여서 스크롤 지연 감소
-  var observerRootMargin = isMobile ? '100px' : '300px';
-  var blockObserverRootMargin = isMobile ? '50px' : '200px';
-  
-  // Preload 작업 배치 처리를 위한 변수
-  var preloadQueue = [];
-  var isPreloading = false;
-  
-  // 배치 Preload 함수 (여러 작업을 한 번에 처리)
-  function batchPreload() {
-    if (isPreloading || preloadQueue.length === 0) return;
-    
-    isPreloading = true;
-    
-    // requestIdleCallback을 사용하여 브라우저 유휴 시간에 처리
-    var processQueue = function() {
-      if (preloadQueue.length === 0) {
-        isPreloading = false;
-        return;
-      }
-      
-      var task = preloadQueue.shift();
-      if (task && typeof task === 'function') {
-        task();
-      }
-      
-      // 다음 작업을 지연 처리 (메인 스레드 부하 감소)
-      if ('requestIdleCallback' in window) {
-        requestIdleCallback(processQueue, { timeout: isMobile ? 5000 : 2000 });
-      } else {
-        setTimeout(processQueue, isMobile ? 200 : 100);
-      }
-    };
-    
-    if ('requestIdleCallback' in window) {
-      requestIdleCallback(processQueue, { timeout: isMobile ? 5000 : 2000 });
-    } else {
-      setTimeout(processQueue, isMobile ? 200 : 100);
-    }
-  }
-  
-  // 1. 통합 Intersection Observer (3개를 1개로 통합하여 성능 최적화)
-  if ('IntersectionObserver' in window) {
-    var unifiedObserver = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          var target = entry.target;
-          
-          // 갤러리 섹션인 경우
-          if (target === gallerySection) {
-            // Preload 작업을 큐에 추가 (배치 처리)
-            preloadQueue.push(function() {
-              preloadAllGalleryImages('low');
-            });
-            preloadQueue.push(function() {
-              preloadModalImages();
-            });
-            batchPreload();
-            unifiedObserver.unobserve(target);
-          }
-          // 갤러리 블록인 경우
-          else if (target === galleryBlock) {
-            // Preload 작업을 큐에 추가 (배치 처리)
-            preloadQueue.push(function() {
-              preloadAllGalleryImages('low');
-            });
-            batchPreload();
-            unifiedObserver.unobserve(target);
-          }
-        }
-      });
-    }, { 
-      rootMargin: observerRootMargin, // 모바일에서는 100px, 데스크톱에서는 300px
-      threshold: isMobile ? 0.1 : 0.2 // 모바일에서는 더 빠르게 트리거
-    });
-    
-    // 갤러리 섹션과 블록을 하나의 Observer로 관찰
-    unifiedObserver.observe(gallerySection);
-    unifiedObserver.observe(galleryBlock);
-  }
-  
-  // 2. '사진더보기' 버튼 hover 시에도 모든 이미지 preload (데스크톱, 우선순위 높음)
-  if (morePictureBtn) {
-    // 마우스 이벤트 (데스크톱)
-    morePictureBtn.addEventListener('mouseenter', function() {
-      preloadAllGalleryImages('high'); // 버튼 hover 시에는 모든 이미지 즉시 preload
-    }, { once: true }); // 한 번만 실행
-    
-    // 터치 이벤트 (모바일 - 버튼 근처 터치 시)
-    morePictureBtn.addEventListener('touchstart', function() {
-      preloadAllGalleryImages('high'); // 터치 시에는 모든 이미지 즉시 preload
-    }, { once: true, passive: true });
-    
-    // 포커스 이벤트 (키보드 접근성)
-    morePictureBtn.addEventListener('focus', function() {
-      preloadAllGalleryImages('high'); // 포커스 시에는 모든 이미지 즉시 preload
-    }, { once: true });
-  }
-})();
-    </script>
-    <!-- 26_JS_01Section_ScrollHint - 인라인화 -->
-    <script>
-// ============================================
-// 26_JS_01Section_ScrollHint.js - 스크롤 힌트
-// ============================================
-(function () {
-  'use strict';
+          document.head.appendChild(link);
+          preloadedUrls.add(img.src);
 
-  var scrollHint = document.querySelector('.main_image_scroll_hint');
-  if (!scrollHint) return;
-
-  var hasScrolled = false;
-
-  function handleScroll() {
-    if (hasScrolled) return;
-    
-    if (window.scrollY > 50) {
-      hasScrolled = true;
-      scrollHint.classList.add('scroll-hide');
-      window.removeEventListener('scroll', handleScroll);
-    }
-  }
-
-  window.addEventListener('scroll', handleScroll, { passive: true });
-})();
-    </script>
-    
-    <!-- 갤러리 '사진더보기' 버튼 클릭 시 즉시 구조물 표시 및 스피너 처리 -->
-    <script>
-// ============================================
-// 갤러리 '사진더보기' 버튼 즉시 반응 처리 + 스피너
-// ============================================
-(function() {
-  'use strict';
-  
-  var morePictureCheckbox = document.getElementById('more-picture');
-  var galleryBlock = document.querySelector('.wrapper>main>section:nth-child(5)>.gallery-block');
-  var item04 = document.querySelector('.wrapper>main>section:nth-child(5)>.gallery-block>.item.item-04');
-  var item05 = document.querySelector('.wrapper>main>section:nth-child(5)>.gallery-block>.item.item-05');
-  var spinner = document.getElementById('galleryLoadingSpinner');
-  
-  if (!morePictureCheckbox || !galleryBlock) return;
-  
-  // 이미지 로딩 완료 확인 함수
-  function checkImagesLoaded(items, callback) {
-    var images = [];
-    items.forEach(function(item) {
-      if (item) {
-        var imgs = item.querySelectorAll('img');
-        imgs.forEach(function(img) {
-          images.push(img);
+          var preloadImg = new Image();
+          preloadImg.src = img.src;
         });
       }
-    });
-    
-    if (images.length === 0) {
-      callback();
-      return;
-    }
-    
-    var loadedCount = 0;
-    var totalCount = images.length;
-    var hasShownSpinner = false;
-    var startTime = Date.now();
-    var spinnerTimeout = null;
-    
-    // 100ms 후에도 이미지가 로드되지 않으면 스피너 표시
-    spinnerTimeout = setTimeout(function() {
-      if (loadedCount < totalCount && spinner) {
-        spinner.style.display = 'flex';
-        hasShownSpinner = true;
+
+      // 모바일 감지 (최적화를 위해)
+      var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+        (window.innerWidth <= 768);
+
+      // 모바일에서는 rootMargin을 줄여서 스크롤 지연 감소
+      var observerRootMargin = isMobile ? '100px' : '300px';
+      var blockObserverRootMargin = isMobile ? '50px' : '200px';
+
+      // Preload 작업 배치 처리를 위한 변수
+      var preloadQueue = [];
+      var isPreloading = false;
+
+      // 배치 Preload 함수 (여러 작업을 한 번에 처리)
+      function batchPreload() {
+        if (isPreloading || preloadQueue.length === 0) return;
+
+        isPreloading = true;
+
+        // requestIdleCallback을 사용하여 브라우저 유휴 시간에 처리
+        var processQueue = function () {
+          if (preloadQueue.length === 0) {
+            isPreloading = false;
+            return;
+          }
+
+          var task = preloadQueue.shift();
+          if (task && typeof task === 'function') {
+            task();
+          }
+
+          // 다음 작업을 지연 처리 (메인 스레드 부하 감소)
+          if ('requestIdleCallback' in window) {
+            requestIdleCallback(processQueue, { timeout: isMobile ? 5000 : 2000 });
+          } else {
+            setTimeout(processQueue, isMobile ? 200 : 100);
+          }
+        };
+
+        if ('requestIdleCallback' in window) {
+          requestIdleCallback(processQueue, { timeout: isMobile ? 5000 : 2000 });
+        } else {
+          setTimeout(processQueue, isMobile ? 200 : 100);
+        }
       }
-    }, 100);
-    
-    function imageLoaded() {
-      loadedCount++;
-      if (loadedCount === totalCount) {
-        if (spinnerTimeout) {
-          clearTimeout(spinnerTimeout);
-        }
-        if (hasShownSpinner && spinner) {
-          spinner.style.display = 'none';
-        }
-        callback();
-      }
-    }
-    
-    images.forEach(function(img) {
-      if (img.complete && img.naturalWidth > 0) {
-        // 이미 로드된 이미지
-        imageLoaded();
-      } else {
-        // 로딩 중인 이미지
-        img.addEventListener('load', imageLoaded, { once: true });
-        img.addEventListener('error', imageLoaded, { once: true }); // 에러 시에도 진행
-      }
-    });
-  }
-  
-  // 체크박스 변경 이벤트 리스너
-  morePictureCheckbox.addEventListener('change', function() {
-    if (this.checked) {
-      // 구조물을 즉시 표시 (이미지 로딩과 무관하게)
-      requestAnimationFrame(function() {
-        // 구조물 즉시 표시
-        if (item04) {
-          item04.style.maxHeight = '1000px';
-          item04.style.opacity = '1';
-          item04.style.overflow = 'visible';
-          item04.style.display = 'flex'; // display도 즉시 설정
-        }
-        if (item05) {
-          item05.style.maxHeight = '1000px';
-          item05.style.opacity = '1';
-          item05.style.overflow = 'visible';
-          item05.style.display = 'flex'; // display도 즉시 설정
-        }
-        
-        // gallery-block 높이 즉시 조정
-        galleryBlock.style.height = 'auto';
-        
-        // 강제 리플로우 트리거하여 즉시 렌더링
-        galleryBlock.offsetHeight;
-        
-        // 이미지 로딩 상태 확인 및 스피너 처리
-        checkImagesLoaded([item04, item05], function() {
-          // 모든 이미지 로딩 완료
-          // 추가 처리 없음 (스피너는 이미 숨김 처리됨)
+
+      // 1. 통합 Intersection Observer (3개를 1개로 통합하여 성능 최적화)
+      if ('IntersectionObserver' in window) {
+        var unifiedObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              var target = entry.target;
+
+              // 갤러리 섹션인 경우
+              if (target === gallerySection) {
+                // Preload 작업을 큐에 추가 (배치 처리)
+                preloadQueue.push(function () {
+                  preloadAllGalleryImages('low');
+                });
+                preloadQueue.push(function () {
+                  preloadModalImages();
+                });
+                batchPreload();
+                unifiedObserver.unobserve(target);
+              }
+              // 갤러리 블록인 경우
+              else if (target === galleryBlock) {
+                // Preload 작업을 큐에 추가 (배치 처리)
+                preloadQueue.push(function () {
+                  preloadAllGalleryImages('low');
+                });
+                batchPreload();
+                unifiedObserver.unobserve(target);
+              }
+            }
+          });
+        }, {
+          rootMargin: observerRootMargin, // 모바일에서는 100px, 데스크톱에서는 300px
+          threshold: isMobile ? 0.1 : 0.2 // 모바일에서는 더 빠르게 트리거
         });
+
+        // 갤러리 섹션과 블록을 하나의 Observer로 관찰
+        unifiedObserver.observe(gallerySection);
+        unifiedObserver.observe(galleryBlock);
+      }
+
+      // 2. '사진더보기' 버튼 hover 시에도 모든 이미지 preload (데스크톱, 우선순위 높음)
+      if (morePictureBtn) {
+        // 마우스 이벤트 (데스크톱)
+        morePictureBtn.addEventListener('mouseenter', function () {
+          preloadAllGalleryImages('high'); // 버튼 hover 시에는 모든 이미지 즉시 preload
+        }, { once: true }); // 한 번만 실행
+
+        // 터치 이벤트 (모바일 - 버튼 근처 터치 시)
+        morePictureBtn.addEventListener('touchstart', function () {
+          preloadAllGalleryImages('high'); // 터치 시에는 모든 이미지 즉시 preload
+        }, { once: true, passive: true });
+
+        // 포커스 이벤트 (키보드 접근성)
+        morePictureBtn.addEventListener('focus', function () {
+          preloadAllGalleryImages('high'); // 포커스 시에는 모든 이미지 즉시 preload
+        }, { once: true });
+      }
+    })();
+  </script>
+  <!-- 26_JS_01Section_ScrollHint - 인라인화 -->
+  <script>
+    // ============================================
+    // 26_JS_01Section_ScrollHint.js - 스크롤 힌트
+    // ============================================
+    (function () {
+      'use strict';
+
+      var scrollHint = document.querySelector('.main_image_scroll_hint');
+      if (!scrollHint) return;
+
+      var hasScrolled = false;
+
+      function handleScroll() {
+        if (hasScrolled) return;
+
+        if (window.scrollY > 50) {
+          hasScrolled = true;
+          scrollHint.classList.add('scroll-hide');
+          window.removeEventListener('scroll', handleScroll);
+        }
+      }
+
+      window.addEventListener('scroll', handleScroll, { passive: true });
+    })();
+  </script>
+
+  <!-- 갤러리 '사진더보기' 버튼 클릭 시 즉시 구조물 표시 및 스피너 처리 -->
+  <script>
+    // ============================================
+    // 갤러리 '사진더보기' 버튼 즉시 반응 처리 + 스피너
+    // ============================================
+    (function () {
+      'use strict';
+
+      var morePictureCheckbox = document.getElementById('more-picture');
+      var galleryBlock = document.querySelector('.wrapper>main>section:nth-child(5)>.gallery-block');
+      var item04 = document.querySelector('.wrapper>main>section:nth-child(5)>.gallery-block>.item.item-04');
+      var item05 = document.querySelector('.wrapper>main>section:nth-child(5)>.gallery-block>.item.item-05');
+      var spinner = document.getElementById('galleryLoadingSpinner');
+
+      if (!morePictureCheckbox || !galleryBlock) return;
+
+      // 이미지 로딩 완료 확인 함수
+      function checkImagesLoaded(items, callback) {
+        var images = [];
+        items.forEach(function (item) {
+          if (item) {
+            var imgs = item.querySelectorAll('img');
+            imgs.forEach(function (img) {
+              images.push(img);
+            });
+          }
+        });
+
+        if (images.length === 0) {
+          callback();
+          return;
+        }
+
+        var loadedCount = 0;
+        var totalCount = images.length;
+        var hasShownSpinner = false;
+        var startTime = Date.now();
+        var spinnerTimeout = null;
+
+        // 100ms 후에도 이미지가 로드되지 않으면 스피너 표시
+        spinnerTimeout = setTimeout(function () {
+          if (loadedCount < totalCount && spinner) {
+            spinner.style.display = 'flex';
+            hasShownSpinner = true;
+          }
+        }, 100);
+
+        function imageLoaded() {
+          loadedCount++;
+          if (loadedCount === totalCount) {
+            if (spinnerTimeout) {
+              clearTimeout(spinnerTimeout);
+            }
+            if (hasShownSpinner && spinner) {
+              spinner.style.display = 'none';
+            }
+            callback();
+          }
+        }
+
+        images.forEach(function (img) {
+          if (img.complete && img.naturalWidth > 0) {
+            // 이미 로드된 이미지
+            imageLoaded();
+          } else {
+            // 로딩 중인 이미지
+            img.addEventListener('load', imageLoaded, { once: true });
+            img.addEventListener('error', imageLoaded, { once: true }); // 에러 시에도 진행
+          }
+        });
+      }
+
+      // 체크박스 변경 이벤트 리스너
+      morePictureCheckbox.addEventListener('change', function () {
+        if (this.checked) {
+          // 구조물을 즉시 표시 (이미지 로딩과 무관하게)
+          requestAnimationFrame(function () {
+            // 구조물 즉시 표시
+            if (item04) {
+              item04.style.maxHeight = '1000px';
+              item04.style.opacity = '1';
+              item04.style.overflow = 'visible';
+              item04.style.display = 'flex'; // display도 즉시 설정
+            }
+            if (item05) {
+              item05.style.maxHeight = '1000px';
+              item05.style.opacity = '1';
+              item05.style.overflow = 'visible';
+              item05.style.display = 'flex'; // display도 즉시 설정
+            }
+
+            // gallery-block 높이 즉시 조정
+            galleryBlock.style.height = 'auto';
+
+            // 강제 리플로우 트리거하여 즉시 렌더링
+            galleryBlock.offsetHeight;
+
+            // 이미지 로딩 상태 확인 및 스피너 처리
+            checkImagesLoaded([item04, item05], function () {
+              // 모든 이미지 로딩 완료
+              // 추가 처리 없음 (스피너는 이미 숨김 처리됨)
+            });
+          });
+        }
       });
-    }
-  });
-})();
-    </script>
-    
-    <!-- main.html 로드 시 첫 섹션 비디오 자동 재생 및 intro-completed 클래스 추가 -->
-    <script>
-// ============================================
-// main.html 로드 시 첫 섹션 초기화
-// ============================================
-(function() {
-    // 정적 자원 로드 완료 확인 함수
-    function waitForResources(callback) {
+    })();
+  </script>
+
+  <!-- main.html 로드 시 첫 섹션 비디오 자동 재생 및 intro-completed 클래스 추가 -->
+  <script>
+    // ============================================
+    // main.html 로드 시 첫 섹션 초기화
+    // ============================================
+    (function () {
+      // 정적 자원 로드 완료 확인 함수
+      function waitForResources(callback) {
         var resourcesLoaded = 0;
         var totalResources = 0;
         var maxWaitTime = 10000; // 최대 10초 대기
         var startTime = Date.now();
-        
+
         // 첫 섹션의 메인 이미지 확인
         var mainImage = document.querySelector('.wrapper>main>section:nth-child(1) .main_image img');
         if (mainImage) {
-            totalResources++;
-            
-            function checkImageLoaded() {
-                if (mainImage.complete && mainImage.naturalWidth > 0) {
-                    // 이미지가 이미 로드됨
-                    resourcesLoaded++;
-                    if (resourcesLoaded >= totalResources) {
-                        callback();
-                    }
-                } else {
-                    // 이미지 로드 대기
-                    mainImage.addEventListener('load', function onLoad() {
-                        mainImage.removeEventListener('load', onLoad);
-                        resourcesLoaded++;
-                        if (resourcesLoaded >= totalResources) {
-                            callback();
-                        }
-                    }, { once: true });
-                    
-                    mainImage.addEventListener('error', function onError() {
-                        mainImage.removeEventListener('error', onError);
-                        // 이미지 로드 실패해도 진행
-                        resourcesLoaded++;
-                        if (resourcesLoaded >= totalResources) {
-                            callback();
-                        }
-                    }, { once: true });
-                }
-            }
-            
-            // DOM이 준비되면 이미지 확인
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', checkImageLoaded);
-            } else {
-                checkImageLoaded();
-            }
-        } else {
-            // 이미지가 없으면 즉시 콜백
-            callback();
-        }
-        
-        // 최대 대기 시간 초과 시 강제 진행
-        setTimeout(function() {
-            if (resourcesLoaded < totalResources) {
+          totalResources++;
+
+          function checkImageLoaded() {
+            if (mainImage.complete && mainImage.naturalWidth > 0) {
+              // 이미지가 이미 로드됨
+              resourcesLoaded++;
+              if (resourcesLoaded >= totalResources) {
                 callback();
+              }
+            } else {
+              // 이미지 로드 대기
+              mainImage.addEventListener('load', function onLoad() {
+                mainImage.removeEventListener('load', onLoad);
+                resourcesLoaded++;
+                if (resourcesLoaded >= totalResources) {
+                  callback();
+                }
+              }, { once: true });
+
+              mainImage.addEventListener('error', function onError() {
+                mainImage.removeEventListener('error', onError);
+                // 이미지 로드 실패해도 진행
+                resourcesLoaded++;
+                if (resourcesLoaded >= totalResources) {
+                  callback();
+                }
+              }, { once: true });
             }
+          }
+
+          // DOM이 준비되면 이미지 확인
+          if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', checkImageLoaded);
+          } else {
+            checkImageLoaded();
+          }
+        } else {
+          // 이미지가 없으면 즉시 콜백
+          callback();
+        }
+
+        // 최대 대기 시간 초과 시 강제 진행
+        setTimeout(function () {
+          if (resourcesLoaded < totalResources) {
+            callback();
+          }
         }, maxWaitTime);
-    }
-    
-    function initMainContent() {
+      }
+
+      function initMainContent() {
         // 정적 자원 로드 완료 후 실행
-        waitForResources(function() {
-            // 비디오 로드 및 재생 (비디오는 선택적이므로 로드 완료를 기다리지 않음)
-            var video = document.getElementById('introVideo');
-            if (video) {
-                video.load();
-                video.play().catch(function(){});
-            }
-            
-            // 하단 네비게이션 바 표시
-            const mobileNavBar = document.querySelector('.mobile-nav-bar');
-            if (mobileNavBar) {
-                mobileNavBar.style.visibility = 'visible';
-                mobileNavBar.style.opacity = '1';
-                mobileNavBar.style.pointerEvents = 'auto';
-            }
-            
-            // 첫 번째 섹션에 intro-completed 클래스 추가하여 HAPPY WEDDING DAY 애니메이션 시작
-            // 정적 자원이 모두 로드된 후에 표시
-            const firstSection = document.querySelector('.wrapper>main>section:nth-child(1)');
-            if (firstSection) {
-                // 약간의 지연을 두어 부드러운 전환 효과
-                requestAnimationFrame(function() {
-                    requestAnimationFrame(function() {
-                        firstSection.classList.add('intro-completed');
-                    });
-                });
-            }
+        waitForResources(function () {
+          // 비디오 로드 및 재생 (비디오는 선택적이므로 로드 완료를 기다리지 않음)
+          var video = document.getElementById('introVideo');
+          if (video) {
+            video.load();
+            video.play().catch(function () { });
+          }
+
+          // 하단 네비게이션 바 표시
+          const mobileNavBar = document.querySelector('.mobile-nav-bar');
+          if (mobileNavBar) {
+            mobileNavBar.style.visibility = 'visible';
+            mobileNavBar.style.opacity = '1';
+            mobileNavBar.style.pointerEvents = 'auto';
+          }
+
+          // 첫 번째 섹션에 intro-completed 클래스 추가하여 HAPPY WEDDING DAY 애니메이션 시작
+          // 정적 자원이 모두 로드된 후에 표시
+          const firstSection = document.querySelector('.wrapper>main>section:nth-child(1)');
+          if (firstSection) {
+            // 약간의 지연을 두어 부드러운 전환 효과
+            requestAnimationFrame(function () {
+              requestAnimationFrame(function () {
+                firstSection.classList.add('intro-completed');
+              });
+            });
+          }
         });
-    }
-    
-    // DOM 로드 완료 후 실행
-    if (document.readyState === 'loading') {
+      }
+
+      // DOM 로드 완료 후 실행
+      if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initMainContent);
-    } else {
+      } else {
         initMainContent();
-    }
-})();
-    </script>
-    
-    <!-- ----------------------------- 
+      }
+    })();
+  </script>
+
+  <!-- ----------------------------- 
       13 Modal_Common
      ----------------------------- -->
-     <!-- 
+  <!-- 
       05 갤러리 Swiper Modal
       -->
-      <div class="modal section_05_gallery_md fade" id="section_05_gallery_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content gallery-modal-content">
-            <div class="modal-header">
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  <div class="modal section_05_gallery_md fade" id="section_05_gallery_modal" data-bs-backdrop="static"
+    data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content gallery-modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="swiper gallery-swiper">
+            <div class="swiper-wrapper" id="gallerySwiperWrapper">
+              <!-- 슬라이드 동적 생성 -->
             </div>
-            <div class="modal-body">
-              <div class="swiper gallery-swiper">
-                <div class="swiper-wrapper" id="gallerySwiperWrapper">
-                  <!-- 슬라이드 동적 생성 -->
-                </div>
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-button-next"></div>
-              </div>
-            </div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
           </div>
         </div>
       </div>
-    
-  </body>
+    </div>
+  </div>
+
+</body>
+
 </html>
