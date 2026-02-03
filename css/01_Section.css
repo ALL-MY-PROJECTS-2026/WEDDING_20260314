@@ -41,7 +41,7 @@
 .wrapper>main>section:nth-child(1){
     position:relative;
     padding: 0;
-    padding-bottom: 60px; /* 하단 네비와의 간격 */
+    padding-bottom: 50px; /* 하단 네비와의 간격 (정보 블록과 네비바 사이 여유 공간) */
     width: 100%;
     min-height: auto; /* 자동 높이로 변경하여 정보 블록이 보이도록 */
 }
@@ -49,8 +49,8 @@
     position: relative;
     width: 100%;
     height: auto;
-    min-height: calc(100vh - 200px); /* 정보 블록과 네비바 공간을 고려하여 높이 조정 */
-    max-height: calc(100vh - 200px);
+    min-height: calc(100vh - 120px); /* 정보 블록 최소 공간만 고려하여 이미지 높이 최대화 */
+    max-height: calc(100vh - 120px);
     display: block;
     overflow: hidden;
 }
@@ -84,17 +84,18 @@
 .wrapper>main>section:nth-child(1) .main_image_info_block{
     position: relative;
     width: 100%;
-    padding: 25px 20px 15px 20px;
+    padding: 12px 20px 12px 20px; /* 위아래 여백만 최소화 */
     background: #ffffff;
     background-image: url('../images/bg.png');
     background-repeat: repeat;
     text-align: center;
     z-index: 2;
     margin-top: -1px; /* 물결 효과와 자연스럽게 연결 */
-    min-height: 120px; /* 최소 높이 보장 */
     display: flex;
     flex-direction: column;
     justify-content: center;
+    top : -10px;
+   
 }
 
 .wrapper>main>section:nth-child(1) .main_image_info_date{
@@ -102,8 +103,8 @@
     font-size: 0.95rem;
     font-weight: 400;
     color: rgb(58, 58, 58);
-    line-height: 1.6;
-    margin-bottom: 8px;
+    line-height: 1.5;
+    margin-bottom: 4px;
     letter-spacing: 0.02em;
 }
 
@@ -112,8 +113,8 @@
     font-size: 1.1rem;
     font-weight: 500;
     color: rgb(58, 58, 58);
-    line-height: 1.6;
-    margin-bottom: 4px;
+    line-height: 1.5;
+    margin-bottom: 2px;
     letter-spacing: 0.01em;
 }
 
@@ -122,8 +123,10 @@
     font-size: 0.85rem;
     font-weight: 400;
     color: rgb(100, 100, 100);
-    line-height: 1.6;
+    line-height: 1.5;
     letter-spacing: 0.01em;
+    margin-bottom: 0; /* 기본 margin 제거 */
+    padding-bottom: 15px; /* 하단 네비바와의 간격 */
 }
 
 /* 첫 번째 이미지 그라데이션 - 넷플릭스 스타일: 상단에서 하단으로 깔끔한 페이드아웃 */
@@ -174,6 +177,9 @@
 .wrapper>main>section:nth-child(1) .main_image_hero_line::first-letter{
     color: #f9d4c4;
 }
+.wrapper>main>section:nth-child(1).intro-completed{
+    padding-bottom : 0;
+}
 /* 인트로가 끝난 후 애니메이션 시작 */
 .wrapper>main>section:nth-child(1).intro-completed .main_image_hero_line{
     animation: main-hero-write-in 1.2s ease-out forwards;
@@ -186,12 +192,12 @@
     to{ max-width: 100%; }
 }
 
-/* 스크롤 안내 - OUR WEDDING DAY 표시 후 우측 하단, 스크롤 시 사라짐 */
+/* 스크롤 안내 - 첫 번째 화면(viewport) 기준 우측 하단, 스크롤 시 사라짐 */
 .wrapper>main>section:nth-child(1) .main_image_scroll_hint{
-    position: absolute;
-    right: 1.25rem;
-    bottom: 50px;
-    z-index: 2;
+    position: fixed; /* viewport 기준으로 고정 위치 */
+    right: calc((100vw - 23.75rem) / 2 + 1.25rem); /* wrapper 중앙 정렬 고려하여 우측 위치 계산 */
+    bottom: calc(36px + env(safe-area-inset-bottom, 0) + 30px); /* 네비바 높이 + safe-area + 여유 공간 (더 아래로 배치) */
+    z-index: 2147483646; /* 네비바보다 낮지만 다른 요소보다 높게 */
     pointer-events: none;
     display: flex;
     flex-direction: column;
@@ -203,6 +209,13 @@
     opacity: 0;
     animation: none; /* 기본적으로 애니메이션 비활성화 */
     transition: opacity 1.2s ease-out;
+}
+
+/* 모바일에서 wrapper 너비가 화면보다 작을 때 */
+@media (max-width: 23.75rem) {
+    .wrapper>main>section:nth-child(1) .main_image_scroll_hint{
+        right: 1.25rem; /* wrapper 너비가 화면과 같으면 간단하게 */
+    }
 }
 /* 인트로가 끝난 후 스크롤 힌트 표시 */
 .wrapper>main>section:nth-child(1).intro-completed .main_image_scroll_hint{
