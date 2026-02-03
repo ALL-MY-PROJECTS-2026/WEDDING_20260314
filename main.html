@@ -1849,31 +1849,77 @@
         if (mainImage) {
           totalResources++;
 
+          // 이미지가 완전히 로드되었는지 확인하는 함수
+          function isImageFullyLoaded(img) {
+            // complete: 이미지 로드 완료 여부
+            // naturalWidth > 0: 이미지의 실제 너비가 있는지 확인
+            // naturalHeight > 0: 이미지의 실제 높이가 있는지 확인
+            return img.complete && 
+                   img.naturalWidth > 0 && 
+                   img.naturalHeight > 0 &&
+                   img.offsetWidth > 0; // 실제로 렌더링되었는지 확인
+          }
+
           function checkImageLoaded() {
-            if (mainImage.complete && mainImage.naturalWidth > 0) {
-              // 이미지가 이미 로드됨
-              resourcesLoaded++;
-              if (resourcesLoaded >= totalResources) {
-                callback();
-              }
-            } else {
-              // 이미지 로드 대기
-              mainImage.addEventListener('load', function onLoad() {
-                mainImage.removeEventListener('load', onLoad);
+            if (isImageFullyLoaded(mainImage)) {
+              // 이미지가 이미 완전히 로드됨
+              // 추가 확인을 위해 약간의 지연 후 콜백 (렌더링 완료 보장)
+              setTimeout(function() {
                 resourcesLoaded++;
                 if (resourcesLoaded >= totalResources) {
                   callback();
                 }
-              }, { once: true });
+              }, 50);
+            } else {
+              // 이미지 로드 대기
+              var isCallbackCalled = false;
+              
+              var loadHandler = function onLoad() {
+                if (isCallbackCalled) return;
+                // 이미지 로드 이벤트 후에도 완전히 로드되었는지 재확인
+                if (isImageFullyLoaded(mainImage)) {
+                  isCallbackCalled = true;
+                  mainImage.removeEventListener('load', loadHandler);
+                  mainImage.removeEventListener('error', errorHandler);
+                  resourcesLoaded++;
+                  if (resourcesLoaded >= totalResources) {
+                    callback();
+                  }
+                }
+              };
 
-              mainImage.addEventListener('error', function onError() {
-                mainImage.removeEventListener('error', onError);
+              var errorHandler = function onError() {
+                if (isCallbackCalled) return;
+                isCallbackCalled = true;
+                mainImage.removeEventListener('load', loadHandler);
+                mainImage.removeEventListener('error', errorHandler);
                 // 이미지 로드 실패해도 진행
                 resourcesLoaded++;
                 if (resourcesLoaded >= totalResources) {
                   callback();
                 }
-              }, { once: true });
+              };
+
+              mainImage.addEventListener('load', loadHandler, { once: true });
+              mainImage.addEventListener('error', errorHandler, { once: true });
+
+              // 이미지가 이미 src가 설정되어 있고 로딩 중인 경우를 대비
+              if (mainImage.src && !mainImage.complete) {
+                // 이미지가 로딩 중이면 이벤트를 기다림
+              } else if (mainImage.src && mainImage.complete) {
+                // 이미지가 완료되었지만 naturalWidth가 0인 경우 재확인
+                setTimeout(function() {
+                  if (!isCallbackCalled && isImageFullyLoaded(mainImage)) {
+                    isCallbackCalled = true;
+                    mainImage.removeEventListener('load', loadHandler);
+                    mainImage.removeEventListener('error', errorHandler);
+                    resourcesLoaded++;
+                    if (resourcesLoaded >= totalResources) {
+                      callback();
+                    }
+                  }
+                }, 100);
+              }
             }
           }
 

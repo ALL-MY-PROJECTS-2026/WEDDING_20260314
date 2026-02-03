@@ -283,13 +283,13 @@
         if (!introScreen) return;
         
         // SVG 로드 및 설정, 그리기 애니메이션 완료 대기
-        const svgAnimationDuration = await loadAndSetupSVG();
+        await loadAndSetupSVG();
         
-        // SVG 그리기 애니메이션이 완료된 후 0.5초(500ms) 대기 후 페이드아웃 시작
-        // SVG draw 애니메이션이 완료되면 "결혼식에 초대합니다" 문구가 완전히 그려진 상태
+        // SVG 그리기 애니메이션이 완료되면 "결혼식에 초대합니다" 문구가 완전히 그려진 상태
+        // 애니메이션 완료 후 0.3초 딜레이 후 페이드아웃 시작
         setTimeout(function() {
             fadeOutIntro();
-        }, svgAnimationDuration + 500); // SVG 완료 후 0.5초 대기
+        }, 300); // 0.3초 딜레이
     }
     
     /**

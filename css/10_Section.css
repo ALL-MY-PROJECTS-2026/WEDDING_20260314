@@ -85,56 +85,104 @@
 .wrapper>main>section:nth-child(10)>.accordion .accordion-body{
    
 }
+.wrapper>main>section.account>.accordion .accordion-body>div,
 .wrapper>main>section:nth-child(10)>.accordion .accordion-body>div{
-    height:60px;
-    padding : 15px 0px;
-    border-bottom:0px solid lightgray;
+    min-height:60px !important;
+    padding : 15px 15px 15px 15px !important;
+    border-bottom:0px solid lightgray !important;
+    position: relative !important;
     
-    padding : 10px;
-    
-    display:flex;
-    justify-content: space-evenly;
-
-    flex-direction: column;
-   
-    
+    display:flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
 }
 
 .wrapper>main>section:nth-child(10)>.accordion .accordion-body span,a,div{
     font-size:.8rem;
 }
+/* section-10 계좌정보 스타일링 - 더 구체적인 선택자 사용 */
+.wrapper>main>section.account>.accordion .accordion-body>div>.account,
 .wrapper>main>section:nth-child(10)>.accordion .accordion-body>div>.account{
-    display:flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom:5px;
-   
+    display:flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    margin-bottom:0 !important;
+    width: 100% !important;
+    position: relative !important;
+    padding-right: 60px !important;
 }
 
+.wrapper>main>section.account>.accordion .accordion-body>div>.account>.left,
 .wrapper>main>section:nth-child(10)>.accordion .accordion-body>div>.account>.left{
-   
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 4px !important;
+    width: 100% !important;
+    flex: 1 !important;
 }
-.wrapper>main>section:nth-child(10)>.accordion .accordion-body>div>.account>.right{}
+
+.wrapper>main>section.account>.accordion .accordion-body>div>.account>.left>span:first-child,
+.wrapper>main>section:nth-child(10)>.accordion .accordion-body>div>.account>.left>span:first-child{
+    font-size: 0.75rem !important;
+    color: rgb(137, 117, 122) !important;
+    font-weight: 500 !important;
+}
+
+.wrapper>main>section.account>.accordion .accordion-body>div>.account>.left>.account-number,
+.wrapper>main>section:nth-child(10)>.accordion .accordion-body>div>.account>.left>.account-number{
+    font-size: 0.95rem !important;
+    color: rgb(58, 58, 58) !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.5px !important;
+}
+
+.wrapper>main>section.account>.accordion .accordion-body>div>.account>.right,
+.wrapper>main>section:nth-child(10)>.accordion .accordion-body>div>.account>.right{
+    position: absolute !important;
+    top: 0 !important;
+    right: 0 !important;
+    z-index: 1 !important;
+}
+
+.wrapper>main>section.account>.accordion .accordion-body>div>.name,
 .wrapper>main>section:nth-child(10)>.accordion .accordion-body>div>.name{
-    display:flex;
-    justify-content: left;
-    align-items: center;
-    
+    display:flex !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+    font-size: 0.85rem !important;
+    color: rgb(137, 117, 122) !important;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
 }
 
+.wrapper>main>section.account>.accordion .accordion-body>div>.account>.right>a,
+.wrapper>main>section.account>.accordion a,
 .wrapper>main>section:nth-child(10)>.accordion a{
-    display:block;
-    width : 35px;
-    height:25px;
-    /* border : 1px solid; */
-    text-decoration: none;
+    display:flex !important;
+    width: auto !important;
+    min-width: 50px !important;
+    height: 28px !important;
+    padding: 0 12px !important;
+    text-decoration: none !important;
+    justify-content: center !important;
+    align-items: center !important;
+    color: rgb(137, 117, 122) !important;
+    background-color: rgb(248, 247, 247) !important;
+    border: 1px solid rgb(232, 223, 223) !important;
+    border-radius: 0 !important;
+    font-size: 0.75rem !important;
+    font-weight: 500 !important;
+    transition: all 0.2s ease !important;
+    box-shadow: none !important;
+}
 
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    color : gray;
-    box-shadow: 2px 2px 2px lightgray;
-   
+.wrapper>main>section.account>.accordion .accordion-body>div>.account>.right>a:hover,
+.wrapper>main>section.account>.accordion a:hover,
+.wrapper>main>section:nth-child(10)>.accordion a:hover{
+    background-color: rgb(242, 238, 238) !important;
+    color: rgb(58, 58, 58) !important;
+    border-color: rgb(194, 178, 178) !important;
 }
 
 
