@@ -221,7 +221,7 @@
         <!-- VIDEO BLOCK -->
         <div class="main_image">
           <img src="./images/01_section.jpg" alt="" fetchpriority="high">
-          <video id="introVideo" muted loop playsinline webkit-playsinline preload="none"
+          <video id="introVideo" muted loop playsinline webkit-playsinline preload="auto"
             poster="./images/01_section.jpg">
             <source src="./video/flower_00.mp4" type="video/mp4">
           </video>
@@ -2071,11 +2071,39 @@
       function initMainContent() {
         // 정적 자원 로드 완료 후 실행
         waitForResources(function () {
-          // 비디오 로드 및 재생 (비디오는 선택적이므로 로드 완료를 기다리지 않음)
+          // 비디오 로드 및 재생
           var video = document.getElementById('introVideo');
           if (video) {
+            // 비디오 메타데이터 로드 대기
+            video.addEventListener('loadedmetadata', function() {
+              // 비디오 재생 시도
+              var playPromise = video.play();
+              
+              if (playPromise !== undefined) {
+                playPromise
+                  .then(function() {
+                    // 재생 성공
+                    console.log('비디오 재생 성공');
+                  })
+                  .catch(function(error) {
+                    // 재생 실패 (자동 재생 정책 등)
+                    console.log('비디오 자동 재생 실패:', error);
+                    // 사용자 인터랙션 후 재생 시도
+                    document.addEventListener('click', function tryPlayVideo() {
+                      video.play().catch(function() {});
+                      document.removeEventListener('click', tryPlayVideo);
+                    }, { once: true });
+                  });
+              }
+            }, { once: true });
+            
+            // 비디오 로드 시작
             video.load();
-            video.play().catch(function () { });
+            
+            // 로드 에러 처리
+            video.addEventListener('error', function(e) {
+              console.error('비디오 로드 에러:', e);
+            }, { once: true });
           }
 
           // 하단 네비게이션 바 표시
