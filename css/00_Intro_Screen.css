@@ -200,7 +200,7 @@
 
 /* SVG path 기본 스타일 */
 .intro-svg path[stroke] {
-    stroke: rgb(245, 204, 125);
+    stroke: rgb(255, 192, 203);
     fill: none;
     stroke-width: 12;
     stroke-linecap: round;
