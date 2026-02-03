@@ -49,77 +49,55 @@
     position: relative;
     width: 100%;
     height: auto;
-    min-height: calc(100vh - 120px); /* 정보 블록 최소 공간만 고려하여 이미지 높이 최대화 */
-    max-height: calc(100vh - 120px);
+    min-height: calc(100vh); /* 정보 블록 최소 공간만 고려하여 이미지 높이 최대화 */
+    max-height: calc(100vh);
     display: block;
     overflow: hidden;
 }
-
-/* 첫 번째 섹션 하단 물결 효과 테두리 - 균등하고 일정한 물결 패턴 */
-.wrapper>main>section:nth-child(1) .main_image::after{
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    height: 45px;
-    background: #ffffff;
-    background-image: url('../images/bg.png');
-    background-repeat: repeat;
-    mask-size: 100% 100%;
-    -webkit-mask-size: 100% 100%;
-    mask-repeat: no-repeat;
-    -webkit-mask-repeat: no-repeat;
-    mask-position: bottom;
-    -webkit-mask-position: bottom;
-    z-index: 3;
-    pointer-events: none;
-}
-
 
 /* WAVE */
 .wrapper>main>section:nth-child(1){
     position: relative;
 }
+
 .wrapper>main>section:nth-child(1) .wave-bottom1{
-    position: absolute;
-    left: 0;
-    top:70%;
-    width: 100%;
-    height: 100px; /* 물결의 높이 */
-    background: #ffffff; /* 기존 배경색과 동일 */
-    background-image: url('../images/bg.png'); /* 기존 종이 질감과 동일 */
-    background-repeat: repeat; /* 기존과 동일한 반복 */
+    /* position: absolute; */
+    /* left: 0; */
+    /* top:70%; */
+    /* width: 100%; */
+    /* height: 100px;   */
+    /* background: #ffffff;   */
+    /* background-image: url('../images/bg.png');   */
+    /* background-repeat: repeat;   */
     
     /* mask-image 또는 clip-path를 사용하여 곡선 생성 */
     /* 간단한 구현을 위해 SVG 데이터 URL 사용 예시 */
-    mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="black" fill-opacity="1" d="M0,160L60,176C120,192,240,224,360,229.3C480,235,600,213,720,181.3C840,149,960,107,1080,101.3C1200,96,1320,128,1380,144L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>');
-    -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="black" fill-opacity="1" d="M0,160L60,176C120,192,240,224,360,229.3C480,235,600,213,720,181.3C840,149,960,107,1080,101.3C1200,96,1320,128,1380,144L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>');
-    mask-size: cover;
-    -webkit-mask-size: cover;
-    z-index: 2; /* 정보 블록(z-index: 4) 아래에 배치 */
-    pointer-events: none;
+    /* mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="black" fill-opacity="1" d="M0,160L60,176C120,192,240,224,360,229.3C480,235,600,213,720,181.3C840,149,960,107,1080,101.3C1200,96,1320,128,1380,144L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>'); */
+    /* -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="black" fill-opacity="1" d="M0,160L60,176C120,192,240,224,360,229.3C480,235,600,213,720,181.3C840,149,960,107,1080,101.3C1200,96,1320,128,1380,144L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>'); */
+    /* mask-size: cover; */
+    /* -webkit-mask-size: cover; */
+    /* z-index: 2;  */
+    /* pointer-events: none; */
 }
-
 
 /* 일시 및 장소 정보 블록 - 물결 범위 안에서 정가운데 배치 */
 .wrapper>main>section:nth-child(1) .main_image_info_block{
-    position: relative;
+    position: absolute;
+    bottom:0;
     width: 100%;
-    padding: 0 20px; /* 좌우만 여백, 상하는 중앙 정렬을 위해 제거 */
+    min-height : 160px;
+    max-height : 160px;
     background: #ffffff; /* 배경색 유지 */
     background-image: url('../images/bg.png'); /* 종이 질감 유지 */
     background-repeat: repeat;
     text-align: center;
-    z-index: 5; /* wave-bottom1(z-index: 2)와 물결 효과(z-index: 3) 위에 표시되도록 */
-    margin-top: -45px; /* 물결 높이(45px)만큼 올려서 물결 영역 안에 배치 */
+   
     display: flex;
     flex-direction: column;
     justify-content: center; /* 수직 중앙 정렬 */
     align-items: center; /* 수평 중앙 정렬 */
-    top:-30px;
-    min-height:120px;
+  
+    display:none;
 }
 
 .wrapper>main>section:nth-child(1) .main_image_info_date{
