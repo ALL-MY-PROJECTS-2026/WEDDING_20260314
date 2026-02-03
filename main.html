@@ -1325,6 +1325,28 @@
           return;
         }
 
+        // 원본 이미지 preload 함수 (모든 함수에서 사용 가능하도록 상단에 정의)
+        var preloadedOriginals = new Set(); // 중복 preload 방지
+        function preloadOriginalImage(img) {
+          if (!img) return;
+          var originalSrc = img.getAttribute('data-original');
+          if (!originalSrc || preloadedOriginals.has(originalSrc)) {
+            return; // 이미 preload됨
+          }
+          
+          // link rel="preload"로 preload
+          var link = document.createElement('link');
+          link.rel = 'preload';
+          link.as = 'image';
+          link.href = originalSrc;
+          document.head.appendChild(link);
+          preloadedOriginals.add(originalSrc);
+          
+          // Image 객체로도 preload (더 확실한 방법)
+          var preloadImg = new Image();
+          preloadImg.src = originalSrc;
+        }
+
         function getImageSrcList() {
           var list = [];
           galleryImages.forEach(function (img) {
@@ -1335,23 +1357,34 @@
           return list;
         }
 
-        function buildSwiperSlides(srcList) {
-          // 원본 이미지 경로를 기반으로 캐시 키 생성
-          var cacheKey = srcList.join('|');
+        function buildSwiperSlides(srcList, initialIndex) {
+          initialIndex = initialIndex || 0;
+          // 원본 이미지 경로와 initialIndex를 기반으로 캐시 키 생성
+          var cacheKey = srcList.join('|') + '|' + initialIndex;
           // 캐시된 HTML이 있고 경로가 동일하면 재사용
           if (cachedSlidesHTML && cachedSlidesHTML.cacheKey === cacheKey) {
             return cachedSlidesHTML.html;
           }
 
-          // 첫 이미지만 eager, 나머지는 lazy로 최적화
+          // initialIndex에 해당하는 이미지만 즉시 로드, 나머지는 Swiper lazy loading 사용
           var slidesHTML = srcList
             .map(function (src, index) {
-              var loadingAttr = index === 0 ? 'loading="eager"' : 'loading="lazy"';
-              return (
-                '<div class="swiper-slide">' +
-                '<img src="' + src + '" alt="" ' + loadingAttr + '>' +
-                '</div>'
-              );
+              if (index === initialIndex) {
+                // initialIndex에 해당하는 이미지는 즉시 로드
+                return (
+                  '<div class="swiper-slide">' +
+                  '<img src="' + src + '" alt="" loading="eager">' +
+                  '</div>'
+                );
+              } else {
+                // 나머지는 Swiper lazy loading 사용
+                return (
+                  '<div class="swiper-slide swiper-lazy">' +
+                  '<div class="swiper-lazy-preloader"></div>' +
+                  '<img data-src="' + src + '" alt="" class="swiper-lazy">' +
+                  '</div>'
+                );
+              }
             })
             .join('');
 
@@ -1378,7 +1411,24 @@
 
           // 슬라이드 HTML 생성 (캐시 활용)
           var srcList = getImageSrcList();
-          wrapperEl.innerHTML = buildSwiperSlides(srcList);
+          
+          // 첫 번째 이미지와 인접한 이미지들 원본 preload (즉시 표시될 이미지들)
+          if (srcList.length > 0) {
+            // 첫 번째 이미지 preload
+            preloadOriginalImage(galleryImages[initialIndex] || galleryImages[0]);
+            // 다음 이미지도 preload (스와이프 시 빠른 표시)
+            if (srcList.length > 1) {
+              var nextIndex = (initialIndex + 1) % srcList.length;
+              preloadOriginalImage(galleryImages[nextIndex]);
+            }
+            // 이전 이미지도 preload
+            if (srcList.length > 1) {
+              var prevIndex = (initialIndex - 1 + srcList.length) % srcList.length;
+              preloadOriginalImage(galleryImages[prevIndex]);
+            }
+          }
+          
+          wrapperEl.innerHTML = buildSwiperSlides(srcList, initialIndex);
 
           // 모달 표시
           galleryModal.show();
@@ -1389,6 +1439,11 @@
               gallerySwiper = new Swiper('.gallery-swiper', {
                 initialSlide: initialIndex,
                 loop: true,
+                lazy: {
+                  loadPrevNext: true,
+                  loadPrevNextAmount: 2, // 이전/다음 2개 이미지 미리 로드
+                  checkInView: true,
+                },
                 navigation: {
                   nextEl: '.swiper-button-next',
                   prevEl: '.swiper-button-prev',
@@ -1404,6 +1459,11 @@
                     gallerySwiper = new Swiper('.gallery-swiper', {
                       initialSlide: initialIndex,
                       loop: true,
+                      lazy: {
+                        loadPrevNext: true,
+                        loadPrevNextAmount: 2, // 이전/다음 2개 이미지 미리 로드
+                        checkInView: true,
+                      },
                       navigation: {
                         nextEl: '.swiper-button-next',
                         prevEl: '.swiper-button-prev',
@@ -1455,15 +1515,33 @@
         modalEl.addEventListener('hidden.bs.modal', handleClose);
 
         galleryImages.forEach(function (img, index) {
+          // 클릭 이벤트
           img.addEventListener('click', function () {
             openGalleryModal(index);
           });
+          
+          // 키보드 이벤트
           img.addEventListener('keydown', function (e) {
             if (e.key === 'Enter' || e.key === ' ') {
               e.preventDefault();
               openGalleryModal(index);
             }
           });
+          
+          // hover/터치 시 원본 이미지 preload (데스크톱)
+          img.addEventListener('mouseenter', function () {
+            preloadOriginalImage(img);
+          }, { once: true, passive: true });
+          
+          // 터치 시 원본 이미지 preload (모바일)
+          img.addEventListener('touchstart', function () {
+            preloadOriginalImage(img);
+          }, { once: true, passive: true });
+          
+          // 포커스 시 원본 이미지 preload (키보드 접근성)
+          img.addEventListener('focus', function () {
+            preloadOriginalImage(img);
+          }, { once: true });
         });
 
         // Swiper 사전 초기화는 제거 (모달이 보일 때만 초기화하는 것이 더 안전)
