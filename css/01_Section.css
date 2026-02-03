@@ -162,6 +162,20 @@
     margin-bottom:10px;
 }
 
+.wrapper>main>section:nth-child(1)  .main_image_info_name{
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: white;
+    position:relative;
+    top:20px;
+    z-index: 100;
+    display:flex;
+    justify-content: space-between;
+   
+    width:100%;
+}
+
 /* 첫 번째 이미지 그라데이션 - 넷플릭스 스타일: 상단에서 하단으로 깔끔한 페이드아웃 */
 .wrapper>main>section:nth-child(1) .main_image_gradient{
     position: absolute;
