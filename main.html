@@ -816,7 +816,6 @@
         <li><a href="#section-07" class="bottom-sheet__link">예식정보</a></li>
         <li><a href="#section-10" class="bottom-sheet__link">마음 전하실 곳</a></li>
         <li><a href="javascript:void(0)" class="bottom-sheet__link"></a></li>
-
       </ul>
     </div>
   </div>
@@ -1284,7 +1283,25 @@
     // 링크공유
     document.querySelectorAll('.url-copy').forEach(function (urlCopy) {
       urlCopy.addEventListener('click', function () {
-        window.navigator.clipboard.writeText(window.location.href);;
+        // index.html의 URL로 변경 (intro부터 보여지도록)
+        var currentUrl = window.location.href;
+        var introUrl;
+        
+        // main.html을 index.html로 교체
+        if (currentUrl.indexOf('main.html') !== -1) {
+          introUrl = currentUrl.replace(/main\.html.*$/, 'index.html');
+        } else {
+          // main.html이 없으면 현재 경로의 디렉토리에 index.html 추가
+          var baseUrl = window.location.origin + window.location.pathname;
+          var lastSlash = baseUrl.lastIndexOf('/');
+          if (lastSlash !== -1) {
+            introUrl = baseUrl.substring(0, lastSlash + 1) + 'index.html';
+          } else {
+            introUrl = baseUrl + '/index.html';
+          }
+        }
+        
+        window.navigator.clipboard.writeText(introUrl);
       });
     });
   </script>
