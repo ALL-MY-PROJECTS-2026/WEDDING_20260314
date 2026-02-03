@@ -1366,22 +1366,25 @@
             return cachedSlidesHTML.html;
           }
 
-          // initialIndex에 해당하는 이미지만 즉시 로드, 나머지는 Swiper lazy loading 사용
+          // initialIndex와 인접한 이미지는 eager 로드, 나머지는 lazy loading 사용
           var slidesHTML = srcList
             .map(function (src, index) {
-              if (index === initialIndex) {
-                // initialIndex에 해당하는 이미지는 즉시 로드
+              // initialIndex와 이전/다음 인덱스는 eager 로드
+              var prevIndex = (initialIndex - 1 + srcList.length) % srcList.length;
+              var nextIndex = (initialIndex + 1) % srcList.length;
+              
+              if (index === initialIndex || index === prevIndex || index === nextIndex) {
+                // initialIndex와 인접한 이미지는 즉시 로드
                 return (
                   '<div class="swiper-slide">' +
                   '<img src="' + src + '" alt="" loading="eager">' +
                   '</div>'
                 );
               } else {
-                // 나머지는 Swiper lazy loading 사용
+                // 나머지는 lazy loading 사용
                 return (
-                  '<div class="swiper-slide swiper-lazy">' +
-                  '<div class="swiper-lazy-preloader"></div>' +
-                  '<img data-src="' + src + '" alt="" class="swiper-lazy">' +
+                  '<div class="swiper-slide">' +
+                  '<img src="' + src + '" alt="" loading="lazy">' +
                   '</div>'
                 );
               }
@@ -1439,11 +1442,6 @@
               gallerySwiper = new Swiper('.gallery-swiper', {
                 initialSlide: initialIndex,
                 loop: true,
-                lazy: {
-                  loadPrevNext: true,
-                  loadPrevNextAmount: 2, // 이전/다음 2개 이미지 미리 로드
-                  checkInView: true,
-                },
                 navigation: {
                   nextEl: '.swiper-button-next',
                   prevEl: '.swiper-button-prev',
