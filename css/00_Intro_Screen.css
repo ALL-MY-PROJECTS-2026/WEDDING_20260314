@@ -91,7 +91,7 @@
 }
 
 .intro-flower-svg path {
-    stroke: rgb(220, 150, 170);
+    stroke: rgb(255, 192, 203);
     fill: none;
     stroke-width: 3;
     stroke-linecap: round;
@@ -226,7 +226,7 @@
 
 /* SVG path 기본 스타일 */
 .intro-svg path[stroke] {
-    stroke: rgb(220, 150, 170);
+    stroke: rgb(255, 192, 203);
     fill: none;
     stroke-width: 12;
     stroke-linecap: round;
