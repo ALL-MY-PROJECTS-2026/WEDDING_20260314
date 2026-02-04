@@ -66,7 +66,7 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 200px;
+  height: 250px;
   background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1440 520" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path fill="%23ffffff" d="M0,160L48,176C96,192,192,224,288,213.3C384,203,480,149,576,149.3C672,149,768,203,864,213.3C960,224,1056,192,1152,165.3C1248,139,1344,117,1392,106.7L1440,96V520H0Z"></path></svg>');
   opacity:0.5;
 }
@@ -77,75 +77,23 @@
     position: relative;
 }
 
-.wrapper>main>section:nth-child(1) .wave-bottom1{
-    position: absolute;
-    left: 0;
-    top: 70vh;
-    width: 100%;
-    height: 320px;
-    background: #ffffff;
-    background-image: url('../images/bg.png');
-    background-repeat: repeat;
-    
-    /* SVG를 사용하여 물결 모양 생성 - mask-image 방식 */
-    mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="black" fill-opacity="1" d="M0,160L60,176C120,192,240,224,360,229.3C480,235,600,213,720,181.3C840,149,960,107,1080,101.3C1200,96,1320,128,1380,144L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>');
-    -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="black" fill-opacity="1" d="M0,160L60,176C120,192,240,224,360,229.3C480,235,600,213,720,181.3C840,149,960,107,1080,101.3C1200,96,1320,128,1380,144L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>');
-    mask-size: 100% 100%;
-    -webkit-mask-size: 100% 100%;
-    mask-repeat: no-repeat;
-    -webkit-mask-repeat: no-repeat;
-    mask-position: center;
-    -webkit-mask-position: center;
-    
-    z-index: 3;
-    pointer-events: none;
-    transform: translateY(-50%);
-}
 
-.wrapper>main>section:nth-child(1) .wave-bottom2{
-    position: absolute;
-    left: 0;
-    top: 70vh;
-    width: 100%;
-    height: 320px;
-    background: #ffffff;
-    background-image: url('../images/bg.png');
-    background-repeat: repeat;
-    
-    /* 두 번째 물결 레이어 (더 부드러운 효과) */
-    mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="black" fill-opacity="1" d="M0,160L60,176C120,192,240,224,360,229.3C480,235,600,213,720,181.3C840,149,960,107,1080,101.3C1200,96,1320,128,1380,144L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>');
-    -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="black" fill-opacity="1" d="M0,160L60,176C120,192,240,224,360,229.3C480,235,600,213,720,181.3C840,149,960,107,1080,101.3C1200,96,1320,128,1380,144L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>');
-    mask-size: 100% 100%;
-    -webkit-mask-size: 100% 100%;
-    mask-repeat: no-repeat;
-    -webkit-mask-repeat: no-repeat;
-    mask-position: center;
-    -webkit-mask-position: center;
-    
-    z-index: 2;
-    pointer-events: none;
-    transform: translateY(-50%);
-    opacity: 0.9;
-}
 
 /* 일시 및 장소 정보 블록 - 물결 범위 안에서 정가운데 배치 */
 .wrapper>main>section:nth-child(1) .main_image_info_block{
     position: absolute;
-    bottom:0;
+    bottom:35px;
     width: 100%;
-    min-height : 160px;
-    max-height : 160px;
     background: #ffffff; /* 배경색 유지 */
-    background-image: url('../images/bg.png'); /* 종이 질감 유지 */
     background-repeat: repeat;
     text-align: center;
-   
     display: flex;
     flex-direction: column;
     justify-content: center; /* 수직 중앙 정렬 */
     align-items: center; /* 수평 중앙 정렬 */
-  
-    display:none;
+    color : black;
+    z-index: 100;
+   
 }
 
 .wrapper>main>section:nth-child(1) .main_image_info_date{
@@ -157,7 +105,7 @@
     margin-bottom: 2px; /* 간격 축소 */
     letter-spacing: 0.02em;
     position:relative;
-    z-index: 100;
+    z-index: 1001;
     margin-bottom:10px;
 }
 
@@ -170,7 +118,7 @@
     margin-bottom: 1px; /* 간격 축소 */
     letter-spacing: 0.01em;
     position:relative;
-    z-index: 100;
+    z-index: 1001;
     margin-bottom:10px;
 }
 
@@ -184,7 +132,7 @@
     margin-bottom: 0; /* 기본 margin 제거 */
     padding-bottom: 0; /* 정보 블록 padding으로 처리 */
     position:relative;
-    z-index: 100;
+    z-index: 1001;
     margin-bottom:10px;
 }
 
@@ -274,17 +222,17 @@
 /* 스크롤 안내 - 첫 번째 화면(viewport) 기준 우측 하단, 스크롤 시 사라짐 */
 .wrapper>main>section:nth-child(1) .main_image_scroll_hint{
     position: fixed; /* viewport 기준으로 고정 위치 */
-    right: calc((100vw - 23.75rem) / 2 + 1.25rem); /* wrapper 중앙 정렬 고려하여 우측 위치 계산 */
-    bottom: calc(36px + env(safe-area-inset-bottom, 0) + 30px); /* 네비바 높이 + safe-area + 여유 공간 (더 아래로 배치) */
+    right: calc((100vw - 23.7rem) / 2 ); /* wrapper 중앙 정렬 고려하여 우측 위치 계산 */
+    bottom: calc(36px + env(safe-area-inset-bottom, 0) + 5px); /* 네비바 높이 + safe-area + 여유 공간 (더 아래로 배치) */
     z-index: 2147483646; /* 네비바보다 낮지만 다른 요소보다 높게 */
     pointer-events: none;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 0.35rem;
-    padding: 0.5rem 0.65rem;
+    padding: 0.5rem 0.35rem;
     background: rgba(0, 0, 0, 0.35);
-    border-radius: 25px;
+    border-radius: 15px;
     opacity: 0;
     animation: none; /* 기본적으로 애니메이션 비활성화 */
     transition: opacity 1.2s ease-out;

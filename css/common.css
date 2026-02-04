@@ -749,13 +749,11 @@ main>section:nth-child(4)>.bottom>.bottom-body{
     justify-content: left;
     align-items: start;
     /* border : 1px solid red; */
-    margin:5px 0px;
-    padding-bottom: 15px;
+    margin: 8px 0px;
 }
 .wrapper>main>section:nth-child(6)>.info>div>.left{
-    margin-right:10px;
-  
-
+    margin-right: 15px;
+    flex-shrink: 0;
 }
 .wrapper>main>section:nth-child(6)>.info>div>.right{
     text-align:left;
@@ -765,24 +763,29 @@ main>section:nth-child(4)>.bottom>.bottom-body{
 
 .wrapper>main>section:nth-child(6)>.info>div>.right>.title{
     color : black;
-    font-size : 1rem;
-    
-    margin-bottom:5px;
+    font-size : 1.1rem;
+    font-weight: 500;
+    margin-bottom: 8px;
 }
 .wrapper>main>section:nth-child(6)>.info>div>.right>.contents{
-    font-size:1rem;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin-bottom: 6px;
+    color: rgb(58, 58, 58);
 }
 
 .wrapper>main>section:nth-child(6)>.info>.subway{
-    
+    padding-bottom: 20px;
     border-bottom : 1px solid lightgray;
 }
 .wrapper>main>section:nth-child(6)>.info>.bus{
-    padding-top : 10px;
+    padding-top : 20px;
+    padding-bottom: 20px;
     border-bottom : 1px solid lightgray;
 }
 .wrapper>main>section:nth-child(6)>.info>.parking{
-    padding-top : 10px;
+    padding-top : 20px;
+    padding-bottom: 10px;
 }
 
 /* Section 07 */
@@ -1166,29 +1169,29 @@ main>section:nth-child(4)>.bottom>.bottom-body{
     
 }
 
-.wrapper>main>section:nth-child(9)>.accordion .accordion-body span,a,div{
+.wrapper>main>section#section-10>.accordion .accordion-body span,a,div{
     font-size:1rem;
 }
-.wrapper>main>section:nth-child(9)>.accordion .accordion-body>div>.account{
-    display:flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom:5px;
+.wrapper>main>section#section-10>.accordion .accordion-body>div>.account{
+    display:flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    margin-bottom:5px !important;
    
 }
 
-.wrapper>main>section:nth-child(9)>.accordion .accordion-body>div>.account>.left{
+cordion .accordion-body>div>.account>.left{.wrapper>main>section:nth-child(9)>.ac
    
 }
-.wrapper>main>section:nth-child(9)>.accordion .accordion-body>div>.account>.right{}
-.wrapper>main>section:nth-child(9)>.accordion .accordion-body>div>.name{
+.wrapper>main>section#section-10>.accordion .accordion-body>div>.account>.right{}
+.wrapper>main>section#section-10>.accordion .accordion-body>div>.name{
     display:flex;
     justify-content: left;
     align-items: center;
     
 }
 
-.wrapper>main>section:nth-child(9)>.accordion a{
+.wrapper>main>section#section-10>.accordion a{
     display:block;
     width : 35px;
     height:25px;
