@@ -26,12 +26,16 @@
     color : rgb(73, 65, 58);
     font-size:.9rem;
 }
-
+.wrapper>header>nav>div:nth-child(3){
+    letter-spacing: 2px;
+    color : rgb(73, 65, 58);
+    font-size:.9rem;
+}
 /* main */
 .wrapper>main{}
 .wrapper>main>section{
     width : 335px;
-    padding : 40px 0px;
+    padding : 40px 0px 0px 0px;
     margin : 0 auto;
     
     position:relative;
@@ -41,7 +45,7 @@
 .wrapper>main>section:nth-child(1){
     position:relative;
     padding: 0;
-    padding-bottom: 50px; /* 하단 네비와의 간격 (정보 블록과 네비바 사이 여유 공간) */
+    padding-bottom: 0;
     width: 100%;
     min-height: auto; /* 자동 높이로 변경하여 정보 블록이 보이도록 */
 }

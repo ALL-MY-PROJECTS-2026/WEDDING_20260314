@@ -87,7 +87,9 @@ body{
     margin-top : 10px;
     margin-bottom : 20px;
 }
-.wrapper>main>section:nth-child(2)>.contents>.sentence-02{}
+.wrapper>main>section:nth-child(2)>.contents>.sentence-02{
+    font-size:1rem;
+}
 
 /* section2에서 종이질감 제거 */
 .wrapper>main>section:nth-child(2)::before{
@@ -142,7 +144,9 @@ body{
     margin-bottom : 30px;
 }
 
-.wrapper>main>section:nth-child(3)>.contents>.sentence-01{}
+.wrapper>main>section:nth-child(3)>.contents>.sentence-01{
+    font-size:1rem;
+}
 
 .wrapper>main>section:nth-child(3)>.contents>.image-block-01{
    
@@ -153,11 +157,10 @@ body{
     margin:20px 0px;
 }
 .wrapper>main>section:nth-child(3)>.contents>.sentence-02{
-    letter-spacing: 2px;
     margin:20px 0px;
 }
 .wrapper>main>section:nth-child(3)>.contents>.sentence-02 span{
-    font-size:1.2rem;
+    font-size:1rem;
 }
 
 /* 종이 질감 오버레이 효과 - span 블록 배경색을 종이질감과 동일하게 */
@@ -254,6 +257,23 @@ main>section:nth-child(4){
     border-radius: 15px;
     position: relative;
 }
+.wrapper>main>section:nth-child(4)>.sub-title{ 
+    letter-spacing: 2px;  
+    margin-bottom:10px;
+    color : rgb(194, 178, 178);
+    font-size : 11.4872px;
+    letter-spacing: 3px;
+    height:20px;
+    text-align: center;
+}
+.wrapper>main>section:nth-child(4)>.greeting-title{
+    color :rgb(137, 117, 122);
+    font-size : 18.0513px;
+    letter-spacing: 0.5px;
+    height:32px;;
+    margin-bottom : 30px;
+}
+
 /* section-04 종이질감 - 배경색 유지 */
 main>section:nth-child(4)::before{
     content: '';
@@ -297,10 +317,11 @@ main>section:nth-child(4)>.datetime-block>div{
     margin-bottom : 10px;
 }
 main>section:nth-child(4)>.datetime-block>.top-date{
-    font-size : 1.2rem;
+    font-size : 1rem;
     letter-spacing: 2px;
 }
 main>section:nth-child(4)>.datetime-block>.top-hours{
+    font-size:1rem;
     letter-spacing: 1px;
 }
 main>section:nth-child(4)>.calender{
@@ -318,7 +339,7 @@ main>section:nth-child(4)>.calender th,td{
     height : 45px;
     /* border : 1px solid gray; */
     margin : 2px;
-    font-size:0.9rem;
+    font-size:1rem;
 }
 
 main>section:nth-child(4)>.calender>table .rest-day{
@@ -399,7 +420,9 @@ main>section:nth-child(4)>.bottom>.bottom-header>.hours{}
 main>section:nth-child(4)>.bottom>.bottom-header>.min{}
 main>section:nth-child(4)>.bottom>.bottom-header>.sec{}
 
-main>section:nth-child(4)>.bottom>.bottom-body{}
+main>section:nth-child(4)>.bottom>.bottom-body{
+    font-size:1rem;
+}
 
 /* Section 05 */
 .wrapper>main>section:nth-child(5){
@@ -415,7 +438,6 @@ main>section:nth-child(4)>.bottom>.bottom-body{}
     text-align: center;
 }
 .wrapper>main>section:nth-child(5)>.greeting-title{
-    font-size:1.3rem;     
     color :rgb(137, 117, 122);
     font-size : 18.0513px;
     letter-spacing: 0.5px;
@@ -558,11 +580,11 @@ main>section:nth-child(4)>.bottom>.bottom-body{}
     display:flex;
     justify-content: center;
     align-items: center;
-    font-size:0.9rem;
+    font-size:1rem;
 }
 
 .wrapper>main>section:nth-child(5) .more-picture-btn-block>span{
-    font-size:0.9rem;
+    font-size:1rem;
     margin-right:5px;
 }
 
@@ -615,21 +637,23 @@ main>section:nth-child(4)>.bottom>.bottom-body{}
 .wrapper>main>section:nth-child(6)>.title-01{
     color:rgb(182, 156, 160);
     opacity: 0.7;
-    font-size:0.8rem;
+    font-size:11.4872px;
     letter-spacing: 2px;
 }
 .wrapper>main>section:nth-child(6)>.title-02{
     color:rgb(189, 176, 178);
-    font-size:1.3rem;
+    font-size:18.0513px;
     font-weight:100;
     margin-bottom:25px;
 }
 .wrapper>main>section:nth-child(6)>.location{
     color:black;
+    font-size:1rem;
 }
 .wrapper>main>section:nth-child(6)>.address{
     margin-bottom:20px;
     color : gray;
+    font-size:1rem;
 }
 .wrapper>main>section:nth-child(6)>.map{
     width:320px;
@@ -746,7 +770,7 @@ main>section:nth-child(4)>.bottom>.bottom-body{}
     margin-bottom:5px;
 }
 .wrapper>main>section:nth-child(6)>.info>div>.right>.contents{
-    font-size:0.85rem;
+    font-size:1rem;
 }
 
 .wrapper>main>section:nth-child(6)>.info>.subway{
@@ -773,7 +797,6 @@ main>section:nth-child(4)>.bottom>.bottom-body{}
     text-align: center;
 }
 .wrapper>main>section:nth-child(7)>.title02{
-    font-size:1.3rem;     
     color :rgb(137, 117, 122);
     font-size : 18.0513px;
     letter-spacing: 0.5px;
@@ -828,6 +851,7 @@ main>section:nth-child(4)>.bottom>.bottom-body{}
     padding : 32.821px 13.128px ;
     position: relative;
     z-index: 2;
+    font-size:1rem;
    
 }
 .wrapper>main>section:nth-child(7)>.info-block>.show-block>.image-block{
@@ -1086,6 +1110,7 @@ main>section:nth-child(4)>.bottom>.bottom-body{}
 .wrapper>main>section:nth-child(9)>.accordion{
     width : 320px;
     margin : 0 auto;
+
 }
 
 .wrapper>main>section:nth-child(9)>.accordion>.accordion-item{
@@ -1142,7 +1167,7 @@ main>section:nth-child(4)>.bottom>.bottom-body{}
 }
 
 .wrapper>main>section:nth-child(9)>.accordion .accordion-body span,a,div{
-    font-size:.8rem;
+    font-size:1rem;
 }
 .wrapper>main>section:nth-child(9)>.accordion .accordion-body>div>.account{
     display:flex;
@@ -1190,7 +1215,6 @@ main>section:nth-child(4)>.bottom>.bottom-body{}
     text-align: center;
 }
 .wrapper>main>section.account .title02{
-    font-size:1.3rem;     
     color :rgb(137, 117, 122);
     font-size : 18.0513px;
     letter-spacing: 0.5px;
@@ -1201,7 +1225,7 @@ main>section:nth-child(4)>.bottom>.bottom-body{}
 /* Section 11 */
 .wrapper>main>section:nth-child(10){
     height:400px;
-    
+ 
 }
 .wrapper>main>section:nth-child(10)>.title01{
     color : rgb(194, 178, 178);
@@ -1265,6 +1289,7 @@ main>section:nth-child(4)>.bottom>.bottom-body{}
 
 /* Footer */
 .wrapper>footer{
+    margin-top : 20px;
     padding : 40px 0px;
     position:relative;
     height : 350px;
@@ -1299,6 +1324,7 @@ main>section:nth-child(4)>.bottom>.bottom-body{}
     display:flex;
     justify-content: center;
     align-items: center;
+    color : white;
   
 
 }
