@@ -139,9 +139,9 @@
   margin: -1px 0;
 }
 
-/* 가운데 o (노란색, 채워진 형태, 작게) */
+/* 가운데 o (노란색, 채워진 형태, 작게, 연하게) */
 .wrapper>main>section:nth-child(1) .main_image .bee .bee-body {
-  color: #ffd700;
+  color: #ffeb3b;
   font-size: 0;
   font-weight: 900;
   animation: bee-buzz 0.15s ease-in-out infinite;
@@ -149,21 +149,22 @@
   position: relative;
   width: 7px;
   height: 7px;
-  background-color: #ffd700;
+  background-color: #ffeb3b;
   border-radius: 50%;
-  border: 1px solid #000000;
+  border: none;
   box-sizing: border-box;
   margin: 0 1px;
+  opacity: 0.85;
 }
 
-/* 벌 무늬 - 검정 세로 줄 | */
+/* 벌 무늬 - 연한 검정 세로 줄 | */
 .wrapper>main>section:nth-child(1) .main_image .bee .bee-body::before {
   content: "|";
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  color: #000000;
+  color: rgba(0, 0, 0, 0.4);
   font-size: 6px;
   font-weight: bold;
   line-height: 1;
