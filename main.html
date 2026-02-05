@@ -136,11 +136,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://hangeul.pstatic.net">
 
-  <!-- google font (지연 로드) - Hi Melody 제거 (사용하지 않음) -->
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" as="style"
+  <!-- google font (지연 로드) -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Hi+Melody&family=Noto+Sans+KR&display=swap" as="style"
     onload="this.onload=null;this.rel='stylesheet'">
   <noscript>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hi+Melody&family=Noto+Sans+KR&display=swap">
   </noscript>
 
   <!-- BS5 - 지연 로드 (모달에서만 사용) -->
@@ -235,6 +235,35 @@
             <span class="main_image_scroll_icon"></span>
             <span class="main_image_scroll_label">스크롤</span>
           </div>
+          <!-- 이름 표시 (왼쪽 하단) -->
+          <div class="main_image_couple_name" aria-hidden="true">
+            민형 <span class="heart">❤</span> 유정
+          </div>
+          <!-- 벌 애니메이션 (세로 형태: ~ ~o ~) -->
+          <div class="bee bee-1">
+            <span class="bee-wing-top">~</span>
+            <span class="bee-body-wrapper">
+              <span class="bee-trail">~</span>
+              <span class="bee-body">o</span>
+            </span>
+            <span class="bee-wing-bottom">~</span>
+          </div>
+          <div class="bee bee-2">
+            <span class="bee-wing-top">~</span>
+            <span class="bee-body-wrapper">
+              <span class="bee-trail">~</span>
+              <span class="bee-body">o</span>
+            </span>
+            <span class="bee-wing-bottom">~</span>
+          </div>
+          <div class="bee bee-3">
+            <span class="bee-wing-top">~</span>
+            <span class="bee-body-wrapper">
+              <span class="bee-trail">~</span>
+              <span class="bee-body">o</span>
+            </span>
+            <span class="bee-wing-bottom">~</span>
+          </div>
           <div class="volumn_block volumn_block--overlay" style="display:none!important">
             <input type="checkbox" id="volumn-chk" checked>
             <div><label for="volumn-chk"><span class="material-symbols-outlined volumn_up">volume_up</span></label>
@@ -246,12 +275,22 @@
         <!--  -->
         <div class="wave-bottom1"></div>
         <div class="wave-bottom2"></div>
-        
-        <!-- 일시 및 장소 정보 블록 -->
-        <div class="main_image_info_block">
-          <div class="main_image_info_location">웨딩그룹위더스 안양 </div>
-          <div class="main_image_info_location">6층 벨라홀 </div>
-          <div class="main_image_info_date">2026년 3월 14일 토요일 오후 03시 30분</div>
+      </section>
+
+      <!-- ----------------------------- 
+        01-1 일시 및 장소 정보
+       ----------------------------- -->
+      <section id="section-01-1" class="scroll-spy">
+        <div class="contents back-to-position to-up">
+          <div class="title back-to-position to-up">
+            <div class="m-title">WEDDING INFORMATION</div>
+            <div class="sub-title">결혼식 안내</div>
+          </div>
+          <div class="info-block back-to-position to-up">
+            <div class="info-location">웨딩그룹위더스 안양</div>
+            <div class="info-location">6층 벨라홀</div>
+            <div class="info-date">2026년 3월 14일 토요일 오후 03시 30분</div>
+          </div>
         </div>
       </section>
 
@@ -606,23 +645,30 @@
               <div class="contents">일반(1, 1-2, 5, 8-2, 11-2, 15, 15-2, 20, 31-7, 32, 64, 88, 350) · 마을(10-1, 10-2)</div>
             </div>
           </div>
-          <div class="parking back-to-position to-up">
-            <div class="left">
-              <span class="material-symbols-outlined">local_parking</span>
-            </div>
-            <div class="right">
-              <div class="title">주차안내</div>
-              <div class="contents">광명역(KTX)에서 택시로 약 20분 거리입니다.</div>
-              <div class="contents">먼 길 와주셔서 진심으로 감사드립니다.</div>
-            </div>
-          </div>
 
         </div>
       </section>
       <!-- ----------------------------- 
-        07
+        07 주차안내
        ----------------------------- -->
       <section id="section-07" class="scroll-spy">
+        <div class="contents back-to-position to-up">
+          <div class="title back-to-position to-up">
+            <div class="m-title">PARKING</div>
+            <div class="sub-title">주차안내</div>
+            <div class="parking-item">
+              <div class="right">
+                <div>본건물 (지하 1~2층, 지상 2~4층) 2시간 무료</div>
+                <div>외부주차 : 2시간 무료</div>
+                <div>행사 당일 주차장이 혼잡하오니 대중교통을 이용해 주시면 감사하겠습니다.</div>
+                <div>-</div>
+                <div class="contents">광명역(KTX)에서 택시로 약 20분 거리입니다.</div>
+                <div class="contents">먼 길 와주셔서 진심으로 감사드립니다.</div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
       </section>
 
 
@@ -1045,7 +1091,7 @@
       //-------------------
       // TOP-DATE
       //-------------------
-      const topDateEl = document.querySelector('.wrapper>main>section:nth-child(4) .top-date')
+      const topDateEl = document.querySelector('.wrapper>main>section#section-04 .top-date')
       topDateEl.innerHTML = calendarYear + ".";
       if (calendarMonth < 10)
         topDateEl.innerHTML += "0" + calendarMonth + ".";
@@ -1061,7 +1107,7 @@
       //-------------------
       // TOP-HOURS
       //-------------------
-      const topHoursEl = document.querySelector('.wrapper>main>section:nth-child(4) .top-hours')
+      const topHoursEl = document.querySelector('.wrapper>main>section#section-04 .top-hours')
       if (yoil == 0)
         topHoursEl.innerHTML = '일요일 ' + time;
       else if (yoil == 1)
@@ -1082,14 +1128,14 @@
       //-------------------
       let day = 1;
       //FirstRow
-      const tdStartEls = document.querySelectorAll(".wrapper>main>section:nth-child(4) table td.start-days");
+      const tdStartEls = document.querySelectorAll(".wrapper>main>section#section-04 table td.start-days");
       tdStartEls.forEach(tdEl => {
         const start_no = tdEl.getAttribute('data-start');
         if (start_no >= calendarMonthStartDay)
           tdEl.innerHTML = (day++);
       })
       //EtcRow
-      const tdEtcEls = document.querySelectorAll(".wrapper>main>section:nth-child(4) table td.days");
+      const tdEtcEls = document.querySelectorAll(".wrapper>main>section#section-04 table td.days");
       tdEtcEls.forEach(tdEl => {
 
         if (day <= monthLastDate)
@@ -1098,7 +1144,7 @@
         day++;
       })
       // D-DAY 표시(classname : d-day)
-      const tdEls = document.querySelectorAll(".wrapper>main>section:nth-child(4) table td");
+      const tdEls = document.querySelectorAll(".wrapper>main>section#section-04 table td");
       tdEls.forEach(tdEl => {
         if (tdEl.innerHTML == d_day)
           tdEl.classList.add('d-day');
@@ -1114,10 +1160,10 @@
 
 
     // D DAY FUNCTION
-    const dayEls = document.querySelectorAll('.wrapper>main>section:nth-child(4) .bottom .day>span');
-    const hoursEl = document.querySelector('.wrapper>main>section:nth-child(4) .bottom .hours>span');
-    const minEl = document.querySelector('.wrapper>main>section:nth-child(4) .bottom .min>span');
-    const secEl = document.querySelector('.wrapper>main>section:nth-child(4) .bottom .sec>span');
+    const dayEls = document.querySelectorAll('.wrapper>main>section#section-04 .bottom .day>span');
+    const hoursEl = document.querySelector('.wrapper>main>section#section-04 .bottom .hours>span');
+    const minEl = document.querySelector('.wrapper>main>section#section-04 .bottom .min>span');
+    const secEl = document.querySelector('.wrapper>main>section#section-04 .bottom .sec>span');
 
     const d_day_func = (weddingDate) => {
 

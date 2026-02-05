@@ -58,15 +58,20 @@ body{
    섹션별 CSS 통합 (02_Section.css ~ 12_Footer.css)
    ============================================ */
 
+/* Section 01-1 - 일시 및 장소 정보 (새로 추가된 섹션) */
+.wrapper>main>section#section-01-1{
+    margin-top: 0;
+}
+
 /* Section 02 */
-.wrapper>main>section:nth-child(2){
+.wrapper>main>section#section-02{
     margin-top:40px;
 }
-.wrapper>main>section:nth-child(2)>.contents{
+.wrapper>main>section#section-02>.contents{
     position:relative;
 }
 
-.wrapper>main>section:nth-child(2)>.contents::before{
+.wrapper>main>section#section-02>.contents::before{
     content:"";
     display:block;
     width:100%;
@@ -82,17 +87,17 @@ body{
     background-position: center;
     
 }
-.wrapper>main>section:nth-child(2)>.contents>.sentence-01{
+.wrapper>main>section#section-02>.contents>.sentence-01{
     font-size:1rem;
     margin-top : 10px;
     margin-bottom : 20px;
 }
-.wrapper>main>section:nth-child(2)>.contents>.sentence-02{
+.wrapper>main>section#section-02>.contents>.sentence-02{
     font-size:1rem;
 }
 
 /* section2에서 종이질감 제거 */
-.wrapper>main>section:nth-child(2)::before{
+.wrapper>main>section#section-02::before{
     content: '';
     position: absolute;
     top: 0;
@@ -104,7 +109,7 @@ body{
     /* background-color: #ffffff; */
 }
 
-.wrapper>main>section:nth-child(2)::after{
+.wrapper>main>section#section-02::after{
     content: '';
     position: absolute;
     top: 0;
@@ -115,19 +120,19 @@ body{
     /* background-color: #ffffff; */
 }
 
-.wrapper>main>section:nth-child(2) > * {
+.wrapper>main>section#section-02 > * {
     position: relative;
     z-index: 3;
 }
 
 /* Section 03 */
-.wrapper>main>section:nth-child(3){}
-.wrapper>main>section:nth-child(3)>.contents{}
-.wrapper>main>section:nth-child(3)>.contents>div{
+.wrapper>main>section#section-03{}
+.wrapper>main>section#section-03>.contents{}
+.wrapper>main>section#section-03>.contents>div{
     margin:20px 0px;
 }
-.wrapper>main>section:nth-child(3)>.contents>.title{}
-.wrapper>main>section:nth-child(3)>.contents>.title>.m-title{
+.wrapper>main>section#section-03>.contents>.title{}
+.wrapper>main>section#section-03>.contents>.title>.m-title{
     margin-bottom:10px;
     color : rgb(194, 178, 178);
     font-size : 11.4872px;
@@ -135,7 +140,7 @@ body{
     height:20px;
     text-align: center;
 }
-.wrapper>main>section:nth-child(3)>.contents>.title>.sub-title{
+.wrapper>main>section#section-03>.contents>.title>.sub-title{
    
     color :rgb(137, 117, 122);
     font-size : 18.0513px;
@@ -144,27 +149,27 @@ body{
     margin-bottom : 30px;
 }
 
-.wrapper>main>section:nth-child(3)>.contents>.sentence-01{
+.wrapper>main>section#section-03>.contents>.sentence-01{
     font-size:1rem;
 }
 
-.wrapper>main>section:nth-child(3)>.contents>.image-block-01{
+.wrapper>main>section#section-03>.contents>.image-block-01{
    
 }
-.wrapper>main>section:nth-child(3)>.contents>.image-block-01>img{
+.wrapper>main>section#section-03>.contents>.image-block-01>img{
     width:100%;
     border-radius: 10px;
     margin:20px 0px;
 }
-.wrapper>main>section:nth-child(3)>.contents>.sentence-02{
+.wrapper>main>section#section-03>.contents>.sentence-02{
     margin:20px 0px;
 }
-.wrapper>main>section:nth-child(3)>.contents>.sentence-02 span{
+.wrapper>main>section#section-03>.contents>.sentence-02 span{
     font-size:1rem;
 }
 
 /* 종이 질감 오버레이 효과 - span 블록 배경색을 종이질감과 동일하게 */
-.wrapper>main>section:nth-child(3)>.contents>.sentence-02 span[style*="position:relative"] {
+.wrapper>main>section#section-03>.contents>.sentence-02 span[style*="position:relative"] {
     position: relative;
     display: inline-block;
     background-color: transparent; /* 배경 이미지가 보이도록 투명하게 변경 */
@@ -173,7 +178,7 @@ body{
     z-index: 0;
 }
 
-.wrapper>main>section:nth-child(3)>.contents>.sentence-02 span[style*="position:relative"]::before {
+.wrapper>main>section#section-03>.contents>.sentence-02 span[style*="position:relative"]::before {
     content: '';
     position: absolute;
     top: 0;
@@ -188,7 +193,7 @@ body{
     opacity: 1;
 }
 
-.wrapper>main>section:nth-child(3)>.contents>.sentence-02 span[style*="position:relative"]::after {
+.wrapper>main>section#section-03>.contents>.sentence-02 span[style*="position:relative"]::after {
     content: '';
     position: absolute;
     top: 0;
@@ -204,7 +209,7 @@ body{
 }
 
 /* 국화꽃 아이콘에 종이 질감 효과 적용 - 흰색 배경 완전 제거 */
-.wrapper>main>section:nth-child(3)>.contents>.sentence-02 img[src*="flower_chrysanthemum"] {
+.wrapper>main>section#section-03>.contents>.sentence-02 img[src*="flower_chrysanthemum"] {
     position: relative;
     display: inline-block;
     vertical-align: middle;
@@ -219,10 +224,10 @@ body{
 }
 
 
-.wrapper>main>section:nth-child(3)>.contents>.btn-block{
+.wrapper>main>section#section-03>.contents>.btn-block{
 
 }
-.wrapper>main>section:nth-child(3)>.contents>.btn-block>button{
+.wrapper>main>section#section-03>.contents>.btn-block>button{
     width:200px;
     height:35px;
     margin : 0 auto;
@@ -238,26 +243,26 @@ body{
     font-size:0.9rem;
 }
 
-.wrapper>main>section:nth-child(3)>.contents>.btn-block>button>span{
+.wrapper>main>section#section-03>.contents>.btn-block>button>span{
     font-size:0.9rem;
     margin-right:5px;
 }
 
 
-.wrapper>main>section:nth-child(3)>.contents>.btn-block>button a{
+.wrapper>main>section#section-03>.contents>.btn-block>button a{
     text-decoration: none;
     color :gray;
 }
 
 /* Section 04 */
-main>section:nth-child(4){
+.wrapper>main>section#section-04{
     background-color: rgb(251, 250, 248);
     background-image: url('../images/bg.png');
     background-repeat: repeat;
     border-radius: 15px;
     position: relative;
 }
-.wrapper>main>section:nth-child(4)>.sub-title{ 
+.wrapper>main>section#section-04>.sub-title{ 
     letter-spacing: 2px;  
     margin-bottom:10px;
     color : rgb(194, 178, 178);
@@ -266,7 +271,7 @@ main>section:nth-child(4){
     height:20px;
     text-align: center;
 }
-.wrapper>main>section:nth-child(4)>.greeting-title{
+.wrapper>main>section#section-04>.greeting-title{
     color :rgb(137, 117, 122);
     font-size : 18.0513px;
     letter-spacing: 0.5px;
@@ -275,7 +280,7 @@ main>section:nth-child(4){
 }
 
 /* section-04 종이질감 - 배경색 유지 */
-main>section:nth-child(4)::before{
+.wrapper>main>section#section-04::before{
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
@@ -287,12 +292,12 @@ main>section:nth-child(4)::before{
     border-radius: 15px;
 }
 /* section-04 내부 콘텐츠가 종이질감 위에 표시되도록 */
-main>section:nth-child(4) > * {
+.wrapper>main>section#section-04 > * {
     position: relative;
     z-index: 1;
 }
 
-main>section:nth-child(4)>.wedding-day-title{
+.wrapper>main>section#section-04>.wedding-day-title{
     font-size: 1rem;
     letter-spacing: 3px;
     color: #7b0101;
@@ -300,7 +305,7 @@ main>section:nth-child(4)>.wedding-day-title{
     font-weight: 800;
 }
 
-main>section:nth-child(4)>.datetime-block{
+.wrapper>main>section#section-04>.datetime-block{
     width : 300px;
     height : 80px;
     margin : 0 auto;
@@ -313,28 +318,28 @@ main>section:nth-child(4)>.datetime-block{
     flex-direction: column;
 
 }
-main>section:nth-child(4)>.datetime-block>div{
+.wrapper>main>section#section-04>.datetime-block>div{
     margin-bottom : 10px;
 }
-main>section:nth-child(4)>.datetime-block>.top-date{
+.wrapper>main>section#section-04>.datetime-block>.top-date{
     font-size : 1rem;
     letter-spacing: 2px;
 }
-main>section:nth-child(4)>.datetime-block>.top-hours{
+.wrapper>main>section#section-04>.datetime-block>.top-hours{
     font-size:1rem;
     letter-spacing: 1px;
 }
-main>section:nth-child(4)>.calender{
+.wrapper>main>section#section-04>.calender{
   
     margin :0 auto;
     margin-bottom :20px;
     
 }
-main>section:nth-child(4)>.calender table{
+.wrapper>main>section#section-04>.calender table{
    
   width : 100%;
 }
-main>section:nth-child(4)>.calender th,td{
+.wrapper>main>section#section-04>.calender th,td{
     width : 45px;
     height : 45px;
     /* border : 1px solid gray; */
@@ -342,24 +347,24 @@ main>section:nth-child(4)>.calender th,td{
     font-size:1rem;
 }
 
-main>section:nth-child(4)>.calender>table .rest-day{
+.wrapper>main>section#section-04>.calender>table .rest-day{
     color : rgb(160, 2, 2);
 }
-main>section:nth-child(4)>.calender>table .d-day{
+.wrapper>main>section#section-04>.calender>table .d-day{
     background-color: lightcoral;
     border-radius: 50%;
 
     color:white;
 }
 
-main>section:nth-child(4)>.bottom{}
+.wrapper>main>section#section-04>.bottom{}
 
-main>section:nth-child(4)>.bottom>.bottom-header{
+.wrapper>main>section#section-04>.bottom>.bottom-header{
     display:flex;
     justify-content: center;
     margin-bottom:20px;
 }
-main>section:nth-child(4)>.bottom>.bottom-header>div{
+.wrapper>main>section#section-04>.bottom>.bottom-header>div{
     width : 50px;
     height : 50px;
     border-radius: 5px;
@@ -374,7 +379,7 @@ main>section:nth-child(4)>.bottom>.bottom-header>div{
     padding-top:5px;
     
 }
-main>section:nth-child(4)>.bottom>.bottom-header>div::after{
+.wrapper>main>section#section-04>.bottom>.bottom-header>div::after{
     content : ":";
 
     display:block;
@@ -382,12 +387,12 @@ main>section:nth-child(4)>.bottom>.bottom-header>div::after{
     left:120%;
     top:25%;
 }
-main>section:nth-child(4)>.bottom>.bottom-header>div:last-child::after{
+.wrapper>main>section#section-04>.bottom>.bottom-header>div:last-child::after{
     display:none;
 
 }
 
-main>section:nth-child(4)>.bottom>.bottom-header>div:before{
+.wrapper>main>section#section-04>.bottom>.bottom-header>div:before{
  
     display:block;
     width:100%;
@@ -399,36 +404,36 @@ main>section:nth-child(4)>.bottom>.bottom-header>div:before{
     color:gray;
     opacity: 0.8;
 }
-main>section:nth-child(4)>.bottom>.bottom-header>div:nth-child(1)::before{
+.wrapper>main>section#section-04>.bottom>.bottom-header>div:nth-child(1)::before{
     content:"DAYS";
 }
 
-main>section:nth-child(4)>.bottom>.bottom-header>div:nth-child(2)::before{
+.wrapper>main>section#section-04>.bottom>.bottom-header>div:nth-child(2)::before{
     content:"HOURS";
 
 }
-main>section:nth-child(4)>.bottom>.bottom-header>div:nth-child(3)::before{
+.wrapper>main>section#section-04>.bottom>.bottom-header>div:nth-child(3)::before{
     content:"MIN";
 
 }
-main>section:nth-child(4)>.bottom>.bottom-header>div:nth-child(4)::before{
+.wrapper>main>section#section-04>.bottom>.bottom-header>div:nth-child(4)::before{
     content:"SEC";
 
 }
-main>section:nth-child(4)>.bottom>.bottom-header>.day{}
-main>section:nth-child(4)>.bottom>.bottom-header>.hours{}
-main>section:nth-child(4)>.bottom>.bottom-header>.min{}
-main>section:nth-child(4)>.bottom>.bottom-header>.sec{}
+.wrapper>main>section#section-04>.bottom>.bottom-header>.day{}
+.wrapper>main>section#section-04>.bottom>.bottom-header>.hours{}
+.wrapper>main>section#section-04>.bottom>.bottom-header>.min{}
+.wrapper>main>section#section-04>.bottom>.bottom-header>.sec{}
 
-main>section:nth-child(4)>.bottom>.bottom-body{
+.wrapper>main>section#section-04>.bottom>.bottom-body{
     font-size:1rem;
 }
 
 /* Section 05 */
-.wrapper>main>section:nth-child(5){
+.wrapper>main>section#section-05{
     margin-top:50px;   
 }
-.wrapper>main>section:nth-child(5)>.sub-title{ 
+.wrapper>main>section#section-05>.sub-title{ 
     letter-spacing: 2px;  
     margin-bottom:10px;
     color : rgb(194, 178, 178);
@@ -437,7 +442,7 @@ main>section:nth-child(4)>.bottom>.bottom-body{
     height:20px;
     text-align: center;
 }
-.wrapper>main>section:nth-child(5)>.greeting-title{
+.wrapper>main>section#section-05>.greeting-title{
     color :rgb(137, 117, 122);
     font-size : 18.0513px;
     letter-spacing: 0.5px;
@@ -446,11 +451,11 @@ main>section:nth-child(4)>.bottom>.bottom-body{
 }
 
 /* 갤러리 섹션 빈 화면 지연 문제 해결 - transition 제거 */
-.wrapper>main>section:nth-child(5) .back-to-position {
+.wrapper>main>section#section-05 .back-to-position {
     transition: none !important; /* transition 완전 제거 - 즉시 표시 */
     will-change: transform, opacity; /* Transform 최적화 - 모바일 스크롤 성능 개선 */
 }
-.wrapper>main>section:nth-child(5).to-up .back-to-position {
+.wrapper>main>section#section-05.to-up .back-to-position {
     opacity: 1 !important; /* 즉시 표시 */
     transform: translateY(-50px) !important;
 }
@@ -462,7 +467,7 @@ main>section:nth-child(4)>.bottom>.bottom-body{
 
 
 
-.wrapper>main>section:nth-child(5)>.gallery-block{
+.wrapper>main>section#section-05>.gallery-block{
     width : 340px;
     height : 630px;
     margin : 0 auto;
@@ -475,12 +480,12 @@ main>section:nth-child(4)>.bottom>.bottom-body{
     will-change: transform; /* Transform 최적화 - 모바일 스크롤 성능 개선 */
     contain: layout style paint; /* 레이아웃 격리 - 리플로우 범위 축소 */
 }
-.wrapper>main>section:nth-child(5)>.gallery-block>.item{
+.wrapper>main>section#section-05>.gallery-block>.item{
     display:flex;
     justify-content: center;
     align-items: center;
 }
-.wrapper>main>section:nth-child(5)>.gallery-block>.item>.left{
+.wrapper>main>section#section-05>.gallery-block>.item>.left{
     width : 160px;
     height : 200px;
     margin : 5px;
@@ -488,12 +493,12 @@ main>section:nth-child(4)>.bottom>.bottom-body{
     border-radius: 5px;
     overflow: hidden;
 }
-.wrapper>main>section:nth-child(5)>.gallery-block>.item>.left>img{
+.wrapper>main>section#section-05>.gallery-block>.item>.left>img{
     border-radius: 4px;
     display: block;
 }
 
-.wrapper>main>section:nth-child(5)>.gallery-block>.item>.right{
+.wrapper>main>section#section-05>.gallery-block>.item>.right{
     width : 160px;
     height : 200px;
     margin : 5px;
@@ -501,8 +506,8 @@ main>section:nth-child(4)>.bottom>.bottom-body{
     border-radius: 5px;
     overflow: hidden;
 }
-.wrapper>main>section:nth-child(5)>.gallery-block>.item>.left,
-.wrapper>main>section:nth-child(5)>.gallery-block>.item>.right
+.wrapper>main>section#section-05>.gallery-block>.item>.left,
+.wrapper>main>section#section-05>.gallery-block>.item>.right
 {
     display:flex;
     justify-content: center;
@@ -510,8 +515,8 @@ main>section:nth-child(4)>.bottom>.bottom-body{
     flex-direction: column;
 }
 
-.wrapper>main>section:nth-child(5)>.gallery-block>.item>.left>div,
-.wrapper>main>section:nth-child(5)>.gallery-block>.item>.right>div
+.wrapper>main>section#section-05>.gallery-block>.item>.left>div,
+.wrapper>main>section#section-05>.gallery-block>.item>.right>div
 {
     width : 150px;
     height : 90px;
@@ -520,44 +525,44 @@ main>section:nth-child(4)>.bottom>.bottom-body{
     margin : 5px;
     overflow: hidden;
 }
-.wrapper>main>section:nth-child(5)>.gallery-block>.item>.left>div>img,
-.wrapper>main>section:nth-child(5)>.gallery-block>.item>.right>div>img
+.wrapper>main>section#section-05>.gallery-block>.item>.left>div>img,
+.wrapper>main>section#section-05>.gallery-block>.item>.right>div>img
 {
     border-radius: 2px;
     display: block;
 }
 
-.wrapper>main>section:nth-child(5)>.gallery-block>.item:last-child>.left{
+.wrapper>main>section#section-05>.gallery-block>.item:last-child>.left{
     height : 300px;
 }
-.wrapper>main>section:nth-child(5)>.gallery-block>.item:last-child>.left>div:nth-child(1){
+.wrapper>main>section#section-05>.gallery-block>.item:last-child>.left>div:nth-child(1){
     height : 200px;
 }
-.wrapper>main>section:nth-child(5)>.gallery-block>.item:last-child>.left>div:nth-child(2){
+.wrapper>main>section#section-05>.gallery-block>.item:last-child>.left>div:nth-child(2){
     height : 100px;
 }
-.wrapper>main>section:nth-child(5)>.gallery-block>.item:last-child>.right{
+.wrapper>main>section#section-05>.gallery-block>.item:last-child>.right{
     height : 300px;
 }
-.wrapper>main>section:nth-child(5)>.gallery-block>.item:last-child>.lrighteft>div:nth-child(1){
+.wrapper>main>section#section-05>.gallery-block>.item:last-child>.lrighteft>div:nth-child(1){
     height : 100px;
 }
-.wrapper>main>section:nth-child(5)>.gallery-block>.item:last-child>.right>div:nth-child(2){
+.wrapper>main>section#section-05>.gallery-block>.item:last-child>.right>div:nth-child(2){
     height : 200px;
 }
 
 
-.wrapper>main>section:nth-child(5)>.gallery-block img{
+.wrapper>main>section#section-05>.gallery-block img{
     width:100%;
     height : 100%;
   object-fit: cover;
 }
 
 
-.wrapper>main>section:nth-child(5) input[type="checkbox"]{
+.wrapper>main>section#section-05 input[type="checkbox"]{
     display:none;
 }
-.wrapper>main>section:nth-child(5) .more-picture-btn-block{
+.wrapper>main>section#section-05 .more-picture-btn-block{
     
     position:absolute;
     left:0;
@@ -567,7 +572,7 @@ main>section:nth-child(4)>.bottom>.bottom-body{
     z-index:115;
     cursor: pointer;
 }
-.wrapper>main>section:nth-child(5) .more-picture-btn-block{
+.wrapper>main>section#section-05 .more-picture-btn-block{
     width:200px;
     height:35px;
     margin : 0 auto;
@@ -583,7 +588,7 @@ main>section:nth-child(4)>.bottom>.bottom-body{
     font-size:1rem;
 }
 
-.wrapper>main>section:nth-child(5) .more-picture-btn-block>span{
+.wrapper>main>section#section-05 .more-picture-btn-block>span{
     font-size:1rem;
     margin-right:5px;
 }
@@ -591,8 +596,8 @@ main>section:nth-child(4)>.bottom>.bottom-body{
 
 /* 추가 이미지들(item-04, item-05) 미리 렌더링하고 숨김 - 즉시 표시를 위해 */
 /* max-height: 0으로 설정하여 구조물은 렌더링되지만 보이지 않게 처리 */
-.wrapper>main>section:nth-child(5)>.gallery-block>.item.item-04,
-.wrapper>main>section:nth-child(5)>.gallery-block>.item.item-05 {
+.wrapper>main>section#section-05>.gallery-block>.item.item-04,
+.wrapper>main>section#section-05>.gallery-block>.item.item-05 {
     max-height: 0 !important; /* 높이를 0으로 설정하여 레이아웃에 영향 없게 */
     overflow: hidden !important; /* 넘치는 내용 숨김 */
     margin: 0 !important;
@@ -602,7 +607,7 @@ main>section:nth-child(4)>.bottom>.bottom-body{
 }
 
 /* 체크박스 체크 시 추가 이미지 표시 및 버튼 숨김 */
-.wrapper>main>section:nth-child(5) input[type="checkbox"]:checked~.gallery-block{
+.wrapper>main>section#section-05 input[type="checkbox"]:checked~.gallery-block{
    height: auto !important; /* 즉시 표시를 위해 auto 사용 */
    min-height: 630px; /* 최소 높이 유지 */
    transition: none !important; /* transition 완전 제거 */
@@ -610,8 +615,8 @@ main>section:nth-child(4)>.bottom>.bottom-body{
    contain: layout style paint;
 }
 
-.wrapper>main>section:nth-child(5) input[type="checkbox"]:checked~.gallery-block>.item.item-04,
-.wrapper>main>section:nth-child(5) input[type="checkbox"]:checked~.gallery-block>.item.item-05 {
+.wrapper>main>section#section-05 input[type="checkbox"]:checked~.gallery-block>.item.item-04,
+.wrapper>main>section#section-05 input[type="checkbox"]:checked~.gallery-block>.item.item-05 {
     max-height: 1000px !important; /* 충분히 큰 값으로 설정하여 즉시 표시 */
     overflow: visible !important; /* overflow 복원 */
     margin: revert !important; /* 기본 margin 복원 */
@@ -624,38 +629,38 @@ main>section:nth-child(4)>.bottom>.bottom-body{
 }
 
 /* 버튼 숨김 - 체크박스 체크 시 */
-.wrapper>main>section:nth-child(5) input[type="checkbox"]:checked~.gallery-block .more-picture-btn-block{
+.wrapper>main>section#section-05 input[type="checkbox"]:checked~.gallery-block .more-picture-btn-block{
     display:none !important;
 }
 
 /* Section 06 */
-.wrapper>main>section:nth-child(6){}
-.wrapper>main>section:nth-child(6)>div{
+.wrapper>main>section#section-06{}
+.wrapper>main>section#section-06>div{
     margin-bottom:5px;
    
 }
-.wrapper>main>section:nth-child(6)>.title-01{
+.wrapper>main>section#section-06>.title-01{
     color:rgb(182, 156, 160);
     opacity: 0.7;
     font-size:11.4872px;
     letter-spacing: 2px;
 }
-.wrapper>main>section:nth-child(6)>.title-02{
+.wrapper>main>section#section-06>.title-02{
     color:rgb(189, 176, 178);
     font-size:18.0513px;
     font-weight:100;
     margin-bottom:25px;
 }
-.wrapper>main>section:nth-child(6)>.location{
+.wrapper>main>section#section-06>.location{
     color:black;
     font-size:1rem;
 }
-.wrapper>main>section:nth-child(6)>.address{
+.wrapper>main>section#section-06>.address{
     margin-bottom:20px;
     color : gray;
     font-size:1rem;
 }
-.wrapper>main>section:nth-child(6)>.map{
+.wrapper>main>section#section-06>.map{
     width:320px;
     height : 320px;
     /* border : 1px solid ; */
@@ -666,7 +671,7 @@ main>section:nth-child(4)>.bottom>.bottom-body{
     align-items : center;
 
 }
-.wrapper>main>section:nth-child(6)>.map #map{
+.wrapper>main>section#section-06>.map #map{
     width: 320px !important;
     height: 320px !important;
     min-height: 320px;
@@ -682,7 +687,7 @@ main>section:nth-child(4)>.bottom>.bottom-body{
 }
 
 
-.wrapper>main>section:nth-child(6)>.map-nav{
+.wrapper>main>section#section-06>.map-nav{
     height : 320px;
     height:25px;
     border : 1px solid lightgray;
@@ -694,7 +699,7 @@ main>section:nth-child(4)>.bottom>.bottom-body{
     align-items: center;
     margin-bottom:20px;
 }
-.wrapper>main>section:nth-child(6)>.map-nav>div{
+.wrapper>main>section#section-06>.map-nav>div{
     flex-grow: 1;
     flex-shrink: 0;
     flex-basis: 100px;
@@ -702,20 +707,20 @@ main>section:nth-child(4)>.bottom>.bottom-body{
   
 }
 
-.wrapper>main>section:nth-child(6)>.map-nav a{
+.wrapper>main>section#section-06>.map-nav a{
     text-decoration: none;
     color:black;
 }
-.wrapper>main>section:nth-child(6)>.map-nav a img{
+.wrapper>main>section#section-06>.map-nav a img{
     width : 15px; height:15px;
     margin-right:5px;
 }
-.wrapper>main>section:nth-child(6)>.map-nav>.naver{}
-.wrapper>main>section:nth-child(6)>.map-nav>.kakao{
+.wrapper>main>section#section-06>.map-nav>.naver{}
+.wrapper>main>section#section-06>.map-nav>.kakao{
     border : 0px;
 }
 
-.wrapper>main>section:nth-child(6)>.info{
+.wrapper>main>section#section-06>.info{
     /* border:1px solid; */
     width:320px;
     margin : 0 auto;
@@ -723,7 +728,7 @@ main>section:nth-child(4)>.bottom>.bottom-body{
 }
 
 
-.wrapper>main>section:nth-child(6)>.info>div .material-symbols-outlined{
+.wrapper>main>section#section-06>.info>div .material-symbols-outlined{
 
     font-variation-settings:
     'FILL' 0,
@@ -744,67 +749,325 @@ main>section:nth-child(4)>.bottom>.bottom-body{
     justify-content: center;
     align-items: center;
 }
-.wrapper>main>section:nth-child(6)>.info>div{
+.wrapper>main>section#section-06>.info>div{
     display:flex;
     justify-content: left;
     align-items: start;
     /* border : 1px solid red; */
     margin: 8px 0px;
 }
-.wrapper>main>section:nth-child(6)>.info>div>.left{
+.wrapper>main>section#section-06>.info>div>.left{
     margin-right: 15px;
     flex-shrink: 0;
 }
-.wrapper>main>section:nth-child(6)>.info>div>.right{
+.wrapper>main>section#section-06>.info>div>.right{
     text-align:left;
 
 
 }
 
-.wrapper>main>section:nth-child(6)>.info>div>.right>.title{
+.wrapper>main>section#section-06>.info>div>.right>.title{
     color : black;
     font-size : 1.1rem;
     font-weight: 500;
     margin-bottom: 8px;
 }
-.wrapper>main>section:nth-child(6)>.info>div>.right>.contents{
+.wrapper>main>section#section-06>.info>div>.right>.contents{
     font-size: 1.05rem;
     line-height: 1.6;
     margin-bottom: 6px;
     color: rgb(58, 58, 58);
 }
 
-.wrapper>main>section:nth-child(6)>.info>.subway{
+.wrapper>main>section#section-06>.info>.subway{
     padding-bottom: 20px;
     border-bottom : 1px solid lightgray;
 }
-.wrapper>main>section:nth-child(6)>.info>.bus{
+.wrapper>main>section#section-06>.info>.bus{
     padding-top : 20px;
     padding-bottom: 20px;
-    border-bottom : 1px solid lightgray;
-}
-.wrapper>main>section:nth-child(6)>.info>.parking{
-    padding-top : 20px;
-    padding-bottom: 10px;
 }
 
-/* Section 07 */
-.wrapper>main>section:nth-child(7){}
-.wrapper>main>section:nth-child(7)>.title01{
-    letter-spacing: 2px;  
-    margin-bottom:10px;
-    color : rgb(194, 178, 178);
-    font-size : 11.4872px;
+/* Section 06-1 - 주차안내 */
+.wrapper>main>section#section-06-1{
+    margin-top: 0;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #ffffff;
+    background-image: url('../images/bg.png');
+    background-repeat: repeat;
+}
+
+.wrapper>main>section#section-06-1>.contents{
+    position: relative;
+}
+
+.wrapper>main>section#section-06-1>.contents>.title{
+    margin-bottom: 30px;
+}
+
+.wrapper>main>section#section-06-1>.contents>.title>.m-title{
+    margin-bottom: 10px;
+    color: rgb(194, 178, 178);
+    font-size: 11.4872px;
     letter-spacing: 3px;
-    height:20px;
+    height: 20px;
     text-align: center;
 }
-.wrapper>main>section:nth-child(7)>.title02{
-    color :rgb(137, 117, 122);
-    font-size : 18.0513px;
+
+.wrapper>main>section#section-06-1>.contents>.title>.sub-title{
+    color: rgb(137, 117, 122);
+    font-size: 18.0513px;
     letter-spacing: 0.5px;
-    height:32px;;
-    margin-bottom : 40px;
+    height: 32px;
+    margin-bottom: 30px;
+}
+
+.wrapper>main>section#section-06-1>.contents>.info-block{
+    width: 320px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.wrapper>main>section#section-06-1>.contents>.info-block>.parking-item{
+    display: flex;
+    justify-content: left;
+    align-items: start;
+    margin: 8px 0px;
+}
+
+.wrapper>main>section#section-06-1>.contents>.info-block>.parking-item>.left{
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+.wrapper>main>section#section-06-1>.contents>.info-block>.parking-item>.left .material-symbols-outlined{
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 200,
+    'GRAD' 0,
+    'opsz' 48;
+    font-size: 2.5rem;
+    width: 50px;
+    height: 50px;
+    opacity: 0.4;
+    border-radius: 50%;
+    background-color: antiquewhite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapper>main>section#section-06-1>.contents>.info-block>.parking-item>.right{
+    text-align: left;
+}
+
+.wrapper>main>section#section-06-1>.contents>.info-block>.parking-item>.right>.title{
+    color: black;
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.wrapper>main>section#section-06-1>.contents>.info-block>.parking-item>.right>.contents{
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin-bottom: 6px;
+    color: rgb(58, 58, 58);
+}
+
+.wrapper>main>section#section-06-1>.contents>.info-block>.parking-guide{
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid lightgray;
+}
+
+.wrapper>main>section#section-06-1>.contents>.info-block>.parking-guide>.guide-title{
+    color: black;
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 15px;
+    text-align: left;
+    position: relative;
+    padding-left: 12px;
+}
+
+.wrapper>main>section#section-06-1>.contents>.info-block>.parking-guide>.guide-title::before{
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    background-color: rgb(137, 117, 122);
+    border-radius: 50%;
+}
+
+.wrapper>main>section#section-06-1>.contents>.info-block>.parking-guide>.guide-list{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+}
+
+.wrapper>main>section#section-06-1>.contents>.info-block>.parking-guide>.guide-list>li{
+    font-size: 1.05rem;
+    line-height: 1.8;
+    margin-bottom: 8px;
+    color: rgb(58, 58, 58);
+    position: relative;
+    padding-left: 20px;
+}
+
+.wrapper>main>section#section-06-1>.contents>.info-block>.parking-guide>.guide-list>li::before{
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: rgb(137, 117, 122);
+    font-size: 1.2rem;
+    line-height: 1.8;
+}
+
+/* Section 07 - 주차안내 */
+.wrapper>main>section#section-07{
+    margin-top: 0;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #ffffff;
+    background-image: url('../images/bg.png');
+    background-repeat: repeat;
+}
+
+.wrapper>main>section#section-07>.contents{
+    position: relative;
+}
+
+.wrapper>main>section#section-07>.contents>.title{
+    margin-bottom: 30px;
+}
+
+.wrapper>main>section#section-07>.contents>.title>.m-title{
+    margin-bottom: 10px;
+    color: rgb(194, 178, 178);
+    font-size: 11.4872px;
+    letter-spacing: 3px;
+    height: 20px;
+    text-align: center;
+}
+
+.wrapper>main>section#section-07>.contents>.title>.sub-title{
+    color: rgb(137, 117, 122);
+    font-size: 18.0513px;
+    letter-spacing: 0.5px;
+    height: 32px;
+    margin-bottom: 30px;
+}
+
+.wrapper>main>section#section-07>.contents>.info-block{
+    width: 320px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.wrapper>main>section#section-07>.contents>.info-block>.parking-item{
+    display: flex;
+    justify-content: left;
+    align-items: start;
+    margin: 8px 0px;
+}
+
+.wrapper>main>section#section-07>.contents>.info-block>.parking-item>.left{
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+.wrapper>main>section#section-07>.contents>.info-block>.parking-item>.left .material-symbols-outlined{
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 200,
+    'GRAD' 0,
+    'opsz' 48;
+    font-size: 2.5rem;
+    width: 50px;
+    height: 50px;
+    opacity: 0.4;
+    border-radius: 50%;
+    background-color: antiquewhite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapper>main>section#section-07>.contents>.info-block>.parking-item>.right{
+    text-align: left;
+}
+
+.wrapper>main>section#section-07>.contents>.info-block>.parking-item>.right>.title{
+    color: black;
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.wrapper>main>section#section-07>.contents>.info-block>.parking-item>.right>.contents{
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin-bottom: 6px;
+    color: rgb(58, 58, 58);
+}
+
+.wrapper>main>section#section-07>.contents>.info-block>.parking-guide{
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid lightgray;
+}
+
+.wrapper>main>section#section-07>.contents>.info-block>.parking-guide>.guide-title{
+    color: black;
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 15px;
+    text-align: left;
+    position: relative;
+    padding-left: 12px;
+}
+
+.wrapper>main>section#section-07>.contents>.info-block>.parking-guide>.guide-title::before{
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    background-color: rgb(137, 117, 122);
+    border-radius: 50%;
+}
+
+.wrapper>main>section#section-07>.contents>.info-block>.parking-guide>.guide-list{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+}
+
+.wrapper>main>section#section-07>.contents>.info-block>.parking-guide>.guide-list>li{
+    font-size: 1.05rem;
+    line-height: 1.8;
+    margin-bottom: 8px;
+    color: rgb(58, 58, 58);
+    position: relative;
+    padding-left: 20px;
+}
+
+.wrapper>main>section#section-07>.contents>.info-block>.parking-guide>.guide-list>li::before{
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: rgb(137, 117, 122);
+    font-size: 1.2rem;
+    line-height: 1.8;
 }
 
 
@@ -1180,9 +1443,8 @@ main>section:nth-child(4)>.bottom>.bottom-body{
    
 }
 
-cordion .accordion-body>div>.account>.left{.wrapper>main>section:nth-child(9)>.ac
-   
-}
+.wrapper>main>section#section-10>.accordion .accordion-body>div>.account>.left{}
+
 .wrapper>main>section#section-10>.accordion .accordion-body>div>.account>.right{}
 .wrapper>main>section#section-10>.accordion .accordion-body>div>.name{
     display:flex;
@@ -1212,7 +1474,7 @@ cordion .accordion-body>div>.account>.left{.wrapper>main>section:nth-child(9)>.a
     letter-spacing: 2px;  
     margin-bottom:10px;
     color : rgb(194, 178, 178);
-    font-size : 11.4872px;
+    font-size : 11.4872px !important;
     letter-spacing: 3px;
     height:20px;
     text-align: center;
@@ -1225,31 +1487,49 @@ cordion .accordion-body>div>.account>.left{.wrapper>main>section:nth-child(9)>.a
     margin-bottom : 40px;
 }
 
+/* Section 10 - ACCOUNTS */
+.wrapper>main>section#section-10>.contents>.title01{
+    letter-spacing: 2px;
+    margin-bottom:10px;
+    color : rgb(194, 178, 178);
+    font-size : 11.4872px !important;
+    letter-spacing: 3px;
+    height:20px;
+    text-align: center;
+}
+.wrapper>main>section#section-10>.contents>.title02{
+    color :rgb(137, 117, 122);
+    font-size : 18.0513px;
+    letter-spacing: 0.5px;
+    height:32px;
+    margin-bottom : 30px;
+}
+
 /* Section 11 */
-.wrapper>main>section:nth-child(10){
+.wrapper>main>section:nth-child(11){
     height:400px;
  
 }
-.wrapper>main>section:nth-child(10)>.title01{
+.wrapper>main>section:nth-child(11)>.title01{
     color : rgb(194, 178, 178);
     font-size : 11.4872px;
     letter-spacing: 3px;
     height:20px;
     text-align: center;
 }
-.wrapper>main>section:nth-child(10)>.title02{
+.wrapper>main>section:nth-child(11)>.title02{
     color :rgb(137, 117, 122);
     font-size : 18.0513px;
     letter-spacing: 0.5px;
     height:32px;;
     margin-bottom : 30px;
 }
-.wrapper>main>section:nth-child(10)>.board-block{
+.wrapper>main>section:nth-child(11)>.board-block{
     position:relative;
     width : 320px;
     margin : 0 auto;
 }
-.wrapper>main>section:nth-child(10)>.board-block>.board{
+.wrapper>main>section:nth-child(11)>.board-block>.board{
 
   
     padding : 40px 0px;
@@ -1261,17 +1541,17 @@ cordion .accordion-body>div>.account>.left{.wrapper>main>section:nth-child(9)>.a
     align-items: center;
     flex-direction: column;
 }
-.wrapper>main>section:nth-child(10)>.board-block>.board>img{
+.wrapper>main>section:nth-child(11)>.board-block>.board>img{
     width : 35px;
     height : 35px;
     opacity: 0.2;
     margin-bottom:10px;
 }
-.wrapper>main>section:nth-child(10)>.board-block>.board>span{
+.wrapper>main>section:nth-child(11)>.board-block>.board>span{
     color : gray;
     font-size:0.8rem; 
 }
-.wrapper>main>section:nth-child(10)>.board-block a{
+.wrapper>main>section:nth-child(11)>.board-block a{
     width : 100px;
     height : 35px;
     display:flex;
@@ -1338,6 +1618,7 @@ cordion .accordion-body>div>.account>.left{.wrapper>main>section:nth-child(9)>.a
     top:0;bottom:0;left:0;right:0;
     object-fit: cover;
     object-position: center 55%;
+    z-index: 1;
 }
 .wrapper>footer>.header>span{
     color:white;
@@ -1354,7 +1635,7 @@ cordion .accordion-body>div>.account>.left{.wrapper>main>section:nth-child(9)>.a
     z-index:3;
     /* border : 1px solid white; */
 }
-.wrapper>footer>.bg{
+.wrapper>footer>.header>.bg{
     background-color:black;
     width : 100%;
     height : 192px;
@@ -1362,6 +1643,7 @@ cordion .accordion-body>div>.account>.left{.wrapper>main>section:nth-child(9)>.a
     left:0;
     top:0;
     opacity: .3;
+    z-index: 2;
 }
 
 .wrapper>footer>.body{
@@ -1861,12 +2143,12 @@ cordion .accordion-body>div>.account>.left{.wrapper>main>section:nth-child(9)>.a
 }
 
 /* 갤러리 이미지 클릭 가능 표시 */
-.wrapper>main>section:nth-child(5) .gallery-img {
+.wrapper>main>section#section-05 .gallery-img {
   cursor: pointer;
 }
 
 /* 갤러리 로딩 스피너 */
-.wrapper>main>section:nth-child(5)>.gallery-block>.gallery-loading-spinner {
+.wrapper>main>section#section-05>.gallery-block>.gallery-loading-spinner {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -1882,7 +2164,7 @@ cordion .accordion-body>div>.account>.left{.wrapper>main>section:nth-child(9)>.a
   height: 60px;
 }
 
-.wrapper>main>section:nth-child(5)>.gallery-block>.gallery-loading-spinner .spinner {
+.wrapper>main>section#section-05>.gallery-block>.gallery-loading-spinner .spinner {
   width: 40px;
   height: 40px;
   border: 4px solid rgba(137, 117, 122, 0.2);

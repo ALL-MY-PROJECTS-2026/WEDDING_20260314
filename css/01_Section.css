@@ -7,6 +7,15 @@
     src: url('../fonts/James Stroker.ttf') format('truetype');
 }
 
+/* GreatVibes - 필기체 폰트 */
+@font-face {
+    font-family: 'GreatVibes';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../fonts/GreatVibes-Regular.ttf') format('truetype');
+}
+
 /* header */
 .wrapper>header{}
 
@@ -71,6 +80,353 @@
   opacity:0.5;
 }
 
+/* 이름 표시 - 왼쪽 하단 */
+.wrapper>main>section:nth-child(1) .main_image_couple_name {
+  position: absolute;
+  left: 1rem;
+  bottom: calc(36px + env(safe-area-inset-bottom, 0) + 1.5rem);
+  z-index: 1002;
+  font-family: 'Hi Melody', 'Comic Sans MS', cursive;
+  font-size: clamp(1.1rem, 3.5vw, 1.3rem);
+  font-weight: 400;
+  color: #333333;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8), 0 0 4px rgba(255, 255, 255, 0.5);
+  pointer-events: none;
+  white-space: nowrap;
+  letter-spacing: 0.03em;
+}
+
+/* 하트 연한 핑크색 */
+.wrapper>main>section:nth-child(1) .main_image_couple_name .heart {
+  color: #ffb6c1;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8), 0 0 4px rgba(255, 182, 193, 0.4);
+}
+
+/* 벌 애니메이션 - 상단 물결을 타고 지그제그로 날아다니는 효과 */
+
+/* 벌 요소들 - 세로 형태 (~ ~o ~) */
+.wrapper>main>section:nth-child(1) .main_image .bee {
+  position: absolute;
+  width: 14px;
+  height: 24px;
+  z-index: 1001;
+  pointer-events: none;
+  top: 0;
+  left: 0;
+  font-size: 8px;
+  line-height: 1;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+}
+
+/* 위쪽 날개 ~ */
+.wrapper>main>section:nth-child(1) .main_image .bee .bee-wing-top {
+  color: #000000;
+  font-size: 7px;
+  line-height: 0.8;
+  font-weight: bold;
+  margin-bottom: -2px;
+  animation: bee-buzz 0.15s ease-in-out infinite;
+}
+
+/* 가운데 본체 래퍼 (~o) */
+.wrapper>main>section:nth-child(1) .main_image .bee .bee-body-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  line-height: 1;
+  margin: -1px 0;
+}
+
+/* 가운데 o (노란색, 채워진 형태, 작게) */
+.wrapper>main>section:nth-child(1) .main_image .bee .bee-body {
+  color: #ffd700;
+  font-size: 0;
+  font-weight: 900;
+  animation: bee-buzz 0.15s ease-in-out infinite;
+  display: inline-block;
+  position: relative;
+  width: 7px;
+  height: 7px;
+  background-color: #ffd700;
+  border-radius: 50%;
+  border: 1px solid #000000;
+  box-sizing: border-box;
+  margin: 0 1px;
+}
+
+/* 벌 무늬 - 검정 세로 줄 | */
+.wrapper>main>section:nth-child(1) .main_image .bee .bee-body::before {
+  content: "|";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: #000000;
+  font-size: 6px;
+  font-weight: bold;
+  line-height: 1;
+}
+
+/* 날아다니는 표시 ~ (가운데에 위치) */
+.wrapper>main>section:nth-child(1) .main_image .bee .bee-body-wrapper .bee-trail {
+  color: #000000;
+  font-size: 7px;
+  font-weight: bold;
+  line-height: 0.8;
+  margin: 0 -1px;
+  animation: bee-buzz 0.15s ease-in-out infinite;
+}
+
+/* 아래쪽 날개 ~ */
+.wrapper>main>section:nth-child(1) .main_image .bee .bee-wing-bottom {
+  color: #000000;
+  font-size: 7px;
+  line-height: 0.8;
+  font-weight: bold;
+  margin-top: -2px;
+  animation: bee-buzz 0.15s ease-in-out infinite;
+}
+
+@keyframes bee-buzz {
+  0%, 100% {
+    transform: translateX(0) scale(1);
+  }
+  50% {
+    transform: translateX(-1px) scale(1.05);
+  }
+}
+
+
+/* 벌 1 */
+.wrapper>main>section:nth-child(1) .main_image .bee.bee-1 {
+  animation: bee-wave-1 20s linear infinite;
+}
+
+/* 벌 2 */
+.wrapper>main>section:nth-child(1) .main_image .bee.bee-2 {
+  animation: bee-wave-2 25s linear infinite;
+  animation-delay: -5s;
+}
+
+/* 벌 3 */
+.wrapper>main>section:nth-child(1) .main_image .bee.bee-3 {
+  animation: bee-wave-3 22s linear infinite;
+  animation-delay: -8s;
+}
+
+/* 상단 물결을 타고 지그제그로 날아다니는 애니메이션 - 왼쪽에서 오른쪽으로 linear 이동 */
+/* 물결의 상단 경계선을 따라 지그제그 패턴으로 이동 */
+@keyframes bee-wave-1 {
+  0% {
+    left: -5%;
+    top: calc(100vh - 250px + 30px);
+    transform: translateY(0);
+  }
+  8.33% {
+    left: 8.33%;
+    top: calc(100vh - 250px + 30px + 12px);
+    transform: translateY(0);
+  }
+  16.66% {
+    left: 16.66%;
+    top: calc(100vh - 250px + 30px);
+    transform: translateY(0);
+  }
+  25% {
+    left: 25%;
+    top: calc(100vh - 250px + 30px - 12px);
+    transform: translateY(0);
+  }
+  33.33% {
+    left: 33.33%;
+    top: calc(100vh - 250px + 30px);
+    transform: translateY(0);
+  }
+  41.66% {
+    left: 41.66%;
+    top: calc(100vh - 250px + 30px + 12px);
+    transform: translateY(0);
+  }
+  50% {
+    left: 50%;
+    top: calc(100vh - 250px + 30px);
+    transform: translateY(0);
+  }
+  58.33% {
+    left: 58.33%;
+    top: calc(100vh - 250px + 30px - 12px);
+    transform: translateY(0);
+  }
+  66.66% {
+    left: 66.66%;
+    top: calc(100vh - 250px + 30px);
+    transform: translateY(0);
+  }
+  75% {
+    left: 75%;
+    top: calc(100vh - 250px + 30px + 12px);
+    transform: translateY(0);
+  }
+  83.33% {
+    left: 83.33%;
+    top: calc(100vh - 250px + 30px);
+    transform: translateY(0);
+  }
+  91.66% {
+    left: 91.66%;
+    top: calc(100vh - 250px + 30px - 12px);
+    transform: translateY(0);
+  }
+  100% {
+    left: 105%;
+    top: calc(100vh - 250px + 30px);
+    transform: translateY(0);
+  }
+}
+
+@keyframes bee-wave-2 {
+  0% {
+    left: -5%;
+    top: calc(100vh - 250px + 50px);
+    transform: translateY(0);
+  }
+  8.33% {
+    left: 8.33%;
+    top: calc(100vh - 250px + 50px - 10px);
+    transform: translateY(0);
+  }
+  16.66% {
+    left: 16.66%;
+    top: calc(100vh - 250px + 50px);
+    transform: translateY(0);
+  }
+  25% {
+    left: 25%;
+    top: calc(100vh - 250px + 50px + 10px);
+    transform: translateY(0);
+  }
+  33.33% {
+    left: 33.33%;
+    top: calc(100vh - 250px + 50px);
+    transform: translateY(0);
+  }
+  41.66% {
+    left: 41.66%;
+    top: calc(100vh - 250px + 50px - 10px);
+    transform: translateY(0);
+  }
+  50% {
+    left: 50%;
+    top: calc(100vh - 250px + 50px);
+    transform: translateY(0);
+  }
+  58.33% {
+    left: 58.33%;
+    top: calc(100vh - 250px + 50px + 10px);
+    transform: translateY(0);
+  }
+  66.66% {
+    left: 66.66%;
+    top: calc(100vh - 250px + 50px);
+    transform: translateY(0);
+  }
+  75% {
+    left: 75%;
+    top: calc(100vh - 250px + 50px - 10px);
+    transform: translateY(0);
+  }
+  83.33% {
+    left: 83.33%;
+    top: calc(100vh - 250px + 50px);
+    transform: translateY(0);
+  }
+  91.66% {
+    left: 91.66%;
+    top: calc(100vh - 250px + 50px + 10px);
+    transform: translateY(0);
+  }
+  100% {
+    left: 105%;
+    top: calc(100vh - 250px + 50px);
+    transform: translateY(0);
+  }
+}
+
+@keyframes bee-wave-3 {
+  0% {
+    left: -5%;
+    top: calc(100vh - 250px + 70px);
+    transform: translateY(0);
+  }
+  8.33% {
+    left: 8.33%;
+    top: calc(100vh - 250px + 70px + 15px);
+    transform: translateY(0);
+  }
+  16.66% {
+    left: 16.66%;
+    top: calc(100vh - 250px + 70px);
+    transform: translateY(0);
+  }
+  25% {
+    left: 25%;
+    top: calc(100vh - 250px + 70px - 15px);
+    transform: translateY(0);
+  }
+  33.33% {
+    left: 33.33%;
+    top: calc(100vh - 250px + 70px);
+    transform: translateY(0);
+  }
+  41.66% {
+    left: 41.66%;
+    top: calc(100vh - 250px + 70px + 15px);
+    transform: translateY(0);
+  }
+  50% {
+    left: 50%;
+    top: calc(100vh - 250px + 70px);
+    transform: translateY(0);
+  }
+  58.33% {
+    left: 58.33%;
+    top: calc(100vh - 250px + 70px - 15px);
+    transform: translateY(0);
+  }
+  66.66% {
+    left: 66.66%;
+    top: calc(100vh - 250px + 70px);
+    transform: translateY(0);
+  }
+  75% {
+    left: 75%;
+    top: calc(100vh - 250px + 70px + 15px);
+    transform: translateY(0);
+  }
+  83.33% {
+    left: 83.33%;
+    top: calc(100vh - 250px + 70px);
+    transform: translateY(0);
+  }
+  91.66% {
+    left: 91.66%;
+    top: calc(100vh - 250px + 70px - 15px);
+    transform: translateY(0);
+  }
+  100% {
+    left: 105%;
+    top: calc(100vh - 250px + 70px);
+    transform: translateY(0);
+  }
+}
+
   
 /* WAVE */
 .wrapper>main>section:nth-child(1){
@@ -79,75 +435,67 @@
 
 
 
-/* 일시 및 장소 정보 블록 - 물결 범위 안에서 정가운데 배치 */
-.wrapper>main>section:nth-child(1) .main_image_info_block{
-    position: absolute;
-    bottom:35px;
-    width: 100%;
-    background: #ffffff; /* 배경색 유지 */
+/* Section 01-1 - 일시 및 장소 정보 */
+.wrapper>main>section#section-01-1{
+    margin-top: 0;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #ffffff;
+    background-image: url('../images/bg.png');
     background-repeat: repeat;
+}
+
+.wrapper>main>section#section-01-1>.contents{
+    position: relative;
+}
+
+.wrapper>main>section#section-01-1>.contents>.title{
+    margin-bottom: 30px;
+}
+
+.wrapper>main>section#section-01-1>.contents>.title>.m-title{
+    margin-bottom: 10px;
+    color: rgb(194, 178, 178);
+    font-size: 11.4872px;
+    letter-spacing: 3px;
+    height: 20px;
+    text-align: center;
+}
+
+.wrapper>main>section#section-01-1>.contents>.title>.sub-title{
+    color: rgb(137, 117, 122);
+    font-size: 18.0513px;
+    letter-spacing: 0.5px;
+    height: 32px;
+    margin-bottom: 30px;
+}
+
+.wrapper>main>section#section-01-1>.contents>.info-block{
     text-align: center;
     display: flex;
     flex-direction: column;
-    justify-content: center; /* 수직 중앙 정렬 */
-    align-items: center; /* 수평 중앙 정렬 */
-    color : black;
-    z-index: 100;
-   
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
 }
 
-.wrapper>main>section:nth-child(1) .main_image_info_date{
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 400;
-    color: rgb(58, 58, 58);
-    line-height: 1.3; /* 줄 간격 조정 */
-    margin-bottom: 2px; /* 간격 축소 */
-    letter-spacing: 0.02em;
-    position:relative;
-    z-index: 1001;
-    margin-bottom:10px;
-}
-
-.wrapper>main>section:nth-child(1) .main_image_info_location{
+.wrapper>main>section#section-01-1>.contents>.info-block>.info-location{
     font-family: 'Noto Sans KR', sans-serif;
     font-size: 1.1rem;
     font-weight: 500;
     color: rgb(58, 58, 58);
-    line-height: 1.3; /* 줄 간격 조정 */
-    margin-bottom: 1px; /* 간격 축소 */
+    line-height: 1.3;
     letter-spacing: 0.01em;
-    position:relative;
-    z-index: 1001;
-    margin-bottom:10px;
 }
 
-.wrapper>main>section:nth-child(1) .main_image_info_address{
+.wrapper>main>section#section-01-1>.contents>.info-block>.info-date{
     font-family: 'Noto Sans KR', sans-serif;
-    font-size: 0.85rem;
+    font-size: 0.95rem;
     font-weight: 400;
-    color: rgb(100, 100, 100);
-    line-height: 1.3; /* 줄 간격 조정 */
-    letter-spacing: 0.01em;
-    margin-bottom: 0; /* 기본 margin 제거 */
-    padding-bottom: 0; /* 정보 블록 padding으로 처리 */
-    position:relative;
-    z-index: 1001;
-    margin-bottom:10px;
-}
-
-.wrapper>main>section:nth-child(1)  .main_image_info_name{
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 400;
-    color: white;
-    position:relative;
-    top:20px;
-    z-index: 100;
-    display:flex;
-    justify-content: space-between;
-   
-    width:100%;
+    color: rgb(58, 58, 58);
+    line-height: 1.3;
+    letter-spacing: 0.02em;
+    margin-top: 4px;
 }
 
 /* 첫 번째 이미지 그라데이션 - 넷플릭스 스타일: 상단에서 하단으로 깔끔한 페이드아웃 */
@@ -222,8 +570,8 @@
 /* 스크롤 안내 - 첫 번째 화면(viewport) 기준 우측 하단, 스크롤 시 사라짐 */
 .wrapper>main>section:nth-child(1) .main_image_scroll_hint{
     position: fixed; /* viewport 기준으로 고정 위치 */
-    right: calc((100vw - 23.7rem) / 2 ); /* wrapper 중앙 정렬 고려하여 우측 위치 계산 */
-    bottom: calc(36px + env(safe-area-inset-bottom, 0) + 5px); /* 네비바 높이 + safe-area + 여유 공간 (더 아래로 배치) */
+    right: calc((100vw - 23.7rem) / 2 + 1rem); /* wrapper 중앙 정렬 고려하여 우측 위치 계산 */
+    bottom: calc(36px + env(safe-area-inset-bottom, 0) + 1rem); /* 네비바 높이 + safe-area + 여유 공간 (더 아래로 배치) */
     z-index: 2147483646; /* 네비바보다 낮지만 다른 요소보다 높게 */
     pointer-events: none;
     display: flex;
@@ -236,6 +584,7 @@
     opacity: 0;
     animation: none; /* 기본적으로 애니메이션 비활성화 */
     transition: opacity 1.2s ease-out;
+    color : black;
 }
 
 /* 모바일에서 wrapper 너비가 화면보다 작을 때 */
