@@ -147,8 +147,8 @@
   animation: bee-buzz 0.15s ease-in-out infinite;
   display: inline-block;
   position: relative;
-  width: 7px;
-  height: 7px;
+  width: 5px;
+  height: 5px;
   background-color: #ffeb3b;
   border-radius: 50%;
   border: none;
@@ -170,9 +170,9 @@
   line-height: 1;
 }
 
-/* 날아다니는 표시 ~ (가운데에 위치) */
+/* 날아다니는 표시 ~ (가운데에 위치, 회색계열 연하게) */
 .wrapper>main>section:nth-child(1) .main_image .bee .bee-body-wrapper .bee-trail {
-  color: #000000;
+  color: rgba(128, 128, 128, 0.6);
   font-size: 7px;
   font-weight: bold;
   line-height: 0.8;
