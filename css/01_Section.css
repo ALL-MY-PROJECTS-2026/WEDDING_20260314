@@ -124,14 +124,9 @@
   gap: 0;
 }
 
-/* 위쪽 날개 ~ */
+/* 위쪽 날개 ~ (숨김) */
 .wrapper>main>section:nth-child(1) .main_image .bee .bee-wing-top {
-  color: #000000;
-  font-size: 7px;
-  line-height: 0.8;
-  font-weight: bold;
-  margin-bottom: -2px;
-  animation: bee-buzz 0.15s ease-in-out infinite;
+  display: none;
 }
 
 /* 가운데 본체 래퍼 (~o) */
@@ -184,14 +179,9 @@
   animation: bee-buzz 0.15s ease-in-out infinite;
 }
 
-/* 아래쪽 날개 ~ */
+/* 아래쪽 날개 ~ (숨김) */
 .wrapper>main>section:nth-child(1) .main_image .bee .bee-wing-bottom {
-  color: #000000;
-  font-size: 7px;
-  line-height: 0.8;
-  font-weight: bold;
-  margin-top: -2px;
-  animation: bee-buzz 0.15s ease-in-out infinite;
+  display: none;
 }
 
 @keyframes bee-buzz {
