@@ -157,17 +157,9 @@
   opacity: 0.85;
 }
 
-/* 벌 무늬 - 연한 검정 세로 줄 | */
+/* 벌 무늬 - 연한 검정 세로 줄 | (숨김) */
 .wrapper>main>section:nth-child(1) .main_image .bee .bee-body::before {
-  content: "|";
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  color: rgba(0, 0, 0, 0.4);
-  font-size: 6px;
-  font-weight: bold;
-  line-height: 1;
+  display: none;
 }
 
 /* 날아다니는 표시 ~ (가운데에 위치, 회색계열 연하게) */
