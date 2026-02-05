@@ -162,9 +162,9 @@
   display: none;
 }
 
-/* 날아다니는 표시 ~ (가운데에 위치, 회색계열 연하게) */
+/* 날아다니는 표시 - (가운데에 위치, 연한 핑크색) */
 .wrapper>main>section:nth-child(1) .main_image .bee .bee-body-wrapper .bee-trail {
-  color: rgba(128, 128, 128, 0.6);
+  color: #ffb6c1;
   font-size: 7px;
   font-weight: bold;
   line-height: 0.8;
