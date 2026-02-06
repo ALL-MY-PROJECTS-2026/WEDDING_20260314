@@ -1832,6 +1832,7 @@
       'use strict';
 
       var scrollHint = document.querySelector('.main_image_scroll_hint');
+      var coupleName = document.querySelector('.main_image_couple_name');
       if (!scrollHint) return;
 
       var hasScrolled = false;
@@ -1842,6 +1843,10 @@
         if (window.scrollY > 50) {
           hasScrolled = true;
           scrollHint.classList.add('scroll-hide');
+          // 커플 이름도 함께 숨김
+          if (coupleName) {
+            coupleName.classList.add('scroll-hide');
+          }
           window.removeEventListener('scroll', handleScroll);
         }
       }

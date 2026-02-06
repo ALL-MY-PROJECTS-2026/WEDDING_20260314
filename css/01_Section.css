@@ -118,6 +118,10 @@
 .wrapper>main>section:nth-child(1).intro-completed .main_image_couple_name {
   animation: main-scroll-hint-in 0.5s ease-out 3.8s forwards; /* 스크롤 힌트와 동일한 타이밍으로 표시 */
 }
+/* 스크롤 시 커플 이름 숨김 */
+.wrapper>main>section:nth-child(1) .main_image_couple_name.scroll-hide {
+  opacity: 0 !important;
+}
 
 /* 하트 연한 핑크색 - 이미지와 동일하게 표시 */
 .wrapper>main>section:nth-child(1) .main_image_couple_name .heart {
