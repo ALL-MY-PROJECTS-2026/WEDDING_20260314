@@ -103,13 +103,14 @@
   opacity: 0; /* 초기에는 숨김 */
   animation: none; /* 기본적으로 애니메이션 비활성화 */
   transition: opacity 1.2s ease-out;
+  overflow: visible; /* 벌이 요소 밖으로 나가도 보이도록 */
 }
 
 /* 모바일에서 wrapper 너비가 화면보다 작을 때 */
 @media (max-width: 23.75rem) {
   .wrapper>main>section:nth-child(1) .main_image_couple_name {
     right: calc(1.25rem + 65px + 0.5rem); /* wrapper 너비가 화면과 같으면 간단하게 */
-    font-size: clamp(1.3rem, 4.5vw, 2.2rem); /* 모바일에서 글자 크기 조정 */
+    font-size: clamp(1.9rem, 4.5vw, 2.2rem); /* 모바일에서 글자 크기 조정 */
   }
 }
 
@@ -129,6 +130,130 @@
   display: inline-block;
   vertical-align: middle;
   line-height: 1; /* 정렬 개선 */
+}
+
+/* 커플 이름 영역 안에서 날아다니는 벌 */
+.wrapper>main>section:nth-child(1) .main_image_couple_name .couple-name-bee {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  z-index: 1;
+  pointer-events: none;
+  top: 0;
+  left: 0;
+  font-size: 0;
+  line-height: 1;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wrapper>main>section:nth-child(1) .main_image_couple_name .couple-name-bee .bee-body-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.wrapper>main>section:nth-child(1) .main_image_couple_name .couple-name-bee .bee-body {
+  color: #ffeb3b;
+  font-size: 0;
+  font-weight: 900;
+  animation: couple-name-bee-buzz 0.2s ease-in-out infinite;
+  display: inline-block;
+  position: relative;
+  width: 4px;
+  height: 4px;
+  background-color: #ffeb3b;
+  border-radius: 50%;
+  border: none;
+  box-sizing: border-box;
+  opacity: 0.7;
+}
+
+@keyframes couple-name-bee-buzz {
+  0%, 100% {
+    transform: translateX(0) scale(1);
+  }
+  50% {
+    transform: translateX(-0.5px) scale(1.1);
+  }
+}
+
+/* 벌 1 - 무작위 경로 (천천히 이동) */
+.wrapper>main>section:nth-child(1) .main_image_couple_name .couple-name-bee-1 {
+  animation: couple-name-bee-fly-1 20s linear infinite; /* 물결 벌처럼 천천히 */
+}
+
+/* 벌 2 - 무작위 경로 (천천히 이동) */
+.wrapper>main>section:nth-child(1) .main_image_couple_name .couple-name-bee-2 {
+  animation: couple-name-bee-fly-2 25s linear infinite; /* 물결 벌처럼 천천히 */
+  animation-delay: -5s;
+}
+
+/* 무작위 경로 애니메이션 1 */
+@keyframes couple-name-bee-fly-1 {
+  0% {
+    left: 10%;
+    top: 20%;
+    transform: translateY(0);
+  }
+  20% {
+    left: 60%;
+    top: 10%;
+    transform: translateY(-3px);
+  }
+  40% {
+    left: 80%;
+    top: 50%;
+    transform: translateY(2px);
+  }
+  60% {
+    left: 30%;
+    top: 70%;
+    transform: translateY(3px);
+  }
+  80% {
+    left: 15%;
+    top: 40%;
+    transform: translateY(-2px);
+  }
+  100% {
+    left: 10%;
+    top: 20%;
+    transform: translateY(0);
+  }
+}
+
+/* 무작위 경로 애니메이션 2 */
+@keyframes couple-name-bee-fly-2 {
+  0% {
+    left: 70%;
+    top: 60%;
+    transform: translateY(0);
+  }
+  25% {
+    left: 20%;
+    top: 30%;
+    transform: translateY(-4px);
+  }
+  50% {
+    left: 50%;
+    top: 15%;
+    transform: translateY(2px);
+  }
+  75% {
+    left: 85%;
+    top: 65%;
+    transform: translateY(3px);
+  }
+  100% {
+    left: 70%;
+    top: 60%;
+    transform: translateY(0);
+  }
 }
 
 /* 벌 애니메이션 - 상단 물결을 타고 지그제그로 날아다니는 효과 */
