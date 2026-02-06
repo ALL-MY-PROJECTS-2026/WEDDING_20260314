@@ -84,8 +84,8 @@
 /* 이름 표시 - 우측 하단, 스크롤 힌트 왼쪽에 독립적으로 배치 */
 .wrapper>main>section:nth-child(1) .main_image_couple_name {
   position: fixed; /* viewport 기준으로 고정 위치 */
-  right: calc((100vw - 23.5rem) / 2 + 1rem + 55px); /* 스크롤 힌트 너비(약 65px) + 간격(0.5rem) 고려하여 왼쪽에 배치 */
-  bottom: calc(36px + env(safe-area-inset-bottom, 0) + 1rem);
+  right: calc((100vw - 23.5rem) / 2 + 1rem + 45px); /* 스크롤 힌트 너비(약 65px) + 간격(0.5rem) 고려하여 왼쪽에 배치 */
+  bottom: calc(36px + env(safe-area-inset-bottom, 0) + 1.5rem);
   z-index: 2147483646; /* 네비바보다 낮지만 다른 요소보다 높게 */
   font-family: 'Hi Melody', 'Comic Sans MS', cursive;
   font-size: clamp(1.5rem, 3vw, 2rem); /* 글자 크기 조정 */
@@ -109,7 +109,7 @@
 @media (max-width: 23.75rem) {
   .wrapper>main>section:nth-child(1) .main_image_couple_name {
     right: calc(1.25rem + 65px + 0.5rem); /* wrapper 너비가 화면과 같으면 간단하게 */
-    font-size: clamp(1.3rem, 4.5vw, 1.9rem); /* 모바일에서 글자 크기 조정 */
+    font-size: clamp(1.3rem, 4.5vw, 2.2rem); /* 모바일에서 글자 크기 조정 */
   }
 }
 
