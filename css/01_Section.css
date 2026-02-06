@@ -88,7 +88,7 @@
   bottom: calc(36px + env(safe-area-inset-bottom, 0) + 1.5rem);
   z-index: 2147483646; /* 네비바보다 낮지만 다른 요소보다 높게 */
   font-family: 'Hi Melody', 'Comic Sans MS', cursive;
-  font-size: clamp(1.5rem, 3vw, 2rem); /* 글자 크기 조정 */
+  font-size: clamp(1.5rem, 3vw, 2rem); /* 기본 글자 크기 (데스크톱) */
   font-weight: 400;
   color: rgb(77, 76, 76); /* 웨딩 분위기에 맞는 로즈 브라운 톤 - 이미지와 동일 */
   /* 이미지와 동일한 밝고 미묘한 음영 */
@@ -106,11 +106,18 @@
   overflow: visible; /* 벌이 요소 밖으로 나가도 보이도록 */
 }
 
+/* 모바일 화면 전체 범위 (더 넓은 범위) */
+@media (max-width: 480px) {
+  .wrapper>main>section:nth-child(1) .main_image_couple_name {
+    font-size: clamp(1.9rem, 7vw, 2.6rem) !important; /* 모바일에서 글자 크기 확실하게 증가 */
+  }
+}
+
 /* 모바일에서 wrapper 너비가 화면보다 작을 때 */
 @media (max-width: 23.75rem) {
   .wrapper>main>section:nth-child(1) .main_image_couple_name {
-    right: calc(1.25rem + 65px + 0.5rem); /* wrapper 너비가 화면과 같으면 간단하게 */
-    font-size: clamp(1.9rem, 6vw, 2.5rem) !important; /* 모바일에서 글자 크기 확실하게 증가 */
+    right: calc(1.25rem + 65px + 0.5rem) !important; /* wrapper 너비가 화면과 같으면 간단하게 */
+    font-size: clamp(1.9rem, 7vw, 2.6rem) !important; /* 모바일에서 글자 크기 확실하게 증가 */
   }
 }
 
