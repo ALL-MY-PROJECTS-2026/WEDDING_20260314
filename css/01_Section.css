@@ -110,7 +110,7 @@
 @media (max-width: 23.75rem) {
   .wrapper>main>section:nth-child(1) .main_image_couple_name {
     right: calc(1.25rem + 65px + 0.5rem); /* wrapper 너비가 화면과 같으면 간단하게 */
-    font-size: clamp(1.9rem, 4.5vw, 2.2rem); /* 모바일에서 글자 크기 조정 */
+    font-size: clamp(1.9rem, 6vw, 2.5rem) !important; /* 모바일에서 글자 크기 확실하게 증가 */
   }
 }
 
