@@ -76,30 +76,61 @@
   left: 0;
   width: 100%;
   height: 250px;
+  
   background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1440 520" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path fill="%23ffffff" d="M0,160L48,176C96,192,192,224,288,213.3C384,203,480,149,576,149.3C672,149,768,203,864,213.3C960,224,1056,192,1152,165.3C1248,139,1344,117,1392,106.7L1440,96V520H0Z"></path></svg>');
   opacity:0.5;
 }
 
-/* 이름 표시 - 왼쪽 하단 */
+/* 이름 표시 - 우측 하단, 스크롤 힌트 왼쪽에 독립적으로 배치 */
 .wrapper>main>section:nth-child(1) .main_image_couple_name {
-  position: absolute;
-  left: 1rem;
-  bottom: calc(36px + env(safe-area-inset-bottom, 0) + 1.5rem);
-  z-index: 1002;
+  position: fixed; /* viewport 기준으로 고정 위치 */
+  right: calc((100vw - 23.5rem) / 2 + 1rem + 55px); /* 스크롤 힌트 너비(약 65px) + 간격(0.5rem) 고려하여 왼쪽에 배치 */
+  bottom: calc(36px + env(safe-area-inset-bottom, 0) + 1rem);
+  z-index: 2147483646; /* 네비바보다 낮지만 다른 요소보다 높게 */
   font-family: 'Hi Melody', 'Comic Sans MS', cursive;
-  font-size: clamp(1.1rem, 3.5vw, 1.3rem);
+  font-size: clamp(1.5rem, 3vw, 2rem); /* 글자 크기 조정 */
   font-weight: 400;
-  color: #333333;
-  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8), 0 0 4px rgba(255, 255, 255, 0.5);
+  color: rgb(137, 117, 122); /* 웨딩 분위기에 맞는 로즈 브라운 톤 */
+  /* 가독성 향상을 위한 스타일 */
+  text-shadow: 
+    0 1px 2px rgba(255, 255, 255, 0.8),
+    0 2px 4px rgba(255, 255, 255, 0.6),
+    0 0 8px rgba(255, 255, 255, 0.4); /* 밝은 음영으로 가독성 향상 */
+  background: rgba(255, 255, 255, 0.85); /* 반투명 흰색 배경 */
+  backdrop-filter: blur(8px); /* 배경 블러 효과 */
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 18px;
+  box-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.15),
+    0 0 0 1px rgba(255, 255, 255, 0.5) inset; /* 미묘한 그림자와 내부 테두리 */
   pointer-events: none;
   white-space: nowrap;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.03em; /* 글자 간격 조정 (조화롭게) */
+  display: flex;
+  align-items: center; /* 하트와 텍스트 정렬 개선 */
+  padding: 0.7rem 1.2rem; /* 패딩 조정 */
+  opacity: 1; /* 즉시 표시 */
 }
 
-/* 하트 연한 핑크색 */
+/* 모바일에서 wrapper 너비가 화면보다 작을 때 */
+@media (max-width: 23.75rem) {
+  .wrapper>main>section:nth-child(1) .main_image_couple_name {
+    right: calc(1.25rem + 65px + 0.5rem); /* wrapper 너비가 화면과 같으면 간단하게 */
+    font-size: clamp(1.3rem, 4.5vw, 1.9rem); /* 모바일에서 글자 크기 조정 */
+  }
+}
+
+/* 하트 연한 핑크색 - 조화롭게 표시 */
 .wrapper>main>section:nth-child(1) .main_image_couple_name .heart {
-  color: #ffb6c1;
-  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8), 0 0 4px rgba(255, 182, 193, 0.4);
+  color: rgb(200, 150, 160); /* 텍스트 색상과 조화로운 로즈 핑크 톤 */
+  font-size: 1.25em; /* 텍스트 크기에 비례하여 조화롭게 (1.25배) */
+  text-shadow: 
+    0 1px 2px rgba(255, 255, 255, 0.6),
+    0 0 4px rgba(255, 255, 255, 0.3); /* 텍스트와 유사한 음영 스타일 */
+  margin: 0 0.2em; /* 하트 좌우 여백 조정 */
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1; /* 정렬 개선 */
 }
 
 /* 벌 애니메이션 - 상단 물결을 타고 지그제그로 날아다니는 효과 */
@@ -561,13 +592,15 @@
     flex-direction: column;
     align-items: center;
     gap: 0.35rem;
-    padding: 0.5rem 0.35rem;
-    background: rgba(0, 0, 0, 0.35);
-    border-radius: 15px;
+    padding: 0.5rem 0.4rem;
+    background: rgba(0, 0, 0, 0.5); /* 배경 투명도 증가로 가독성 향상 */
+    border-radius: 18px;
     opacity: 0;
     animation: none; /* 기본적으로 애니메이션 비활성화 */
     transition: opacity 1.2s ease-out;
     color : black;
+    backdrop-filter: blur(4px); /* 배경 블러 효과로 가독성 향상 */
+    -webkit-backdrop-filter: blur(4px);
 }
 
 /* 모바일에서 wrapper 너비가 화면보다 작을 때 */
@@ -583,6 +616,7 @@
 .wrapper>main>section:nth-child(1) .main_image_scroll_hint.scroll-hide{
     opacity: 0 !important;
 }
+
 .wrapper>main>section:nth-child(1) .main_image_scroll_icon{
     width: 20px;
     height: 48px;
@@ -610,8 +644,9 @@
 }
 .wrapper>main>section:nth-child(1) .main_image_scroll_label{
     font-size: 0.7rem;
-    color: rgba(255,255,255,0.95);
+    color: rgba(255,255,255,0.98); /* 가독성을 위한 밝은 색상 */
     letter-spacing: 0.02em;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3); /* 가독성을 위한 약한 음영 */
 }
 @keyframes main-scroll-hint-in{
     from{ opacity: 0; transform: translateY(6px); }
