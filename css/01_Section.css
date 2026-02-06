@@ -90,26 +90,19 @@
   font-family: 'Hi Melody', 'Comic Sans MS', cursive;
   font-size: clamp(1.5rem, 3vw, 2rem); /* 글자 크기 조정 */
   font-weight: 400;
-  color: rgb(137, 117, 122); /* 웨딩 분위기에 맞는 로즈 브라운 톤 */
-  /* 가독성 향상을 위한 스타일 */
-  text-shadow: 
-    0 1px 2px rgba(255, 255, 255, 0.8),
-    0 2px 4px rgba(255, 255, 255, 0.6),
-    0 0 8px rgba(255, 255, 255, 0.4); /* 밝은 음영으로 가독성 향상 */
-  background: rgba(255, 255, 255, 0.85); /* 반투명 흰색 배경 */
-  backdrop-filter: blur(8px); /* 배경 블러 효과 */
-  -webkit-backdrop-filter: blur(8px);
+  color: rgb(77, 76, 76); /* 웨딩 분위기에 맞는 로즈 브라운 톤 - 이미지와 동일 */
+  /* 이미지와 동일한 밝고 미묘한 음영 */
+  
   border-radius: 18px;
-  box-shadow: 
-    0 2px 8px rgba(0, 0, 0, 0.15),
-    0 0 0 1px rgba(255, 255, 255, 0.5) inset; /* 미묘한 그림자와 내부 테두리 */
   pointer-events: none;
   white-space: nowrap;
   letter-spacing: 0.03em; /* 글자 간격 조정 (조화롭게) */
   display: flex;
   align-items: center; /* 하트와 텍스트 정렬 개선 */
   padding: 0.7rem 1.2rem; /* 패딩 조정 */
-  opacity: 1; /* 즉시 표시 */
+  opacity: 0; /* 초기에는 숨김 */
+  animation: none; /* 기본적으로 애니메이션 비활성화 */
+  transition: opacity 1.2s ease-out;
 }
 
 /* 모바일에서 wrapper 너비가 화면보다 작을 때 */
@@ -120,13 +113,18 @@
   }
 }
 
-/* 하트 연한 핑크색 - 조화롭게 표시 */
+/* 인트로가 끝난 후 커플 이름 표시 - 스크롤 힌트와 함께 */
+.wrapper>main>section:nth-child(1).intro-completed .main_image_couple_name {
+  animation: main-scroll-hint-in 0.5s ease-out 3.8s forwards; /* 스크롤 힌트와 동일한 타이밍으로 표시 */
+}
+
+/* 하트 연한 핑크색 - 이미지와 동일하게 표시 */
 .wrapper>main>section:nth-child(1) .main_image_couple_name .heart {
-  color: rgb(200, 150, 160); /* 텍스트 색상과 조화로운 로즈 핑크 톤 */
+  color: rgb(223, 166, 178); /* 이미지와 동일한 로즈 핑크 톤 */
   font-size: 1.25em; /* 텍스트 크기에 비례하여 조화롭게 (1.25배) */
   text-shadow: 
-    0 1px 2px rgba(255, 255, 255, 0.6),
-    0 0 4px rgba(255, 255, 255, 0.3); /* 텍스트와 유사한 음영 스타일 */
+    0 1px 2px rgba(255, 255, 255, 0.8),
+    0 0 4px rgba(255, 255, 255, 0.5); /* 이미지와 동일한 미묘한 음영 */
   margin: 0 0.2em; /* 하트 좌우 여백 조정 */
   display: inline-block;
   vertical-align: middle;
@@ -193,14 +191,9 @@
   display: none;
 }
 
-/* 날아다니는 표시 - (가운데에 위치, 연한 핑크색) */
+/* 날아다니는 표시 - (가운데에 위치, 연한 핑크색) - 숨김 처리 */
 .wrapper>main>section:nth-child(1) .main_image .bee .bee-body-wrapper .bee-trail {
-  color: #ffb6c1;
-  font-size: 7px;
-  font-weight: bold;
-  line-height: 0.8;
-  margin: 0 -1px;
-  animation: bee-buzz 0.15s ease-in-out infinite;
+  display: none; /* 벌 뒤에 따라오는 꼬리 제거 */
 }
 
 /* 아래쪽 날개 ~ (숨김) */
@@ -584,23 +577,21 @@
 /* 스크롤 안내 - 첫 번째 화면(viewport) 기준 우측 하단, 스크롤 시 사라짐 */
 .wrapper>main>section:nth-child(1) .main_image_scroll_hint{
     position: fixed; /* viewport 기준으로 고정 위치 */
-    right: calc((100vw - 23.7rem) / 2 + 1rem); /* wrapper 중앙 정렬 고려하여 우측 위치 계산 */
-    bottom: calc(36px + env(safe-area-inset-bottom, 0) + 1rem); /* 네비바 높이 + safe-area + 여유 공간 (더 아래로 배치) */
+    right: calc((100vw - 23.7rem) / 2 + 1rem); /* wrapper 중앙 정렬 고려하여 우측 위치 계산 - 크기와 위치 유지 */
+    bottom: calc(36px + env(safe-area-inset-bottom, 0) + 1rem); /* 네비바 높이 + safe-area + 여유 공간 - 크기와 위치 유지 */
     z-index: 2147483646; /* 네비바보다 낮지만 다른 요소보다 높게 */
     pointer-events: none;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 0.35rem;
-    padding: 0.5rem 0.4rem;
-    background: rgba(0, 0, 0, 0.5); /* 배경 투명도 증가로 가독성 향상 */
-    border-radius: 18px;
+    padding: 0.5rem 0.35rem; /* 원래 스타일로 복원 */
+    background: rgba(0, 0, 0, 0.35); /* 원래 색상과 스타일로 복원 */
+    border-radius: 15px; /* 원래 스타일로 복원 */
     opacity: 0;
     animation: none; /* 기본적으로 애니메이션 비활성화 */
     transition: opacity 1.2s ease-out;
     color : black;
-    backdrop-filter: blur(4px); /* 배경 블러 효과로 가독성 향상 */
-    -webkit-backdrop-filter: blur(4px);
 }
 
 /* 모바일에서 wrapper 너비가 화면보다 작을 때 */
@@ -644,9 +635,8 @@
 }
 .wrapper>main>section:nth-child(1) .main_image_scroll_label{
     font-size: 0.7rem;
-    color: rgba(255,255,255,0.98); /* 가독성을 위한 밝은 색상 */
+    color: rgba(255,255,255,0.95); /* 원래 색상과 스타일로 복원 */
     letter-spacing: 0.02em;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3); /* 가독성을 위한 약한 음영 */
 }
 @keyframes main-scroll-hint-in{
     from{ opacity: 0; transform: translateY(6px); }
