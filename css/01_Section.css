@@ -109,7 +109,7 @@
 /* 모바일 화면 전체 범위 (더 넓은 범위) */
 @media (max-width: 480px) {
   .wrapper>main>section:nth-child(1) .main_image_couple_name {
-    font-size: clamp(1.9rem, 7vw, 2.6rem) !important; /* 모바일에서 글자 크기 확실하게 증가 */
+    font-size: clamp(2.2rem, 8vw, 3rem) !important; /* 모바일에서 글자 크기 더 크게 증가 */
   }
 }
 
@@ -117,7 +117,7 @@
 @media (max-width: 23.75rem) {
   .wrapper>main>section:nth-child(1) .main_image_couple_name {
     right: calc(1.25rem + 65px + 0.5rem) !important; /* wrapper 너비가 화면과 같으면 간단하게 */
-    font-size: clamp(1.9rem, 7vw, 2.6rem) !important; /* 모바일에서 글자 크기 확실하게 증가 */
+    font-size: clamp(2.2rem, 8vw, 3rem) !important; /* 모바일에서 글자 크기 더 크게 증가 */
   }
 }
 
