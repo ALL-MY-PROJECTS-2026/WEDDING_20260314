@@ -1596,14 +1596,14 @@
         galleryImages.forEach(function (img, index) {
           // 클릭 이벤트
           img.addEventListener('click', function () {
-            openGalleryModal(0);
+            openGalleryModal(index);
           });
           
           // 키보드 이벤트
           img.addEventListener('keydown', function (e) {
             if (e.key === 'Enter' || e.key === ' ') {
               e.preventDefault();
-              openGalleryModal(0);
+              openGalleryModal(index);
             }
           });
           
