@@ -47,7 +47,10 @@ function initMap() {
     }
     
     // 지도 초기화
-    var map = createMap("경기도 안양시 만안구 안양로 104", "웨딩그룹위더스 안양");
+    var T = typeof window !== 'undefined' ? window.WEDDING_TEMPLATE : null;
+    var addr = (T && T.addressRoad) ? T.addressRoad : '서울특별시 중구 세종대로 110';
+    var title = (T && T.venueName) ? T.venueName : '예식장명';
+    var map = createMap(addr, title);
     if (!map) {
         // 초기화 실패 시 재시도
         setTimeout(initMap, 200);

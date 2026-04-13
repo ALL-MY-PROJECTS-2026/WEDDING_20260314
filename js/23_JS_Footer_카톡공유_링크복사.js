@@ -1,42 +1,55 @@
-// 카톡공유(https://developers.kakao.com/docs/latest/ko/message/js-link#default-template-msg-custom)
+// 카톡공유 — main.html 사용 시 인라인 스크립트가 우선합니다. 본 파일은 wedding-config.js를 선로드한 경우에 맞춥니다.
 
-  // SDK를 초기화 합니다. 사용할 앱의 JavaScript 키를 설정해 주세요.
-  Kakao.init('69f997d9b7dfb3972e5c6ca96e84a293');
+(function () {
+  var T = typeof window !== 'undefined' ? window.WEDDING_TEMPLATE : null;
 
-  // SDK 초기화 여부를 판단합니다.
-  // console.log(Kakao.isInitialized()); // 디버깅용 로그 제거
+  function absUrl(path) {
+    try {
+      return new URL(path, document.baseURI).href;
+    } catch (e) {
+      return path;
+    }
+  }
 
+  function shareImageUrl() {
+    if (!T) return absUrl('./images/01_section.jpg');
+    var u = (T.kakaoShareImageUrl && String(T.kakaoShareImageUrl).trim());
+    if (u) return u;
+    u = (T.ogImageAbsoluteUrl && String(T.ogImageAbsoluteUrl).trim());
+    if (u) return u;
+    return absUrl(T.ogImagePath || './images/01_section.jpg');
+  }
 
-const kakaoShareEls = document.querySelectorAll('.kakao-share');
-kakaoShareEls.forEach(function(kakaoShare){
+  var key = T && T.kakaoJavascriptKey;
+  var kakaoReady = false;
+  if (key && String(key).indexOf('YOUR_') !== 0 && typeof Kakao !== 'undefined' && Kakao.init) {
+    try {
+      Kakao.init(key);
+      kakaoReady = true;
+    } catch (e) {}
+  }
+
+  var kakaoShareEls = document.querySelectorAll('.kakao-share');
+  kakaoShareEls.forEach(function (kakaoShare) {
     if (!kakaoShare) return;
-    kakaoShare.addEventListener('click',function(){
-
-    // Kakao.Share.sendDefault({
-    //     objectType: 'text',
-    //     text:'최도형 ❤️ 이하나 결혼합니다',
-    //     imageUrl:'http://k.kakaocdn.net/dn/dScJiJ/btqB3cwK1Hi/pv5qHVwetz5RZfPZR3C5K1/kakaolink40_original.png',
-    //     link: {
-    //       mobileWebUrl: window.location.href,
-    //       webUrl: window.location.href,
-    //     },
-    //   });
-
-    // 직접 버튼 사용하는 메시지 탬플릿(위치)
-    Kakao.Share.sendDefault({
+    kakaoShare.addEventListener('click', function () {
+      if (!kakaoReady || typeof Kakao === 'undefined' || !Kakao.Share) {
+        alert('카카오 JavaScript 키를 wedding-config.js에 설정해 주세요.');
+        return;
+      }
+      Kakao.Share.sendDefault({
         objectType: 'location',
-        address: '경기도 안양시 만안구 안양로 104',
-        addressTitle: '웨딩그룹위더스 안양',
+        address: (T && T.addressRoad) || '',
+        addressTitle: (T && T.venueName) || '',
         content: {
-          title: '민형 ❤️ 유정 결혼합니다',
+          title: (T && T.kakaoShareTitle) || (T && T.pageTitle) || '',
           description: '',
-          imageUrl: "https://edu-embadded-curriculum.github.io/02_SCREEN_IMPL_WEDDING.github.io/images/01_section.jpg",
+          imageUrl: shareImageUrl(),
           link: {
             mobileWebUrl: window.location.href,
             webUrl: window.location.href,
           },
         },
-
         buttons: [
           {
             title: '자세히 보기',
@@ -47,47 +60,25 @@ kakaoShareEls.forEach(function(kakaoShare){
           },
         ],
       });
-
     });
-});
+  });
 
-
-
-//   function kakaoShare() {
-//     Kakao.Link.sendDefault({
-//       objectType: 'feed',
-//       content: {
-//         title: '카카오공유하기 시 타이틀',
-//         description: '카카오공유하기 시 설명',
-//         imageUrl: '카카오공유하기 시 썸네일 이미지 경로',
-//         link: {
-//           mobileWebUrl: '카카오공유하기 시 클릭 후 이동 경로',
-//           webUrl: '카카오공유하기 시 클릭 후 이동 경로',
-//         },
-//       },
-//       buttons: [
-//         {
-//           title: '웹으로 보기',
-//           link: {
-//             mobileWebUrl: '카카오공유하기 시 클릭 후 이동 경로',
-//             webUrl: '카카오공유하기 시 클릭 후 이동 경로',
-//           },
-//         },
-//       ],
-//       // 카카오톡 미설치 시 카카오톡 설치 경로이동
-//       installTalk: true,
-//     })
-//   }
-
-
-
-
-
-
-// 링크공유
-document.querySelectorAll('.url-copy').forEach(function(urlCopy){
-    urlCopy.addEventListener('click',function(){
-         window.navigator.clipboard.writeText(window.location.href); ;
+  document.querySelectorAll('.url-copy').forEach(function (urlCopy) {
+    urlCopy.addEventListener('click', function () {
+      var currentUrl = window.location.href;
+      var introUrl;
+      if (currentUrl.indexOf('main.html') !== -1) {
+        introUrl = currentUrl.replace(/main\.html.*$/, 'index.html');
+      } else {
+        var baseUrl = window.location.origin + window.location.pathname;
+        var lastSlash = baseUrl.lastIndexOf('/');
+        if (lastSlash !== -1) {
+          introUrl = baseUrl.substring(0, lastSlash + 1) + 'index.html';
+        } else {
+          introUrl = baseUrl + '/index.html';
+        }
+      }
+      window.navigator.clipboard.writeText(introUrl);
     });
-});
-
+  });
+})();

@@ -1,5 +1,6 @@
-const wedding_date = new Date("2026-03-14");
-const wedding_hours = "오후 03시 30분";
+var _wt = typeof window !== 'undefined' ? window.WEDDING_TEMPLATE : null;
+const wedding_date = new Date((_wt && _wt.weddingDateISO ? _wt.weddingDateISO : '2026-06-06') + 'T12:00:00');
+const wedding_hours = (_wt && _wt.weddingTimeLabel) ? _wt.weddingTimeLabel : '오후 12시 00분';
 
 // CALENDAR FUNCTION 
 const cal_calender = (wedding_date,time)=>{
@@ -11,7 +12,7 @@ const cal_calender = (wedding_date,time)=>{
     var calendarToday = wedding_date.getDate();             // 달력 일
     
     //마지막 일자 구하기
-    var monthLastDate = new Date(2022, calendarMonth-1, 0).getDate();
+    var monthLastDate = new Date(calendarYear, calendarMonth, 0).getDate();
     //날짜를 기준으로 월의 시작 요일 구하기
     var monthStartDay = new Date(calendarYear, calendarMonth-1, 1);
     
@@ -78,7 +79,7 @@ const cal_calender = (wedding_date,time)=>{
     //-------------------
     // TOP-DATE
     //-------------------
-    const topDateEl = document.querySelector('.wrapper>main>section:nth-child(4) .top-date')
+    const topDateEl = document.querySelector('.wrapper>main>section#section-04 .top-date')
     topDateEl.innerHTML = calendarYear+".";
     if(calendarMonth<10)
         topDateEl.innerHTML += "0"+calendarMonth+".";
@@ -95,7 +96,7 @@ const cal_calender = (wedding_date,time)=>{
     //-------------------
     // TOP-HOURS
     //-------------------
-    const topHoursEl = document.querySelector('.wrapper>main>section:nth-child(4) .top-hours')
+    const topHoursEl = document.querySelector('.wrapper>main>section#section-04 .top-hours')
     if(yoil==0)
         topHoursEl.innerHTML = '일요일 ' +time;
     else if(yoil==1)
@@ -116,14 +117,14 @@ const cal_calender = (wedding_date,time)=>{
     //-------------------
     let day=1;
     //FirstRow
-    const tdStartEls =  document.querySelectorAll(".wrapper>main>section:nth-child(4) table td.start-days");
+    const tdStartEls =  document.querySelectorAll(".wrapper>main>section#section-04 table td.start-days");
     tdStartEls.forEach(tdEl=>{    
        const start_no =  tdEl.getAttribute('data-start');
         if(start_no>=calendarMonthStartDay)
             tdEl.innerHTML=(day++);
     })
     //EtcRow
-    const tdEtcEls =  document.querySelectorAll(".wrapper>main>section:nth-child(4) table td.days");
+    const tdEtcEls =  document.querySelectorAll(".wrapper>main>section#section-04 table td.days");
     tdEtcEls.forEach(tdEl=>{    
       
         if(day<=monthLastDate)
@@ -132,9 +133,9 @@ const cal_calender = (wedding_date,time)=>{
         day++;
     })   
     // D-DAY 표시(classname : d-day)
-    const tdEls =  document.querySelectorAll(".wrapper>main>section:nth-child(4) table td");
+    const tdEls =  document.querySelectorAll(".wrapper>main>section#section-04 table td");
     tdEls.forEach(tdEl=>{
-        if(tdEl.innerHTML==d_day)
+        if(String(tdEl.innerHTML).trim()===String(d_day))
         tdEl.classList.add('d-day');
     })
     
@@ -150,10 +151,10 @@ cal_calender(wedding_date, wedding_hours);
 
 
 // D DAY FUNCTION
-const dayEls = document.querySelectorAll('.wrapper>main>section:nth-child(4) .bottom .day>span');
-const hoursEl = document.querySelector('.wrapper>main>section:nth-child(4) .bottom .hours>span');
-const minEl = document.querySelector('.wrapper>main>section:nth-child(4) .bottom .min>span');
-const secEl = document.querySelector('.wrapper>main>section:nth-child(4) .bottom .sec>span');
+const dayEls = document.querySelectorAll('.wrapper>main>section#section-04 .bottom .day>span');
+const hoursEl = document.querySelector('.wrapper>main>section#section-04 .bottom .hours>span');
+const minEl = document.querySelector('.wrapper>main>section#section-04 .bottom .min>span');
+const secEl = document.querySelector('.wrapper>main>section#section-04 .bottom .sec>span');
 
 const d_day_func = (weddingDate)=>{
 

@@ -10,18 +10,13 @@
 
   <link rel="icon" href="images/favicon.png">
 
-  <!-- Opengraph -->
+  <!-- Opengraph (내용은 js/wedding-config.js에서 덮어씁니다) -->
   <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="SITENAME" />
-  <meta property="og:title" content="민형 ❤ 유정 결혼합니다." />
-  <meta property="og:description" content="2026년 3월 14일(토) 오후 03시 30분 웨딩그룹위더스 안양 6층 벨라홀" />
-  <meta property="og:image"
-    content="https://github.com/ALL-MY-PROJECTS-2026/WEDDING_20260314/blob/main/images/01_section.jpg?raw=true" />
-  <meta property="og:url" content="https://all-my-projects-2026.github.io/WEDDING_20260314/" />
-
-  <!-- DNS Prefetch & Preconnect (이미지 로딩 최적화) -->
-  <link rel="preconnect" href="https://github.com">
-  <link rel="dns-prefetch" href="https://github.com">
+  <meta property="og:site_name" content="" />
+  <meta property="og:title" content="" />
+  <meta property="og:description" content="" />
+  <meta property="og:image" content="" />
+  <meta property="og:url" content="" />
 
   <!-- 첫 화면 이미지 preload (FCP 최적화) -->
   <link rel="preload" href="./images/01_section.jpg" as="image" fetchpriority="high">
@@ -39,7 +34,21 @@
   <script src="js/KoreanTmsProviders/src/Leaflet.KoreanTmsProviders.js"></script>
 
 
-  <title>민형 ❤ 유정 결혼합니다.</title>
+  <title>모바일 청첩장</title>
+  <script src="./js/wedding-config.js"></script>
+  <script>
+    (function () {
+      var T = window.WEDDING_TEMPLATE || {};
+      var key = T.kakaoJavascriptKey;
+      if (key && String(key).indexOf('YOUR_') !== 0) {
+        var s = document.createElement('script');
+        s.src = 'https://dapi.kakao.com/v2/maps/sdk.js?appkey=' + encodeURIComponent(key) + '&libraries=services';
+        s.charset = 'utf-8';
+        s.async = true;
+        document.head.appendChild(s);
+      }
+    })();
+  </script>
 
   <!-- Critical CSS 인라인 (첫 화면 렌더링 최적화) -->
   <style>
@@ -188,10 +197,7 @@
 
 
 
-  <!-- kakao map - 지연 로드 (지도 섹션에서만 필요) -->
-  <script type="text/javascript"
-    src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=6effaf063a25826448e20f9b64ce23b6&libraries=services"
-    charset="utf-8"></script>
+  <!-- 카카오맵 Web API: wedding-config.js의 kakaoJavascriptKey가 설정된 경우에만 위에서 로드됨 -->
 
   <!-- 23 카카오 공유 SDK - 지연 로드 (공유 버튼 클릭 시 필요) -->
   <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
@@ -237,7 +243,7 @@
           </div>
           <!-- 이름 표시 (우측 하단, 스크롤 힌트 왼쪽에 독립적으로 배치) -->
           <div class="main_image_couple_name" aria-hidden="true">
-            민형 <span class="heart">❤</span> 유정
+            신랑 <span class="heart">❤</span> 신부
             <!-- 커플 이름 영역 안에서 날아다니는 벌 2개 -->
             <div class="couple-name-bee couple-name-bee-1">
               <span class="bee-body-wrapper">
@@ -302,9 +308,9 @@
             <div class="sub-title">결혼식 안내</div>
           </div>
           <div class="info-block back-to-position to-up">
-            <div class="info-location">웨딩그룹위더스 안양</div>
-            <div class="info-location">6층 벨라홀</div>
-            <div class="info-date">2026년 3월 14일 토요일 오후 03시 30분</div>
+            <div class="info-location">예식장명</div>
+            <div class="info-location">N층 홀명</div>
+            <div class="info-date">YYYY년 M월 D일 요일 오후 H시 M분</div>
           </div>
         </div>
       </section>
@@ -354,10 +360,10 @@
             <img src="./images/03_section_01.jpg" alt="">
           </div>
           <div class="sentence-02 back-to-position to-up">
-            <div><span style="position:relative"> 유병환<img src="images/flower_chrysanthemum.jpg" style="width:15px;"> ·
-                정현숙</span> 의 아들 <span> 민형</span></div>
-            <div><span style="position:relative"> 고성곤<img src="images/flower_chrysanthemum.jpg" style="width:15px;"> ·
-                사공미진</span> 의 딸 <span> 유정</span></div>
+            <div><span style="position:relative"> 신랑 아버지<img src="images/flower_chrysanthemum.jpg" style="width:15px;"> ·
+                신랑 어머니</span> 의 아들 <span> 신랑</span></div>
+            <div><span style="position:relative"> 신부 아버지<img src="images/flower_chrysanthemum.jpg" style="width:15px;"> ·
+                신부 어머니</span> 의 딸 <span> 신부</span></div>
           </div>
           <!-- <div class="btn-block back-to-position to-up">
               <button data-bs-toggle="modal" data-bs-target="#section_03_modal">
@@ -376,8 +382,8 @@
       <section id="section-04" class="scroll-spy">
         <div class="sub-title  back-to-position to-up"> WEDDING DAY</div>
         <div class="datetime-block  back-to-position to-up">
-          <div class="top-date">2026.03.15</div>
-          <div class="top-hours">토요일 오후 3시 30분</div>
+          <div class="top-date">YYYY.MM.DD</div>
+          <div class="top-hours">요일 오후 H시 M분</div>
         </div>
         <hr style="width:90%;margin:15px auto;" class="back-to-position to-up">
         <div class="calender  back-to-position to-up">
@@ -465,7 +471,7 @@
             </div>
           </div>
           <div class=" bottom-body back-to-position to-up ">
-            <span class="day">민형 ❤ 유정의 결혼식이 <span style="color:red;"></span>일 남았습니다.</span>
+            <span class="day">신랑 ❤ 신부의 결혼식이 <span style="color:red;"></span>일 남았습니다.</span>
           </div>
         </div>
 
@@ -496,18 +502,18 @@
 
           <div class="item item-01  back-to-position to-up">
             <div class="left"> <img
-                src="./images/thumb/05_01.jpg"
+                src="./images/thumb/05_01.webp"
                 data-original="./images/05_01.jpg"
                 data-original-webp="./images/05_01.webp"
                 alt="" class="gallery-img" role="button" tabindex="0" loading="eager"></div>
             <div class="right">
               <div> <img
-                  src="./images/thumb/05_02.jpg"
+                  src="./images/thumb/05_02.webp"
                   data-original="./images/05_02.jpg"
                   data-original-webp="./images/05_02.webp"
                   alt="" class="gallery-img" role="button" tabindex="0" loading="lazy"></div>
               <div> <img
-                  src="./images/thumb/05_03.jpg"
+                  src="./images/thumb/05_03.webp"
                   data-original="./images/05_03.jpg"
                   data-original-webp="./images/05_03.webp"
                   alt="" class="gallery-img" role="button" tabindex="0" loading="lazy"></div>
@@ -516,36 +522,36 @@
           <div class="item item-02  back-to-position to-up">
             <div class="left">
               <div> <img
-                  src="./images/thumb/05_04.jpg"
+                  src="./images/thumb/05_04.webp"
                   data-original="./images/05_04.jpg"
                   data-original-webp="./images/05_04.webp"
                   alt="" class="gallery-img" role="button" tabindex="0" loading="lazy"></div>
               <div> <img
-                  src="./images/thumb/05_05.jpg"
+                  src="./images/thumb/05_05.webp"
                   data-original="./images/05_05.jpg"
                   data-original-webp="./images/05_05.webp"
                   alt="" class="gallery-img" role="button" tabindex="0" loading="lazy"></div>
             </div>
             <div class="right"> <img
-                src="./images/thumb/05_06.jpg"
+                src="./images/thumb/05_06.webp"
                 data-original="./images/05_06.jpg"
                 data-original-webp="./images/05_06.webp"
                 alt="" class="gallery-img" role="button" tabindex="0" loading="lazy"></div>
           </div>
           <div class="item item-03  back-to-position to-up">
             <div class="left"> <img
-                src="./images/thumb/05_07.jpg"
+                src="./images/thumb/05_07.webp"
                 data-original="./images/05_07.jpg"
                 data-original-webp="./images/05_07.webp"
                 alt="" class="gallery-img" role="button" tabindex="0" loading="lazy"></div>
             <div class="right">
               <div> <img
-                  src="./images/thumb/05_08.jpg"
+                  src="./images/thumb/05_08.webp"
                   data-original="./images/05_08.jpg"
                   data-original-webp="./images/05_08.webp"
                   alt="" class="gallery-img" role="button" tabindex="0" loading="lazy"></div>
               <div> <img
-                  src="./images/thumb/05_09.jpg"
+                  src="./images/thumb/05_09.webp"
                   data-original="./images/05_09.jpg"
                   data-original-webp="./images/05_09.webp"
                   alt="" class="gallery-img" role="button" tabindex="0" loading="lazy"></div>
@@ -553,12 +559,12 @@
           </div>
           <div class="item item-04  back-to-position to-up">
             <div class="left"> <img
-                src="./images/thumb/05_10.jpg"
+                src="./images/thumb/05_10.webp"
                 data-original="./images/05_10.jpg"
                 data-original-webp="./images/05_10.webp"
                 alt="" class="gallery-img" role="button" tabindex="0" loading="lazy"></div>
             <div class="right"> <img
-                src="./images/thumb/05_11.jpg"
+                src="./images/thumb/05_11.webp"
                 data-original="./images/05_11.jpg"
                 data-original-webp="./images/05_11.webp"
                 alt="" class="gallery-img" role="button" tabindex="0" loading="lazy"></div>
@@ -566,36 +572,36 @@
           <div class="item item-05  back-to-position to-up">
             <div class="left">
               <div> <img
-                  src="./images/thumb/05_12.jpg"
+                  src="./images/thumb/05_12.webp"
                   data-original="./images/05_12.jpg"
                   data-original-webp="./images/05_12.webp"
                   alt="" class="gallery-img" role="button" tabindex="0" loading="lazy"></div>
               <div> <img
-                  src="./images/thumb/05_13.jpg"
+                  src="./images/thumb/05_13.webp"
                   data-original="./images/05_13.jpg"
                   data-original-webp="./images/05_13.webp"
                   alt="" class="gallery-img" role="button" tabindex="0" loading="lazy"></div>
             </div>
             <div class="right  back-to-position to-up">
               <div> <img
-                  src="./images/thumb/05_14.jpg"
+                  src="./images/thumb/05_14.webp"
                   data-original="./images/05_14.jpg"
                   data-original-webp="./images/05_14.webp"
                   alt="" class="gallery-img" role="button" tabindex="0" loading="lazy"></div>
               <div> <img
-                  src="./images/thumb/05_15.jpg"
+                  src="./images/thumb/05_15.webp"
                   data-original="./images/05_15.jpg"
                   data-original-webp="./images/05_15.webp"
                   alt="" class="gallery-img" role="button" tabindex="0" loading="lazy"></div>
             </div>
             <div class="right  back-to-position to-up">
               <div> <img
-                  src="./images/thumb/05_16.jpg"
+                  src="./images/thumb/05_16.webp"
                   data-original="./images/05_16.jpg"
                   data-original-webp="./images/05_16.webp"
                   alt="" class="gallery-img" role="button" tabindex="0" loading="lazy"></div>
               <div> <img
-                  src="./images/thumb/05_17.jpg"
+                  src="./images/thumb/05_17.webp"
                   data-original="./images/05_17.jpg"
                   data-original-webp="./images/05_17.webp"
                   alt="" class="gallery-img" role="button" tabindex="0" loading="lazy"></div>
@@ -611,45 +617,39 @@
       <section id="section-06" class="scroll-spy usemap">
         <div class="title-01  back-to-position to-up">LOCATION</div>
         <div class="title-02  back-to-position to-up">오시는 길</div>
-        <div class="location  back-to-position to-up">웨딩그룹위더스 안양</div>
-        <div class="address  back-to-position to-up">경기도 안양시 만안구 안양로 104</div>
+        <div class="location  back-to-position to-up">예식장명</div>
+        <div class="address  back-to-position to-up">시·도 시·군·구 도로명 주소</div>
         <div class="map  back-to-position to-up">
           <div id="map" style="width:100%;height:100%;"></div>
           <script>
-            // 네이버 지도에서 확인한 정확한 좌표 (place ID: 34585318)
-            // 네이버 지도 기준: 37.3929, 126.9267
-            // 더 정확한 좌표를 위해 네이버 지도에서 확인한 값 사용
-            var address = "경기도 안양시 만안구 안양로 104";
-            var markerTitle = "웨딩그룹위더스 안양";
-            
-            // 네이버 지도에서 확인한 정확한 좌표 (WGS84)
-            // 네이버 지도 place ID 34585318 기준 좌표
-            var accurateLat = 37.384550;
-            var accurateLng = 126.933999;
-            
-            var map = new L.Map('map', {
-              center: new L.LatLng(accurateLat, accurateLng), //웨딩그룹위더스 안양 중심좌표
-              zoom: 10,	//Leaflet.KoreanTmsProviders.js : resolutions기준 줌 레벨(Level 12)
-              crs: L.Proj.CRS.Daum, //Leaflet.KoreanTmsProviders.js : 새로 정의된 Daum Map CRS
-              worldCopyJump: false,  //https://leafletjs.com/reference-1.3.2.html#map-worldcopyjump 참조    
-            });
-            var baseLayers = L.tileLayer.koreaProvider('DaumMap.Street').addTo(map);
+            (function () {
+              var T = window.WEDDING_TEMPLATE || {};
+              var accurateLat = typeof T.mapLat === 'number' ? T.mapLat : 37.5665;
+              var accurateLng = typeof T.mapLng === 'number' ? T.mapLng : 126.978;
+              var markerTitle = T.venueName || '예식장';
 
-            // 웨딩그룹위더스 안양 마커 추가 (네이버 지도 기준 정확한 좌표 사용)
-            var marker = L.marker([accurateLat, accurateLng]).addTo(map);
-            marker.bindPopup('<div class="map-marker">' + markerTitle + '</div>').openPopup();
+              var map = new L.Map('map', {
+                center: new L.LatLng(accurateLat, accurateLng),
+                zoom: 10,
+                crs: L.Proj.CRS.Daum,
+                worldCopyJump: false,
+              });
+              L.tileLayer.koreaProvider('DaumMap.Street').addTo(map);
 
+              var marker = L.marker([accurateLat, accurateLng]).addTo(map);
+              marker.bindPopup('<div class="map-marker">' + markerTitle.replace(/</g, '&lt;') + '</div>').openPopup();
+            })();
           </script>
         </div>
         <div class="map-nav  back-to-position to-up">
           <div class="naver">
-            <a href="https://map.naver.com/v5/search/웨딩그룹위더스%20안양" target="_blank">
+            <a href="https://map.naver.com/v5/search/%EC%98%88%EC%8B%9D%EC%9E%A5%EA%B2%80%EC%83%89%EC%96%B4" target="_blank" id="map-nav-naver">
               <img src="https://mcard.fromtoday.co.kr/mcard/assets/images/icon_navermap_w48.png" alt="">
               네이버지도
             </a>
           </div>
           <div class="kakao">
-            <a href="https://map.kakao.com/link/search/웨딩그룹위더스%20안양" target="_blank">
+            <a href="https://map.kakao.com/link/search/%EC%98%88%EC%8B%9D%EC%9E%A5%EA%B2%80%EC%83%89%EC%96%B4" target="_blank" id="map-nav-kakao">
               <img src="https://mcard.fromtoday.co.kr/mcard/assets/images/icon_kakaonavi_w48.png" alt="">
               카카오내비
             </a>
@@ -663,7 +663,7 @@
             </div>
             <div class="right">
               <div class="title">지하철</div>
-              <div class="contents">[1호선] <span>명학역</span> 1번 출구 도보 2분</div>
+              <div class="contents">[노선명] <span>역명</span> N번 출구 도보 N분</div>
             </div>
           </div>
           <div class="bus  back-to-position to-up">
@@ -672,9 +672,9 @@
             </div>
             <div class="right">
               <div class="title">버스</div>
-              <div class="contents">성결대학, 안양아트센터, 명학역 정류장 하차</div>
-              <div class="contents">간선(541) · 지선(5530, 5531, 5623) · 직행(333, 1303, 3330)</div>
-              <div class="contents">일반(1, 1-2, 5, 8-2, 11-2, 15, 15-2, 20, 31-7, 32, 64, 88, 350) · 마을(10-1, 10-2)</div>
+              <div class="contents">주요 정류장 하차 안내 문구</div>
+              <div class="contents">간선 · 지선 · 직행 버스 번호 예시</div>
+              <div class="contents">일반 · 마을 버스 번호 예시</div>
             </div>
           </div>
 
@@ -690,12 +690,12 @@
             <div class="sub-title">주차안내</div>
             <div class="parking-item">
               <div class="right">
-                <div>본건물 (지하 1~2층, 지상 2~4층) 2시간 무료</div>
-                <div>외부주차 : 2시간 무료</div>
-                <div>행사 당일 주차장이 혼잡하오니 대중교통을 이용해 주시면 감사하겠습니다.</div>
+                <div>본관 주차 안내 (층수·무료 시간 등)</div>
+                <div>외부 주차 안내</div>
+                <div>행사 당일 혼잡 시 대중교통 이용을 권장합니다.</div>
                 <div>-</div>
-                <div class="contents">광명역(KTX)에서 택시로 약 20분 거리입니다.</div>
-                <div class="contents">먼 길 와주셔서 진심으로 감사드립니다.</div>
+                <div class="contents">역·거리 등 참고 문구 (없으면 wedding-config.js에서 해당 줄 삭제)</div>
+                <div class="contents">먼 길 와주셔서 감사드립니다.</div>
               </div>
             </div>
           </div>
@@ -736,14 +736,14 @@
                 <div>
                   <div class="account">
                     <div class="left">
-                      <span>신한은행</span>
-                      <span class="account-number">110-259-239657</span>
+                      <span>은행명</span>
+                      <span class="account-number">000-000-000000</span>
                     </div>
                     <div class="right">
                       <a href="javascript:void(0)">복사</a>
                     </div>
                   </div>
-                  <div class="name">민형</div>
+                  <div class="name">신랑</div>
                 </div>
               </div>
             </div>
@@ -764,26 +764,26 @@
                 <div>
                   <div class="account" >
                     <div class="left">
-                      <span>카카오뱅크</span>
-                      <span class="account-number">3333-23-8077125</span>
+                      <span>은행명</span>
+                      <span class="account-number">000-000-000000</span>
                     </div>
                     <div class="right">
                       <a href="javascript:void(0)">복사</a>
                     </div>
                   </div>
-                  <div class="name">유정</div>
+                  <div class="name">신부</div>
                 </div>
                 <div>
                   <div class="account">
                     <div class="left">
-                      <span>기업은행</span>
-                      <span class="account-number">099-053210-01-010</span>
+                      <span>은행명</span>
+                      <span class="account-number">000-000-000000</span>
                     </div>
                     <div class="right">
                       <a href="javascript:void(0)">복사</a>
                     </div>
                   </div>
-                  <div class="name">사공미진</div>
+                  <div class="name">예금주</div>
                 </div>
               </div>
             </div>
@@ -821,7 +821,7 @@
         </div>
       </div>
       <div class="bottom">
-        <span>Copyright 2026 <span>WEDDING_PROJECT_BY_JUNGWOOGYUN</span> All right reserved.</span>
+        <span>Copyright YYYY <span>YOUR_SITE_OR_NAME</span> All right reserved.</span>
       </div>
     </footer>
 
@@ -866,6 +866,7 @@
   <!-- ============================================
          JavaScript 파일 - 직접 실행
          ============================================ -->
+  <script src="./js/wedding-apply-dom.js"></script>
 
   <!-- ScrollMagic 애니메이션 - common.js에서 인라인화 -->
   <script>
@@ -1057,8 +1058,9 @@
     // ============================================
     // 20_JS_04Section_DDay.js - D-Day 계산
     // ============================================
-    const wedding_date = new Date("2026-03-14");
-    const wedding_hours = "오후 03시 30분";
+    var _wt = window.WEDDING_TEMPLATE || {};
+    const wedding_date = new Date((_wt.weddingDateISO || '2026-06-06') + 'T12:00:00');
+    const wedding_hours = _wt.weddingTimeLabel || '오후 12시 00분';
 
     // CALENDAR FUNCTION 
     const cal_calender = (wedding_date, time) => {
@@ -1069,8 +1071,8 @@
       var calendarMonth = wedding_date.getMonth() + 1;        // 달력 월 
       var calendarToday = wedding_date.getDate();             // 달력 일
 
-      //마지막 일자 구하기
-      var monthLastDate = new Date(2022, calendarMonth - 1, 0).getDate();
+      //마지막 일자 구하기 (해당 연·월 기준)
+      var monthLastDate = new Date(calendarYear, calendarMonth, 0).getDate();
       //날짜를 기준으로 월의 시작 요일 구하기
       var monthStartDay = new Date(calendarYear, calendarMonth - 1, 1);
 
@@ -1190,7 +1192,7 @@
       // D-DAY 표시(classname : d-day)
       const tdEls = document.querySelectorAll(".wrapper>main>section#section-04 table td");
       tdEls.forEach(tdEl => {
-        if (tdEl.innerHTML == d_day)
+        if (String(tdEl.innerHTML).trim() === String(d_day))
           tdEl.classList.add('d-day');
       })
 
@@ -1264,14 +1266,8 @@
     accordionAEls.forEach(item => {
 
       item.addEventListener('click', function () {
-        console.log(item);
-        const leftBlockEl = item.parentNode.parentNode;
         const accountNumber = item.parentNode.parentNode.querySelector('.account-number').innerHTML;
-        console.log(accountNumber);
-        //클립보드에 복사
         window.navigator.clipboard.writeText(accountNumber);
-
-
       })
     })
   </script>
@@ -1283,44 +1279,71 @@
     // ============================================
     // 카톡공유(https://developers.kakao.com/docs/latest/ko/message/js-link#default-template-msg-custom)
 
-    // SDK를 초기화 합니다. 사용할 앱의 JavaScript 키를 설정해 주세요.
-    Kakao.init('69f997d9b7dfb3972e5c6ca96e84a293');
+    (function () {
+      var T = window.WEDDING_TEMPLATE || {};
+      var key = T.kakaoJavascriptKey;
+      var kakaoReady = false;
+      if (key && String(key).indexOf('YOUR_') !== 0 && typeof Kakao !== 'undefined' && Kakao.init) {
+        try {
+          Kakao.init(key);
+          kakaoReady = true;
+        } catch (e) {
+          console.warn('[청첩장] 카카오 SDK 초기화 실패:', e);
+        }
+      } else {
+        console.warn('[청첩장] js/wedding-config.js의 kakaoJavascriptKey를 실제 키로 바꾸면 카카오톡 공유가 동작합니다.');
+      }
 
-    // SDK 초기화 여부를 판단합니다.
+      function absUrl(path) {
+        try {
+          return new URL(path, document.baseURI).href;
+        } catch (e) {
+          return path;
+        }
+      }
 
-    const kakaoShareEls = document.querySelectorAll('.kakao-share');
-    kakaoShareEls.forEach(function (kakaoShare) {
-      if (!kakaoShare) return;
-      kakaoShare.addEventListener('click', function () {
+      function shareImageUrl() {
+        var u = (T.kakaoShareImageUrl && String(T.kakaoShareImageUrl).trim());
+        if (u) return u;
+        u = (T.ogImageAbsoluteUrl && String(T.ogImageAbsoluteUrl).trim());
+        if (u) return u;
+        return absUrl(T.ogImagePath || './images/01_section.jpg');
+      }
 
-        // 직접 버튼 사용하는 메시지 탬플릿(위치)
-        Kakao.Share.sendDefault({
-          objectType: 'location',
-          address: '경기도 안양시 만안구 안양로 104',
-          addressTitle: '웨딩그룹위더스 안양',
-          content: {
-            title: '민형 ❤️ 유정 결혼합니다',
-            description: '',
-            imageUrl: "https://edu-embadded-curriculum.github.io/02_SCREEN_IMPL_WEDDING.github.io/images/01_section.jpg",
-            link: {
-              mobileWebUrl: window.location.href,
-              webUrl: window.location.href,
-            },
-          },
-
-          buttons: [
-            {
-              title: '자세히 보기',
+      const kakaoShareEls = document.querySelectorAll('.kakao-share');
+      kakaoShareEls.forEach(function (kakaoShare) {
+        if (!kakaoShare) return;
+        kakaoShare.addEventListener('click', function () {
+          if (!kakaoReady || typeof Kakao === 'undefined' || !Kakao.Share) {
+            alert('카카오 JavaScript 키를 wedding-config.js에 설정해 주세요.');
+            return;
+          }
+          Kakao.Share.sendDefault({
+            objectType: 'location',
+            address: T.addressRoad || '',
+            addressTitle: T.venueName || '',
+            content: {
+              title: T.kakaoShareTitle || T.pageTitle || '',
+              description: '',
+              imageUrl: shareImageUrl(),
               link: {
                 mobileWebUrl: window.location.href,
                 webUrl: window.location.href,
               },
             },
-          ],
+            buttons: [
+              {
+                title: '자세히 보기',
+                link: {
+                  mobileWebUrl: window.location.href,
+                  webUrl: window.location.href,
+                },
+              },
+            ],
+          });
         });
-
       });
-    });
+    })();
 
 
     // 링크공유
@@ -1711,7 +1734,7 @@
         var preloadedUrls = new Set(); // 중복 preload 방지
 
         // 첫 화면 이미지(05_01~05_03)는 즉시, 나머지는 lazy
-        var firstScreenImages = ['05_01.jpg', '05_02.jpg', '05_03.jpg'];
+        var firstScreenImages = ['05_01.webp', '05_02.webp', '05_03.webp'];
 
         allGalleryImages.forEach(function (img) {
           if (!img.src) return;
